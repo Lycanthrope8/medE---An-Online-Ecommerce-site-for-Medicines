@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>medE</title>
+	<link rel="icon" type="image/x-icon" href="{% static 'Favicon.png' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+	<header>
+		<div class="header-main" data-header>
+			<div class="container">
+				<a class="header-logo" href="#">
+					<img src="{% static 'Logo.jpg' %}" alt=" medX logo"height="50px"width="80px">
+				</a>
+				<div class="header-search-container">
+					<input type="search" name="search" class="search-field" placeholder="Type to search products...">
+					<button class="search-btn">
+						<ion-icon name="search"></ion-icon>
+					</button>
+				</div>
+				<button class="action-btn menu-action" data-mobile-menu-open-btn>
+					<ion-icon name="menu"></ion-icon>
+				</button>
+				<div class="header-user-actions">
+					<div class="search-box">
+						<input class="search-txt" type="text" placeholder="Type to search...">
+						<button class="mobile-srch-btn action-btn">
+							<ion-icon name="search-outline"></ion-icon>
+						</button>
+					</div>
+					<button id="user-login-btn" class="action-btn">
+						<ion-icon name="person-outline"></ion-icon>
+					</button>
+					<button id="cart-btn" class="action-btn">
+						<ion-icon name="bag-outline"></ion-icon>
+						<span class="btn-badge">3</span>
+					</button>
+					<div class="shopping-cart">
+						<div class="cartbox">
+							<button class="cart-trash">
+								<ion-icon name="trash"></ion-icon>
+							</button>
+							<img src="assets/products/napaextend.jpg" alt="napa extend">
+							<div class="cart-content">
+								<h3>Napa Extend</h3>
+								<span class="cart-content-price">৳240.00</span>
+								<span class="quantity">qty: 1</span>
+							</div>
+						</div>
+						<div class="cartbox">
+							<button class="cart-trash">
+								<ion-icon name="trash"></ion-icon>
+							</button>
+							<img src="assets/products/napaextra.jpg" alt="napa extra">
+							<div class="cart-content">
+								<h3>Napa Extra</h3>
+								<span class="cart-content-price">৳610.00</span>
+								<span class="quantity">qty: 1</span>
+							</div>
+						</div>
+						<div class="cartbox">
+							<button class="cart-trash">
+								<ion-icon name="trash"></ion-icon>
+							</button>
+							<img src="assets/products/napa.jpg" alt="napa">
+							<div class="cart-content">
+								<h3>Napa</h3>
+								<span class="cart-content-price">৳610.00</span>
+								<span class="quantity">qty: 1</span>
+							</div>
+						</div>
+						<div class="total">Total: ৳1460.00</div>
+						<a href="#" class="cart-checkout-btn">Checkout</a>
+					</div>
+					<form action="#" class="user-login">
+						<input type="email" placeholder="Email" class="login-box">
+						<input type="password" placeholder="Password" class="login-box">
+						<div class="forgotreg">
+							<a href="#">Forgot password?</a>
+							<a href="register.html">Register now!</a>
+						</div>
+						<input type="submit" value="Login" class="form-btn">
+					</form>
+				</div>
+			</div>
+		</div>
+		<nav class="desktop-navigation-menu">
+			<div class="container">
+				<ul class="desktop-menu-category-list">
+					<li class="menu-category">
+						<a href="#" class="menu-title">Home</a>
+					</li>
+					<li class="menu-category">
+						<a href="#" class="menu-title">Categories</a>
+						<div class="dropdown-panel">
+							<ul class="dropdown-panel-list">
+								<li class="menu-title">
+									<a href="#">Diabetics Care</a>
+								</li>
+								<li class="panel-list-item"><a href="#">Diabetics</a></li>
+								<li class="panel-list-item"><a href="#">Dental Care</a></li>
+								<li class="panel-list-item"><a href="#">Sexual Care</a></li>
+								<li class="panel-list-item"><a href="#">Baby Care</a></li>
+							</ul>
+							<ul class="dropdown-panel-list">
+								<li class="menu-title">
+									<a href="#">Covid Special</a>
+								</li>
+								<li class="panel-list-item"><a href="#">Sanitizers</a></li>
+								<li class="panel-list-item"><a href="#">Surgical Masks</a></li>
+								<li class="panel-list-item"><a href="#">Hand Gloves</a></li>
+								<li class="panel-list-item"><a href="#">Covid Test Kit</a></li>
+							</ul>
+							<ul class="dropdown-panel-list">
+								<li class="menu-title">
+									<a href="#">Men's Care</a>
+								</li>
+								<li class="panel-list-item"><a href="#">Men Specific</a></li>
+								<li class="panel-list-item"><a href="#">Men Specific</a></li>
+								<li class="panel-list-item"><a href="#">Men Specific</a></li>
+								<li class="panel-list-item"><a href="#">Men Specific</a></li>
+							</ul>
+							<ul class="dropdown-panel-list">
+								<li class="menu-title">
+									<a href="#">Women's Care</a>
+								</li>
+								<li class="panel-list-item"><a href="#">Women Specific</a></li>
+								<li class="panel-list-item"><a href="#">Women Specific</a></li>
+								<li class="panel-list-item"><a href="#">Women Specific</a></li>
+								<li class="panel-list-item"><a href="#">Women Specific</a></li>
+							</ul>
+						</div>
+					</li>
+					<li class="menu-category">
+						<a href="#" class="menu-title">Men's</a>
+			
+						<ul class="dropdown-list">
+			
+						  <li class="dropdown-item">
+							<a href="#">Men Specific</a>
+						  </li>
+			
+						  <li class="dropdown-item">
+							<a href="#">Men Specific</a>
+						  </li>
+			
+						  <li class="dropdown-item">
+							<a href="#">Men Specific</a>
+						  </li>
+			
+						  <li class="dropdown-item">
+							<a href="#">Men Specific</a>
+						  </li>
+			
+						</ul>
+					</li>
+					<li class="menu-category">
+						<a href="#" class="menu-title">Women's</a>
+			
+						<ul class="dropdown-list">
+			
+						  <li class="dropdown-item">
+							<a href="#">Women Specific</a>
+						  </li>
+			
+						  <li class="dropdown-item">
+							<a href="#">Women Specific</a>
+						  </li>
+			
+						  <li class="dropdown-item">
+							<a href="#">Women Specific</a>
+						  </li>
+			
+						  <li class="dropdown-item">
+							<a href="#">Women Specific</a>
+						  </li>
+			
+						</ul>
+					</li>
+					<li class="menu-category">
+						<a href="#" class="menu-title">Baby Care</a>
+			
+						<ul class="dropdown-list">
+			
+						  <li class="dropdown-item">
+							<a href="#">Baby Specific</a>
+						  </li>
+			
+						  <li class="dropdown-item">
+							<a href="#">Baby Specific</a>
+						  </li>
+			
+						  <li class="dropdown-item">
+							<a href="#">Baby Specific</a>
+						  </li>
+			
+						  <li class="dropdown-item">
+							<a href="#">Baby Specific</a>
+						  </li>
+			
+						</ul>
+					</li>
+					<li class="menu-category">
+						<a href="#" class="menu-title">Personal Hygiene</a>
+			
+						<ul class="dropdown-list">
+			
+						  <li class="dropdown-item">
+							<a href="#">Personal Hygiene</a>
+						  </li>
+			
+						  <li class="dropdown-item">
+							<a href="#">Personal Hygiene</a>
+						  </li>
+			
+						  <li class="dropdown-item">
+							<a href="#">Personal Hygiene</a>
+						  </li>
+			
+						  <li class="dropdown-item">
+							<a href="#">Personal Hygiene</a>
+						  </li>
+			
+						</ul>
+					</li>
+					<li class="menu-category">
+						<a href="#" class="menu-title">Medical Equipments</a>
+			
+						<ul class="dropdown-list">
+			
+						  <li class="dropdown-item">
+							<a href="#">Medical Equipments</a>
+						  </li>
+			
+						  <li class="dropdown-item">
+							<a href="#">Medical Equipments</a>
+						  </li>
+			
+						  <li class="dropdown-item">
+							<a href="#">Medical Equipments</a>
+						  </li>
+			
+						  <li class="dropdown-item">
+							<a href="#">Medical Equipments</a>
+						  </li>
+			
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<!-- __________________________ -->
+		<!-- <div class="mobile-bottom-navigation">
+			<button class="action-btn" data-mobile-menu-open-btn>
+				<ion-icon name="menu"></ion-icon>
+			</button>
+			<button class="action-btn">
+				<ion-icon name="bag"></ion-icon>
+			</button>                                               
+			<button class="action-btn">
+				<ion-icon class="person"></ion-icon>
+			</button>
+		</div> -->
+		<!-- ________________________ -->
+		<nav class="mobile-navigation-menu has-scrollbar" data-mobile-menu>
+			<div class="menu-top">
+				<h2 class="menu-title">Menu</h2>
+				
+				<button class="menu-close-btn" data-mobile-menu-close-btn>
+					<ion-icon name="close-outline"></ion-icon>
+				</button>
+			</div>
+			<ul class="mobile-menu-category-list">
+				<li class="menu-category">
+					<a href="" class="menu-title">Home</a>
+				</li>
+				<li class="menu-category">
+					<button class="accordion-menu" data-accordion-btn>
+						<p class="menu-title">Categories</p>
+						<div>
+							<ion-icon name="add-outline" class="add-icon"></ion-icon>
+							<ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+						</div>
+					</button>
+
+					<ul class="submenu-category-list" data-accordion>
+						<li class="submenu-category">
+							<a href="#" class="submenu-title">Diabetics</a>
+						</li>
+						<li class="submenu-category">
+							<a href="#" class="submenu-title">Dental Care</a>
+						</li>
+						<li class="submenu-category">
+							<a href="#" class="submenu-title">Sexual Care</a>
+						</li>
+						<li class="submenu-category">
+							<a href="#" class="submenu-title">Baby care</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</nav> 
+	</header>
+	<main>
+		<!-- --------------
+			BANNER
+		-------------- -->
+		<div class="banner">
+			<div class="container">
+				<div class="slider-container has-scrollbar">
+					<!-- ------------------------- -->
+					<!-- <div class="slides">
+						<input type="radio" name="radio-btn" id="radio1">
+						<input type="radio" name="radio-btn" id="radio2">
+						<input type="radio" name="radio-btn" id="radio3">
+
+						<div class="slide first"><img src="assets/images/banner-1.jpg" alt="banner1"></div>
+						<div class="slide"><img src="assets/images/banner-2.jpg" alt="banner2"></div>
+						<div class="slide"><img src="assets/images/banner-3.jpg" alt="banner3"></div>
+
+						<div class="navigation-auto">
+							<div class="auto-btn1"></div>
+							<div class="auto-btn2"></div>
+							<div class="auto-btn3"></div>
+						</div>
+					</div>
+					<div class="navigation-manual">
+						<label for="radio1" class="manual-btn"></label>
+						<label for="radio2" class="manual-btn"></label>
+						<label for="radio3" class="manual-btn"></label>
+					</div> -->
+
+					<!-- ------------------------- -->
+					<div class="slider-item">
+						<img class="banner-img" src="{% static 'images/banner-1.jpg' %}" alt="banner-1">
+						<div class="banner-content">
+							<p class="banner-subtitle">Daily Needs</p>
+
+							<h2 class="banner-title">Banner-1</h2>
+
+							<p class="banner-text">Lorem ipsum dolor sit amet.</p>
+
+							<a href="#" class="banner-btn">Consult now</a>
+						</div>
+					</div>
+					<div class="slider-item">
+						<img class="banner-img" src="{% static 'images/banner-2.jpg' %}" alt="banner-1">
+						<div class="banner-content">
+							<p class="banner-subtitle">Daily Needs</p>
+
+							<h2 class="banner-title">Banner-2</h2>
+
+							<p class="banner-text">Lorem ipsum dolor sit amet.</p>
+
+							<a href="#" class="banner-btn">Consult now</a>
+						</div>
+					</div>
+					<div class="slider-item">
+						<img class="banner-img" src="{% static 'images/banner-3.jpg' %}" alt="banner-1">
+						<div class="banner-content">
+							<p class="banner-subtitle">Daily Needs</p>
+
+							<h2 class="banner-title">Banner-3</h2>
+
+							<p class="banner-text">Lorem ipsum dolor sit amet.</p>
+
+							<a href="#" class="banner-btn">Consult now</a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<!-- --------------
+			UPLOAD PRESCRIPTION
+		-------------- -->
+		<div class="prescription">
+			<div class="container">
+				<input type="file" id="file-upload" accept="image/*">
+				<label for="file-upload">Upload Prescription</label>
+			</div>
+		</div>
+		<!-- --------------
+			CATEGORY
+		-------------- -->
+		<div class="category">
+			<div class="container">
+				<div class="category-item-container has-scrollbar">
+					<div class="category-item">
+						<div class="category-img-box">
+							<img src="{% static 'cat-icons/syringe.png' %}" alt="syringe-logo" width="30">
+						</div>
+						<div class="category-content-box">
+							<div class="category-content-flex">
+								<h3 class="category-item-title">Medicines</h3>
+								<p class="category-item-amount">(168)</p>
+							</div>
+							<a href="#" class="category-btn">Show all</a>
+						</div>
+					</div>
+					<div class="category-item">
+						<div class="category-img-box">
+							<img src="{% static 'cat-icons/dental.png' %}" alt="dental-logo" width="30">
+						</div>
+						<div class="category-content-box">
+							<div class="category-content-flex">
+								<h3 class="category-item-title">Dental Care</h3>
+								<p class="category-item-amount">(61)</p>
+							</div>
+							<a href="#" class="category-btn">Show all</a>
+						</div>
+					</div>
+					<div class="category-item">
+						<div class="category-img-box">
+							<img src="{% static 'cat-icons/woman.png' %}" alt="woman-logo" width="30">
+						</div>
+						<div class="category-content-box">
+							<div class="category-content-flex">
+								<h3 class="category-item-title">Women's Choice</h3>
+								<p class="category-item-amount">(69)</p>
+							</div>
+							<a href="#" class="category-btn">Show all</a>
+						</div>
+					</div>
+					<div class="category-item">
+						<div class="category-img-box">
+							<img src="{% static 'cat-icons/contraceptive.png' %}" alt="contraceptive-logo" width="30">
+						</div>
+						<div class="category-content-box">
+							<div class="category-content-flex">
+								<h3 class="category-item-title">Sexual Care</h3>
+								<p class="category-item-amount">(38)</p>
+							</div>
+							<a href="#" class="category-btn">Show all</a>
+						</div>
+					</div>
+					<div class="category-item">
+						<div class="category-img-box">
+							<img src="{% static 'cat-icons/baby.png' %}" alt="baby-logo" width="30">
+						</div>
+						<div class="category-content-box">
+							<div class="category-content-flex">
+								<h3 class="category-item-title">Baby Care</h3>
+								<p class="category-item-amount">(124)</p>
+							</div>
+							<a href="#" class="category-btn">Show all</a>
+						</div>
+					</div>
+					<div class="category-item">
+						<div class="category-img-box">
+							<img src="{% static 'cat-icons/diabetic.png' %}" alt="diabetic-logo" width="30">
+						</div>
+						<div class="category-content-box">
+							<div class="category-content-flex">
+								<h3 class="category-item-title">Diabetics Care</h3>
+								<p class="category-item-amount">(57)</p>
+							</div>
+							<a href="#" class="category-btn">Show all</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- --------------
+			PRODUCTS
+		-------------- -->
+		<div class="container">
+			<div class="product-main">
+				<h2 class="title">Featured Products</h2>
+				<div class="product-grid">
+					<div class="showcase">
+						<div class="showcase-banner">
+							<a href="{%url 'prod'%}">
+								<img  class="product-img default" src="assets/products/napa.jpg" alt="napa" width="300">
+								<img  class="product-img hover" src="assets/products/napa.jpg" alt="napa" width="300">
+							</a>
+							<p class="showcase-badge">15%</p>
+
+							<div class="showcase-actions">
+								<button class="btn-action">
+									<ion-icon name="heart-outline"></ion-icon>
+								</button>
+								<button class="btn-action">
+									<ion-icon name="bag-outline"></ion-icon>
+								</button>
+							</div>
+						</div>
+
+						<div class="showcase-content">
+							<a href="{%url 'prod'%}" class="showcase-category">Napa</a>
+
+							<a href="{%url 'prod'%}">
+								<h3 class="showcase-title">Napa</h3>
+							</a>
+							<div class="price-box">
+								<p class="price">৳610.00</p>
+								<del>৳700.00</del>
+							</div>
+						</div>
+					</div>
+					<div class="showcase">
+						<div class="showcase-banner">
+							<a href="{%url 'prod'%}">
+								<img  class="product-img default" src="assets/products/napaextend.jpg" alt="napaextend" width="300">
+								<img  class="product-img hover" src="assets/products/napaextend.jpg" alt="napaextend" width="300">
+							</a>
+							<p class="showcase-badge">15%</p>
+
+							<div class="showcase-actions">
+								<button class="btn-action">
+									<ion-icon name="heart-outline"></ion-icon>
+								</button>
+								<button class="btn-action">
+									<ion-icon name="bag-outline"></ion-icon>
+								</button>
+							</div>
+						</div>
+
+						<div class="showcase-content">
+							<a href="{%url 'prod'%}" class="showcase-category">Napa Extend</a>
+
+							<a href="{%url 'prod'%}">
+								<h3 class="showcase-title">Napa Extend</h3>
+							</a>
+							<div class="price-box">
+								<p class="price">৳240.00</p>
+								<del>৳276.00</del>
+							</div>
+						</div>
+					</div>
+					<div class="showcase">
+						<div class="showcase-banner">
+							<a href="{%url 'prod'%}">
+								<img class="product-img default" src="assets/products/napaextra.jpg" alt="napaextra" width="300">
+								<img class="product-img hover" src="assets/products/napaextra.jpg" alt="napaextra" width="300">
+							</a>
+							<p class="showcase-badge">15%</p>
+
+							<div class="showcase-actions">
+								<button class="btn-action">
+									<ion-icon name="heart-outline"></ion-icon>
+								</button>
+								<button class="btn-action">
+									<ion-icon name="bag-outline"></ion-icon>
+								</button>
+							</div>
+						</div>
+
+						<div class="showcase-content">
+							<a href="#" class="showcase-category">Napa</a>
+
+							<a href="#">
+								<h3 class="showcase-title">Napa</h3>
+							</a>
+							<div class="price-box">
+								<p class="price">৳610.00</p>
+								<del>৳700.00</del>
+							</div>
+						</div>
+					</div>
+					<div class="showcase">
+						<div class="showcase-banner">
+							<a href="{%url 'prod'%}">
+								<img  class="product-img default" src="assets/products/napasyrup.jpg" alt="napasyrup" width="300">
+								<img  class="product-img hover" src="assets/products/napasyrup.jpg" alt="napasyrup" width="300">
+							</a>
+							<p class="showcase-badge">15%</p>
+
+							<div class="showcase-actions">
+								<button class="btn-action">
+									<ion-icon name="heart-outline"></ion-icon>
+								</button>
+								<button class="btn-action">
+									<ion-icon name="bag-outline"></ion-icon>
+								</button>
+							</div>
+						</div>
+
+						<div class="showcase-content">
+							<a href="#" class="showcase-category">Napa Extra</a>
+
+							<a href="#">
+								<h3 class="showcase-title">Napa Extra</h3>
+							</a>
+							<div class="price-box">
+								<p class="price">৳610.00</p>
+								<del>৳700.00</del>
+							</div>
+						</div>
+					</div>
+					<div class="showcase">
+						<div class="showcase-banner">
+							<img  class="product-img default" src="assets/products/napa.jpg" alt="napa" width="300">
+							<img  class="product-img hover" src="assets/products/napa.jpg" alt="napa" width="300">
+
+							<p class="showcase-badge">15%</p>
+
+							<div class="showcase-actions">
+								<button class="btn-action">
+									<ion-icon name="heart-outline"></ion-icon>
+								</button>
+								<button class="btn-action">
+									<ion-icon name="bag-outline"></ion-icon>
+								</button>
+							</div>
+						</div>
+
+						<div class="showcase-content">
+							<a href="#" class="showcase-category">Napa Syrup</a>
+
+							<a href="#">
+								<h3 class="showcase-title">Napa Syrup</h3>
+							</a>
+							<div class="price-box">
+								<p class="price">৳610.00</p>
+								<del>৳700.00</del>
+							</div>
+						</div>
+					</div>
+					<div class="showcase">
+						<div class="showcase-banner">
+							<img  class="product-img default" src="assets/products/napa.jpg" alt="napa" width="300">
+							<img  class="product-img hover" src="assets/products/napa.jpg" alt="napa" width="300">
+
+							<p class="showcase-badge">15%</p>
+
+							<div class="showcase-actions">
+								<button class="btn-action">
+									<ion-icon name="heart-outline"></ion-icon>
+								</button>
+								<button class="btn-action">
+									<ion-icon name="bag-outline"></ion-icon>
+								</button>
+							</div>
+						</div>
+
+						<div class="showcase-content">
+							<a href="#" class="showcase-category">Napa</a>
+
+							<a href="#">
+								<h3 class="showcase-title">Napa</h3>
+							</a>
+							<div class="price-box">
+								<p class="price">৳610.00</p>
+								<del>৳700.00</del>
+							</div>
+						</div>
+					</div>
+					<div class="showcase">
+						<div class="showcase-banner">
+							<img  class="product-img default" src="assets/products/napa.jpg" alt="napa" width="300">
+							<img  class="product-img hover" src="assets/products/napa.jpg" alt="napa" width="300">
+
+							<p class="showcase-badge">15%</p>
+
+							<div class="showcase-actions">
+								<button class="btn-action">
+									<ion-icon name="heart-outline"></ion-icon>
+								</button>
+								<button class="btn-action">
+									<ion-icon name="bag-outline"></ion-icon>
+								</button>
+							</div>
+						</div>
+
+						<div class="showcase-content">
+							<a href="#" class="showcase-category">Napa</a>
+
+							<a href="#">
+								<h3 class="showcase-title">Napa</h3>
+							</a>
+							<div class="price-box">
+								<p class="price">৳610.00</p>
+								<del>৳700.00</del>
+							</div>
+						</div>
+					</div>
+					<div class="showcase">
+						<div class="showcase-banner">
+							<img  class="product-img default" src="assets/products/napa.jpg" alt="napa" width="300">
+							<img  class="product-img hover" src="assets/products/napa.jpg" alt="napa" width="300">
+
+							<p class="showcase-badge">15%</p>
+
+							<div class="showcase-actions">
+								<button class="btn-action">
+									<ion-icon name="heart-outline"></ion-icon>
+								</button>
+								<button class="btn-action">
+									<ion-icon name="bag-outline"></ion-icon>
+								</button>
+							</div>
+						</div>
+
+						<div class="showcase-content">
+							<a href="#" class="showcase-category">Napa</a>
+
+							<a href="#">
+								<h3 class="showcase-title">Napa</h3>
+							</a>
+							<div class="price-box">
+								<p class="price">৳610.00</p>
+								<del>৳700.00</del>
+							</div>
+						</div>
+					</div>
+					<div class="showcase">
+						<div class="showcase-banner">
+							<img  class="product-img default" src="assets/products/napa.jpg" alt="napa" width="300">
+							<img  class="product-img hover" src="assets/products/napa.jpg" alt="napa" width="300">
+
+							<p class="showcase-badge">15%</p>
+
+							<div class="showcase-actions">
+								<button class="btn-action">
+									<ion-icon name="heart-outline"></ion-icon>
+								</button>
+								<button class="btn-action">
+									<ion-icon name="bag-outline"></ion-icon>
+								</button>
+							</div>
+						</div>
+
+						<div class="showcase-content">
+							<a href="#" class="showcase-category">Napa Syrup</a>
+
+							<a href="#">
+								<h3 class="showcase-title">Napa Syrup</h3>
+							</a>
+							<div class="price-box">
+								<p class="price">৳610.00</p>
+								<del>৳700.00</del>
+							</div>
+						</div>
+					</div>
+					<div class="showcase">
+						<div class="showcase-banner">
+							<img  class="product-img default" src="assets/products/napa.jpg" alt="napa" width="300">
+							<img  class="product-img hover" src="assets/products/napa.jpg" alt="napa" width="300">
+
+							<p class="showcase-badge">15%</p>
+
+							<div class="showcase-actions">
+								<button class="btn-action">
+									<ion-icon name="heart-outline"></ion-icon>
+								</button>
+								<button class="btn-action">
+									<ion-icon name="bag-outline"></ion-icon>
+								</button>
+							</div>
+						</div>
+
+						<div class="showcase-content">
+							<a href="#" class="showcase-category">Napa</a>
+
+							<a href="#">
+								<h3 class="showcase-title">Napa</h3>
+							</a>
+							<div class="price-box">
+								<p class="price">৳610.00</p>
+								<del>৳700.00</del>
+							</div>
+						</div>
+					</div>
+					<div class="showcase">
+						<div class="showcase-banner">
+							<img  class="product-img default" src="assets/products/napa.jpg" alt="napa" width="300">
+							<img  class="product-img hover" src="assets/products/napa.jpg" alt="napa" width="300">
+
+							<p class="showcase-badge">15%</p>
+
+							<div class="showcase-actions">
+								<button class="btn-action">
+									<ion-icon name="heart-outline"></ion-icon>
+								</button>
+								<button class="btn-action">
+									<ion-icon name="bag-outline"></ion-icon>
+								</button>
+							</div>
+						</div>
+
+						<div class="showcase-content">
+							<a href="#" class="showcase-category">Napa</a>
+
+							<a href="#">
+								<h3 class="showcase-title">Napa</h3>
+							</a>
+							<div class="price-box">
+								<p class="price">৳610.00</p>
+								<del>৳700.00</del>
+							</div>
+						</div>
+					</div>
+					<div class="showcase">
+						<div class="showcase-banner">
+							<img  class="product-img default" src="assets/products/napa.jpg" alt="napa" width="300">
+							<img  class="product-img hover" src="assets/products/napa.jpg" alt="napa" width="300">
+
+							<p class="showcase-badge">15%</p>
+
+							<div class="showcase-actions">
+								<button class="btn-action">
+									<ion-icon name="heart-outline"></ion-icon>
+								</button>
+								<button class="btn-action">
+									<ion-icon name="bag-outline"></ion-icon>
+								</button>
+							</div>
+						</div>
+
+						<div class="showcase-content">
+							<a href="#" class="showcase-category">Napa</a>
+
+							<a href="#">
+								<h3 class="showcase-title">Napa</h3>
+							</a>
+							<div class="price-box">
+								<p class="price">৳610.00</p>
+								<del>৳700.00</del>
+							</div>
+						</div>
+					</div>
+					<div class="showcase">
+						<div class="showcase-banner">
+							<img  class="product-img default" src="assets/products/napa.jpg" alt="napa" width="300">
+							<img  class="product-img hover" src="assets/products/napa.jpg" alt="napa" width="300">
+
+							<p class="showcase-badge">15%</p>
+
+							<div class="showcase-actions">
+								<button class="btn-action">
+									<ion-icon name="heart-outline"></ion-icon>
+								</button>
+								<button class="btn-action">
+									<ion-icon name="bag-outline"></ion-icon>
+								</button>
+							</div>
+						</div>
+
+						<div class="showcase-content">
+							<a href="#" class="showcase-category">Napa Syrup</a>
+
+							<a href="#">
+								<h3 class="showcase-title">Napa Syrup</h3>
+							</a>
+							<div class="price-box">
+								<p class="price">৳610.00</p>
+								<del>৳700.00</del>
+							</div>
+						</div>
+					</div>
+					<div class="showcase">
+						<div class="showcase-banner">
+							<img  class="product-img default" src="assets/products/napa.jpg" alt="napa" width="300">
+							<img  class="product-img hover" src="assets/products/napa.jpg" alt="napa" width="300">
+
+							<p class="showcase-badge">15%</p>
+
+							<div class="showcase-actions">
+								<button class="btn-action">
+									<ion-icon name="heart-outline"></ion-icon>
+								</button>
+								<button class="btn-action">
+									<ion-icon name="bag-outline"></ion-icon>
+								</button>
+							</div>
+						</div>
+
+						<div class="showcase-content">
+							<a href="#" class="showcase-category">Napa</a>
+
+							<a href="#">
+								<h3 class="showcase-title">Napa</h3>
+							</a>
+							<div class="price-box">
+								<p class="price">৳610.00</p>
+								<del>৳700.00</del>
+							</div>
+						</div>
+					</div>
+					<div class="showcase">
+						<div class="showcase-banner">
+							<img  class="product-img default" src="assets/products/napa.jpg" alt="napa" width="300">
+							<img  class="product-img hover" src="assets/products/napa.jpg" alt="napa" width="300">
+
+							<p class="showcase-badge">15%</p>
+
+							<div class="showcase-actions">
+								<button class="btn-action">
+									<ion-icon name="heart-outline"></ion-icon>
+								</button>
+								<button class="btn-action">
+									<ion-icon name="bag-outline"></ion-icon>
+								</button>
+							</div>
+						</div>
+
+						<div class="showcase-content">
+							<a href="#" class="showcase-category">Napa</a>
+
+							<a href="#">
+								<h3 class="showcase-title">Napa</h3>
+							</a>
+							<div class="price-box">
+								<p class="price">৳610.00</p>
+								<del>৳700.00</del>
+							</div>
+						</div>
+					</div>
+					<div class="showcase">
+						<div class="showcase-banner">
+							<img  class="product-img default" src="assets/products/napa.jpg" alt="napa" width="300">
+							<img  class="product-img hover" src="assets/products/napa.jpg" alt="napa" width="300">
+
+							<p class="showcase-badge">15%</p>
+
+							<div class="showcase-actions">
+								<button class="btn-action">
+									<ion-icon name="heart-outline"></ion-icon>
+								</button>
+								<button class="btn-action">
+									<ion-icon name="bag-outline"></ion-icon>
+								</button>
+							</div>
+						</div>
+
+						<div class="showcase-content">
+							<a href="#" class="showcase-category">Napa</a>
+
+							<a href="#">
+								<h3 class="showcase-title">Napa</h3>
+							</a>
+							<div class="price-box">
+								<p class="price">৳610.00</p>
+								<del>৳700.00</del>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer class="footer">
+		<div class="footer-top section">
+			<div class="container">
+				<div class="footer-brand">
+					<a href="#" class="logo"><img style="border-radius: 10px;" src="{% static 'Favicon.png' %}" width="80" alt="logo"></a>
+					<p class="footer-text">
+						If you have any queries please contact us at <a href="mailto:support@gmail.com" class="link">support@gmail.com</a>
+					</p>
+					<ul class="contact-list">
+						<li class="contact-item">
+							<ion-icon name="location-outline" aria-hidden="true"></ion-icon>
+							<address class="address">
+								Online Store, Narayanganj
+							</address>
+						</li>
+						<li class="contact-item">
+							<ion-icon name="call-outline" aria-hidden="true"></ion-icon>
+							<a href="tel:(+880)XXXXXXXXXX" class="contact-link">(+880)XXXXXXXXXX</a>
+						</li>
+					</ul>
+					<ul class="social-list">
+						<li>
+							<a href="#" class="social-link">
+								<ion-icon name="logo-facebook"></ion-icon>
+							</a>
+						</li>
+						<li>
+							<a href="#" class="social-link">
+								<ion-icon name="logo-instagram"></ion-icon>
+							</a>
+						</li>
+						<li>
+							<a href="#" class="social-link">
+								<ion-icon name="logo-twitter"></ion-icon>
+							</a>
+						</li>
+						<li>
+							<a href="#" class="social-link">
+								<ion-icon name="logo-linkedin"></ion-icon>
+							</a>
+						</li>
+					</ul>
+				</div>
+				
+				<ul class="footer-list">
+					<li>
+						<p class="footer-list-title">Corporate</p>
+					</li>
+					<li>
+						<p class="footer-link">About Us</p>
+					</li>
+					<li>
+						<p class="footer-link">Contact Us</p>
+					</li>
+					<li>
+						<p class="footer-link">FAQs</p>
+					</li>
+				</ul>
+				<ul class="footer-list">
+					<li>
+						<p class="footer-list-title">Information</p>
+					</li>
+					<li>
+						<p class="footer-link">Privacy Policy</p>
+					</li>
+					<li>
+						<p class="footer-link">Refund Policy</p>
+					</li>
+					<li>
+						<p class="footer-link">Shipping Policy</p>
+					</li>
+					<li>
+						<p class="footer-link">Terms of Service</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<div class="container">
+				<p class="copyright">
+					&copy; 2023 Made by <a href="#">Team NJ<sup>2</sup>.</a>
+				</p>
+				<img src="{% static 'payment/payment.png' %}" width="380" height="90" loading="lazy" alt="payment method" class="img">
+			</div>
+		</div>
+	</footer>
+
+	<a href="#top" class="back-top-btn" aria-label="back to top" data-back-top-btn>
+		<ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
+	</a>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+	<script type="text/javascript" src="assets/script.js"></script>
+</body>
+</html>
