@@ -5,6 +5,7 @@ from .models import Product
 def home(request):
     products = Product.objects.all()
     for product in products:
-        product.discounted_price = product.p_price - (product.p_price*(product.p_discount/100))			
-                        
+
+        product.discounted_price = product.p_price - (product.p_price*(product.p_discount/100))	#FOR DISCOUNT
+
     return render(request,'index.html',{'products': products})
