@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from .models import Product
 # Create your views here.
 def home(request):
-    return render(request,'index.html')
+    products = Product.objects.all()
+    for product in products:
+        product.discounted_price = product.p_price - (product.p_price*(product.p_discount/100))			
+                        
+    return render(request,'index.html',{'products': products})
