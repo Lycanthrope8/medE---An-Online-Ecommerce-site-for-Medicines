@@ -478,7 +478,7 @@
 					{% for product in products %}
 					<div class="showcase">
 						<div class="showcase-banner">
-							<a href="{%url 'prod'%}">
+							<a href="{%url 'prod' p_name=product.p_name %}">
 								<img  class="product-img default" src="data:image/jpeg;base64,{{ product.p_image }}" alt="{{ product.p_name }}" width="300">
 								<img  class="product-img hover" src="data:image/jpeg;base64,{{ product.p_image }}" alt="{{ product.p_name }}" width="300">
 							</a>
@@ -495,9 +495,9 @@
 						</div>
 			
 						<div class="showcase-content">
-							<a href="{%url 'prod'%}" class="showcase-category">{{ product.p_name }}</a>
+							<a href="{%url 'prod' p_name=product.p_name %}" class="showcase-category">{{ product.p_name }}</a>
 
-							<a href="{%url 'prod'%}">
+							<a href="{%url 'prod' p_name=product.p_name %}">
 								<h3 class="showcase-title">{{ product.p_category }}</h3>
 							</a>
 							

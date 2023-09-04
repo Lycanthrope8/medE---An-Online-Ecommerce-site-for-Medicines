@@ -61,7 +61,7 @@
 							</button>
 							<img src="assets/products/napa.jpg" alt="napa">
 							<div class="cart-content">
-								<h3>Napa</h3>
+								<h3>{% product_details.name% }</h3>
 								<span class="cart-content-price">৳610.00</span>
 								<span class="quantity">qty: 1</span>
 							</div>
@@ -303,8 +303,8 @@
                     <img class="product-img default" src="{% static 'products/napaextra.jpg'%}" alt="napaextra" width="600">
                 </div>
                 <div class="col-sm-6">
-                    <p>Home / Napa Extra</p>
-                    <h1>Napa Extra</h1>
+                    <p>Home / {{ product_details.name }}</p>
+                    <h1>{{ product_details.name }}</h1>
                     <h2>Tablet</h2>
                     <h3>Generics: Paracetamol 500mgCaffeine 65mg</h3>
                     <a href=""><h3>Beximco Pharmaceuticals Ltd.</h3></a>
@@ -480,24 +480,7 @@
         num = document.querySelector(".num");
 
     let a = 1;
-
-    plus.addEventListener("click", ()=>{
-        a++;
-        a = (a < 10) ? "0" + a : a;
-        num.innerText = a;
-        console.log(a);
-    });
-
-    minus.addEventListener("click", ()=>{
-        if(a>1){
-            a--;
-            a = (a < 10) ? "0" + a : a;
-            num.innerText = a;
-            console.log(a);    
-        }
-        
-    });
-
+ 
     </script>
 </body>
 </html> 

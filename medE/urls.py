@@ -22,6 +22,6 @@ from products import views as  secondactivity
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',firstactivity.home, name='home'),
-    path('product/', secondactivity.prod, name='prod'),
+    path('product/<str:p_name>/', secondactivity.prod, name='prod'),
    
 ]
