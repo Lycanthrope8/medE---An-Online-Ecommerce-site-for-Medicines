@@ -18,5 +18,6 @@ class main_product(models.Model):
     p_Precautions = models.TextField()
     p_Therapeutic = models.TextField()
     p_Storage = models.CharField(max_length=255)
+    
 
     

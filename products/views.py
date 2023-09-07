@@ -11,8 +11,10 @@ def prod(request, p_name):
 
     try:
         product = main_product.objects.get(p_name=product_details['name'])
+         
     except main_product.DoesNotExist:
         product = None
+        product.discounted_price = product.p_price - (product.p_price*(product.p_discount/100))	#FOR DISCOUNT
 
     return render(request, 'product.html', {'product_details': product})
 

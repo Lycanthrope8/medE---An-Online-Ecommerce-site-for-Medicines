@@ -96,7 +96,7 @@
 			<div class="container">
 				<ul class="desktop-menu-category-list">
 					<li class="menu-category">
-						<a href="index.html" class="menu-title">Home</a>
+						<a href="{%url 'home'%}" class="menu-title">Home</a>
 					</li>
 					<li class="menu-category">
 						<a href="#" class="menu-title">Categories</a>
@@ -305,12 +305,12 @@
                 <div class="col-sm-6">
                     <p>Home / {{ product_details.p_name }}</p>
                     <h1>{{ product_details.p_name }}</h1>
-                    <h2>Tablet</h2>
-                    <h3>Generics: Paracetamol 500mgCaffeine 65mg</h3>
-                    <a href=""><h3>Beximco Pharmaceuticals Ltd.</h3></a>
+                    <h2>{{ product_details.p_type }}</h2>
+                    <h3>Generics: {{ product_details.p_generics }}</h3>
+                    <a href=""><h3>{{ product_details.p_company }}</h3></a>
                     <div class="price-box">
-                        <p class="price">৳610.00</p>
-                        <del>৳700.00</del>
+                        <p class="price">৳{{ product.discounted_price|floatformat:"2"}}</p>
+                        <del>৳{{ product.p_price|floatformat:"2" }}</del>
                     </div>
                     <div class="quantity">
                         <span class="minus">-</span>
@@ -326,25 +326,25 @@
             </div>
             <section class="product-medications">
                 <h2>Indications</h2>
-                <p>Fever, common cold, and influenza, headache, toothache, earache, bodyache, myalgia, neuralgia, dysmenorrhoea, sprains, colic pain, back pain, post-operative pain, postpartum discomfort, inflammatory pain, and post-vaccination pain in children are among the conditions for which paracetamol is prescribed. It's also used to treat rheumatic and osteoarthritic pain, as well as joint stiffness.</p>
+                <p>{{ product_details.p_Indications }}</p>
                 <h2>Pharmacology</h2>
-                <p>Paracetamol is an analgesic and antipyretic with just a little anti-inflammatory effect. Paracetamol (Acetaminophen) is considered to work largely in the central nervous system (CNS), raising pain threshold by blocking both isoforms of the cyclooxygenase enzymes COX-1, COX-2, and COX3, which are involved in prostaglandin (PG) production. Paracetamol is a para aminophenol derivative that possesses analgesic, antipyretic, and anti-inflammatory effects.  One of the most commonly used, safest, and fastest-acting analgesics is paracetamol.  It is well tolerated and devoid of aspirin's numerous adverse effects.</p>
+                <p>{{ product_details.p_Pharmacology }}</p>
                 <h2>Dosage & Administration</h2>
-               
+               <p>{{ product_details.p_Dosage }}</p>
                     <h2>Interaction</h2>
-                    <p>Patients taking barbiturates, tricyclic antidepressants, and alcohol may have a reduced ability to metabolize large doses of paracetamol. Alcohol can increase liver toxicity from acetaminophen overdose. Long-term use of oral contraceptives or steroidal contraceptives can induce liver enzymes and may prevent therapeutic levels of paracetamol from being achieved by increasing metabolism or first-pass clearance.</p>
+                    <p>{{ product_details.p_Interaction }}</p>
                     <h2>Contradictions</h2>
-                    <p>In individuals with significant renal function impairment and hepatic disorders, paracetamol is contraindicated (Viral Hepatitis).</p>
+                    <p>{{ product_details.p_Contradictions }}</p>
                     <h2>Side Effects</h2>
-                    <p>Side effects of paracetamol are usually mild, though hematological reactions including thrombocytopenia, leucopenia, pancytopenia, neutropenia, and agranulocytosis have been reported. Pancreatitis, skin rashes, and other allergic reactions occur occasionally.</p>
+                    <p>{{ product_details.p_Side_Effects }}</p>
                     <h2>Pregnancy and Lactation</h2>
-                    <p>Pregnancy category B according to USFDA. This drug should be used during pregnancy only if clearly needed</p>
+                    <p>{{ product_details.p_Pregnancy }}</p>
                     <h2>Precautions and Warnings</h2>
-                    <p>Paracetamol should be given with caution to patients with impaired kidney or liver function. Paracetamol should be given with care to patients taking other drugs that affect the liver.</p>
+                    <p>{{ product_details.p_Precautions}}</p>
                     <h2>Therapeutic Class</h2>
-                    <p>Non-opioid analgesics</p>
+                    <p>{{ product_details.p_Therapeutic}}</p>
                     <h2>Storage Conditions</h2>
-                    <p>Store in a dry place away from light and heat. Keep out of reach of children. Opioid analgesics</p>
+                    <p>{{ product_details.p_Storage}}</p>
             </section>
 		</div>
 	</main>
