@@ -14,7 +14,7 @@
 	<header>
 		<div class="header-main" data-header>
 			<div class="container">
-				<a class="header-logo" href="#">
+				<a class="header-logo" href="{%url 'home'%}">
 					<img src="{% static 'Logo.jpg' %}" alt=" medX logo"height="50px"width="80px">
 				</a>
 				<div class="header-search-container">
@@ -93,7 +93,7 @@
 			<div class="container">
 				<ul class="desktop-menu-category-list">
 					<li class="menu-category">
-						<a href="#" class="menu-title">Home</a>
+						<a href="{%url 'home'%}" class="menu-title">Home</a>
 					</li>
 					<li class="menu-category">
 						<a href="#" class="menu-title">Categories</a>
