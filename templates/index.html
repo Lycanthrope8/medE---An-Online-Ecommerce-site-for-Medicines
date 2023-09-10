@@ -33,6 +33,9 @@
 							<ion-icon name="search-outline"></ion-icon>
 						</button>
 					</div>
+					<button id="select-image" class="action-btn">
+						<img src="{%static 'prescription.png'%}" alt="prescription-upload-icon" width="30">
+					</button>
 					<button id="user-login-btn" class="action-btn">
 						<ion-icon name="person-outline"></ion-icon>
 					</button>
@@ -137,26 +140,26 @@
 						</div>
 					</li>
 					<li class="menu-category">
-						<a href="{%url 'category'%}" class="menu-title">Men's</a>
+						<a href="{%url 'category' p_category='Mens'%}"class="menu-title">Men's</a>
 			
 
 					</li>
 					<li class="menu-category">
-						<a href="#" class="menu-title">Women's</a>
+						<a href="{%url 'category' p_category='Womens'%}" class="menu-title">Women's</a>
 
 					</li>
 					<li class="menu-category">
-						<a href="#" class="menu-title">Baby Care</a>
+						<a href="{%url 'category' p_category='BABY CARE'%}" class="menu-title">Baby Care</a>
 			
 	
 					</li>
 					<li class="menu-category">
-						<a href="#" class="menu-title">Personal Hygiene</a>
+						<a href="{%url 'category' p_category='Personal Hygiene'%}" class="menu-title">Personal Hygiene</a>
 			
 
 					</li>
 					<li class="menu-category">
-						<a href="#" class="menu-title">Medical Equipments</a>
+						<a href="{%url 'category' p_category='Medical Equipments' %}"class="menu-title">Medical Equipments</a>
 
 					</li>
 				</ul>
@@ -290,7 +293,31 @@
 		<div class="prescription">
 			<div class="container">
 				<input type="file" id="file-upload" accept="image/*">
-				<label for="file-upload">Upload Prescription</label>
+				<label id="select-image" for="file-upload">Upload Prescription</label>
+			</div>
+		</div>
+		<div class="backdrop"></div>
+		<div class="img-area" id="img-area">
+			<div class="elem-container active" data-img="">
+					<input type="file" id="file-upload" accept="image/*" hidden>
+					<div class="times">
+						<input type="checkbox" name="Morning" value="Morning">
+						<label for="Morning">Morning</label>
+						<input type="checkbox" name="Afternoon" value="Afternoon">
+						<label for="Afternoon">Afternoon</label>
+						<input type="checkbox" name="Night" value="Night">
+						<label for="Night">Night</label>
+					</div>
+					<div class="days">
+						<input type="checkbox" name="7Days" value="7Days">
+						<label for="7Days">7 Days</label>
+						<input type="checkbox" name="15Days" value="15Days">
+						<label for="15Days">15 Days</label>
+						<input type="checkbox" name="1Month" value="1Month">
+						<label for="1Month">1 Month</label>
+					</div>
+					<button class="prescription-upload-btn" type="submit">Upload</button>
+				</div>
 			</div>
 		</div>
 		<!-- --------------
@@ -371,6 +398,30 @@
 							<a href="#" class="category-btn">Show all</a>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+		<div class="backdrop"></div>
+		<div class="img-area" id="img-area">
+			<div class="elem-container active" data-img="">
+					<input type="file" id="file-upload" accept="image/*" hidden>
+					<div class="times">
+						<input type="checkbox" name="Morning" value="Morning">
+						<label for="Morning">Morning</label>
+						<input type="checkbox" name="Afternoon" value="Afternoon">
+						<label for="Afternoon">Afternoon</label>
+						<input type="checkbox" name="Night" value="Night">
+						<label for="Night">Night</label>
+					</div>
+					<div class="days">
+						<input type="checkbox" name="7Days" value="7Days">
+						<label for="7Days">7 Days</label>
+						<input type="checkbox" name="15Days" value="15Days">
+						<label for="15Days">15 Days</label>
+						<input type="checkbox" name="1Month" value="1Month">
+						<label for="1Month">1 Month</label>
+					</div>
+					<button class="prescription-upload-btn" type="submit">Upload</button>
 				</div>
 			</div>
 		</div>

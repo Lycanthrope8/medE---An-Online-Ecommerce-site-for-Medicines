@@ -1,6 +1,11 @@
 from django.db import models
 
 class main_product(models.Model):
+    CATEGORY_CHOICES = (
+        ('BABY CARE', 'BABY CARE'),
+        ('MENS','MENS')
+      )
+        
     p_id = models.AutoField(primary_key=True)
     p_name = models.CharField(max_length=255)
     p_type = models.CharField(max_length=255)
@@ -18,6 +23,8 @@ class main_product(models.Model):
     p_Precautions = models.TextField()
     p_Therapeutic = models.TextField()
     p_Storage = models.CharField(max_length=255)
+    p_category=models.CharField(max_length=255, choices=CATEGORY_CHOICES)
+
     
 
     

@@ -33,6 +33,9 @@
 							<ion-icon name="search-outline"></ion-icon>
 						</button>
 					</div>
+					<button id="select-image" class="action-btn">
+						<img src="{%static 'prescription.png'%}" alt="prescription-upload-icon" width="30">
+					</button>
 					<button id="user-login-btn" class="action-btn">
 						<ion-icon name="person-outline"></ion-icon>
 					</button>
@@ -137,26 +140,26 @@
 						</div>
 					</li>
 					<li class="menu-category">
-						<a href="#" class="menu-title">Men's</a>
+						<a href="{%url 'category' p_category='MENS'%}"class="menu-title">Men's</a>
 			
 
 					</li>
 					<li class="menu-category">
-						<a href="#" class="menu-title">Women's</a>
+						<a href="{%url 'category' p_category='WOMEN'%}" class="menu-title">Women's</a>
 
 					</li>
 					<li class="menu-category">
-						<a href="#" class="menu-title">Baby Care</a>
+						<a href="{%url 'category' p_category='BABY CARE'%}" class="menu-title">Baby Care</a>
 			
 	
 					</li>
 					<li class="menu-category">
-						<a href="#" class="menu-title">Personal Hygiene</a>
+						<a href="{%url 'category' p_category='Personal Hygiene'%}" class="menu-title">Personal Hygiene</a>
 			
 
 					</li>
 					<li class="menu-category">
-						<a href="#" class="menu-title">Medical Equipments</a>
+						<a href="{%url 'category' p_category='Medical Equipments' %}"class="menu-title">Medical Equipments</a>
 
 					</li>
 				</ul>
@@ -221,29 +224,116 @@
 		<div class="sidebar">
 			<div class="menu-bar">
 				<div class="menu">
-					<ul class="menu-links">
 						<li class="nav-link">
 							<a href="#">
-								<img src="{% static 'cat-icons/syringe.png' %}" alt="syringe-logo" width="30">
+								<img src="{%static 'cat-icons/syringe.png'%}" alt="syringe-logo" width="30">
 								<h3>Medicines</h3>
 							</a>
 						</li>
-					</ul>
+						<li class="nav-link">
+							<a href="#">
+								<img src="{%static 'cat-icons/dental.png'%}" alt="dental-logo" width="30">
+								<h3>Dental Care</h3>
+							</a>
+						</li>
+						<li class="nav-link">
+							<a href="#">
+								<img src="{%static 'cat-icons/woman.png'%}" alt="woman-logo" width="30">
+								<h3>Women's Care</h3>
+							</a>
+						</li>
+						<li class="nav-link">
+							<a href="#">
+								<img src="{%static 'cat-icons/contraceptive.png'%}" alt="contraceptive-logo" width="30">
+								<h3>Sexual Care</h3>
+							</a>
+						</li>
+						<li class="nav-link">
+							<a href="#">
+								<img src="{%static 'cat-icons/baby.png'%}" alt="baby-logo" width="30">
+								<h3>Baby Care</h3>
+							</a>
+						</li>
+						<li class="nav-link">
+							<a href="#">
+								<img src="{%static 'cat-icons/diabetic.png'%}" alt="diabetic-logo" width="30">
+								<h3>Diabetics Care</h3>
+							</a>
+						</li>
 				</div>
 			</div>
 		</div>
-
+		<div class="backdrop"></div>
+		<div class="img-area" id="img-area">
+			<div class="elem-container active" data-img="">
+					<input type="file" id="file-upload" accept="image/*" hidden>
+					<div class="times">
+						<input type="checkbox" name="Morning" value="Morning">
+						<label for="Morning">Morning</label>
+						<input type="checkbox" name="Afternoon" value="Afternoon">
+						<label for="Afternoon">Afternoon</label>
+						<input type="checkbox" name="Night" value="Night">
+						<label for="Night">Night</label>
+					</div>
+					<div class="days">
+						<input type="checkbox" name="7Days" value="7Days">
+						<label for="7Days">7 Days</label>
+						<input type="checkbox" name="15Days" value="15Days">
+						<label for="15Days">15 Days</label>
+						<input type="checkbox" name="1Month" value="1Month">
+						<label for="1Month">1 Month</label>
+					</div>
+					<button class="prescription-upload-btn" type="submit">Upload</button>
+				</div>
+			</div>
+		</div>
 		<!-- --------------
 			PRODUCTS
 		-------------- -->
 		
 		<div class="container">
 			<div class="product-main">
-				<h2 class="title">Featured Products</h2>
-				
+				<h2 class="title">{{category}}</h2>
+				<div class="product-grid">
+					
+					{% for product in product_details %}
+					<div class="showcase">
+						<div class="showcase-banner">
+							<a href="{%url 'prod' p_name=product.p_name %}">
+								<img  class="product-img default" src="data:image/jpeg;base64,{{ product.p_image }}" alt="{{ product.p_name }}" width="300">
+								<img  class="product-img hover" src="data:image/jpeg;base64,{{ product.p_image }}" alt="{{ product.p_name }}" width="300">
+							</a>
+							<p class="showcase-badge">{{ product.p_discount|floatformat:"2" }}%</p>
+
+							<div class="showcase-actions">
+								<button class="btn-action">
+									<ion-icon name="heart-outline"></ion-icon>
+								</button>
+								<button class="btn-action">
+									<ion-icon name="bag-outline"></ion-icon>
+								</button>
+							</div>
+						</div>
+			
+						<div class="showcase-content">
+							<a href="{%url 'prod' p_name=product.p_name %}" class="showcase-category">{{ product.p_name }}</a>
+
+							<a href="{%url 'prod' p_name=product.p_name %}">
+								<h3 class="showcase-title">{{ product.p_category }}</h3>
+							</a>
+							
+							<div class="price-box">
+						
+                             <p class="price">৳{{ product.discounted_price|floatformat:"2"}}</p>
+ 
+								<del>{{ product.p_price|floatformat:"2" }}</del>
+							</div>
+						</div>
+					
+					</div>
+					{%endfor%}
 				</div>
 			</div>
-
 	</main>
 
 	<footer class="footer">

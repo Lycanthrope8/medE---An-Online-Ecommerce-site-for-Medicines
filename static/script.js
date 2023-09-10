@@ -1,6 +1,13 @@
 'use strict';
 
+const main = document.querySelector('main');
+const userLogin = document.querySelector('.user-login');
+const shoppingcart = document.querySelector('.shopping-cart');
 
+main.addEventListener('click', function(){
+    userLogin.classList.remove('active');
+    shoppingcart.classList.remove('active');
+})
 
 const mobileMenuOpenBtn = document.querySelectorAll('[data-mobile-menu-open-btn]');
 const mobileMenu = document.querySelectorAll('[data-mobile-menu]');
@@ -16,6 +23,7 @@ for (let i=0; i < mobileMenuOpenBtn.length; i++) {
 
     mobileMenuCloseBtn[i].addEventListener('click', mobileMenuCloseFunc);
 }
+
 
 // ACCORDION MENU
 
@@ -43,19 +51,6 @@ for (let i = 0; i < accordionBtn.length; i++) {
 }
 
 // BACK TO TOP BUTTON
-// const addEventOnElem = function (elem, type, callback) {
-//     if (elem.length > 1) {}
-// }
-// const backTopBtn = document.querySelector("[data-back-top-btn]");
-
-// const activeElemOnScroll = function () {
-//     if (window.scrollY > 100) {
-//         backTopBtn.classList.add("active");
-//     } else {
-//         backTopBtn.classList.remove("active");
-//     }
-// }
-// addEventOnElem(window, "scroll", activeElemOnScroll);
 
 const mybutton = document.querySelector("[data-back-top-btn]");
 window.onscroll = function() {scrollFunction()};
@@ -100,3 +95,34 @@ document.querySelector('#user-login-btn').onclick = () =>{
     loginForm.classList.toggle('active');
     shoppingCart.classList.remove('active');
 }
+
+const selectImage = document.querySelector('#select-image');
+const inputFile = document.querySelector('#file-upload');
+const imgArea = document.getElementById('img-area');
+const backDrop = document.querySelector('.backdrop');
+const elemContainer = document.querySelector('.elem-container');
+
+selectImage.addEventListener('click', function () {
+    inputFile.click();
+    imgArea.classList.add('active');
+    backDrop.classList.add('active');
+})
+backDrop.addEventListener('click', function () {
+    backDrop.classList.remove('active');
+    imgArea.classList.remove('active');
+})
+
+inputFile.addEventListener('change', function () {
+    const image = this.files[0]
+    console.log(image);
+    const reader = new FileReader();
+    reader.onload = ()=> {
+        const imgUrl = reader.result;
+        const img = document.createElement('img');
+        img.src = imgUrl;
+        elemContainer.appendChild(img);
+        elemContainer.classList.add('active');
+        elemContainer.dataset.img = image.name;
+    }
+    reader.readAsDataURL(image);
+})

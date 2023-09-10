@@ -18,12 +18,12 @@ from django.contrib import admin
 from django.urls import path
 from Home import views as  firstactivity
 from products import views as  secondactivity
-from category import views as  thirdactivity
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',firstactivity.home, name='home'),
     path('product/<str:p_name>/', secondactivity.prod, name='prod'),
-    path("Category",thirdactivity.category,name='category')
+    path("Category<str:p_category>/",secondactivity.category,name='category')
    
 ]

@@ -21,7 +21,7 @@
 					<img src="{% static 'Logo.jpg' %}" alt=" medX logo" height="50px"width="80px">
 				</a>
 				<div class="header-search-container">
-					<input type="search" name="search" class="search-field" placeholder="Type to search products..."></input>
+					<input type="search" name="search" class="search-field" placeholder="Type to search products...">
 					<button class="search-btn">
 						<ion-icon name="search"></ion-icon>
 					</button>
@@ -36,6 +36,9 @@
 							<ion-icon name="search-outline"></ion-icon>
 						</button>
 					</div>
+					<button id="select-image" class="action-btn">
+						<img src="{%static 'prescription.png'%}" alt="prescription-upload-icon" width="30">
+					</button>
 					<button id="user-login-btn" class="action-btn">
 						<ion-icon name="person-outline"></ion-icon>
 					</button>
@@ -140,33 +143,27 @@
 						</div>
 					</li>
 					<li class="menu-category">
-						<a href="#" class="menu-title">Men's</a>
+						<a href="{%url 'category' p_category='Mens'%}"class="menu-title">Men's</a>
 			
 
 					</li>
 					<li class="menu-category">
-						<a href="#" class="menu-title">Women's</a>
-			
-		
+						<a href="{%url 'category' p_category='Womens'%}" class="menu-title">Women's</a>
+
 					</li>
 					<li class="menu-category">
-						<a href="#" class="menu-title">Baby Care</a>
+						<a href="{%url 'category' p_category='BABY CARE'%}" class="menu-title">Baby Care</a>
 			
-				
+	
 					</li>
 					<li class="menu-category">
-						<a href="#" class="menu-title">Personal Hygiene</a>
+						<a href="{%url 'category' p_category='Personal Hygiene'%}" class="menu-title">Personal Hygiene</a>
 			
-						<ul class="dropdown-list">
-			
-						  
-			
-						</ul>
+
 					</li>
 					<li class="menu-category">
-						<a href="#" class="menu-title">Medical Equipments</a>
-			
-						
+						<a href="{%url 'category' p_category='Medical Equipments' %}"class="menu-title">Medical Equipments</a>
+
 					</li>
 				</ul>
 			</div>
@@ -211,6 +208,30 @@
 		</nav> 
 	</header>
 	<main>
+		<div class="backdrop"></div>
+		<div class="img-area" id="img-area">
+			<div class="elem-container active" data-img="">
+					<input type="file" id="file-upload" accept="image/*" hidden>
+					<div class="times">
+						<input type="checkbox" name="Morning" value="Morning">
+						<label for="Morning">Morning</label>
+						<input type="checkbox" name="Afternoon" value="Afternoon">
+						<label for="Afternoon">Afternoon</label>
+						<input type="checkbox" name="Night" value="Night">
+						<label for="Night">Night</label>
+					</div>
+					<div class="days">
+						<input type="checkbox" name="7Days" value="7Days">
+						<label for="7Days">7 Days</label>
+						<input type="checkbox" name="15Days" value="15Days">
+						<label for="15Days">15 Days</label>
+						<input type="checkbox" name="1Month" value="1Month">
+						<label for="1Month">1 Month</label>
+					</div>
+					<button class="prescription-upload-btn" type="submit">Upload</button>
+				</div>
+			</div>
+		</div>
 		<div class="container">
 			<div class="product-details row">
                 <div class="col-sm-6">
@@ -223,8 +244,8 @@
                     <h3>Generics: {{ product_details.p_generics }}</h3>
                     <a href=""><h3>{{ product_details.p_company }}</h3></a>
                     <div class="price-box">
-                        <p class="price">৳{{ product.discounted_price|floatformat:"2"}}</p>
-                        <del>৳{{ product.p_price|floatformat:"2" }}</del>
+                        <p class="price">৳{{ product_details.discounted_price|floatformat:"2"}}</p>
+                        <del>৳{{ product_details.p_price|floatformat:"2" }}</del>
                     </div>
                     <div class="quantity">
                         <span class="minus">-</span>

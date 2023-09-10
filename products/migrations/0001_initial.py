@@ -31,6 +31,8 @@ class Migration(migrations.Migration):
                 ('p_Precautions', models.TextField()),
                 ('p_Therapeutic', models.TextField()),
                 ('p_Storage', models.CharField(max_length=255)),
+                ('p_category', models.CharField(max_length=255)),
+
             ],
         ),
     ]
