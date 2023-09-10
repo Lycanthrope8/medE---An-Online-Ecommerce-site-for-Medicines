@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.db import connection
 from .models import main_product
-
+from django.http import JsonResponse
 # Create your views here.
 def prod(request, p_name):
     product_details = {
@@ -37,3 +37,20 @@ def category(request, p_category):
     }
 
     return render(request, 'category-wise.html', context)
+
+
+def live_search(request):
+    if request.method == 'GET':
+        query = request.GET.get('q', '')
+        results = main_product.objects.filter(p_name__icontains=query)
+
+        # Convert the queryset to a list of dictionaries
+        results_list = [
+            {
+                'p_name': product.p_name,
+                'p_type': product.p_type,
+            }
+            for product in results
+        ]
+
+        return JsonResponse(results_list, safe=False)

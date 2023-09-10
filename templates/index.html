@@ -18,11 +18,18 @@
 					<img src="{% static 'Logo.jpg' %}" alt=" medX logo"height="50px"width="80px">
 				</a>
 				<div class="header-search-container">
-					<input type="search" name="search" class="search-field" placeholder="Type to search products...">
+					
+					<input type="search" name="search" id="search-input" class="search-field" placeholder="Type to search products...">
+					<div id="search-results">
+
+					
+					</div>
 					<button class="search-btn">
 						<ion-icon name="search"></ion-icon>
 					</button>
 				</div>
+				
+
 				<button class="action-btn menu-action" data-mobile-menu-open-btn>
 					<ion-icon name="menu"></ion-icon>
 				</button>
@@ -569,5 +576,7 @@
 	<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 	<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 	<script type="text/javascript" src="{% static 'script.js' %}"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="{% static 'search.js' %}"></script>
 </body>
 </html>
