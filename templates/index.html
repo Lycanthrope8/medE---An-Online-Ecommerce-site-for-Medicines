@@ -230,32 +230,22 @@
 		-------------- -->
 		<div class="banner">
 			<div class="container">
-				<div class="slider-container has-scrollbar">
+				<div class="slider-container">
 					<!-- ------------------------- -->
-					<!-- <div class="slides">
-						<input type="radio" name="radio-btn" id="radio1">
-						<input type="radio" name="radio-btn" id="radio2">
-						<input type="radio" name="radio-btn" id="radio3">
 
-						<div class="slide first"><img src="assets/images/banner-1.jpg" alt="banner1"></div>
+						<!-- <div class="slide first"><img src="assets/images/banner-1.jpg" alt="banner1"></div>
 						<div class="slide"><img src="assets/images/banner-2.jpg" alt="banner2"></div>
-						<div class="slide"><img src="assets/images/banner-3.jpg" alt="banner3"></div>
-
-						<div class="navigation-auto">
-							<div class="auto-btn1"></div>
-							<div class="auto-btn2"></div>
-							<div class="auto-btn3"></div>
-						</div>
-					</div>
-					<div class="navigation-manual">
-						<label for="radio1" class="manual-btn"></label>
-						<label for="radio2" class="manual-btn"></label>
-						<label for="radio3" class="manual-btn"></label>
-					</div> -->
+						<div class="slide"><img src="assets/images/banner-3.jpg" alt="banner3"></div> -->
 
 					<!-- ------------------------- -->
-					<div class="slider-item">
-						<img class="banner-img" src="{% static 'images/banner-1.jpg' %}" alt="banner-1">
+					<input type="radio" name="radio-btn" id="radio1">
+					<input type="radio" name="radio-btn" id="radio2">
+					<input type="radio" name="radio-btn" id="radio3">
+					<input type="radio" name="radio-btn" id="radio4">
+					<input type="radio" name="radio-btn" id="radio5">
+
+					<div class="slider-item first">
+						<img class="banner-img" src="{%static 'images/banner-5.png' %}" alt="banner-1">
 						<div class="banner-content">
 							<p class="banner-subtitle">Daily Needs</p>
 
@@ -267,8 +257,8 @@
 						</div>
 					</div>
 					<div class="slider-item">
-						<img class="banner-img" src="{% static 'images/banner-2.jpg' %}" alt="banner-1">
-						<div class="banner-content">
+						<img class="banner-img" src="{%static 'images/banner-2.jpg' %}" alt="banner-1">
+						<div class="banner-content first">
 							<p class="banner-subtitle">Daily Needs</p>
 
 							<h2 class="banner-title">Banner-2</h2>
@@ -279,7 +269,7 @@
 						</div>
 					</div>
 					<div class="slider-item">
-						<img class="banner-img" src="{% static 'images/banner-3.jpg' %}" alt="banner-1">
+						<img class="banner-img" src="{%static 'images/banner-3.jpg' %}" alt="banner-1">
 						<div class="banner-content">
 							<p class="banner-subtitle">Daily Needs</p>
 
@@ -289,6 +279,46 @@
 
 							<a href="#" class="banner-btn">Consult now</a>
 						</div>
+					</div>
+					<div class="slider-item">
+						<img class="banner-img" src="{%static 'images/banner-4.jpg' %}" alt="banner-1">
+						<div class="banner-content">
+							<p class="banner-subtitle">Daily Needs</p>
+
+							<h2 class="banner-title">Banner-4</h2>
+
+							<p class="banner-text">Lorem ipsum dolor sit amet.</p>
+
+							<a href="#" class="banner-btn">Consult now</a>
+						</div>
+					</div>
+					<div class="slider-item">
+						<img class="banner-img" src="{%static 'images/banner-5.png' %}" alt="banner-1">
+						<div class="banner-content">
+							<p class="banner-subtitle">Daily Needs</p>
+
+							<h2 class="banner-title">Banner-5</h2>
+
+							<p class="banner-text">Lorem ipsum dolor sit amet.</p>
+
+							<a href="#" class="banner-btn">Consult now</a>
+						</div>
+					</div>
+					
+					<div class="navigation-auto">
+						<div class="auto-btn1"></div>
+						<div class="auto-btn2"></div>
+						<div class="auto-btn3"></div>
+						<div class="auto-btn4"></div>
+						<div class="auto-btn5"></div>
+					</div>
+
+					<div class="navigation-manual">
+						<label for="radio1" class="manual-btn"></label>
+						<label for="radio2" class="manual-btn"></label>
+						<label for="radio3" class="manual-btn"></label>
+						<label for="radio4" class="manual-btn"></label>
+						<label for="radio5" class="manual-btn"></label>
 					</div>
 				</div>
 
@@ -332,7 +362,7 @@
 		-------------- -->
 		<div class="category">
 			<div class="container">
-				<div class="category-item-container has-scrollbar">
+				<div class="category-item-container">
 					<div class="category-item">
 						<div class="category-img-box">
 							<img src="{% static 'cat-icons/syringe.png' %}" alt="syringe-logo" width="30">

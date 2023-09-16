@@ -1,5 +1,15 @@
 'use strict';
 
+var counter = 1;
+
+setInterval(function() {
+    document.getElementById('radio' + counter).checked = true;
+    counter++;
+    if(counter > 5){
+        counter = 1;
+    }
+}, 5000);
+
 const main = document.querySelector('main');
 const userLogin = document.querySelector('.user-login');
 const shoppingcart = document.querySelector('.shopping-cart');
@@ -81,7 +91,6 @@ function scrollFunction() {
 // }
 // setInterval(slider,2000);
 
-
 let shoppingCart = document.querySelector('.shopping-cart');
 
 document.querySelector('#cart-btn').onclick = () =>{
@@ -125,4 +134,11 @@ inputFile.addEventListener('change', function () {
         elemContainer.dataset.img = image.name;
     }
     reader.readAsDataURL(image);
+})
+
+document.querySelector('.label1').addEventListener('click', function(){
+    document.querySelector('.gendermale').checked = true;
+})
+document.querySelector('.label2').addEventListener('click', function(){
+    document.querySelector('.genderfemale').checked = true;
 })

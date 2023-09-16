@@ -530,7 +530,114 @@ body::-webkit-scrollbar-thumb:hover {
 	max-height: 148px;
 	visibility: visible;
 }
+.backdrop {
+	display: none;
+}
+.backdrop.active {
+	display: block;
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.2);
+	backdrop-filter: blur(5px);
+	z-index: 5;
+}
+.img-area {
+	display: none;
+}
+.img-area.active{
+	display: flex;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 15px;
+	overflow: hidden;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	z-index: 10;
+}
+.img-area .elem-container {
+	display: flex;
+	background-color: white;
+	border-radius: 15px;
+	padding: 500px 20px 25px 25px;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.img-area img {
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -70%);
+	border-radius: 15px;
+	margin-bottom: 10px;
+	height: 450px;
+	width: 500px;
+	z-index: 10;
+}
+.img-area .elem-container::before {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	border-radius: 15px;
+	transform: translate(-50%, -70%);
+	content: attr(data-img);
+	height: 450px;
+	width: 500px;
+	background: rgba(0, 0, 0, 0.5);
+	color: white;
+	pointer-events: none;
+	opacity: 0;
+	transition: all 0.3s ease;
+	z-index: 11;
+}
+.img-area .elem-container.active:hover::before {
+	opacity: 1;
+}
+.img-area .times {
+	display: grid;
+	gap: 2px;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	padding: 10px 0;
+	width: 100%;
+}
+.img-area .times input[type="checkbox"] {
+    display: grid;
+	place-content: center;
+	border: 0px;
+	width: 40px;
+}
 
+.img-area .days {
+	display: grid;
+	gap: 2px;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	padding: 10px 0;
+	width: 100%;
+}
+.img-area .days input[type="checkbox"] {
+    display: grid;
+	place-content: center;
+	border: 0px;
+	width: 40px;
+}
+.img-area .prescription-upload-btn {
+	display: flex;
+	color: white;
+	font-size: 25px;
+	align-items: center;
+	justify-content: center;
+	height: 70px;
+	width: 100%;
+	margin-top: 10px;
+	border-radius: 10px;
+	background-color: var(--red);
+}
 main .container {
 	padding: 20px 20px;
 }
