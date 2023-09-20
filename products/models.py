@@ -25,6 +25,7 @@ class main_product(models.Model):
     p_Storage = models.CharField(max_length=255)
     p_category=models.CharField(max_length=255, choices=CATEGORY_CHOICES)
 
-    
+    def __str__(self):
+      return self.p_name
 
     
