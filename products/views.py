@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.db import connection
 from .models import main_product
 from django.http import JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 def prod(request, p_name):
     product_details = {
@@ -54,3 +55,23 @@ def live_search(request):
         ]
 
         return JsonResponse(results_list, safe=False)
+    
+def get_product_info(request, p_id):
+    try:
+        # Use get() to retrieve a single product by p_id
+        product = main_product.objects.get(p_id=p_id)
+
+        # Create a dictionary with the product information
+        product_data = {
+            'p_id': p_id,
+            'p_name': product.p_name,
+            'p_category': product.p_category,
+            'p_price': str(product.p_price),
+            'p_discount': str(product.p_discount),
+            # Add other fields as needed
+        }
+        return JsonResponse(product_data)
+    
+    except ObjectDoesNotExist:
+        return JsonResponse({'error': 'Product not found'}, status=404)
+

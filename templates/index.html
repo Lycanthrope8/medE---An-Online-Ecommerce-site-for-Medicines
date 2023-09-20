@@ -20,14 +20,13 @@
 				<div class="header-search-container">
 					
 					<input type="search" name="search" id="search-input" class="search-field" placeholder="Type to search products...">
-					
-					<button class="search-btn">
-						<ion-icon name="search"></ion-icon>
-					</button>
 					<div id="search-results">
 
 					
 					</div>
+					<button class="search-btn">
+						<ion-icon name="search"></ion-icon>
+					</button>
 				</div>
 				
 				
@@ -49,62 +48,39 @@
 					<button id="select-image" class="action-btn">
 						<img src="{%static 'prescription.png'%}" alt="prescription-upload-icon" width="30">
 					</button>
-					<button id="user-login-btn" class="action-btn">
+					<button id="user-login-btn" class="action-btn" >
 						<ion-icon name="person-outline"></ion-icon>
 					</button>
-					<button id="cart-btn" class="action-btn">
-						<ion-icon name="bag-outline"></ion-icon>
-						<span class="btn-badge">3</span>
-					</button>
-				   <div>
-						<div class="shopping-cart">
-							<div class="cartbox">
-								<button class="cart-trash">
-									<ion-icon name="trash"></ion-icon>
-								</button>
-								<img src="assets/products/napaextend.jpg" alt="napa extend">
-								<div class="cart-content">
-									<h3>Napa Extend</h3>
-									<div style="display: grid; grid-template-columns: 0.5fr 1fr;gap: 1px;">
-										<span class="cart-content-price">৳240.00</span>
-										<span class="quantity">Times/day: 2</span></br>
-										<span class="quantity">Days: 7</span>
-									</div>
-								</div>
-							</div>
-							<div class="cartbox">
-								<button class="cart-trash">
-									<ion-icon name="trash"></ion-icon>
-								</button>
-								<img src="assets/products/napaextra.jpg" alt="napa extra">
-								<div class="cart-content">
-									<h3>Napa Extra</h3>
-									<div style="display: grid; grid-template-columns: 0.5fr 1fr;gap: 1px;">
-										<span class="cart-content-price">৳610.00</span>
-										<span class="quantity">Times/day: 1</span></br>
-										<span class="quantity">Days: 15</span>
-									</div>
-								</div>
-								
-							</div>
-							<div class="cartbox">
-								<button class="cart-trash">
-									<ion-icon name="trash"></ion-icon>
-								</button>
-								<img src="assets/products/napa.jpg" alt="napa">
-								<div class="cart-content">
-									<h3>Napa</h3>
-									<div style="display: grid; grid-template-columns: 0.5fr 1fr;gap: 1px;">
-										<span class="cart-content-price">৳610.00</span>
-										<span class="quantity">Times/day: 1</span></br>
-										<span class="quantity">Days: 30</span>
-									</div>
-								</div>
-							</div>
-							<div class="total">Total: ৳1460.00</div>
-							<a href="#" class="cart-checkout-btn">Checkout</a>
+							<button id="cart-btn" class="action-btn" >
+								<ion-icon name="bag-outline"></ion-icon>
+								<span class="btn-badge">3</span>
+							</button>
+								<div>
+									
+								<div class="shopping-cart" >
+										<!-- HTML template for a product cartbox -->
+
+										<div class="cartbox" id="cartbox-${p_id}">
+											<button class="cart-trash">
+												<ion-icon name="trash"></ion-icon>
+											</button>
+											<img src="" alt="">
+											<div class="cart-content">
+												<h3 id="productName"></h3>
+												<div style="display: grid; grid-template-columns: 0.5fr 1fr;gap: 1px;">
+													<span class="cart-content-price" id="productPrice"></span>
+													<span class="quantity"></span><br>
+													<span class="quantity">Days: 7</span>
+												</div>
+											</div>
+										</div>
+
+									<div class="total">Total: ৳1460.00</div>
+								<a href="#" class="cart-checkout-btn">Checkout</a>
 						</div>
-					</div>
+
+
+						</div>
 					<form action="#" class="user-login">
 						<input type="email" placeholder="Email" class="login-box">
 						<input type="password" placeholder="Password" class="login-box">
@@ -497,12 +473,13 @@
 								<img  class="product-img hover" src="media/{{ product.p_image }}" alt="{{ product.p_name }}" width="300">
 							</a>
 							<p class="showcase-badge">{{ product.p_discount|floatformat:"2" }}%</p>
+							
 
-							<div class="showcase-actions">
-								<button class="btn-action">
+							<div  class="showcase-actions" >
+								<button id = "{{ product.p_id }}" class="btn-action" onclick="ClearCart()">
 									<ion-icon name="heart-outline"></ion-icon>
 								</button>
-								<button class="btn-action">
+								<button id = "{{ product.p_id }} " class="btn-action" onclick="AddtoCart('{{product.p_id}}')"> <!--Cart button-->
 									<ion-icon name="bag-outline"></ion-icon>
 								</button>
 							</div>
@@ -626,5 +603,6 @@
 	<script type="text/javascript" src="{% static 'script.js' %}"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="{% static 'search.js' %}"></script>
+	<script src="{% static 'cart.js' %}"></script>
 </body>
 </html>
