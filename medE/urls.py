@@ -15,12 +15,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from Home import views as  firstactivity
 from products import views as  secondactivity
 from django.conf import settings
 from django.conf.urls.static import static
-
 
 
 urlpatterns = [
@@ -29,6 +28,9 @@ urlpatterns = [
     path('product/<str:p_name>/', secondactivity.prod, name='prod'),
     path("Category<str:p_category>/",secondactivity.category,name='category'),
     path('live_search/', secondactivity.live_search, name='live_search'),
+    path('get_product_info/<int:p_id>/', secondactivity.get_product_info, name='get_product_info'),
+
+
 
    
 ]
