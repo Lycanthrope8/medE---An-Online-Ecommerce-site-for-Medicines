@@ -8,7 +8,7 @@ setInterval(function() {
     if(counter > 5){
         counter = 1;
     }
-}, 5000);
+}, 3000);
 
 const main = document.querySelector('main');
 const userLogin = document.querySelector('.user-login');

@@ -13,6 +13,7 @@ class main_product(models.Model):
     p_id = models.AutoField(primary_key=True)
     p_name = models.CharField(max_length=255)
     p_type = models.CharField(max_length=255)
+    p_image=models.ImageField(upload_to='media/',default='static\cat-icons\syringe.png')  # 'images/' is the upload directory
     p_generics = models.CharField(max_length=255)
     p_company = models.CharField(max_length=255)
     p_price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -35,7 +36,8 @@ class main_product(models.Model):
 
     def save(self, *args, **kwargs):
         super(main_product, self).save(*args, **kwargs)
-
+        if self.p_image and not self.p_image._committed:
+            super(main_product, self).save(*args, **kwargs)
         # Check if the feature is 'yes' and create a corresponding Product entry
         if self.feature == 'yes':
             Product.objects.create(
@@ -43,8 +45,20 @@ class main_product(models.Model):
                 p_category=self.p_category,
                 p_price=self.p_price,
                 p_discount=self.p_discount,
-                p_id=self.p_id
+                p_id=self.p_id,
+                p_image=self.p_image
             )
+
+    def delete(self, *args, **kwargs):
+        # Delete the associated Product when deleting main_product
+        if self.feature == 'yes':
+            try:
+                product_to_delete = Product.objects.get(p_id=self.p_id)
+                product_to_delete.delete()
+            except Product.DoesNotExist:
+                pass  # Handle the case where the Product does not exist
+
+        super(main_product, self).delete(*args, **kwargs)
 
 @receiver(pre_save, sender=main_product)
 def delete_product_if_feature_changed(sender, instance, **kwargs):

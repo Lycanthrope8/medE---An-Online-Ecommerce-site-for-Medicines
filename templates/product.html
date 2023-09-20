@@ -235,7 +235,7 @@
 		<div class="container">
 			<div class="product-details row">
                 <div class="col-sm-6">
-                    <img class="product-img default" src="{% static 'products/napaextra.jpg'%}" alt="napaextra" width="600">
+                    <img class="product-img default" src="{{ product_details.p_image.url }}" alt="{{ product_details.p_name }}" width="600">
                 </div>
                 <div class="col-sm-6">
                     <p>Home / {{ product_details.p_name }}</p>
