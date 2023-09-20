@@ -43,5 +43,14 @@ class main_product(models.Model):
                 p_discount = self.p_discount,
                 p_id =self.p_id
             )
+    def delete(self, *args, **kwargs):
+        # Delete the associated Product when deleting main_product
+        if self.feature == 'yes':
+            try:
+                product_to_delete = Product.objects.get(p_id=self.p_id)
+                product_to_delete.delete()
+            except Product.DoesNotExist:
+                pass  # Handle the case where the Product does not exist
 
+        super(main_product, self).delete(*args, **kwargs)
     
