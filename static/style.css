@@ -1740,4 +1740,11 @@ body::-webkit-scrollbar-thumb:hover {
 	.footer-top .container {
 		grid-template-columns: 1fr 0.5fr 0.5fr ;
 	}
+	.quantity-button {
+		display: inline;
+		position: absolute;
+		margin-left: 5px; /* Adjust the margin as needed */
+		cursor: pointer; /* Add a pointer cursor to make them look clickable */
+	  }
+	  
 }
