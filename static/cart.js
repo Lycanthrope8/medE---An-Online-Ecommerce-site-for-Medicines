@@ -1,28 +1,29 @@
 
 var cart = JSON.parse(localStorage.getItem('cart')) || {};
 
-function AddtoCart(id, doSomething = null) {
+function AddtoCart(id, doSomething = null, button = null) {
   if (cart[id] === undefined) { 
     console.log("Added to cart:", id);
     cart[id] = 1;
-  }else if (cart[id] !== undefined && doSomething === null){
+  } else if (cart[id] !== undefined && doSomething === null) {
     cart[id] += 1;
-  } else if (doSomething === "increment") { // Increment the quantity
+  } else if (doSomething === "increment") {
     cart[id] += 1;
-  } else if (doSomething === "decrement" && cart[id] > 1) { // Decrement the quantity if it's greater than 1
+  } else if (doSomething === "decrement" && cart[id] > 1) {
     cart[id] -= 1;
   }
 
-  // Update the quantity displayed in the <li> element using jQuery
-  var liElement = $('#product-li-' + id);
-  if (liElement.length > 0) {
-    liElement.find('.quantity-value').text(cart[id]);
+  // Update the quantity element directly if a button is provided
+  if (button) {
+    const quantityElement = button.parentElement.querySelector(".quantity-value");
+    if (quantityElement) {
+      quantityElement.textContent = cart[id];
+    }
   }
 
   console.log(cart);
   localStorage.setItem('cart', JSON.stringify(cart));
 }
-
 
 
 function ClearCart() {
@@ -60,14 +61,31 @@ function ClearCart() {
           if (Object.keys(productData).length > 0) {
             if ("p_name" in productData) {
               // Display the product name
-              resultsDiv.append('<li id="product-li-' + productData["p_id"] + '" style="display: inline; white-space: nowrap;">Name: ' + productData["p_name"] +
-                  '  Quantity: <button class="quantity-button decrement" style="display: inline; white-space: nowrap;" ' +
-                  'onclick="AddtoCart(' + productData["p_id"] + ', \'decrement\')">-</button>' +
-                  '<span class="quantity-value">' + cart[productData["p_id"]] + '</span>' +
-                  ' <button class="quantity-button increment" style="display: inline; white-space: nowrap;" ' +
-                  'onclick="AddtoCart(' + productData["p_id"] + ', \'increment\')">+</button></li>');
 
-
+              resultsDiv.append(`
+                                <div class="cartbox" id="cartbox-${p_id}">
+                                  <button class="cart-trash">
+                                    <ion-icon name="trash"></ion-icon>
+                                  </button>
+                                  <img src="" alt="">
+                                  <div class="cart-content">
+                                    <h3 id="productName-${p_id}">${productData["p_name"]}</h3>
+                                    <div style="display: grid; grid-template-columns: 0.5fr 1fr; gap: 1px;">
+                                      <span class="cart-content-price" id="productPrice-${p_id}"></span>
+                                      <span class="quantity"> 
+                                        Quantity:
+                                        <button class="quantity-button decrement" style="display: inline; white-space: nowrap;"
+                                          onclick="AddtoCart(${productData["p_id"]}, 'decrement', this)">-</button>
+                                        <span class="quantity-value" id="quantity-${p_id}">${cart[productData["p_id"]]}</span>  
+                                        <button class="quantity-button increment" style="display: inline; white-space: nowrap;"
+                                          onclick="AddtoCart(${productData["p_id"]}, 'increment', this)">+</button>
+                                      </span>
+                                      <br>
+                                      <span class="quantity">Days: 7</span>
+                                    </div>
+                                  </div>
+                                </div>`
+                              );
 
            } else {
               resultsDiv.append('<p>No product name found.</p>');
