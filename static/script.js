@@ -116,6 +116,10 @@ selectImage.addEventListener('click', function () {
     imgArea.classList.add('active');
     backDrop.classList.add('active');
 })
+document.querySelector('#select-image2').addEventListener('click', function () {
+    imgArea.classList.add('active');
+    backDrop.classList.add('active');
+})
 backDrop.addEventListener('click', function () {
     backDrop.classList.remove('active');
     imgArea.classList.remove('active');

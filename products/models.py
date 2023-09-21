@@ -6,7 +6,19 @@ from Home.models import Product
 class main_product(models.Model):
     CATEGORY_CHOICES = (
         ('BABY CARE', 'BABY CARE'),
-        ('MENS','MENS')
+        ('MENS','MENS'),
+        ('Cold & Allergies','Cold & Allergies'),
+        ('Heart Problems','Heart Problems'),
+        ('Diabetes','Diabetes'),
+        ('Respiratory Problems','Respiratory Problems'),
+        ('Neurological Problems','Neurological Problems'),
+        ('Arthritis or other types of pain','Arthritis or other types of pain'),
+        ('Sexual Wellness','Sexual Wellness'),
+        ('Herbal & Ayurvedic','Herbal & Ayurvedic'),
+        ('Infant & Mothers care','Infant & Mothers care'),
+        ('Supplements & Nutrition','Supplements & Nutrition')
+        
+
     )
     feature_CHOICES = (('yes', 'yes'), ('no', 'no'))
 

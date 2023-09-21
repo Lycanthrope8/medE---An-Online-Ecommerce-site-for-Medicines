@@ -18,20 +18,32 @@
 					<img src="{% static 'Logo.jpg' %}" alt=" medX logo"height="50px"width="80px">
 				</a>
 				<div class="header-search-container">
-					<input type="search" name="search" class="search-field" placeholder="Type to search products...">
+					
+					<input type="search" name="search" id="search-input" class="search-field" placeholder="Type to search products...">
+					<div id="search-results">
+
+					
+					</div>
 					<button class="search-btn">
 						<ion-icon name="search"></ion-icon>
 					</button>
 				</div>
+				
+				
+
 				<button class="action-btn menu-action" data-mobile-menu-open-btn>
 					<ion-icon name="menu"></ion-icon>
 				</button>
 				<div class="header-user-actions">
 					<div class="search-box">
-						<input class="search-txt" type="text" placeholder="Type to search...">
+						<input class="search-txt" id="search-input2" type="text" placeholder="Type to search...">
 						<button class="mobile-srch-btn action-btn">
 							<ion-icon name="search-outline"></ion-icon>
 						</button>
+						<div id="search-results2">
+
+					
+						</div>
 					</div>
 					<button id="select-image" class="action-btn">
 						<img src="{%static 'prescription.png'%}" alt="prescription-upload-icon" width="30">
@@ -103,39 +115,39 @@
 						<div class="dropdown-panel">
 							<ul class="dropdown-panel-list">
 								<li class="menu-title">
-									<a href="#">Diabetics Care</a>
+									
 								</li>
-								<li class="panel-list-item"><a href="#">Diabetics</a></li>
-								<li class="panel-list-item"><a href="#">Dental Care</a></li>
-								<li class="panel-list-item"><a href="#">Sexual Care</a></li>
-								<li class="panel-list-item"><a href="#">Baby Care</a></li>
+								<li class="panel-list-item"><a href="{%url 'category' p_category='Cold & Allergies'%}">Cold & Allergies</a></li>
+								<li class="panel-list-item"><a href="{%url 'category' p_category='Heart Problems'%}">Heart Problems</a></li>
+								<li class="panel-list-item"><a href="{%url 'category' p_category='Diabetes'%}">Diabetes</a></li>
+								<li class="panel-list-item"><a href="{%url 'category' p_category='Respiratory Problems'%}">Respiratory Problems</a></li>
 							</ul>
 							<ul class="dropdown-panel-list">
 								<li class="menu-title">
-									<a href="#">Covid Special</a>
+									
 								</li>
-								<li class="panel-list-item"><a href="#">Sanitizers</a></li>
-								<li class="panel-list-item"><a href="#">Surgical Masks</a></li>
-								<li class="panel-list-item"><a href="#">Hand Gloves</a></li>
-								<li class="panel-list-item"><a href="#">Covid Test Kit</a></li>
+								<li class="panel-list-item"><a href="{%url 'category' p_category='Neurological Problems'%}">Neurological Problems</a></li>
+								<li class="panel-list-item"><a href="{%url 'category' p_category='Arthritis or other types of pain'%}">Arthritis or other types of pain</a></li>
+								<li class="panel-list-item"><a href="{%url 'category' p_category='Sexual Wellness'%}">Sexual Wellness</a></li>
+								<li class="panel-list-item"><a href="{%url 'category' p_category='Herbal & Ayurvedic'%}">Herbal & Ayurvedic</a></li>
 							</ul>
 							<ul class="dropdown-panel-list">
 								<li class="menu-title">
-									<a href="#">Men's Care</a>
+									
 								</li>
-								<li class="panel-list-item"><a href="#">Men Specific</a></li>
-								<li class="panel-list-item"><a href="#">Men Specific</a></li>
-								<li class="panel-list-item"><a href="#">Men Specific</a></li>
-								<li class="panel-list-item"><a href="#">Men Specific</a></li>
+								<li class="panel-list-item"><a href="{%url 'category' p_category='Infant & Mothers care'%}">Infant & Mothers care</a></li>
+								<li class="panel-list-item"><a href="{%url 'category' p_category='Supplements & Nutrition'%}">Supplements & Nutrition</a></li>
+								<li class="panel-list-item"><a href="{%url 'category' p_category='More will be added late'%}">More will be added late</a></li>
+								<li class="panel-list-item"><a href="{%url 'category' p_category='Cold & Allergies'%}">More will be added late</a></li>
 							</ul>
 							<ul class="dropdown-panel-list">
 								<li class="menu-title">
-									<a href="#">Women's Care</a>
+									
 								</li>
-								<li class="panel-list-item"><a href="#">Women Specific</a></li>
-								<li class="panel-list-item"><a href="#">Women Specific</a></li>
-								<li class="panel-list-item"><a href="#">Women Specific</a></li>
-								<li class="panel-list-item"><a href="#">Women Specific</a></li>
+								<li class="panel-list-item"><a href="{%url 'category' p_category='Cold & Allergies'%}">More will be added late</a></li>
+								<li class="panel-list-item"><a href="{%url 'category' p_category='Cold & Allergies'%}">More will be added late</a></li>
+								<li class="panel-list-item"><a href="{%url 'category' p_category='Cold & Allergies'%}">More will be added late</a></li>
+								<li class="panel-list-item"><a href="{%url 'category' p_category='Cold & Allergies'%}">More will be added late</a></li>
 							</ul>
 						</div>
 					</li>
@@ -201,16 +213,56 @@
 
 					<ul class="submenu-category-list" data-accordion>
 						<li class="submenu-category">
-							<a href="#" class="submenu-title">Diabetics</a>
+							<a href="{%url 'category' p_category='Mens'%}" class="submenu-title">Men's</a>
 						</li>
 						<li class="submenu-category">
-							<a href="#" class="submenu-title">Dental Care</a>
+							<a href="{%url 'category' p_category='Womens'%}" class="submenu-title">Women's</a>
 						</li>
 						<li class="submenu-category">
-							<a href="#" class="submenu-title">Sexual Care</a>
+							<a href="{%url 'category' p_category='BABY CARE'%}"  class="submenu-title">Baby Care</a>
 						</li>
 						<li class="submenu-category">
-							<a href="#" class="submenu-title">Baby care</a>
+							<a href="{%url 'category' p_category='Personal Hygiene'%}" class="submenu-title">Personal Hygiene</a>
+						</li>
+
+						<li class="submenu-category">
+							<a href="{%url 'category' p_category='Medical Equipments' %}"class="submenu-title">Medical Equipments</a>
+						</li>
+						<li class="submenu-category">
+							<a href="{%url 'category' p_category='Cold & Allergies'%}"class="submenu-title">Cold & Allergies</a>
+						</li>
+						<li class="submenu-category">
+							<a href="{%url 'category' p_category='Heart Problems'%}"class="submenu-title">Heart Problems</a>
+						</li>
+						<li class="submenu-category">
+							<a href="{%url 'category' p_category='Diabetes'%}"class="submenu-title">Diabetes</a>
+						</li>
+						<li class="submenu-category">
+							<a href="{%url 'category' p_category='Respiratory Problems'%}"class="submenu-title">Respiratory Problems</a>
+						</li>
+						<li class="submenu-category">
+							<a href="{%url 'category' p_category='Neurological Problems'%}"class="submenu-title">Neurological Problems</a>
+						</li>
+						<li class="submenu-category">
+							<a href="{%url 'category' p_category='Arthritis or other types of pain'%}"class="submenu-title">Arthritis or other types of pain</a>
+						</li>
+						<li class="submenu-category">
+							<a href="{%url 'category' p_category='Sexual Wellness'%}"class="submenu-title">Sexual Wellness</a>
+						</li>
+						<li class="submenu-category">
+							<a href="{%url 'category' p_category='Herbal & Ayurvedic'%}"class="submenu-title">Herbal & Ayurvedic</a>
+						</li>
+						<li class="submenu-category">
+							<a href="{%url 'category' p_category='Infant & Mothers care'%}"class="submenu-title">Infant & Mothers care</a>
+						</li>
+						<li class="submenu-category">
+							<a href="{%url 'category' p_category='Supplements & Nutrition'%}"class="submenu-title">Supplements & Nutrition</a>
+						</li>
+						<li class="submenu-category">
+						<a href="{%url 'category' p_category='More will be added late'%}"class="submenu-title">More will be added late</a>
+						</li>
+						<li class="submenu-category">
+							<a href="{%url 'category' p_category='More will be added late'%}"class="submenu-title">More will be added late</a>
 						</li>
 					</ul>
 				</li>
@@ -221,7 +273,7 @@
 		<!-- --------------
 			SIDEBAR
 		-------------- -->
-		<div class="sidebar">
+		{% comment %} <div class="sidebar">
 			<div class="menu-bar">
 				<div class="menu">
 						<li class="nav-link">
@@ -262,7 +314,7 @@
 						</li>
 				</div>
 			</div>
-		</div>
+		</div> {% endcomment %}
 		<div class="backdrop"></div>
 		<div class="img-area" id="img-area">
 			<div class="elem-container active" data-img="">
@@ -430,5 +482,7 @@
 	<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 	<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 	<script type="text/javascript" src="{% static 'script.js' %}"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="{% static 'search.js' %}"></script>
 </body>
 </html>
