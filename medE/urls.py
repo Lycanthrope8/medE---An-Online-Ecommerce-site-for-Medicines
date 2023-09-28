@@ -34,6 +34,7 @@ urlpatterns = [
     path('send_otp/', log.send_otp, name='send_otp'),
     path('verify_otp/', log.verify_otp, name='verify_otp'),
     path('logout/', LogoutView.as_view(), name='logout'),
+    path('profile', firstactivity.profile,name='profile')
 
 
 
