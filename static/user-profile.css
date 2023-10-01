@@ -663,6 +663,7 @@ main {
 	width: 100%;
 }
 main .container {
+	max-width: 60vw;
 	margin: 0;
 	position: absolute;
 	left: 50%;
@@ -1151,6 +1152,21 @@ main .container .registration-form.active {
 	.header-user-actions .user-login.active {
 		right: -5%;
 	}
+	main .container {
+		margin-top: 20px;
+		width: 100%;
+	}
+	main .sidebar {
+		width: 80px;
+		height: 40%;
+	}
+	
+	main .sidebar li h3{
+		display: none;
+	}
+	main .container .registration-form .input-box button {
+		left: 0px;
+	}
 	.prescriptions {
 		grid-template-columns: 1fr;
 	}
@@ -1186,6 +1202,20 @@ main .container .registration-form.active {
 	.banner-btn {
 		padding: 7px 20px;
 	}
+	main .container {
+		margin-top: 20px;
+		width: 100%;
+		height: 100vh;
+	}
+	main .sidebar {
+		width: 80px;
+		height: 40%;
+	}
+	
+	main .sidebar li h3{
+		display: none;
+	}
+	
 	.product-grid {
 		grid-template-columns: 1fr 1fr;
 		gap: 30px;
@@ -1273,6 +1303,33 @@ main .container .registration-form.active {
 	.banner-btn {
 		--fs-11: 0.75rem;
 	}
+	main {
+		height: 100vh;
+	}
+	main .container {
+		margin-top: 20px;
+		width: 100%;
+	}
+	main .sidebar {
+		width: 150px;
+		height: 40%;
+	}
+	
+	main .sidebar li h3{
+		display: block;
+		font-size: 10px;
+	}
+	.registration-form .input-box:not(:nth-child(1)) input,
+	.registration-form .input-box:not(:nth-child(2)) input,
+	.registration-form .input-box:not(:nth-child(8)) input {
+		width: 80%;
+	}
+	.registration-form .input-box:nth-child(1) input,
+	.registration-form .input-box:nth-child(2) input,
+	.registration-form .input-box:nth-child(8) input {
+		width: 90%;
+	}	
+
 	.footer-bottom .container {
 		display: flex;
 		justify-content: space-between;
@@ -1544,6 +1601,26 @@ main .container .registration-form.active {
 
 	.prescriptions {
 		grid-template-columns: 1fr 1fr 1fr 1fr;
+	}
+
+	main .sidebar {
+		width: 20vw;
+		max-width: 250px;
+		height: 60%;
+	}
+	main .sidebar li h3{
+		font-size: 18px;
+	}
+
+	.registration-form .input-box:not(:nth-child(1)) input,
+	.registration-form .input-box:not(:nth-child(2)) input,
+	.registration-form .input-box:not(:nth-child(8)) input {
+		max-width: 1080px;
+	}
+	.registration-form .input-box:nth-child(1) input,
+	.registration-form .input-box:nth-child(2) input,
+	.registration-form .input-box:nth-child(8) input {
+		max-width: 1080px;
 	}
 
 	/* CATEGORY */

@@ -18,7 +18,7 @@
 		<div class="header-main" data-header>
 			<div class="container">
 				<a class="header-logo" href="index.html">
-					<img src="assets/Logo.jpg" alt=" medX logo" height="50px"width="80px">
+					<img src="{% static 'Logo.jpg' %}" alt=" medX logo" height="50px"width="80px">
 				</a>
 				<div class="header-search-container">
 					<input type="search" name="search" class="search-field" placeholder="Type to search products..."></input>
@@ -37,7 +37,7 @@
 						</button>
 					</div>
 					<button id="select-image" class="action-btn">
-						<img src="assets/prescription.png" alt="prescription-upload-icon" width="30">
+						<img src="{%static 'prescription.png'%}" alt="prescription-upload-icon" width="30">
 					</button>
 					<button id="user-login-btn" class="action-btn">
 						<ion-icon name="person-outline"></ion-icon>
@@ -88,7 +88,7 @@
 						<input type="password" placeholder="Password" class="login-box">
 						<div class="forgotreg">
 							<a href="#">Forgot password?</a>
-							<a href="register.html">Register now!</a>
+							<a href="">Register now!</a>
 						</div>
 						<input type="submit" value="Login" class="form-btn">
 					</form>
@@ -392,7 +392,7 @@
 			<input class="address" type="address" placeholder="Address">
 			<button><ion-icon name="create-outline"></ion-icon></button>
 		</div>
-		<button type="submit"><a href="user-profile.html" style="color: white;">Register Now</a></button>
+		<button type="submit"><a href="user-profile.html" style="color: white;">Save</a></button>
 		</form>
 		<div class="prescriptions" id="prescriptions">
 			<div class="presc-box">
