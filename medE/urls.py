@@ -20,8 +20,7 @@ from Home import views as  firstactivity
 from products import views as  secondactivity
 from django.conf import settings
 from django.conf.urls.static import static
-from authentication import views as log
-from django.contrib.auth.views import LogoutView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,11 +29,7 @@ urlpatterns = [
     path("Category<str:p_category>/",secondactivity.category,name='category'),
     path('live_search/', secondactivity.live_search, name='live_search'),
     path('get_product_info/<int:p_id>/', secondactivity.get_product_info, name='get_product_info'),
-    path('login/',log.my_login,name='login'),
-    path('send_otp/', log.send_otp, name='send_otp'),
-    path('verify_otp/', log.verify_otp, name='verify_otp'),
-    path('logout/', LogoutView.as_view(), name='logout'),
-    path('profile', firstactivity.profile,name='profile')
+   
 
 
 

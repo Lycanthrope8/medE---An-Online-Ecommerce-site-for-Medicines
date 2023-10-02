@@ -20,7 +20,7 @@ STATIC_DIR=os.path.join(BASE_DIR,'static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-LOGOUT_REDIRECT_URL = 'home'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -32,10 +32,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Session settings
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Use database-backed sessions
-SESSION_COOKIE_AGE = 1209600  # Set the session timeout to 2 weeks (in seconds)
-# Application definition
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -46,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Home',
     'products',
-    'authentication',
+ 
    
     
 ]
@@ -100,11 +97,7 @@ DATABASES = {
 
 # settings.py
 
-TWILIO_ACCOUNT_SID = 'AC9208a41b026e1730f6190c699c29a6cd'
-TWILIO_AUTH_TOKEN = '4bc4931a223f7048f8c0567e1b66a69c'
-TWILIO_PHONE_NUMBER = '+17409211140'
 
-AUTH_USER_MODEL = 'authentication.CustomUser'
 
 
 
