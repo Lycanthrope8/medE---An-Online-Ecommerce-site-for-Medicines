@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Home',
     'products',
+    'authentication',
  
    
     
@@ -142,3 +143,9 @@ STATICFILES_DIRS=[STATIC_DIR,]
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+TWILIO_ACCOUNT_SID = 'AC10345156edd1d98a8a0a7f03535b5c54'
+TWILIO_AUTH_TOKEN = '0358202ca0002f4734b5db7eeb2ba7e7'
+TWILIO_PHONE_NUMBER = '+12568343905'
+
+
