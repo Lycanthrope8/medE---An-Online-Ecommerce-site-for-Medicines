@@ -6,10 +6,10 @@ from django.http import HttpResponse
 from twilio.rest import Client
 import random
 from django.conf import settings  # Import Django settings module
-from django.contrib.auth.hashers import make_password
-from django.contrib.auth.hashers import check_password
-from .models import UserProfile
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.hashers import make_password, check_password
+from .models import UserProfile  # Import your UserProfile model
+
 
 def mylogin(request):
     if request.method == 'POST':
@@ -19,15 +19,15 @@ def mylogin(request):
         # Retrieve user profile based on phone number
         user_profile = UserProfile.objects.filter(phone_number=phone_number).first()
 
-        print(user_profile)
-        print(user_profile.password)
-        print(check_password(password, user_profile.password))
+        print(user_profile)  # Debug: Print user_profile to check if it's retrieved correctly
 
         if user_profile is not None and check_password(password, user_profile.password):
             # Password matches, log the user in
-            user = authenticate(request, phone_number=phone_number, password=user_profile.password)
-
+            
+            user = authenticate(request, username=phone_number, password=password)
             print(user)
+
+
             if user is not None:
                 login(request, user)
                 return redirect('home')  # Redirect to the home page after successful login
@@ -39,18 +39,11 @@ def mylogin(request):
     return render(request, 'login.html')
 
 
-
-def myregister(request):
-    return render(request, 'register.html')
-
-
 def verify_otp(request):
     if request.method == 'POST':
         user_otp = request.POST.get('otp')
         stored_otp = request.session.get('otp')
         phone_number = request.session.get('phone_number')
-
-        print(f"User OTP: {user_otp}, Stored OTP: {stored_otp}, Phone Number: {phone_number}")
 
         if user_otp == stored_otp:
             # OTP is correct, create a user profile
@@ -60,15 +53,10 @@ def verify_otp(request):
             hashed_password = make_password(password)
 
             # Check if a user profile with the given phone number already exists
-            user_profile = UserProfile.objects.filter(phone_number=phone_number).first()
-
-            if user_profile:
-                # If the user profile already exists, update the password
-                user_profile.password = hashed_password
-                user_profile.save()
-            else:
-                # If the user profile doesn't exist, create a new one
-                user_profile = UserProfile.objects.create(phone_number=phone_number, password=hashed_password)
+            user_profile, created = UserProfile.objects.get_or_create(
+                phone_number=phone_number,
+                defaults={'password': hashed_password}
+            )
 
             # Clear the OTP data from the session
             del request.session['otp']
@@ -83,6 +71,9 @@ def verify_otp(request):
     # Handle GET requests (if any) here
     return render(request, 'authentication/login.html')
 
+
+def myregister(request):
+    return render(request, 'register.html')
 
 def send_otp(request):
     if request.method == 'POST':
