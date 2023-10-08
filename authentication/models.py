@@ -18,6 +18,8 @@ class UserProfileManager(BaseUserManager):
 
 class UserProfile(AbstractBaseUser, PermissionsMixin):
     phone_number = models.CharField(max_length=15, unique=True)
+    is_staff = models.BooleanField(default=False)  # Add is_staff field
+    is_superuser = models.BooleanField(default=False)  # Add is_superuser field
     # other fields if any ...
 
     objects = UserProfileManager()
