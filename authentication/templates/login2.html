@@ -19,12 +19,19 @@
     </form>
 
     <!-- OTP Verification Form -->
+
     <form action="{% url 'verify_otp' %}" method="POST">
         {% csrf_token %}
         <label for="otp">Enter OTP:</label>
         <input type="text" name="otp" id="otp" placeholder="Enter OTP" required>
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" placeholder="Username" required>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" placeholder="Email" required>
         <input type="hidden" name="phone_number" value="{{ phone_number }}">
         <button type="submit">Verify OTP</button>
     </form>
+
+
 </body>
 </html>

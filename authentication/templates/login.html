@@ -1,37 +1,78 @@
-<!-- authentication/templates/authentication/login.html -->
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login with Phone OTP Verification</title>
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .login-container input {
+            /* width: 100%; */
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .login-container button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .login-container button:hover {
+            background-color: #45a049;
+        }
+
+        .login-container .options {
+            margin-top: 15px;
+        }
+
+        .login-container .options a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #333;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Login with Phone OTP Verification</h1>
-
-    <!-- Form to Send OTP -->
-    <form action="{% url 'send_otp' %}" method="POST">
-        {% csrf_token %}
-        <label for="phone_number">Phone Number:</label>
-        <input type="text" name="phone_number" id="phone_number" placeholder="Phone Number" required>
-        <button type="submit">Send OTP</button>
-    </form>
-
-    <!-- OTP Verification Form -->
-
-    <form action="{% url 'verify_otp' %}" method="POST">
-        {% csrf_token %}
-        <label for="otp">Enter OTP:</label>
-        <input type="text" name="otp" id="otp" placeholder="Enter OTP" required>
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username" placeholder="Username" required>
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" placeholder="Email" required>
-        <input type="hidden" name="phone_number" value="{{ phone_number }}">
-        <button type="submit">Verify OTP</button>
-    </form>
-
-
+    <div class="login-container">
+        <h2>Login</h2>
+        <form method="post" action="{% url 'mylogin' %}">
+            {% csrf_token %}
+            <input type="tel" name="phone_number" placeholder="Phone Number" required><br>
+            <input type="password" name="password" placeholder="Password" required><br>
+            <button type="submit">Login</button>
+        </form>
+        <div class="options">
+            <a href="{% url 'myregister' %}">Register Now</a>
+            <a href="#">Forgot Password</a>
+        </div>
+    </div>
 </body>
+
 </html>
+

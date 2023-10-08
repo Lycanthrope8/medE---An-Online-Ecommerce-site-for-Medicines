@@ -33,7 +33,9 @@ urlpatterns = [
     path('get_product_info/<int:p_id>/', secondactivity.get_product_info, name='get_product_info'),
     path('send_otp/', authenticationViews.send_otp, name='send_otp'),
     path('verify_otp/', authenticationViews.verify_otp, name='verify_otp'),
-    path('login/', authenticationViews.mylogin, name='login'),
+    path('login/', authenticationViews.mylogin, name='mylogin'),
+    path('register/', authenticationViews.myregister, name='myregister'),
+    
     
 
 
