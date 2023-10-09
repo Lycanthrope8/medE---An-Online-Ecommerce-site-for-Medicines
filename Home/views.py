@@ -9,3 +9,6 @@ def home(request):
         product.discounted_price = product.p_price - (product.p_price*(product.p_discount/100))	#FOR DISCOUNT
 
     return render(request,'index.html',{'products': products})
+
+def profile(request):
+    return render(request,'user-profile.html')

@@ -83,8 +83,15 @@
 
 						</div>
 						<div style="text-align:center;" class="user-login">
-							
-  							  <a  href="{% url 'mylogin' %}" class="form-btn">Login</a>
+							{% if user.is_authenticated %}
+							<a href="{% url 'profile' %}" class="form-btn">Profile</a>
+							<a href="{% url 'mylogout' %}" class="form-btn">Logout</a>
+						    {% else %}
+							<a href="{% url 'mylogin' %}" class="form-btn">Login</a>
+						    {% endif %}
+						
+
+					
 							
 
 						</div>

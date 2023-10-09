@@ -35,7 +35,8 @@ urlpatterns = [
     path('verify_otp/', authenticationViews.verify_otp, name='verify_otp'),
     path('login/', authenticationViews.mylogin, name='mylogin'),
     path('register/', authenticationViews.myregister, name='myregister'),
-    
+    path('logout/', authenticationViews.mylogout, name='mylogout'),
+    path('profile/',firstactivity.profile, name='profile'),
     
 
 

@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from twilio.rest import Client
 import random
 from django.conf import settings  # Import Django settings module
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password, check_password
 from .models import UserProfile  # Import your UserProfile model
 
@@ -23,6 +23,7 @@ def mylogin(request):
 
         if user_profile is not None and check_password(password, user_profile.password):
             # Password matches, log the user in
+            
             
             user = authenticate(request, username=phone_number, password=password)
             print(user)
@@ -94,4 +95,8 @@ def send_otp(request):
 
         return HttpResponse("OTP sent successfully")
 
+
+def mylogout(request):
+    logout(request)
+    return redirect('home')
 
