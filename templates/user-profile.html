@@ -343,58 +343,56 @@
 						<h3 href="#">Purchase History</h3>
 					</a>
 				</li>
-		</div>
+			</div>
+			<!-- <h1>{{ user }}</h1> -->
 		<div class="container">
-		<form action="#" class="registration-form row active">
-		<div class="input-box">
-			<label for="">Username</label>
-			<input class="username" type="text" placeholder="Username">
-			<button><ion-icon name="create-outline"></ion-icon></button>
-		</div>
-		<div class="input-box">
-			<label for="">Full Name</label>
-			<input class="fullname" type="text" placeholder="Full Name">
-			<button><ion-icon name="create-outline"></ion-icon></button>
-		</div>
-		<div class="input-box col-sm-6">
-			<label for="">Phone</label>
-			<input class="phone" type="phone" placeholder="Phone Number">
-			<button><ion-icon name="create-outline"></ion-icon></button>
-		</div>
-		<div class="input-box col-sm-6">
-			<label for="">Birth Date</label>				
-			<input class="birthdate" type="date" placeholder="Birth Date">
-			<button><ion-icon name="create-outline"></ion-icon></button>
-		</div>
-		<div class="gender input-box">
-			<label for="">Gender</label>
-			<div class="label1">				
-				<input type="radio" class="gendermale" name="gender" type="gender" placeholder="Male" value="Male">
-				<label for="">Male</label>
-			</div>
-			<div class="label2">
-				<input type="radio" class="genderfemale" name="gender" type="gender" placeholder="Female" value="Female">
-				<label for="">Female</label>
-			</div>
-		</div>
-		<div class="input-box col-sm-6">
-			<label for="">Email</label>				
-			<input class="email" type="email" placeholder="Email">
-			<button><ion-icon name="create-outline"></ion-icon></button>
-		</div>
-		<div class="input-box col-sm-6">
-			<label for="">Password</label>				
-			<input class="password" type="password" placeholder="Password">
-			<button><ion-icon name="create-outline"></ion-icon></button>
-		</div>
-		<div class="input-box">
-			<label for="">Address</label>				
-			<input class="address" type="address" placeholder="Address">
-			<button><ion-icon name="create-outline"></ion-icon></button>
-		</div>
-		<button type="submit"><a href="user-profile.html" style="color: white;">Save</a></button>
-		</form>
-		<div class="prescriptions" id="prescriptions">
+			<div class="container">
+				<form action="#" class="registration-form row active">
+					<div class="input-box col-sm-6">
+						<label for="">First Name</label>
+						<input class="firstname" type="text" placeholder="First Name" value="{{ user.first_name }}">
+						<button><ion-icon name="create-outline"></ion-icon></button>
+					</div>
+					<div class="input-box col-sm-6">
+						<label for="">Last Name</label>
+						<input class="lastname" type="text" placeholder="Last Name" value="{{ user.last_name }}">
+						<button><ion-icon name="create-outline"></ion-icon></button>
+					</div>
+					<div class="input-box col-sm-6">
+						<label for="">Phone</label>
+						<input class="phone" type="phone" placeholder="Phone Number" value="{{ user.phone_number }}" >
+						<button><ion-icon name="create-outline"></ion-icon></button>
+					</div>
+					<div class="input-box col-sm-6">
+						<label for="">Birth Date</label>				
+						<input class="birthdate" type="date" placeholder="Birth Date" value="{{ user.dob }}">
+						<button><ion-icon name="create-outline"></ion-icon></button>
+					</div>
+					<div class="gender input-box">
+						<label for="">Gender</label>
+						<div class="label1">                
+							<input type="radio" class="gendermale" name="gender" value="Male" {% if user.gender == 'M' %} checked {% endif %} >
+							<label for="">Male</label>
+						</div>
+						<div class="label2">
+							<input type="radio" class="genderfemale" name="gender" value="Female" {% if user.gender == 'F' %} checked {% endif %}>
+							<label for="">Female</label>
+						</div>
+					</div>
+					
+					<div class="input-box">
+						<label for="">Email</label>				
+						<input class="email" type="email" placeholder="Email">
+						<button><ion-icon name="create-outline"></ion-icon></button>
+					</div>
+					<div class="input-box">
+						<label for="">Address</label>				
+						<input class="address" type="address" placeholder="Address">
+						<button><ion-icon name="create-outline"></ion-icon></button>
+					</div>
+					<button type="submit"><a href="user-profile.html" style="color: white;">Save</a></button>
+				</form>
+			</div><div class="prescriptions" id="prescriptions">
 			<div class="presc-box">
 				<img src="assets/images/prescription.jpg" alt="prescription-image">
 				<h3>Uploaded: 23.07.23</h3>

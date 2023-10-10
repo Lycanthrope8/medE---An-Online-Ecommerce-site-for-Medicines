@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 
+
 class UserProfileManager(BaseUserManager):
     def create_user(self, phone_number, password=None, **extra_fields):
         if not phone_number:
@@ -16,10 +17,18 @@ class UserProfileManager(BaseUserManager):
 
         return self.create_user(phone_number, password, **extra_fields)
 
+
 class UserProfile(AbstractBaseUser, PermissionsMixin):
     phone_number = models.CharField(max_length=15, unique=True)
-    is_staff = models.BooleanField(default=False)  # Add is_staff field
-    is_superuser = models.BooleanField(default=False)  # Add is_superuser field
+    first_name = models.CharField(max_length=255, default='')  # Added first name field
+    last_name = models.CharField(max_length=255, default='')  # Added last name field
+    dob = models.DateField(null=True, blank=True)  # Added Date of Birth field
+    email = models.EmailField(max_length=255, default='')  # Added email field
+    address = models.TextField(default='')  # Added address field
+
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+
     # other fields if any ...
 
     objects = UserProfileManager()
@@ -31,6 +40,3 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     user_permissions = models.ManyToManyField('auth.Permission', related_name='user_profiles', blank=True)
 
     # other fields if any ...
-
-    def __str__(self):
-        return self.phone_number
