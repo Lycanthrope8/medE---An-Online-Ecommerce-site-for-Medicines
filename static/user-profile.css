@@ -1205,7 +1205,6 @@ main .container .registration-form.active {
 	main .container {
 		margin-top: 20px;
 		width: 100%;
-		height: 100vh;
 	}
 	main .sidebar {
 		width: 80px;
@@ -1215,7 +1214,9 @@ main .container .registration-form.active {
 	main .sidebar li h3{
 		display: none;
 	}
-	
+	main .container .registration-form .input-box button {
+		/* margin-left: 350px; */
+	}
 	.product-grid {
 		grid-template-columns: 1fr 1fr;
 		gap: 30px;
@@ -1303,9 +1304,7 @@ main .container .registration-form.active {
 	.banner-btn {
 		--fs-11: 0.75rem;
 	}
-	main {
-		height: 100vh;
-	}
+
 	main .container {
 		margin-top: 20px;
 		width: 100%;

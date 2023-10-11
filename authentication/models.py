@@ -29,10 +29,19 @@ class UserProfileManager(BaseUserManager):
         return self.create_user(phone_number, password, **extra_fields)
 
 class UserProfile(AbstractBaseUser, PermissionsMixin):
+
+    MALE = 'M'
+    FEMALE = 'F'
+    GENDER_CHOICES = [
+        (MALE, 'Male'),
+        (FEMALE, 'Female'),
+    ]
+
     phone_number = models.CharField(unique=True, max_length=15)
     first_name = models.CharField(max_length=100, default='')
     last_name = models.CharField(max_length=100, default='')
     dob = models.DateField(null=True, blank=True)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='', blank=True)  # Default to empty string
     email = models.EmailField(max_length=255, default='')
     address = models.CharField(max_length=255, default='')
     is_active = models.BooleanField(default=True)
