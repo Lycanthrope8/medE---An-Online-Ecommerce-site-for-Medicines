@@ -659,7 +659,7 @@ body::-webkit-scrollbar-thumb:hover {
 main {
 	position: relative;
 	display: flex;
-	height: 100vh;
+	height: 800px;
 	width: 100%;
 }
 main .container {
@@ -736,14 +736,14 @@ main .container .registration-form.active {
 	color: black;
 	text-transform: none;
 }
-.registration-form .input-box:not(:nth-child(1)) input,
-.registration-form .input-box:not(:nth-child(2)) input,
-.registration-form .input-box:not(:nth-child(8)) input {
+
+.registration-form .input-box:not(:nth-child(6)) input,
+.registration-form .input-box:not(:nth-child(7)) input {
 	width: 93%;
 }
-.registration-form .input-box:nth-child(1) input,
-.registration-form .input-box:nth-child(2) input,
-.registration-form .input-box:nth-child(8) input {
+
+.registration-form .input-box:nth-child(6) input,
+.registration-form .input-box:nth-child(7) input {
 	width: 96%;
 }
 
@@ -1318,14 +1318,14 @@ main .container .registration-form.active {
 		display: block;
 		font-size: 10px;
 	}
-	.registration-form .input-box:not(:nth-child(1)) input,
-	.registration-form .input-box:not(:nth-child(2)) input,
-	.registration-form .input-box:not(:nth-child(8)) input {
+
+	.registration-form .input-box:not(:nth-child(6)) input,
+	.registration-form .input-box:not(:nth-child(7)) input {
 		width: 80%;
 	}
-	.registration-form .input-box:nth-child(1) input,
-	.registration-form .input-box:nth-child(2) input,
-	.registration-form .input-box:nth-child(8) input {
+
+	.registration-form .input-box:nth-child(6) input,
+	.registration-form .input-box:nth-child(7) input {
 		width: 90%;
 	}	
 
@@ -1611,14 +1611,14 @@ main .container .registration-form.active {
 		font-size: 18px;
 	}
 
-	.registration-form .input-box:not(:nth-child(1)) input,
-	.registration-form .input-box:not(:nth-child(2)) input,
-	.registration-form .input-box:not(:nth-child(8)) input {
+	
+	.registration-form .input-box:not(:nth-child(6)) input,
+	.registration-form .input-box:not(:nth-child(7)) input {
 		max-width: 1080px;
 	}
-	.registration-form .input-box:nth-child(1) input,
-	.registration-form .input-box:nth-child(2) input,
-	.registration-form .input-box:nth-child(8) input {
+	
+	.registration-form .input-box:nth-child(6) input,
+	.registration-form .input-box:nth-child(7) input {
 		max-width: 1080px;
 	}
 
