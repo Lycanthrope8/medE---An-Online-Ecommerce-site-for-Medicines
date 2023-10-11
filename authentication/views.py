@@ -92,7 +92,7 @@ def send_otp(request):
         # Store the OTP in session for verification
         request.session['otp'] = otp
         request.session['phone_number'] = phone_number
-
+        print(otp)
         return HttpResponse("OTP sent successfully")
 
 
