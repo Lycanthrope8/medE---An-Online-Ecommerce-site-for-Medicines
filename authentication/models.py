@@ -36,6 +36,10 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
         (MALE, 'Male'),
         (FEMALE, 'Female'),
     ]
+    u_type = [
+        ('quantity', 'quantity'),
+        ('days', 'days'),
+    ]
 
     phone_number = models.CharField(unique=True, max_length=15)
     first_name = models.CharField(max_length=100, default='')
@@ -46,7 +50,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     address = models.CharField(max_length=255, default='')
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-
+    user_type = models.CharField(max_length=10, choices=u_type, default='days')  # Default to empty string
     objects = UserProfileManager()
 
     USERNAME_FIELD = 'phone_number'
