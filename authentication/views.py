@@ -9,6 +9,8 @@ from django.conf import settings  # Import Django settings module
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password, check_password
 from .models import UserProfile  # Import your UserProfile model
+from django.contrib.auth.decorators import login_required
+
 
 
 def mylogin(request):
@@ -100,3 +102,36 @@ def mylogout(request):
     logout(request)
     return redirect('home')
 
+
+
+
+@login_required
+def update_profile(request):
+    if request.method == 'POST':
+        # print(request.POST)
+        # Extract form values from the request
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        dob = request.POST.get('dob')
+        gender = request.POST.get('gender')
+        email = request.POST.get('email')
+        address = request.POST.get('address')
+
+        # Update user profile
+        user_profile = request.user
+        user_profile.first_name = first_name
+        user_profile.last_name = last_name
+        user_profile.dob = dob
+        user_profile.gender = gender
+        user_profile.email = email
+        user_profile.address = address
+        # print("Before save:", user_profile.first_name)  # Check user profile data before saving
+        user_profile.save()
+        # print("After save:", user_profile.first_name)  # Check user profile data after saving
+
+
+        # Redirect to a success page or any other desired behavior after successful form submission
+        return render(request, 'user-profile.html')  # Redirect to a success template
+
+    # Handle GET request or display the form
+    return render(request, 'user-profile.html')
