@@ -37,9 +37,10 @@ urlpatterns = [
     path('register/', authenticationViews.myregister, name='myregister'),
     path('logout/', authenticationViews.mylogout, name='mylogout'),
     path('profile/',firstactivity.profile, name='profile'),
+    path('profile/update_profile/', authenticationViews.update_profile, name='update_profile'),
+
+
     
-
-
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
