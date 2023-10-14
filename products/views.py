@@ -4,6 +4,8 @@ from django.db import connection
 from .models import main_product
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
+from authentication.models import UserProfile
+
 # Create your views here.
 def prod(request, p_name):
     product_details = {
@@ -18,7 +20,17 @@ def prod(request, p_name):
         product = None
         
 
-    return render(request, 'product.html', {'product_details': product})
+    if request.user.is_authenticated:
+        # Check if the user is logged in
+            try:
+                user_profile = UserProfile.objects.get(pk=request.user.id)
+                if user_profile.user_type == 'quantity':
+                    # Check if the user's type is 'quantity'
+                    return render(request, 'product.html', {'product_details': product})
+            except UserProfile.DoesNotExist:
+                pass  # Handle the case where the user profile does not exist
+    # Default case if the user is not logged in or their type is not 'quantity'
+    return render(request, 'product_day.html', {'product_details': product})
 
 
 
