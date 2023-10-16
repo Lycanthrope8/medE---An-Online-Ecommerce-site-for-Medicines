@@ -1,18 +1,19 @@
 
 var cart = JSON.parse(localStorage.getItem('cart')) || {};
 
-function AddtoCart(id, doSomething = null, button = null) {
+function AddtoCart(id,quantity=1, doSomething = null, button = null) {
   if (cart[id] === undefined) { 
     console.log("Added to cart:", id);
-    cart[id] = 1;
+    cart[id] = quantity;
   } else if (cart[id] !== undefined && doSomething === null) {
     cart[id] += 1;
   } else if (doSomething === "increment") {
     cart[id] += 1;
   } else if (doSomething === "decrement" && cart[id] > 1) {
     cart[id] -= 1;
+  } else if (doSomething === "replace"){
+    cart[id] = quantity;
   }
-
   // Update the quantity element directly if a button is provided
   if (button) {
     const quantityElement = button.parentElement.querySelector(".quantity-value");

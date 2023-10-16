@@ -2,13 +2,13 @@
 
 var counter = 1;
 
-setInterval(function() {
-    document.getElementById('radio' + counter).checked = true;
-    counter++;
-    if(counter > 5){
-        counter = 1;
-    }
-}, 3000);
+// setInterval(function() {
+//     document.getElementById('radio' + counter).checked = true;
+//     counter++;
+//     if(counter > 5){
+//         counter = 1;
+//     }
+// }, 3000);
 
 const main = document.querySelector('main');
 const userLogin = document.querySelector('.user-login');
