@@ -92,15 +92,19 @@
 						<div class="total">Total: ৳1460.00</div>
 						<a href="#" class="cart-checkout-btn">Checkout</a>
 					</div>
-					<form action="#" class="user-login">
-						<input type="email" placeholder="Email" class="login-box">
-						<input type="password" placeholder="Password" class="login-box">
-						<div class="forgotreg">
-							<a href="#">Forgot password?</a>
-							<a href="register.html">Register now!</a>
-						</div>
-						<input type="submit" value="Login" class="form-btn">
-					</form>
+					<div style="text-align:center;" class="user-login">
+						{% if user.is_authenticated %}
+						<a href="{% url 'profile' %}" class="form-btn">Profile</a>
+						<a href="{% url 'mylogout' %}" class="form-btn">Logout</a>
+						{% else %}
+						<a href="{% url 'mylogin' %}" class="form-btn">Login</a>
+						{% endif %}
+					
+
+				
+						
+
+					</div>
 				</div>
 			</div>
 		</div>
