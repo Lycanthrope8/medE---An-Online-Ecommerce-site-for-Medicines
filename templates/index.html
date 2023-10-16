@@ -146,12 +146,12 @@
 						</div>
 					</li>
 					<li class="menu-category">
-						<a href="{%url 'category' p_category='Mens'%}"class="menu-title">Men's</a>
+						<a href="{%url 'category' p_category='MENS'%}"class="menu-title">Men's</a>
 			
 
 					</li>
 					<li class="menu-category">
-						<a href="{%url 'category' p_category='Womens'%}" class="menu-title">Women's</a>
+						<a href="{%url 'category' p_category='WOMEN'%}" class="menu-title">Women's</a>
 
 					</li>
 					<li class="menu-category">
@@ -207,10 +207,10 @@
 
 					<ul class="submenu-category-list" data-accordion>
 						<li class="submenu-category">
-							<a href="{%url 'category' p_category='Mens'%}" class="submenu-title">Men's</a>
+							<a href="{%url 'category' p_category='MENS'%}" class="submenu-title">Men's</a>
 						</li>
 						<li class="submenu-category">
-							<a href="{%url 'category' p_category='Womens'%}" class="submenu-title">Women's</a>
+							<a href="{%url 'category' p_category='WOMEN'%}" class="submenu-title">Women's</a>
 						</li>
 						<li class="submenu-category">
 							<a href="{%url 'category' p_category='BABY CARE'%}"  class="submenu-title">Baby Care</a>
@@ -408,24 +408,12 @@
 						</div>
 						<div class="category-content-box">
 							<div class="category-content-flex">
-								<h3 class="category-item-title">Medicines</h3>
-								<p class="category-item-amount">(168)</p>
+								<h3 class="category-item-title">MEN'S CARE</h3>
 							</div>
-							<a href="#" class="category-btn">Show all</a>
+							<a href="{%url 'category' p_category='MENS'%}"class="menu-title">Show A</a>
 						</div>
 					</div>
-					<div class="category-item">
-						<div class="category-img-box">
-							<img src="{% static 'cat-icons/dental.png' %}" alt="dental-logo" width="30">
-						</div>
-						<div class="category-content-box">
-							<div class="category-content-flex">
-								<h3 class="category-item-title">Dental Care</h3>
-								<p class="category-item-amount">(61)</p>
-							</div>
-							<a href="#" class="category-btn">Show all</a>
-						</div>
-					</div>
+					
 					<div class="category-item">
 						<div class="category-img-box">
 							<img src="{% static 'cat-icons/woman.png' %}" alt="woman-logo" width="30">
@@ -433,9 +421,9 @@
 						<div class="category-content-box">
 							<div class="category-content-flex">
 								<h3 class="category-item-title">Women's Choice</h3>
-								<p class="category-item-amount">(69)</p>
+							
 							</div>
-							<a href="#" class="category-btn">Show all</a>
+							<a href="{%url 'category' p_category='WOMEN'%}" class="menu-title">Show All</a>
 						</div>
 					</div>
 					<div class="category-item">
@@ -444,10 +432,10 @@
 						</div>
 						<div class="category-content-box">
 							<div class="category-content-flex">
-								<h3 class="category-item-title">Sexual Care</h3>
-								<p class="category-item-amount">(38)</p>
+								<h3 class="category-item-title">Sexual Wellness</h3>
+								
 							</div>
-							<a href="#" class="category-btn">Show all</a>
+							<a href="{%url 'category' p_category='Sexual Wellness'%}">Show All</a>
 						</div>
 					</div>
 					<div class="category-item">
@@ -457,9 +445,9 @@
 						<div class="category-content-box">
 							<div class="category-content-flex">
 								<h3 class="category-item-title">Baby Care</h3>
-								<p class="category-item-amount">(124)</p>
+							
 							</div>
-							<a href="#" class="category-btn">Show all</a>
+							<a href="{%url 'category' p_category='BABY CARE'%}" class="menu-title">Show All</a>
 						</div>
 					</div>
 					<div class="category-item">
@@ -469,9 +457,8 @@
 						<div class="category-content-box">
 							<div class="category-content-flex">
 								<h3 class="category-item-title">Diabetics Care</h3>
-								<p class="category-item-amount">(57)</p>
 							</div>
-							<a href="#" class="category-btn">Show all</a>
+							<a href="{%url 'category' p_category='Diabetes'%}">Show All</a>
 						</div>
 					</div>
 				</div>
