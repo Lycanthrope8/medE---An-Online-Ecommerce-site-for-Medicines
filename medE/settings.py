@@ -33,7 +33,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
-SESSION_COOKIE_AGE = 604800
+SESSION_COOKIE_AGE = 1870050
 
 
 INSTALLED_APPS = [
