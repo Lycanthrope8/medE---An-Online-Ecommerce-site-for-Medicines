@@ -737,6 +737,7 @@ main .container {
 }
 
 .product-details .buttons {
+	position: relative;
 	display: flex;
 	gap: 10px;
 }
@@ -757,6 +758,7 @@ main .container {
 	color: white;
 	font-weight: 600;
 	border-radius: 10px;
+	z-index: 2;
 	transition: 0.2s ease;
 }
 .product-details .addtolistddown {

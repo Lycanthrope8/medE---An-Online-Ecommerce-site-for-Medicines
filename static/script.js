@@ -8,7 +8,7 @@ var counter = 1;
 //     if(counter > 5){
 //         counter = 1;
 //     }
-// }, 3000);
+// }, 3000);`
 
 const main = document.querySelector('main');
 const userLogin = document.querySelector('.user-login');
@@ -92,10 +92,13 @@ function scrollFunction() {
 // setInterval(slider,2000);
 
 let shoppingCart = document.querySelector('.shopping-cart');
-
+let addToList = document.querySelector('.addtolistddown');
 document.querySelector('#cart-btn').onclick = () =>{
     shoppingCart.classList.toggle('active');
     loginForm.classList.remove('active');
+}
+document.querySelector('#addtolist').onclick = () =>{
+    addToList.classList.toggle('active');
 }
 
 let loginForm = document.querySelector('.user-login');

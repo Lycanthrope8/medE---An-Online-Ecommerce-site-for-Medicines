@@ -299,11 +299,11 @@
                         <p class="price">৳{{ product_details.discounted_price|floatformat:"2"}}</p>
                         <del>৳{{ product_details.p_price|floatformat:"2" }}</del>
                     </div>
-                    <div class="quantity">
+                    <!-- <div class="quantity">
                         <span class="minus">-</span>
                         <span class="num">01</span>
                         <span class="plus">+</span>
-                    </div>
+                    </div> -->
 					<div class="buttons row">
 						<button class="addtocart col-sm-5">Add to Cart</button>
 						<button id="addtolist" class="addtolist col-sm-5">Add To List</button>
@@ -315,12 +315,15 @@
 							<div>
 								<input type="checkbox" name="Day" value="Day">
 								<label for="Day">Day</label>
-
 							</div>
 							<div>
 								<input type="checkbox" name="Night" value="Night">
 								<label for="Night">Night</label>
-
+							</div>
+							<div class="quantity">
+								<button class="day-decrease-btn">-</button>
+								<span type="number" id="num" class="num">01</span>
+								<button class="day-increase-btn">+</button>
 							</div>
 						</div>
 					</div>
@@ -446,11 +449,25 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="{% static 'search.js' %}"></script>
 	<script>
-        const plus = document.querySelector(".plus"),
-        minus = document.querySelector(".minus"),
-        num = document.querySelector(".num") ;
+        const decreaseBtn = document.querySelector('.day-decrease-btn');
+		const increaseBtn = document.querySelector('.day-increase-btn');
+		const quantityNum = document.querySelector('.num');
 
-    let a = 1;
+		// Add event listener for the decrease button
+		decreaseBtn.addEventListener('click', function() {
+			let currentQuantity = parseInt(quantityNum.textContent);
+			if (currentQuantity > 1) {
+				currentQuantity--;
+				quantityNum.textContent = currentQuantity.toString().padStart(2, '0');
+			}
+		});
+
+		// Add event listener for the increase button
+		increaseBtn.addEventListener('click', function() {
+			let currentQuantity = parseInt(quantityNum.textContent);
+			currentQuantity++;
+			quantityNum.textContent = currentQuantity.toString().padStart(2, '0');
+		});
  
     </script>
 </body>
