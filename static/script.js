@@ -8,7 +8,7 @@ var counter = 1;
 //     if(counter > 5){
 //         counter = 1;
 //     }
-// }, 3000);`
+// }, 3000);
 
 const main = document.querySelector('main');
 const userLogin = document.querySelector('.user-login');
@@ -97,9 +97,6 @@ document.querySelector('#cart-btn').onclick = () =>{
     shoppingCart.classList.toggle('active');
     loginForm.classList.remove('active');
 }
-document.querySelector('#addtolist').onclick = () =>{
-    addToList.classList.toggle('active');
-}
 
 let loginForm = document.querySelector('.user-login');
 
@@ -107,6 +104,9 @@ document.querySelector('#user-login-btn').onclick = () =>{
     loginForm.classList.toggle('active');
     shoppingCart.classList.remove('active');
     
+}
+document.querySelector('#addtolist').onclick = () =>{
+    addToList.classList.toggle('active');
 }
 
 const selectImage = document.querySelector('#select-image');

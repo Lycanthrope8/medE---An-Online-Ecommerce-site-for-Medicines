@@ -48,6 +48,8 @@
 					
 						</div>
 					</div>
+
+
 					<button id="select-image" class="action-btn">
 						<img src="{%static 'prescription.png'%}" alt="prescription-upload-icon" width="30">
 					</button>
@@ -91,8 +93,6 @@
 						{% else %}
 						<a href="{% url 'mylogin' %}" class="form-btn">Login</a>
 						{% endif %}
-					
-
 					</div>
 				</div>
 			</div>
@@ -290,15 +290,22 @@
                         <del>৳{{ product_details.p_price|floatformat:"2" }}</del>
                     </div>
 
+
+
+					<!-- Product Page Decrease Increase Quantity -->
+
                     <div class="quantity">
 						<button class="decrease-btn">-</button>
 						<span type="number" id="num" class="num">01</span>
 						<button class="increase-btn">+</button>
 					</div>
 
+					<!-- Product Page Decrease Increase Quantity -->
+
+
 					<div class="buttons row">
 						<button class="addtocart col-sm-5" onclick="AddtoCart('{{product_details.p_id}}',parseInt(document.getElementById('num').innerText),'replace')">Add to Cart</button>
-						<button class="buynow col-sm-5" id="addToCartBtn">Add To List</button>
+						<!-- <button class="buynow col-sm-5" id="addToCartBtn">Add To List</button> -->
 
 							<div class="popup" id="myModal">
 							<div class="popup-content">
@@ -439,6 +446,30 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="{% static 'search.js' %}"></script>
 	<script>
+
+	
+// Get the buttons and the quantity element
+const decreaseBtn = document.querySelector('.decrease-btn');
+    const increaseBtn = document.querySelector('.increase-btn');
+    const quantityNum = document.querySelector('.num');
+
+    // Add event listener for the decrease button
+    decreaseBtn.addEventListener('click', function() {
+        let currentQuantity = parseInt(quantityNum.textContent);
+        if (currentQuantity > 1) {
+            currentQuantity--;
+            quantityNum.textContent = currentQuantity.toString().padStart(2, '0');
+        }
+    });
+
+    // Add event listener for the increase button
+    increaseBtn.addEventListener('click', function() {
+        let currentQuantity = parseInt(quantityNum.textContent);
+        currentQuantity++;
+        quantityNum.textContent = currentQuantity.toString().padStart(2, '0');
+    });
+
+
         const plus = document.querySelector(".plus"),
         minus = document.querySelector(".minus"),
         num = document.querySelector(".num");
@@ -472,28 +503,6 @@ confirmBtn.onclick = function() {
     // Do something with selectedTime and duration, for example, send them to the server
     modal.style.display = 'none';
 }
-
-
-// Get the buttons and the quantity element
-    const decreaseBtn = document.querySelector('.decrease-btn');
-    const increaseBtn = document.querySelector('.increase-btn');
-    const quantityNum = document.querySelector('.num');
-
-    // Add event listener for the decrease button
-    decreaseBtn.addEventListener('click', function() {
-        let currentQuantity = parseInt(quantityNum.textContent);
-        if (currentQuantity > 1) {
-            currentQuantity--;
-            quantityNum.textContent = currentQuantity.toString().padStart(2, '0');
-        }
-    });
-
-    // Add event listener for the increase button
-    increaseBtn.addEventListener('click', function() {
-        let currentQuantity = parseInt(quantityNum.textContent);
-        currentQuantity++;
-        quantityNum.textContent = currentQuantity.toString().padStart(2, '0');
-    });
 
 
 
