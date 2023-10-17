@@ -103,6 +103,7 @@ let loginForm = document.querySelector('.user-login');
 document.querySelector('#user-login-btn').onclick = () =>{
     loginForm.classList.toggle('active');
     shoppingCart.classList.remove('active');
+    
 }
 
 const selectImage = document.querySelector('#select-image');

@@ -51,12 +51,13 @@
 					<button id="user-login-btn" class="action-btn" >
 						<ion-icon name="person-outline"></ion-icon>
 					</button>
-							<button id="cart-btn" class="action-btn" >
-								<ion-icon name="bag-outline"></ion-icon>
-								<span class="btn-badge">3</span>
-							</button>
-								<div>
-									
+
+
+					<button id="cart-btn" class="action-btn" >
+						<ion-icon name="bag-outline"></ion-icon>
+						<span class="btn-badge">3</span>
+					</button>
+
 						<div class="shopping-cart" >
 								<!-- HTML template for a product cartbox -->
 								<div id= "cart-container">
@@ -80,8 +81,6 @@
 						<a href="#" class="cart-checkout-btn">Checkout</a>
 						</div>
 
-
-						</div>
 						<div style="text-align:center;" class="user-login">
 							{% if user.is_authenticated %}
 							<a href="{% url 'profile' %}" class="form-btn">Profile</a>
