@@ -664,7 +664,7 @@ main .container {
 
 .product-details {
     padding-bottom: 60px;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -739,7 +739,6 @@ main .container {
 .product-details .buttons {
 	display: flex;
 	gap: 10px;
-	position: relative;
 }
 
 .product-details .addtocart {
@@ -751,7 +750,7 @@ main .container {
 	border-radius: 10px;
 	transition: 0.2s ease;
 }
-.product-details .addtolist {
+.product-details .buynow {
 	background-color: var(--red);
 	font-size: 1.2rem;
 	padding: 20px 0;
@@ -760,52 +759,7 @@ main .container {
 	border-radius: 10px;
 	transition: 0.2s ease;
 }
-.product-details .addtolistddown {
-	display: flex;
-	position: absolute;
-	flex-direction: column;
-	width: 280px;
-	overflow: hidden;
-	background: white;
-	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-	padding: 20px;
-	left: 42%;
-	top: -10%;
-	z-index: 1;
-	max-height: 0;
-	opacity: 0;
-	transition: 0.75s ease-in-out;
-}
-.product-details .addtolistddown.active {
-	opacity: 1;
-	overflow: auto;
-	max-height: 300px;
-	top: 80%;
-}
-.product-details .addtolistddown input[type="checkbox"] {
-	position: relative;
-    display: grid;
-	appearance: none;
-	background-color: rgb(223, 223, 223);
-	border-radius: 100%;
-	width: 20px;
-	height: 20px;
-	cursor: pointer;
-	line-height: 18px;
-}
-.product-details .addtolistddown input[type="checkbox"]:checked:after {
-	position: absolute;
-	content: '\25CF';
-	font-size: 30px;
-	color: var(--red);
-	left: 50%;
-	transform: translate(-50%, 0);
-}
-.product-details .addtolistddown div {
-	/* width: 100%; */
-	display: flex;
-	justify-content: space-between;
-}
+
 .product-details .addtocart:hover,
 .product-details .buynow:hover {
 	filter: brightness(90%);
@@ -1452,7 +1406,7 @@ main .container {
 	}
 
 	.product-grid {
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(4, 1fr) ;
 	}
 
 	.footer-top .container {
