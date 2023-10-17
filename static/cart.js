@@ -1,8 +1,9 @@
 
 
-var cart = JSON.parse(localStorage.getItem('cart')) || {};
+
 
 function AddtoCart(id,quantity=1, doSomething = null, button = null) {
+  var cart = JSON.parse(localStorage.getItem('cart')) || {};
   if (cart[id] === undefined) { 
     console.log("Added to cart:", id);
     cart[id] = quantity;
@@ -68,12 +69,12 @@ function ClearCart() {
     var sortedProductIds = Object.keys(cart).sort(function(a, b) {
         return a - b;
     });
-
+    console.log(sortedProductIds)
     // Loop through the sorted product IDs and create fetch requests
     for (const p_id of sortedProductIds) {
         try {
             // Fetch the product information for the current p_id
-            const response = await fetch(`get_product_info/${p_id}/`);
+            const response = await fetch(`/get_product_info/${p_id}/`);
             if (response.ok) {
                 const productData = await response.json();
                 console.log("Product Data:", productData);
