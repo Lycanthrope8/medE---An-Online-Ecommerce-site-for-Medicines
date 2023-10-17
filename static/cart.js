@@ -78,8 +78,8 @@ function ClearCart() {
             if (response.ok) {
                 const productData = await response.json();
                 console.log("Product Data:", productData);
-                var productPrice = productData.p_price - (productData.p_price * (productData.p_discount / 100));
-
+                var productPrice = parseFloat(productData.discounted_price).toFixed(2);
+                
                 if (Object.keys(productData).length > 0 && "p_name" in productData) {
                     // Display the product name
                     resultsDiv.append(`
@@ -87,11 +87,11 @@ function ClearCart() {
                             <button class="cart-trash" onclick="removeFromCart(${productData["p_id"]})">
                                 <ion-icon name="trash"></ion-icon>
                             </button>
-                            <img src="" alt="">
+                            <img src="../../media/${productData["p_image"]}" alt="">
                             <div class="cart-content-${p_id}">
                                 <h3 id="productName-${p_id}">${productData["p_name"]}</h3>
                                 <div style="display: grid; grid-template-columns: 0.5fr 1fr; gap: 1px;">
-                                    <span class="cart-content-price" id="productPrice-${p_id}">${productPrice}</span>
+                                <span class="cart-content-price" id="productPrice-${p_id}">${productPrice}</span>
                                     <span class="quantity"> 
                                         Quantity:
                                         <button class="quantity-button decrement" style="display: inline; white-space: nowrap;"

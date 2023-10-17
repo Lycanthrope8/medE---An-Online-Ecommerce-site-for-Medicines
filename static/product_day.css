@@ -751,7 +751,11 @@ main .container {
 	border-radius: 10px;
 	transition: 0.2s ease;
 }
+<<<<<<< HEAD
 .product-details .addtolist {
+=======
+.product-details .buynow {
+>>>>>>> 5a53ca5ee82e2c4fc448e5783eef2c87221a750c
 	background-color: var(--red);
 	font-size: 1.2rem;
 	padding: 20px 0;
@@ -760,6 +764,7 @@ main .container {
 	border-radius: 10px;
 	transition: 0.2s ease;
 }
+<<<<<<< HEAD
 .product-details .addtolistddown {
 	display: flex;
 	position: absolute;
@@ -806,6 +811,9 @@ main .container {
 	display: flex;
 	justify-content: space-between;
 }
+=======
+
+>>>>>>> 5a53ca5ee82e2c4fc448e5783eef2c87221a750c
 .product-details .addtocart:hover,
 .product-details .buynow:hover {
 	filter: brightness(90%);

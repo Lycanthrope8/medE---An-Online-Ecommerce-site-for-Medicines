@@ -80,6 +80,9 @@ def get_product_info(request, p_id):
             'p_category': product.p_category,
             'p_price': str(product.p_price),
             'p_discount': str(product.p_discount),
+            'discounted_price':product.p_price - (product.p_price * (product.p_discount / 100)),
+            'medPerStrip':product.medPerStrip,
+            'p_image':str(product.p_image),
             # Add other fields as needed
         }
         return JsonResponse(product_data)
