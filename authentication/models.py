@@ -37,8 +37,8 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
         (FEMALE, 'Female'),
     ]
     u_type = [
-        ('setA', 'setA'),
-        ('setB', 'setB'),
+        ('quantity', 'quantity'),
+        ('days', 'days'),
     ]
 
     phone_number = models.CharField(unique=True, max_length=15)

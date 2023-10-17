@@ -29,7 +29,7 @@ class main_product(models.Model):
     p_generics = models.CharField(max_length=255)
     p_company = models.CharField(max_length=255)
 
-    piecePerStrip = models.DecimalField(max_digits=10, decimal_places=2)
+    medPerStrip = models.DecimalField(max_digits=10, decimal_places=2)
     p_price = models.DecimalField(max_digits=10, decimal_places=2)
 
     p_discount = models.DecimalField(max_digits=5, decimal_places=2)
