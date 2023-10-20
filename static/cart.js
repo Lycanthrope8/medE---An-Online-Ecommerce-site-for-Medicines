@@ -30,13 +30,13 @@ function AddtoCart(id, quantity = 1, doSomething = null, button = null) {
       // Update the total price for this item in the cart
       const totalPriceElement = document.getElementById(`totalPrice-${id}`);
       if (totalPriceElement) {
-        totalPriceElement.textContent = `${cart[id] * productData['p_price']} Taka`;
+        totalPriceElement.textContent = `${(cart[productData["p_id"]] * (productData['discounted_price'])/productData['medPerStrip']).toFixed(2)} Taka`;
       }
 
       // Recalculate and update the total value for all items in the cart
       var totalValue = Object.keys(cart).reduce((acc, productId) => {
         const product = cart[productId];
-        return acc + product * productData['p_price'];
+        return acc + (product * (productData['discounted_price']/productData['medPerStrip']).toFixed(2));
       }, 0);
 
       // Display total value for all items in the cart
@@ -74,6 +74,21 @@ function removeFromCart(id) {
   if (cartboxElement) {
     cartboxElement.style.display = 'none';
   }
+
+  // Recalculate and update the total value for all items in the cart
+  var totalValue = Object.keys(cart).reduce((acc, productId) => {
+    const product = cart[productId];
+    return acc - (product * (productData['discounted_price']/productData['medPerStrip']).toFixed(2));
+  }, 0);
+
+  // Display total value for all items in the cart
+  const totalElement = document.querySelector('.total');
+  if (totalElement) {
+    totalElement.textContent = `Total: ৳${totalValue.toFixed(2)}`;
+  }
+
+
+
 }
 
 
@@ -131,12 +146,12 @@ document.getElementById("cart-btn").addEventListener("click", async function() {
                                     </span>
                                 </div>
                             </div>
-                          <h6 id="totalPrice-${p_id}">${cart[productData["p_id"]] * productData['p_price']} Taka</h3>
+                          <h6 id="totalPrice-${p_id}">${(cart[productData["p_id"]] * (productData['discounted_price'])/productData['medPerStrip']).toFixed(2)} Taka</h3>
                         </div>`
                   );
 
                   // Update total value
-                  totalValue += cart[productData["p_id"]] * productData['p_price'];
+                  totalValue += (cart[productData["p_id"]] * (productData['discounted_price']/productData['medPerStrip'])).toFixed(2);
               } else {
                   resultsDiv.append('<p>No product name found.</p>');
               }
