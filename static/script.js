@@ -109,10 +109,6 @@ document.querySelector('#addtolist').onclick = () =>{
     addToList.classList.toggle('active');
 }
 
-document.querySelector('#addtolist').onclick = () =>{
-    addToList.classList.toggle('active');
-}
-
 const selectImage = document.querySelector('#select-image');
 const inputFile = document.querySelector('#file-upload');
 const imgArea = document.getElementById('img-area');
