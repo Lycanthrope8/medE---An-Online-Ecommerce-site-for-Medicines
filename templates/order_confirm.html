@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <style>
+    /* Style for the container */
+    .receipt-container {
+      width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Style for the receipt */
+    .receipt {
+      border: 2px solid #333;
+      padding: 10px;
+      text-align: center;
+      background-color: #f5f5f5;
+    }
+
+    /* Style for the address input field */
+    .address-input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+    }
+
+    /* Style for the confirm button */
+    .confirm-button {
+      background-color: #ff0000; /* Red */
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .confirm-button:hover {
+      background-color: #cc0000; /* Darker Red on hover */
+    }
+  </style>
+</head>
+<body>
+  <div class="receipt-container">
+    <div class="receipt">
+      <!-- Receipt Content Here -->
+      <h2>Receipt</h2>
+      <p>ggg</p>
+      <p>Total: $[Total amount here]</p>
+    </div>
+    <input type="text" class="address-input" placeholder="Enter Address">
+    <button class="confirm-button">Confirm</button>
+  </div>
+</body>
+</html>

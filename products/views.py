@@ -5,6 +5,7 @@ from .models import main_product
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from authentication.models import UserProfile
+import json
 
 # Create your views here.
 def prod(request, p_name):
@@ -90,3 +91,28 @@ def get_product_info(request, p_id):
     except ObjectDoesNotExist:
         return JsonResponse({'error': 'Product not found'}, status=404)
 
+
+
+def checkout_view(request):
+    if request.method == 'POST':
+        # Get the JSON data from the request body
+        try:
+            data = json.loads(request.body.decode('utf-8'))
+            # Process the cart_data as needed (e.g., complete the checkout)
+            output=""
+            total=60
+            for key, value in data.items():
+                product = main_product.objects.get(p_id=key)
+                total+=value*((product.p_price - (product.p_price * (product.p_discount / 100)))/product.medPerStrip)
+                output+=product.p_name+": "+str(value)+" Piece, price: "+ str(value*(product.p_price - (product.p_price * (product.p_discount / 100)))/product.medPerStrip)+" taka\n"
+            output+="Delivery charge: 60 taka\n"
+            output+="Total: "+str(total)+" taka"
+            print(output)
+            
+            # You can return a response to the client (e.g., JSON response)
+            render(request,'user-profile.html')
+        except json.JSONDecodeError as e:
+            # Handle JSON decoding error
+            return JsonResponse({'error': 'Invalid JSON data'}, status=400)
+
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
