@@ -217,6 +217,7 @@ document.getElementById('checkout-button').addEventListener('click', function() 
     .then(function(response) {
       if (response.status === 200) {
         console.log('Checkout was successful');
+        window.location.href = 'order_confirm.html';
       } else {
         console.error('Checkout failed');
       }

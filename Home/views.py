@@ -13,4 +13,7 @@ def home(request):
 def profile(request):
     return render(request,'user-profile.html')
 
+def order_confirm(request):
+    return render(request,'order_confirm.html')
+
 

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.db import connection
 from .models import main_product
 from django.http import JsonResponse
@@ -69,6 +69,8 @@ def live_search(request):
 
         return JsonResponse(results_list, safe=False)
     
+
+
 def get_product_info(request, p_id):
     try:
         # Use get() to retrieve a single product by p_id
@@ -93,9 +95,10 @@ def get_product_info(request, p_id):
 
 
 
+
+
 def checkout_view(request):
     if request.method == 'POST':
-        # Get the JSON data from the request body
         try:
             data = json.loads(request.body.decode('utf-8'))
             # Process the cart_data as needed (e.g., complete the checkout)
@@ -108,11 +111,16 @@ def checkout_view(request):
             output+="Delivery charge: 60 taka\n"
             output+="Total: "+str(total)+" taka"
             print(output)
-            
-            # You can return a response to the client (e.g., JSON response)
-            render(request,'user-profile.html')
+
+            # You can return a JSON response to the client (e.g., JSON response)
+            return JsonResponse({'message': 'Checkout successful', 'total': total, 'output': output})
+
         except json.JSONDecodeError as e:
             # Handle JSON decoding error
             return JsonResponse({'error': 'Invalid JSON data'}, status=400)
+        except main_product.DoesNotExist:
+            # Handle product not found error
+            return JsonResponse({'error': 'Product not found'}, status=404)
 
-    return JsonResponse({'error': 'Invalid request method'}, status=405)
+    # For other HTTP methods (e.g., GET), return a method not allowed response
+    return JsonResponse({'error': 'Method Not Allowed'}, status=405)
