@@ -1,10 +1,12 @@
-function AddtoCart(id, quantity = 1, doSomething = null, button = null) {
+async function AddtoCart(id, quantity = 1, doSomething = null, button = null) {
   var cart = JSON.parse(localStorage.getItem('cart')) || {};
 
-  // Assuming you make an API call to get the product data using the product ID
-  fetch(`/get_product_info/${id}`)
-    .then(response => response.json())
-    .then(productData => {
+  try {
+    // Make an asynchronous API call to get the product data using the product ID
+    const response = await fetch(`/get_product_info/${id}`);
+    if (response.ok) {
+      const productData = await response.json();
+
       if (cart[id] === undefined) {
         console.log("Added to cart:", id);
         // Multiply the quantity by 'medPerStrip' from the API response
@@ -19,6 +21,10 @@ function AddtoCart(id, quantity = 1, doSomething = null, button = null) {
         cart[id] = parseInt(quantity * productData.medPerStrip);
       }
 
+      // console.log(cart);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      await totalBill();
+
       // Update the quantity element directly if a button is provided
       if (button) {
         const quantityElement = button.parentElement.querySelector(".quantity-value");
@@ -30,29 +36,18 @@ function AddtoCart(id, quantity = 1, doSomething = null, button = null) {
       // Update the total price for this item in the cart
       const totalPriceElement = document.getElementById(`totalPrice-${id}`);
       if (totalPriceElement) {
-        totalPriceElement.textContent = `${(cart[productData["p_id"]] * (productData['discounted_price'])/productData['medPerStrip']).toFixed(2)} Taka`;
+        totalPriceElement.textContent = `${(cart[id] * (productData.discounted_price) / productData.medPerStrip).toFixed(2)} Taka`;
       }
-
-      // Recalculate and update the total value for all items in the cart
-      var totalValue = Object.keys(cart).reduce((acc, productId) => {
-        const product = cart[productId];
-        return acc + (product * (productData['discounted_price']/productData['medPerStrip']).toFixed(2));
-      }, 0);
-
-      // Display total value for all items in the cart
-      const totalElement = document.querySelector('.total');
-      if (totalElement) {
-        totalElement.textContent = `Total: ৳${totalValue.toFixed(2)}`;
-      }
-
-      console.log(cart);
-      localStorage.setItem('cart', JSON.stringify(cart));
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+    } else {
+      console.log("Response Error");
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
 }
 
+
+////Didn't used in this file but mmight come useful later
 
 async function getProductData(productId) {
   try {
@@ -70,34 +65,32 @@ async function getProductData(productId) {
   }
 }
 
+
+
 async function removeFromCart(productId) {
   var cart = JSON.parse(localStorage.getItem('cart')) || {};
-  if (cart[productId] !== undefined) {
-    var productData = await getProductData(productId);
-    if (productData !== null) {
-      var itemTotal = cart[productId] * (productData['discounted_price'] / productData['medPerStrip']);
-      totalValue -= itemTotal;
 
-      // Remove the item from the cart
-      delete cart[productId];
+  // Check if the productId is in the cart
+  if (cart.hasOwnProperty(productId)) {
+    // Remove the product from the cart
+    delete cart[productId];
+    // Update the cart in localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // Call totalBill to update and display the new total
+    await totalBill();
 
-      // Update the total value for all items in the cart
-      const totalElement = document.querySelector('.total');
-      if (totalElement) {
-        totalElement.textContent = `Total: ৳${totalValue.toFixed(2)}`;
-      }
-
-      // Update the cart in localStorage
-      localStorage.setItem('cart', JSON.stringify(cart));
-
-      // Remove the item from the DOM
-      const cartItem = document.getElementById(`cartbox-${productId}`);
-      if (cartItem) {
-        cartItem.remove();
-      }
+    // Hide the corresponding cartbox div
+    let cartboxId = `cartbox-${productId}`;
+    let cartboxElement = document.getElementById(cartboxId);
+    if (cartboxElement) {
+      cartboxElement.style.display = 'none';
     }
+  } else {
+    console.log('Product not found in the cart.');
   }
 }
+
 
 
 
@@ -112,6 +105,7 @@ function ClearCart() {
   var totalValue = 0.0; // Initialize total value to 0.0
 
 document.getElementById("cart-btn").addEventListener("click", async function() {
+  totalValue = await totalBill();
   var cart = JSON.parse(localStorage.getItem('cart'));
   var resultsDiv = $('#cart-container');
 
@@ -158,34 +152,48 @@ document.getElementById("cart-btn").addEventListener("click", async function() {
                           <h6 id="totalPrice-${p_id}">${(cart[productData["p_id"]] * (productData['discounted_price'])/productData['medPerStrip']).toFixed(2)} Taka</h3>
                         </div>`
                   );
-
-                  // Update total value
-                  totalValue += parseFloat((cart[productData["p_id"]] * (productData['discounted_price'] / productData['medPerStrip'])).toFixed(2));
-
-                  const totalElement = document.querySelector('.total');
-                  if (totalElement) {
-                    totalElement.textContent = `Total: ৳${totalValue.toFixed(2)}`;
-                  }
-              } else {
+                } else {
                   resultsDiv.append('<p>No product name found.</p>');
+                }
+              } else {
+                resultsDiv.append('<p>No results found.</p>');
               }
-          } else {
-              resultsDiv.append('<p>No results found.</p>');
-          }
       } catch (error) {
           console.error('Error:', error);
       }
-  }
-
-  // Display total value for all items in the cart
-  // if(cart!={}){
-  //   resultsDiv.append(`<div class="total">Total: ৳${totalValue.toFixed(2)}</div>`);
-  // }
+    }
 });
 
+async function totalBill(){
+  var cart = JSON.parse(localStorage.getItem('cart')) || {};
+  // Get the sorted array of product IDs
+  var sortedProductIds = Object.keys(cart).sort(function(a, b) {
+    return a - b;
+  });
 
-
+  total = 0.0;
+  try {
+    for(const p_id of sortedProductIds){
+      const response = await fetch(`/get_product_info/${p_id}/`);
+      if (response.ok) {
+        const productData = await response.json();
+        total+= parseFloat((cart[productData["p_id"]] * (productData['discounted_price'] / productData['medPerStrip'])).toFixed(2));
+      }else{
+        console.log("Response Error")
+      }
+    }
+    // console.log(total) 
+    const totalElement = document.querySelector('.total');
+    if (totalElement) {
+      totalElement.textContent = `Total:` + total;
+    }
     
+
+  } catch (error) { // Define the error variable here
+    console.error('Error:', error);
+  }
+}
+
 
 document.getElementById('checkout-button').addEventListener('click', function() {
   var cart = JSON.parse(localStorage.getItem('cart')) || {};
