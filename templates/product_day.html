@@ -58,52 +58,39 @@
 						<ion-icon name="bag-outline"></ion-icon>
 						<span class="btn-badge">3</span>
 					</button>
-					<div class="shopping-cart">
-						<div class="cartbox">
-							<button class="cart-trash">
+					<div class="shopping-cart" >
+						<!-- HTML template for a product cartbox -->
+						<div id= "cart-container">
+
+							
+							<!-- <div class="cartbox" id="cartbox-${p_id}">
+							  <button class="cart-trash">
 								<ion-icon name="trash"></ion-icon>
-							</button>
-							<img src="assets/products/napa.jpg" alt="napa">
-							<div class="cart-content">
-								<h3>Napa</h3>
-								<span class="cart-content-price">৳610.00</span>
-								<span class="quantity">qty: 1</span>
-							</div>
-						</div>
-						<div class="cartbox">
-							<button class="cart-trash">
-								<ion-icon name="trash"></ion-icon>
-							</button>
-							<img src="assets/products/napa.jpg" alt="napa">
-							<div class="cart-content">
-								<h3>{% product_details.p_name% }</h3>
-								<span class="cart-content-price">৳610.00</span>
-								<span class="quantity">qty: 1</span>
-							</div>
-						</div>
-						<div class="cartbox">
-							<button class="cart-trash">
-								<ion-icon name="trash"></ion-icon>
-							</button>
-							<img src="assets/products/napa.jpg" alt="napa">
-							<div class="cart-content">
-								<h3>Napa</h3>
-								<span class="cart-content-price">৳610.00</span>
-								<span class="quantity">qty: 1</span>
-							</div>
-						</div>
-						<div class="total">Total: ৳1830.00</div>
-						<a href="#" class="cart-checkout-btn">Checkout</a>
+							  </button>
+							  <img src="" alt="">
+							  <div class="cart-content">
+								<h3 id="productName-${p_id}"></h3>
+								<div style="display: grid; grid-template-columns: 0.5fr 1fr; gap: 1px;">
+								  <span class="cart-content-price" id="productPrice-${p_id}"></span>
+								  <span class="quantity"></span><br>
+								  <span class="quantity">Days: 7</span>
+								</div>
+							  </div>
+							</div> -->
+						  </div>
+						  
+						<div class="total">Total: ৳1460.00</div>
+					<a href="#" class="cart-checkout-btn">Checkout</a>
 					</div>
-					<form action="#" class="user-login">
-						<input type="email" placeholder="Email" class="login-box">
-						<input type="password" placeholder="Password" class="login-box">
-						<div class="forgotreg">
-							<a href="#">Forgot password?</a>
-							<a href="register.html">Register now!</a>
-						</div>
-						<input type="submit" value="Login" class="form-btn">
-					</form>
+
+					<div style="text-align:center;" class="user-login">
+						{% if user.is_authenticated %}
+						<a href="{% url 'profile' %}" class="form-btn">Profile</a>
+						<a href="{% url 'mylogout' %}" class="form-btn">Logout</a>
+						{% else %}
+						<a href="{% url 'mylogin' %}" class="form-btn">Login</a>
+						{% endif %}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -299,13 +286,15 @@
                         <p class="price">৳{{ product_details.discounted_price|floatformat:"2"}}</p>
                         <del>৳{{ product_details.p_price|floatformat:"2" }}</del>
                     </div>
-                    <!-- <div class="quantity">
-                        <span class="minus">-</span>
-                        <span class="num">01</span>
-                        <span class="plus">+</span>
-                    </div> -->
+
+                    <div class="quantity">
+						<button class="decrease-btn">-</button>
+						<span type="number" id="num" class="num">01</span>
+						<button class="increase-btn">+</button>
+					</div>
+
 					<div class="buttons row">
-						<button class="addtocart col-sm-5">Add to Cart</button>
+						<button class="addtocart col-sm-5" onclick="AddtoCart('{{product_details.p_id}}',parseInt(document.getElementById('num').innerText),'replace')">Add to Cart</button>
 						<button id="addtolist" class="addtolist col-sm-5">Add To List</button>
 						<div class="addtolistddown">
 							<div>
@@ -449,26 +438,29 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="{% static 'search.js' %}"></script>
 	<script>
-        const decreaseBtn = document.querySelector('.day-decrease-btn');
-		const increaseBtn = document.querySelector('.day-increase-btn');
-		const quantityNum = document.querySelector('.num');
+        // Get the buttons and the quantity element
+    const decreaseBtn = document.querySelector('.decrease-btn');
+    const increaseBtn = document.querySelector('.increase-btn');
+    const quantityNum = document.querySelector('.num');
 
-		// Add event listener for the decrease button
-		decreaseBtn.addEventListener('click', function() {
-			let currentQuantity = parseInt(quantityNum.textContent);
-			if (currentQuantity > 1) {
-				currentQuantity--;
-				quantityNum.textContent = currentQuantity.toString().padStart(2, '0');
-			}
-		});
+    // Add event listener for the decrease button
+    decreaseBtn.addEventListener('click', function() {
+        let currentQuantity = parseInt(quantityNum.textContent);
+        if (currentQuantity > 1) {
+            currentQuantity--;
+            quantityNum.textContent = currentQuantity.toString().padStart(2, '0');
+        }
+    });
 
-		// Add event listener for the increase button
-		increaseBtn.addEventListener('click', function() {
-			let currentQuantity = parseInt(quantityNum.textContent);
-			currentQuantity++;
-			quantityNum.textContent = currentQuantity.toString().padStart(2, '0');
-		});
+    // Add event listener for the increase button
+    increaseBtn.addEventListener('click', function() {
+        let currentQuantity = parseInt(quantityNum.textContent);
+        currentQuantity++;
+        quantityNum.textContent = currentQuantity.toString().padStart(2, '0');
+    });
+
  
     </script>
+<script src="{% static 'cart.js' %}"></script>
 </body>
 </html> 
