@@ -39,6 +39,7 @@ urlpatterns = [
     path('profile/',firstactivity.profile, name='profile'),
     path('profile/update_profile/', authenticationViews.update_profile, name='update_profile'),
     path('product/<str:p_name>/', secondactivity.prod, name='prod'),
+    path('checkout/', secondactivity.checkout_view, name='checkout'),
 
     
 ]

@@ -158,5 +158,49 @@ document.getElementById("cart-btn").addEventListener("click", async function() {
 
     
 
+document.getElementById('checkout-button').addEventListener('click', function() {
+  var cart = JSON.parse(localStorage.getItem('cart')) || {};
 
+  // Get the CSRF token
+  var csrftoken = getCookie('csrftoken'); // You'll need a function to get the CSRF token
 
+  // Define the URL and request options
+  var url = 'checkout/';
+  var requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': csrftoken, // Include the CSRF token in the request header
+    },
+    body: JSON.stringify(cart),
+  };
+
+  // Send the cart data to the server using fetch
+  fetch(url, requestOptions)
+    .then(function(response) {
+      if (response.status === 200) {
+        console.log('Checkout was successful');
+      } else {
+        console.error('Checkout failed');
+      }
+    })
+    .catch(function(error) {
+      console.error('An error occurred during the checkout request: ' + error);
+    });
+});
+
+// Function to get the CSRF token from the cookie
+function getCookie(name) {
+  var cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === name + '=') {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
