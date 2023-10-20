@@ -2,15 +2,6 @@
 
 var counter = 1;
 
-<<<<<<< HEAD
-setInterval(function() {
-    document.getElementById('radio' + counter).checked = true;
-    counter++;
-    if(counter > 5){
-        counter = 1;
-    }
-}, 3000);
-=======
 // setInterval(function() {
 //     document.getElementById('radio' + counter).checked = true;
 //     counter++;
@@ -18,7 +9,6 @@ setInterval(function() {
 //         counter = 1;
 //     }
 // }, 3000);
->>>>>>> 1d9f8cf111b3febde93bab32c583cc62aa25913a
 
 const main = document.querySelector('main');
 const userLogin = document.querySelector('.user-login');
