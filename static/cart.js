@@ -54,42 +54,51 @@ function AddtoCart(id, quantity = 1, doSomething = null, button = null) {
 }
 
 
-
-
-function removeFromCart(id) {
-  
-  let cart = JSON.parse(localStorage.getItem('cart')) || {};
-
-  // Check if the item exists in the cart
-  if (cart.hasOwnProperty(id)) {
-    console.log('Removing Item: ', id);
-    delete cart[id];
-    localStorage.setItem('cart', JSON.stringify(cart));
-  } else {
-    console.log('Item not found in cart:', id);
+async function getProductData(productId) {
+  try {
+    const response = await fetch(`/get_product_info/${productId}/`);
+    if (response.ok) {
+      const productData = await response.json();
+      return productData;
+    } else {
+      console.error('Error fetching product data');
+      return null;
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    return null;
   }
-  // Hide the corresponding cartbox div
-  let cartboxId = `cartbox-${id}`;
-  let cartboxElement = document.getElementById(cartboxId);
-  if (cartboxElement) {
-    cartboxElement.style.display = 'none';
-  }
-
-  // Recalculate and update the total value for all items in the cart
-  var totalValue = Object.keys(cart).reduce((acc, productId) => {
-    const product = cart[productId];
-    return acc - (product * (productData['discounted_price']/productData['medPerStrip']).toFixed(2));
-  }, 0);
-
-  // Display total value for all items in the cart
-  const totalElement = document.querySelector('.total');
-  if (totalElement) {
-    totalElement.textContent = `Total: ৳${totalValue.toFixed(2)}`;
-  }
-
-
-
 }
+
+async function removeFromCart(productId) {
+  var cart = JSON.parse(localStorage.getItem('cart')) || {};
+  if (cart[productId] !== undefined) {
+    var productData = await getProductData(productId);
+    if (productData !== null) {
+      var itemTotal = cart[productId] * (productData['discounted_price'] / productData['medPerStrip']);
+      totalValue -= itemTotal;
+
+      // Remove the item from the cart
+      delete cart[productId];
+
+      // Update the total value for all items in the cart
+      const totalElement = document.querySelector('.total');
+      if (totalElement) {
+        totalElement.textContent = `Total: ৳${totalValue.toFixed(2)}`;
+      }
+
+      // Update the cart in localStorage
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      // Remove the item from the DOM
+      const cartItem = document.getElementById(`cartbox-${productId}`);
+      if (cartItem) {
+        cartItem.remove();
+      }
+    }
+  }
+}
+
 
 
 
@@ -100,11 +109,11 @@ function ClearCart() {
     console.log(cart)
   }
 
+  var totalValue = 0.0; // Initialize total value to 0.0
 
 document.getElementById("cart-btn").addEventListener("click", async function() {
   var cart = JSON.parse(localStorage.getItem('cart'));
   var resultsDiv = $('#cart-container');
-  var totalValue = 0; // Initialize total value to 0
 
   // Clear the existing content
   resultsDiv.empty();
@@ -151,7 +160,12 @@ document.getElementById("cart-btn").addEventListener("click", async function() {
                   );
 
                   // Update total value
-                  totalValue += (cart[productData["p_id"]] * (productData['discounted_price']/productData['medPerStrip'])).toFixed(2);
+                  totalValue += parseFloat((cart[productData["p_id"]] * (productData['discounted_price'] / productData['medPerStrip'])).toFixed(2));
+
+                  const totalElement = document.querySelector('.total');
+                  if (totalElement) {
+                    totalElement.textContent = `Total: ৳${totalValue.toFixed(2)}`;
+                  }
               } else {
                   resultsDiv.append('<p>No product name found.</p>');
               }
@@ -164,14 +178,7 @@ document.getElementById("cart-btn").addEventListener("click", async function() {
   }
 
   // Display total value for all items in the cart
-  if(cart!={}){
-    resultsDiv.append(`<div class="total">Total: ৳${totalValue.toFixed(2)}</div>`);
-  }
+  // if(cart!={}){
+  //   resultsDiv.append(`<div class="total">Total: ৳${totalValue.toFixed(2)}</div>`);
+  // }
 });
-
-
-
-    
-
-
-
