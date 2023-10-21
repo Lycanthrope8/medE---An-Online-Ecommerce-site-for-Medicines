@@ -2,11 +2,11 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.db import connection
 from .models import main_product
-from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from authentication.models import UserProfile
 import json
-from .models import Order
+from .models import Orders
+
 # Create your views here.
 def prod(request, p_name):
     product_details = {
@@ -140,11 +140,13 @@ def order_confirm(request):
     return render(request, 'order_confirm.html', context)
 
 def order_complete(request):
+    ordered_products = request.GET.get('order_data', None)
+    total = request.GET.get('total', None)
+    del_adress = request.GET.get('address', None)
     User = UserProfile()
-    datas = request.GET.get('data', None)
     phonenumber = request.user.phone_number
-    print(datas)
-    json_data = json.loads(datas)
-    order = Order(phonenumber=phonenumber, datas=json_data)
+    order = Orders(phonenumber=phonenumber, ordered_products=ordered_products,total=total,del_adress=del_adress)
     order.save()
+    return render(request,'confirm.html')
+
     return render(request,'confirm.html')

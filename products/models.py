@@ -89,7 +89,8 @@ def delete_product_if_feature_changed(sender, instance, **kwargs):
 pre_save.connect(delete_product_if_feature_changed, sender=main_product)
 
 
-
-class Order(models.Model):
+class Orders(models.Model):
     phonenumber = models.CharField(max_length=15)
-    datas = models.JSONField()
+    ordered_products = models.TextField(default="null")
+    total = models.TextField(default="null")
+    del_adress = models.TextField(default="null")

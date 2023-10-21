@@ -58,7 +58,7 @@
             </table>
             <label for="address">Address:</label>
             <input style="height: 60px;" type="text" name="address" value='{{user_address}}'>
-           <a href="{%url 'confirm'%}?data={{ context }}"> <button class="confirm-order" type="submit">Confirm Order</button></a>
+           <a href="{%url 'confirm'%}?order_data={{product_data_list}}&total={{ total }}&address={{ user_address }}"> <button class="confirm-order" type="submit">Confirm Order</button></a>
           </div>
 
         
