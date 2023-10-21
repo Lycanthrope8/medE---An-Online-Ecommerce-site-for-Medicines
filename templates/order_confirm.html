@@ -1,58 +1,272 @@
 <!DOCTYPE html>
 {% load static %}
 <html>
-<head>
-  <style>
-    /* Style for the container */
-    .receipt-container {
-      width: 300px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+  <head>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'order_confirm.css' %}"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="header-main" data-header>
+        <div class="container">
+          <a class="header-logo" href="{%url 'home'%}">
+            <img
+              src="{% static 'Logo.jpg' %}"
+              alt=" medX logo"
+              height="50px"
+              width="80px"
+            />
+          </a>
+        </div>
+      </div>
+      <!-- __________________________ -->
+      <!-- <div class="mobile-bottom-navigation">
+        <button class="action-btn" data-mobile-menu-open-btn>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <button class="action-btn">
+          <ion-icon name="bag"></ion-icon>
+        </button>                                               
+        <button class="action-btn">
+          <ion-icon class="person"></ion-icon>
+        </button>
+      </div> -->
+      <!-- ________________________ -->
+      <nav class="mobile-navigation-menu has-scrollbar" data-mobile-menu>
+        <div class="menu-top">
+          <h2 class="menu-title">Menu</h2>
 
-    /* Style for the receipt */
-    .receipt {
-      border: 2px solid #333;
-      padding: 10px;
-      text-align: center;
-      background-color: #f5f5f5;
-    }
+          <button class="menu-close-btn" data-mobile-menu-close-btn>
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+        </div>
+        <ul class="mobile-menu-category-list">
+          <li class="menu-category">
+            <a href="{%url 'home'%}" class="menu-title">Home</a>
+          </li>
+          <li class="menu-category">
+            <button class="accordion-menu" data-accordion-btn>
+              <p class="menu-title">Categories</p>
+              <div>
+                <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+              </div>
+            </button>
 
-    /* Style for the address input field */
-    .address-input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-    }
+            <ul class="submenu-category-list" data-accordion>
+              <li class="submenu-category">
+                <a
+                  href="{%url 'category' p_category='MENS'%}"
+                  class="submenu-title"
+                  >Men's</a
+                >
+              </li>
+              <li class="submenu-category">
+                <a
+                  href="{%url 'category' p_category='WOMEN'%}"
+                  class="submenu-title"
+                  >Women's</a
+                >
+              </li>
+              <li class="submenu-category">
+                <a
+                  href="{%url 'category' p_category='BABY CARE'%}"
+                  class="submenu-title"
+                  >Baby Care</a
+                >
+              </li>
+              <li class="submenu-category">
+                <a
+                  href="{%url 'category' p_category='Personal Hygiene'%}"
+                  class="submenu-title"
+                  >Personal Hygiene</a
+                >
+              </li>
 
-    /* Style for the confirm button */
-    .confirm-button {
-      background-color: #ff0000; /* Red */
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      cursor: pointer;
-    }
+              <li class="submenu-category">
+                <a
+                  href="{%url 'category' p_category='Medical Equipments' %}"
+                  class="submenu-title"
+                  >Medical Equipments</a
+                >
+              </li>
+              <li class="submenu-category">
+                <a
+                  href="{%url 'category' p_category='Cold & Allergies'%}"
+                  class="submenu-title"
+                  >Cold & Allergies</a
+                >
+              </li>
+              <li class="submenu-category">
+                <a
+                  href="{%url 'category' p_category='Heart Problems'%}"
+                  class="submenu-title"
+                  >Heart Problems</a
+                >
+              </li>
+              <li class="submenu-category">
+                <a
+                  href="{%url 'category' p_category='Diabetes'%}"
+                  class="submenu-title"
+                  >Diabetes</a
+                >
+              </li>
+              <li class="submenu-category">
+                <a
+                  href="{%url 'category' p_category='Respiratory Problems'%}"
+                  class="submenu-title"
+                  >Respiratory Problems</a
+                >
+              </li>
+              <li class="submenu-category">
+                <a
+                  href="{%url 'category' p_category='Neurological Problems'%}"
+                  class="submenu-title"
+                  >Neurological Problems</a
+                >
+              </li>
+              <li class="submenu-category">
+                <a
+                  href="{%url 'category' p_category='Arthritis or other types of pain'%}"
+                  class="submenu-title"
+                  >Arthritis or other types of pain</a
+                >
+              </li>
+              <li class="submenu-category">
+                <a
+                  href="{%url 'category' p_category='Sexual Wellness'%}"
+                  class="submenu-title"
+                  >Sexual Wellness</a
+                >
+              </li>
+              <li class="submenu-category">
+                <a
+                  href="{%url 'category' p_category='Herbal & Ayurvedic'%}"
+                  class="submenu-title"
+                  >Herbal & Ayurvedic</a
+                >
+              </li>
+              <li class="submenu-category">
+                <a
+                  href="{%url 'category' p_category='Infant & Mothers care'%}"
+                  class="submenu-title"
+                  >Infant & Mothers care</a
+                >
+              </li>
+              <li class="submenu-category">
+                <a
+                  href="{%url 'category' p_category='Supplements & Nutrition'%}"
+                  class="submenu-title"
+                  >Supplements & Nutrition</a
+                >
+              </li>
+              <li class="submenu-category">
+                <a
+                  href="{%url 'category' p_category='More will be added late'%}"
+                  class="submenu-title"
+                  >More will be added late</a
+                >
+              </li>
+              <li class="submenu-category">
+                <a
+                  href="{%url 'category' p_category='More will be added late'%}"
+                  class="submenu-title"
+                  >More will be added late</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="container">
+        <form action="">
+          <div class="purchase-history">
+            <table>
+              <thead>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><li>Napa x 2</li></td>
+                  <td>
+                    <span class="quantity"> 
+                      <button class="quantity-button decrement" style="display: inline; white-space: nowrap;" onclick="AddtoCart(1,19, 'decrement', this)">-</button>
+                      <span class="quantity-value" id="quantity-1">19</span>  
+                      <button class="quantity-button increment" style="display: inline; white-space: nowrap;" onclick="AddtoCart(1,19, 'increment', this)">+</button>
+                    </span>
+                  </td>
+                  <td>200</td>
+                </tr>
+                <tr>
+                  <td><li>Napa x 2</li></td>
+                  <td>
+                    <span class="quantity"> 
+                      <button class="quantity-button decrement" style="display: inline; white-space: nowrap;" onclick="AddtoCart(1,19, 'decrement', this)">-</button>
+                      <span class="quantity-value" id="quantity-1">19</span>  
+                      <button class="quantity-button increment" style="display: inline; white-space: nowrap;" onclick="AddtoCart(1,19, 'increment', this)">+</button>
+                    </span>
+                  </td>
+                  <td>200</td>
+                </tr>
+                <tr>
+                  <td><li>Napa x 2</li></td>
+                  <td>
+                    <span class="quantity"> 
+                      <button class="quantity-button decrement" style="display: inline; white-space: nowrap;" onclick="AddtoCart(1,19, 'decrement', this)">-</button>
+                      <span class="quantity-value" id="quantity-1">19</span>  
+                      <button class="quantity-button increment" style="display: inline; white-space: nowrap;" onclick="AddtoCart(1,19, 'increment', this)">+</button>
+                    </span>
+                  </td>
+                  <td>200</td>
+                </tr>
+                <tr>
+                  <td><li>Napa x 2</li></td>
+                  <td>
+                    <span class="quantity"> 
+                      <button class="quantity-button decrement" style="display: inline; white-space: nowrap;" onclick="AddtoCart(1,19, 'decrement', this)">-</button>
+                      <span class="quantity-value" id="quantity-1">19</span>  
+                      <button class="quantity-button increment" style="display: inline; white-space: nowrap;" onclick="AddtoCart(1,19, 'increment', this)">+</button>
+                    </span>
+                  </td>
+                  <td>200</td>
+                </tr>
+                <tr style="background-color: rgb(195, 255, 139);">
+                  <td colspan="2" rowspan="2">Subtotal</td>
+                  <td>800</td>
+                </tr>
+              </tbody>
+            </table>
+            <label for="address">Address: </label>
+            <input style="height: 60px;" type="text" name="address">
+            <button class="confirm-order" type="submit">Confirm Order</button>
+          </div>
+        </form>
+      </div>
+    </main>
 
-    .confirm-button:hover {
-      background-color: #cc0000; /* Darker Red on hover */
-    }
-  </style>
-</head>
-<body>
-  <div class="receipt-container">
-    <div class="receipt">
-      <!-- Receipt Content Here -->
-      <h2>Receipt</h2>
-      <p>{{output}}</p>
-    
-    </div>
-    <input type="text" class="address-input" placeholder="Enter Address">
-    <button class="confirm-button">Confirm</button>
-  </div>
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <script type="text/javascript" src="{% static 'script.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'search.js' %}"></script>
+    <script src="{% static 'cart.js' %}"></script>
+  </body>
 </html>

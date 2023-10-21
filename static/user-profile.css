@@ -1214,9 +1214,6 @@ main .container .registration-form.active {
 	main .sidebar li h3{
 		display: none;
 	}
-	main .container .registration-form .input-box button {
-		/* margin-left: 350px; */
-	}
 	.product-grid {
 		grid-template-columns: 1fr 1fr;
 		gap: 30px;
