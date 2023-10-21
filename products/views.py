@@ -102,15 +102,15 @@ def checkout_view(request):
         try:
             data = json.loads(request.body.decode('utf-8'))
             # Process the cart_data as needed (e.g., complete the checkout)
-            output=""
+            output={}
             total=60
             for key, value in data.items():
                 product = main_product.objects.get(p_id=key)
                 total+=value*((product.p_price - (product.p_price * (product.p_discount / 100)))/product.medPerStrip)
-                output+=product.p_name+": "+str(value)+" Piece, price: "+ str(value*(product.p_price - (product.p_price * (product.p_discount / 100)))/product.medPerStrip)+" taka\n"
-            output+="Delivery charge: 60 taka\n"
-            output+="Total: "+str(total)+" taka"
+                output[product.p_name]=str(value)+";"+ str(value*(product.p_price - (product.p_price * (product.p_discount / 100)))/product.medPerStrip)
+            print(output)
             request.session['checkout_output'] = output
+            request.session['checkout_total'] = str(total)
 
             # You can return a JSON response to the client (e.g., JSON response)
             return JsonResponse({'message': 'Checkout successful'})
@@ -127,7 +127,12 @@ def checkout_view(request):
 
 
 def order_confirm(request):
-    output = request.session.get('checkout_output', '')
-
-    context = {'output': output}
+    output = request.session.get('checkout_output')
+    total = request.session.get('checkout_total')
+    User = UserProfile()
+    # Split the product data and create a list of tuples (product_name, quantity, price)
+    product_data_list = [(product_name, *product_data.split(';')) for product_name, product_data in output.items()]
+    user_address = request.user.address
+    context = {'product_data_list': product_data_list, 'total': total,'user_address': user_address}
+    print(context)
     return render(request, 'order_confirm.html', context)
