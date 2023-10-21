@@ -110,10 +110,10 @@ def checkout_view(request):
                 output+=product.p_name+": "+str(value)+" Piece, price: "+ str(value*(product.p_price - (product.p_price * (product.p_discount / 100)))/product.medPerStrip)+" taka\n"
             output+="Delivery charge: 60 taka\n"
             output+="Total: "+str(total)+" taka"
-            print(output)
+            request.session['checkout_output'] = output
 
             # You can return a JSON response to the client (e.g., JSON response)
-            return JsonResponse({'message': 'Checkout successful', 'total': total, 'output': output})
+            return JsonResponse({'message': 'Checkout successful'})
 
         except json.JSONDecodeError as e:
             # Handle JSON decoding error
@@ -124,3 +124,10 @@ def checkout_view(request):
 
     # For other HTTP methods (e.g., GET), return a method not allowed response
     return JsonResponse({'error': 'Method Not Allowed'}, status=405)
+
+
+def order_confirm(request):
+    output = request.session.get('checkout_output', '')
+
+    context = {'output': output}
+    return render(request, 'order_confirm.html', context)

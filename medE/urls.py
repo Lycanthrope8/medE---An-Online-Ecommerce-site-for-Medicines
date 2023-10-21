@@ -39,7 +39,7 @@ urlpatterns = [
     path('profile/',firstactivity.profile, name='profile'),
     path('profile/update_profile/', authenticationViews.update_profile, name='update_profile'),
     path('product/<str:p_name>/', secondactivity.prod, name='prod'),
-    path('order_confirm/',firstactivity.order_confirm, name='order_confirm'),
+    path('order_confirm/',secondactivity.order_confirm, name='order_confirm'),
     path('checkout/', secondactivity.checkout_view, name='checkout'),
 
     
