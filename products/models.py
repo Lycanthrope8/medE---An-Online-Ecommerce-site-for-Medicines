@@ -87,3 +87,9 @@ def delete_product_if_feature_changed(sender, instance, **kwargs):
 
 # Register the signal
 pre_save.connect(delete_product_if_feature_changed, sender=main_product)
+
+
+
+class Order(models.Model):
+    phonenumber = models.CharField(max_length=15)
+    datas = models.JSONField()

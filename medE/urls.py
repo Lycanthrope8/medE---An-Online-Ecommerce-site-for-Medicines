@@ -41,6 +41,7 @@ urlpatterns = [
     path('product/<str:p_name>/', secondactivity.prod, name='prod'),
     path('order_confirm/',secondactivity.order_confirm, name='order_confirm'),
     path('checkout/', secondactivity.checkout_view, name='checkout'),
+    path('confirm/', secondactivity.order_complete, name='confirm'),
 
     
 ]

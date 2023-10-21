@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from authentication.models import UserProfile
 import json
-
+from .models import Order
 # Create your views here.
 def prod(request, p_name):
     product_details = {
@@ -138,3 +138,13 @@ def order_confirm(request):
     context = {'product_data_list': product_data_list, 'total': total,'user_address': user_address}
     print(context)
     return render(request, 'order_confirm.html', context)
+
+def order_complete(request):
+    User = UserProfile()
+    datas = request.GET.get('data', None)
+    phonenumber = request.user.phone_number
+    print(datas)
+    json_data = json.loads(datas)
+    order = Order(phonenumber=phonenumber, datas=json_data)
+    order.save()
+    return render(request,'confirm.html')

@@ -26,7 +26,6 @@
     </header>
     <main>
       <div class="container">
-        <form action="{% url 'order_confirm' %}" method="post">
           <div class="purchase-history">
             <table>
               <thead>
@@ -59,9 +58,9 @@
             </table>
             <label for="address">Address:</label>
             <input style="height: 60px;" type="text" name="address" value='{{user_address}}'>
-            <button class="confirm-order" type="submit">Confirm Order</button>
+           <a href="{%url 'confirm'%}?data={{ context }}"> <button class="confirm-order" type="submit">Confirm Order</button></a>
           </div>
-        </form>
+
         
         
         
@@ -82,6 +81,5 @@
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
     <script type="text/javascript" src="{% static 'script.js' %}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </body>
 </html>
