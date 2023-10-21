@@ -103,12 +103,14 @@ def checkout_view(request):
             data = json.loads(request.body.decode('utf-8'))
             # Process the cart_data as needed (e.g., complete the checkout)
             output={}
-            total=60
+            total=0
             for key, value in data.items():
                 product = main_product.objects.get(p_id=key)
                 total+=value*((product.p_price - (product.p_price * (product.p_discount / 100)))/product.medPerStrip)
                 output[product.p_name]=str(value)+";"+ str(value*(product.p_price - (product.p_price * (product.p_discount / 100)))/product.medPerStrip)
             print(output)
+            if(total>0):
+                total+=60
             request.session['checkout_output'] = output
             request.session['checkout_total'] = str(total)
 
