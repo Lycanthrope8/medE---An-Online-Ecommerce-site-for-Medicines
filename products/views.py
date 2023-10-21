@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.db import connection
-from .models import main_product
+from .models import main_product, Profile_MedList
 from django.core.exceptions import ObjectDoesNotExist
 from authentication.models import UserProfile
 import json
@@ -149,4 +149,37 @@ def order_complete(request):
     order.save()
     return render(request,'confirm.html')
 
-    return render(request,'confirm.html')
+
+def save_med_list(request):
+    try:
+        data = json.loads(request.body.decode('utf-8'))
+        user_phone_number = data.get('user')
+        p_id = data.get('p_id')
+        intakes = data.get('intakes')
+        num_Days = data.get('numDays')
+
+        # print(user_phone_number)
+        # print(p_id)
+        # print(intakes)
+        # print(num_Days)
+        # Return a success response if everything is processed correctly
+
+        # Retrieve or create the user object based on phone number
+        user, created = Profile_MedList.objects.get_or_create(phone_number=user_phone_number)
+
+        # Ensure the med_list field is initialized as a dictionary if it's null
+        med_list = [intakes,num_Days]
+        # print(med_list)
+
+        if user.med_list is None:
+            user.med_list = {}
+
+        # # Update the med_list field
+        user.med_list[p_id] = med_list
+        user.save()
+
+        return JsonResponse({'success': True})
+
+    except Exception as e:
+        # Return an error response if there is any exception
+        return JsonResponse({'success': False, 'error': str(e)})

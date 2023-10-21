@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="csrf-token" content="{{ csrf_token }}">
 	<title>medE</title>
 	<link rel="icon" type="image/x-icon" href="{% static 'Favicon.png' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'product_day.css' %}">
@@ -298,23 +299,26 @@
 						<button id="addtolist" class="addtolist col-sm-5">Add To List</button>
 						<div class="addtolistddown">
 							<div>
-								<input type="checkbox" name="Morning" value="Morning">
+								<input type="checkbox" name="MorningD" value="Morning">
 								<label for="Morning">Morning</label>
 							</div>
 							<div>
-								<input type="checkbox" name="Day" value="Day">
+								<input type="checkbox" name="DayD" value="Day">
 								<label for="Day">Day</label>
 							</div>
 							<div>
-								<input type="checkbox" name="Night" value="Night">
+								<input type="checkbox" name="NightD" value="Night">
 								<label for="Night">Night</label>
 							</div>
 							<div class="quantity">
 								<button class="day-decrease-btn">-</button>
-								<span type="number" id="num" class="num">01</span>
+								<span type="number" id="Daynum" class="num">01</span>
 								<button class="day-increase-btn">+</button>
 							</div>
+							<button id="addtolist" class="addtolist col-sm-5" onclick="AddToList('{{ user }}', '{{ product_details.p_id }}')">Add To List</button>
 						</div>
+						
+						<div id="message"></div>
 					</div>
                 </div>
                 
@@ -459,8 +463,31 @@
         quantityNum.textContent = currentQuantity.toString().padStart(2, '0');
     });
 
+	const DayNumSpan = document.getElementById('Daynum');
+    const daydecreaseBtn = document.querySelector('.day-decrease-btn');
+    const dayincreaseBtn = document.querySelector('.day-increase-btn');
+
+    // Decrease button click event
+    daydecreaseBtn.addEventListener('click', function() {
+        let num = parseInt(DayNumSpan.innerText);
+        if (num > 1) {
+            num--;
+            DayNumSpan.innerText = num < 10 ? '0' + num : num;
+        }
+    });
+
+    // Increase button click event
+    dayincreaseBtn.addEventListener('click', function() {
+        let num = parseInt(DayNumSpan.innerText);
+        num++;
+        DayNumSpan.innerText = num < 10 ? '0' + num : num;
+    });
+
+
  
     </script>
 <script src="{% static 'cart.js' %}"></script>
+<script src="{% static 'list.js' %}"></script>
+
 </body>
 </html> 
