@@ -341,6 +341,12 @@
 						<h3 href="#">Purchase History</h3>
 					</a>
 				</li>
+				<li class="sidebar-sections" id="list">
+					<a href="#">
+						<ion-icon name="list-outline"></ion-icon>
+						<h3 href="#">My List</h3>
+					</a>
+				</li>
 			</div>
 			<!-- <h1>{{ user }}</h1> -->
 		<div class="container">
@@ -390,8 +396,8 @@
                     </div>
                     <button type="submit">Update Profile</button>
                 </form>
-                
-			</div><div class="prescriptions" id="prescriptions">
+			</div>
+			<div class="prescriptions" id="prescriptions">
 			<div class="presc-box">
 				<img src="assets/images/prescription.jpg" alt="prescription-image">
 				<h3>Uploaded: 23.07.23</h3>
@@ -448,6 +454,44 @@
 					</tbody>
 					
 				</table>
+			</div>
+		</div>
+		<div class="container">
+			<div class="list">
+				<table>
+					<thead>
+						<th>Products</th>
+						<th>Times</th>
+						<th>Dose</th>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Napa</td>
+							<td class="mylist-times">
+								<div>
+									<input type="checkbox" name="MorningD" value="Morning">
+									<label for="Morning">Morning</label>
+								</div>
+								<div>
+									<input type="checkbox" name="DayD" value="Day">
+									<label for="Day">Day</label>
+								</div>
+								<div>
+									<input type="checkbox" name="NightD" value="Night">
+									<label for="Night">Night</label>
+								</div>
+							</td>
+							<td class="quantity-container">
+								<div class="quantity">
+									<button class="day-decrease-btn">-</button>
+									<input type="text" id="Daynum" class="num" value="01">
+									<button class="day-increase-btn">+</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<button type="submit" class="quick-order">Quick Order</button>
 			</div>
 		</div>
 	</main>
@@ -542,7 +586,43 @@
 	<a href="#top" class="back-top-btn" aria-label="back to top" data-back-top-btn>
 		<ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
 	</a>
+	
 	<script type="text/javascript" src="{% static 'cart.js' %}"></script>
     <script type="text/javascript" src="{% static 'user-profile.js' %}"></script>
+	<script>
+
+		let DayNumSpan = document.getElementById('Daynum');
+		let daydecreaseBtn = document.querySelector('.day-decrease-btn');
+		let dayincreaseBtn = document.querySelector('.day-increase-btn');
+
+		let format = (num) => num>9?num:"0"+num;
+
+		// Decrease button click event
+		daydecreaseBtn.onclick=()=> {
+			let num = parseInt(DayNumSpan.value);
+			if (num == 0) {
+				DayNumSpan.value = "00";
+			}
+			else {
+				DayNumSpan.value = format(num - 1);
+			}
+		}
+
+		dayincreaseBtn.onclick=()=> {
+			DayNumSpan.value = format(parseInt(DayNumSpan.value) + 1);
+		}
+
+		DayNumSpan.addEventListener('keyup', () =>{
+			let num = parseInt(input.value);
+			if (isNaN(num)){
+				DayNumSpan.value = "00";
+			}
+			else{
+				DayNumSpan.value = format(num);
+			}
+		})
+
+ 
+    </script>
 </body>
 </html> 

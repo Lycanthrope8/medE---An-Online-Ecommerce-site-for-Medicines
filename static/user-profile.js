@@ -139,21 +139,31 @@ document.querySelector('.label2').addEventListener('click', function(){
 const regForm = document.querySelector('.registration-form');
 const prescriptions = document.querySelector('.prescriptions');
 const history = document.querySelector('.purchase-history');
+const list = document.querySelector('.list');
 
 document.getElementById('account').addEventListener('click', function(){
     regForm.classList.add('active');
     prescriptions.classList.remove('active');
     history.classList.remove('active');
+    list.classList.remove('active');
 });
 
 document.getElementById('prescription').addEventListener('click', function(){
     prescriptions.classList.add('active');
     regForm.classList.remove('active');
     history.classList.remove('active');
+    list.classList.remove('active');
 });
 
 document.getElementById('history').addEventListener('click', function(){
     history.classList.add('active');
+    regForm.classList.remove('active');
+    prescriptions.classList.remove('active');
+    list.classList.remove('active');
+});
+document.getElementById('list').addEventListener('click', function(){
+    list.classList.add('active');
+    history.classList.remove('active');
     regForm.classList.remove('active');
     prescriptions.classList.remove('active');
 });

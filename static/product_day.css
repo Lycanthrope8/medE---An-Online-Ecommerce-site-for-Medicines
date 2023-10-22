@@ -722,40 +722,46 @@ main .container {
 	font-size: 20px;
 }
 .product-details .quantity {
+	width: 200px;
+	height: 60px;
 	display: flex;
-    width: 60%;
-	margin-bottom: 15px;
     align-items: center;
     justify-content: center;
     border-radius: 12px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
-.product-details .quantity span {
-    padding: 20px;
+.product-details .quantity input {
     width: 100%;
+	border: none;
+	outline: none;
+	background-color: transparent;
     text-align: center;
     font-size: 1.2rem;
     font-weight: 600;
     cursor: pointer;
     transition: 0.2s ease;
 }
-.product-details .quantity span:nth-child(1) {
+.product-details .quantity button:nth-child(1) {
+    height: 100%;
+	width: 100%;
     border-bottom-left-radius: 12px;
     border-top-left-radius: 12px;
 }
-.product-details .quantity span:nth-child(3) {
+.product-details .quantity button:nth-child(3) {
+    height: 100%;
+	width: 100%;
     border-bottom-right-radius: 12px;
     border-top-right-radius: 12px;
 }
 
-.product-details .quantity span:hover {
+.product-details .quantity button:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
 
 
-.product-details .quantity span.num {
+.product-details .quantity button.num {
     font-size: 1.2rem;
     border-right: 2px solid rgba(0, 0, 0, 0.2);
     border-left: 2px solid rgba(0, 0, 0, 0.2);
@@ -791,23 +797,23 @@ main .container {
 	display: flex;
 	position: absolute;
 	flex-direction: column;
-	width: 280px;
+	border-radius: 5px;
+	width: 271px;
 	overflow: hidden;
 	background: white;
 	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
 	padding: 20px;
-	left: 42%;
-	top: -10%;
+	left: 43%;
+	top: 0%;
 	z-index: 1;
 	max-height: 0;
-	opacity: 0;
+	/* opacity: 0; */
 	transition: 0.75s ease-in-out;
 }
 .product-details .addtolistddown.active {
-	opacity: 1;
-	overflow: auto;
+	/* opacity: 1; */
 	max-height: 300px;
-	top: 80%;
+	top: 90%;
 }
 .product-details .addtolistddown input[type="checkbox"] {
 	position: relative;
@@ -818,7 +824,7 @@ main .container {
 	width: 20px;
 	height: 20px;
 	cursor: pointer;
-	line-height: 18px;
+	line-height: 16px;
 }
 .product-details .addtolistddown input[type="checkbox"]:checked:after {
 	position: absolute;

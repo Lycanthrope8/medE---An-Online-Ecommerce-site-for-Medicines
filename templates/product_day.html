@@ -312,10 +312,10 @@
 							</div>
 							<div class="quantity">
 								<button class="day-decrease-btn">-</button>
-								<span type="number" id="Daynum" class="num">01</span>
+								<input type="text" id="Daynum" class="num" value="01">
 								<button class="day-increase-btn">+</button>
 							</div>
-							<button id="addtolist" class="addtolist col-sm-5" onclick="AddToList('{{ user }}', '{{ product_details.p_id }}')">Add To List</button>
+							<button id="addtolist" class="addtolist col-sm-12" onclick="AddToList('{{ user }}', '{{ product_details.p_id }}')">Add To List</button>
 						</div>
 						
 						<div id="message"></div>
@@ -486,8 +486,8 @@
 
  
     </script>
-<script src="{% static 'cart.js' %}"></script>
-<script src="{% static 'list.js' %}"></script>
+	<script src="{% static 'cart.js' %}"></script>
+	<script src="{% static 'list.js' %}"></script>
 
 </body>
 </html> 
