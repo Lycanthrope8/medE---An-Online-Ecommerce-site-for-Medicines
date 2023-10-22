@@ -105,9 +105,7 @@ document.querySelector('#user-login-btn').onclick = () =>{
     shoppingCart.classList.remove('active');
     
 }
-document.querySelector('#addtolist').onclick = () =>{
-    addToList.classList.toggle('active');
-}
+
 
 const selectImage = document.querySelector('#select-image');
 const inputFile = document.querySelector('#file-upload');
@@ -117,10 +115,6 @@ const elemContainer = document.querySelector('.elem-container');
 
 selectImage.addEventListener('click', function () {
     inputFile.click();
-    imgArea.classList.add('active');
-    backDrop.classList.add('active');
-})
-document.querySelector('#select-image2').addEventListener('click', function () {
     imgArea.classList.add('active');
     backDrop.classList.add('active');
 })
@@ -144,9 +138,17 @@ inputFile.addEventListener('change', function () {
     reader.readAsDataURL(image) ;
 })
 
+document.querySelector('#select-image2').addEventListener('click', function () {
+    imgArea.classList.add('active');
+    backDrop.classList.add('active');
+})
+
 document.querySelector('.label1').addEventListener('click', function(){
     document.querySelector('.gendermale').checked = true;
 })
 document.querySelector('.label2').addEventListener('click', function(){
     document.querySelector('.genderfemale').checked = true;
 })
+document.querySelector('#addtolist').onclick = () =>{
+    addToList.classList.toggle('active');
+}

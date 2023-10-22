@@ -55,56 +55,32 @@
 						<ion-icon name="bag-outline"></ion-icon>
 						<span class="btn-badge">3</span>
 					</button>
-					<div class="shopping-cart">
-						<div class="cartbox">
-							<button class="cart-trash">
+					<div class="shopping-cart" >
+						<!-- HTML template for a product cartbox -->
+						<div id= "cart-container">
+							<!-- <div class="cartbox" id="cartbox-${p_id}">
+							  <button class="cart-trash">
 								<ion-icon name="trash"></ion-icon>
-							</button>
-							<img src="assets/products/napaextend.jpg" alt="napa extend">
-							<div class="cart-content">
-								<h3>Napa Extend</h3>
-								<span class="cart-content-price">৳240.00</span>
-								<span class="quantity">qty: 1</span>
-							</div>
-						</div>
-						<div class="cartbox">
-							<button class="cart-trash">
-								<ion-icon name="trash"></ion-icon>
-							</button>
-							<img src="assets/products/napaextra.jpg" alt="napa extra">
-							<div class="cart-content">
-								<h3>Napa Extra</h3>
-								<span class="cart-content-price">৳610.00</span>
-								<span class="quantity">qty: 1</span>
-							</div>
-						</div>
-						<div class="cartbox">
-							<button class="cart-trash">
-								<ion-icon name="trash"></ion-icon>
-							</button>
-							<img src="assets/products/napa.jpg" alt="napa">
-							<div class="cart-content">
-								<h3>Napa</h3>
-								<span class="cart-content-price">৳610.00</span>
-								<span class="quantity">qty: 1</span>
-							</div>
-						</div>
-						<div class="total">Total: ৳1460.00</div>
-						<a href="#" class="cart-checkout-btn">Checkout</a>
-					</div>
-					<div style="text-align:center;" class="user-login">
-						{% if user.is_authenticated %}
-						<a href="{% url 'profile' %}" class="form-btn">Profile</a>
-						<a href="{% url 'mylogout' %}" class="form-btn">Logout</a>
-						{% else %}
-						<a href="{% url 'mylogin' %}" class="form-btn">Login</a>
-						{% endif %}
-					
-
-				
-						
-
-					</div>
+							  </button>
+							  <img src="" alt="">
+							  <div class="cart-content">
+								<h3 id="productName-${p_id}"></h3>
+								<div style="display: grid; grid-template-columns: 0.5fr 1fr; gap: 1px;">
+								  <span class="cart-content-price" id="productPrice-${p_id}"></span>
+								  <span class="quantity"></span><br>
+								  <span class="quantity">Days: 7</span>
+								</div>
+							  </div>
+							</div> -->
+						  </div>
+						  
+						  <div class="total"></div>
+						  {% if user.is_authenticated %}
+						<a  class="cart-checkout-btn" id="checkout-button">Checkout</a>
+					{% else %}
+					<a href="{% url 'mylogin' %}" class="cart-checkout-btn" id="">Checkout</a>
+					{% endif %}
+				</div>
 				</div>
 			</div>
 		</div>
@@ -488,5 +464,6 @@
 	<script type="text/javascript" src="{% static 'script.js' %}"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="{% static 'search.js' %}"></script>
+	<script src="{% static 'cart.js' %}"></script>
 </body>
 </html>
