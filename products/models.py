@@ -94,3 +94,12 @@ class Orders(models.Model):
     ordered_products = models.TextField(default="null")
     total = models.TextField(default="null")
     del_adress = models.TextField(default="null")
+
+
+class Profile_MedList(models.Model):
+    phone_number = models.CharField(primary_key=True, max_length=15, unique=True)
+    med_list = models.JSONField(default=dict)  # Set default value as an empty dictionary
+    prescriptions = models.JSONField(default=list)
+
+    def __str__(self):
+        return self.phone_number
