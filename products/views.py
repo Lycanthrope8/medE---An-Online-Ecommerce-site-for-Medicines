@@ -6,6 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from authentication.models import UserProfile
 import json
 from .models import Orders
+from django.utils import timezone
 
 # Create your views here.
 def prod(request, p_name):
@@ -145,7 +146,7 @@ def order_complete(request):
     del_adress = request.GET.get('address', None)
     User = UserProfile()
     phonenumber = request.user.phone_number
-    order = Orders(phonenumber=phonenumber, ordered_products=ordered_products,total=total,del_adress=del_adress)
+    order = Orders(phonenumber=phonenumber, ordered_products=ordered_products,total=total,del_adress=del_adress, timestamp=timezone.now() )
     order.save()
     return render(request,'confirm.html')
 

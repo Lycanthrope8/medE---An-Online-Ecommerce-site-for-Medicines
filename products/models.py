@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from Home.models import Product
+from django.utils import timezone
 
 class main_product(models.Model):
     CATEGORY_CHOICES = (
@@ -94,6 +95,7 @@ class Orders(models.Model):
     ordered_products = models.TextField(default="null")
     total = models.TextField(default="null")
     del_adress = models.TextField(default="null")
+    timestamp = models.DateTimeField(default=timezone.now)
 
 
 class Profile_MedList(models.Model):

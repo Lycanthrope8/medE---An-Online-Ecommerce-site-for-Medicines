@@ -57,15 +57,33 @@
               </tbody>
             </table>
             <label for="address">Address:</label>
-            <input style="height: 60px;" type="text" name="address" value='{{user_address}}'>
-           <a href="{%url 'confirm'%}?order_data={{product_data_list}}&total={{ total }}&address={{ user_address }}"> <button class="confirm-order" type="submit">Confirm Order</button></a>
-          </div>
+            <input style="height: 60px;" type="text" id="addressInput" name="address" value='{{user_address}}'>
+            <a href="{% url 'confirm'%}?order_data={{product_data_list}}&total={{ total }}&address=" id="confirmLink"><button class="confirm-order" type="submit">Confirm Order</button></a>
+            </div>
+            
 
         
         
         
       </div>
     </main>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Get references to the input field and the link
+        const addressInput = document.getElementById('addressInput');
+        const confirmLink = document.getElementById('confirmLink');
+      
+        // Add a click event listener to the button
+        confirmLink.addEventListener('click', function(event) {
+          // Get the current value from the input field
+          const userAddress = addressInput.value;
+      
+          // Update the href attribute of the link with the user's address
+          confirmLink.href += encodeURIComponent(userAddress);
+        });
+      });
+      </script>
+      
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
