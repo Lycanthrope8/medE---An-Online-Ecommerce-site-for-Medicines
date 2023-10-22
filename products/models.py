@@ -3,7 +3,6 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from Home.models import Product
 from django.utils import timezone
-
 class main_product(models.Model):
     CATEGORY_CHOICES = (
         ('BABY CARE', 'BABY CARE'),
@@ -91,11 +90,18 @@ pre_save.connect(delete_product_if_feature_changed, sender=main_product)
 
 
 class Orders(models.Model):
+    pending = 'pending'
+    confirm = 'confirm'
+    stat = [
+        (pending, 'pending'),
+        (confirm, 'confirm'),
+    ]
     phonenumber = models.CharField(max_length=15)
     ordered_products = models.TextField(default="null")
     total = models.TextField(default="null")
     del_adress = models.TextField(default="null")
     timestamp = models.DateTimeField(default=timezone.now)
+    status=models.CharField(max_length=20, choices=stat, default='pending', blank=True)
 
 
 class Profile_MedList(models.Model):

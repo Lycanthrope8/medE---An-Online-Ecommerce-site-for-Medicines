@@ -420,55 +420,27 @@
 						<th></th>
 					</thead>
 					<tbody>
+						{% for key, value in temp.items %}
 						<tr>
-							<td>0001</td>
+							<td>{{ key }}</td>
 							<td>
-								<li>Napa x 2</li>
-								<li>Sergel x 1</li>
-								<li>Orsaline x 7</li>
+								<ul>
+									{% for item in value.0 %}
+										<li>{{ item }}</li>
+									{% endfor %}
+								</ul>
 							</td>
-							<td>680</td>
-							<td>12 August 2023</td>
-							<td><p class="status status-paid">Paid</p></td>
-							<td><a href="#">Reorder</a></td>
+							<td>{{ value.1 }}</td>
+							<td>{{ value.2|date:"d F Y" }}</td>
+							{% if value.3 == "pending" %}
+    						<td ><p style="background-color: yellow;">{{ value.3 }}</p></td>
+							{%else%}
+							<td ><p style="background-color: green;">{{ value.3 }}</p></td>
+							{% endif %}
 						</tr>
-						<tr>
-							<td>0002</td>
-							<td>
-								<li>Napa x 2</li>
-								<li>Sergel x 1</li>
-								<li>Orsaline x 7</li>
-							</td>
-							<td>450</td>
-							<td>31 September 2023</td>
-							<td><p class="status  status-unpaid">Unpaid</p></td>
-							<td><a href="#">Reorder</a></td>
-						</tr>
-						<tr>
-							<td>0003</td>
-							<td>
-								<li>Napa x 2</li>
-								<li>Sergel x 1</li>
-								<li>Orsaline x 7</li>
-							</td>
-							<td>2000</td>
-							<td>27 May 2023</td>
-							<td><p class="status  status-refund">Refund</p></td>
-							<td><a href="#">Reorder</a></td>
-						</tr>
-						<tr>
-							<td>0004</td>
-							<td>
-								<li>Napa x 2</li>
-								<li>Sergel x 1</li>
-								<li>Orsaline x 7</li>
-							</td>
-							<td>500</td>
-							<td>14 April 2023</td>
-							<td><p class="status status-cancel">Cancel</p></td>
-							<td><a href="#">Reorder</a></td>
-						</tr>
+						{% endfor %}
 					</tbody>
+					
 				</table>
 			</div>
 		</div>
