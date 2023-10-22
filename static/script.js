@@ -108,8 +108,7 @@ document.querySelector('#user-login-btn').onclick = () =>{
     shoppingCart.classList.remove('active');
     
 }
-
-document.querySelector('#addtolist').onclick=()=>{
+document.querySelector('#addtolist').onclick = () =>{
     addToList.classList.toggle('active');
 }
 
@@ -155,6 +154,3 @@ document.querySelector('.label1').addEventListener('click', function(){
 document.querySelector('.label2').addEventListener('click', function(){
     document.querySelector('.genderfemale').checked = true;
 })
-document.querySelector('#addtolist').onclick = () =>{
-    addToList.classList.toggle('active');
-}
