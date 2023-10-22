@@ -95,9 +95,6 @@ let shoppingCart = document.querySelector('.shopping-cart');
 let addToList = document.querySelector('.addtolistddown');
 
 
-document.querySelector('#addtolist').onclick=()=>{
-    addToList.classList.toggle('active');
-}
 
 document.querySelector('#cart-btn').onclick = () =>{
     shoppingCart.classList.toggle('active');
@@ -112,6 +109,9 @@ document.querySelector('#user-login-btn').onclick = () =>{
     
 }
 
+document.querySelector('#addtolist').onclick=()=>{
+    addToList.classList.toggle('active');
+}
 
 const selectImage = document.querySelector('#select-image');
 const inputFile = document.querySelector('#file-upload');
