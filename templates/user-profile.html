@@ -331,7 +331,7 @@
 				</li>
 				<li class="sidebar-sections" id="prescription">
 					<a href="#">
-						<img src="assets/prescription.png" alt="" width="30">
+						<img src="{%static 'prescription.png'%}" alt="" width="30">
 						<h3 href="#">Prescriptions</h3>
 					</a>
 				</li>
@@ -462,9 +462,10 @@
 					<thead>
 						<th>Products</th>
 						<th>Times</th>
-						<th>Dose</th>
+						<th>Days</th>
 					</thead>
 					<tbody>
+						{%for key,value in medlist.items %}
 						<tr>
 							<td>Napa</td>
 							<td class="mylist-times">
