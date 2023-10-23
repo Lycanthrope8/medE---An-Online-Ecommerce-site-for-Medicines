@@ -150,6 +150,7 @@ def order_complete(request):
     order.save()
     return render(request,'confirm.html')
 
+from django.http import JsonResponse
 
 def save_med_list(request):
     try:
@@ -159,31 +160,26 @@ def save_med_list(request):
         intakes = data.get('intakes')
         num_Days = data.get('numDays')
 
-        # print(user_phone_number)
-        # print(p_id)
-        # print(intakes)
-        # print(num_Days)
-        # Return a success response if everything is processed correctly
-
+        print(data)
         # Retrieve or create the user object based on phone number
         user, created = Profile_MedList.objects.get_or_create(phone_number=user_phone_number)
 
         # Ensure the med_list field is initialized as a dictionary if it's null
         med_list = [intakes,num_Days]
-        # print(med_list)
 
         if user.med_list is None:
             user.med_list = {}
-
-        # # Update the med_list field
+        # Update the med_list field
         user.med_list[p_id] = med_list
         user.save()
 
+        # Return a success response
         return JsonResponse({'success': True})
 
     except Exception as e:
         # Return an error response if there is any exception
         return JsonResponse({'success': False, 'error': str(e)})
+
 
 # def get_saved_data(request):
 #     try:

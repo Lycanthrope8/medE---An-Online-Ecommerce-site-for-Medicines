@@ -48,6 +48,71 @@ function AddToList(user, p_id) {
 }
 
 
+document.querySelectorAll('input[type="checkbox"], input[type="text"]').forEach((input) => {
+    input.addEventListener('change', () => {
+        // Get the updated data from the table
+        let updatedData = gatherUpdatedDataFromTable(input.closest('tr'));
+        console.log(updatedData);
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        fetch('/save_med_list/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken, // Include CSRF token for CSRF protection
+            },
+            body: JSON.stringify(updatedData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle the response from the server if needed
+            console.log(data);
+        })
+        .catch(error => {
+            // Handle errors if the request fails
+            console.error('Error:', error);
+        });
+    });
+});
+
+function gatherUpdatedDataFromTable(row) {
+    let medicineId = row.dataset.productName;
+        
+    // Extract checkbox states and input value from the row
+    let morningCheckbox = row.querySelector('input[name="MorningD"]');
+    let dayCheckbox = row.querySelector('input[name="DayD"]');
+    let nightCheckbox = row.querySelector('input[name="NightD"]');
+    let dayNumInput = row.querySelector('.num');
+
+    // Prepare the data object for the current row
+    let intakes = [];
+    if (morningCheckbox.checked) {
+        intakes.push('Morning');
+    }
+    if (dayCheckbox.checked) {
+        intakes.push('Day');
+    }
+    if (nightCheckbox.checked) {
+        intakes.push('Night');
+    }
+
+    let numDays = parseInt(dayNumInput.value);
+
+    // Add the current row's data to the updatedData array
+    let updatedData = {
+        user: getUserPhoneNumber(), // Replace with the actual user phone number
+        p_id: medicineId,
+        intakes: intakes,
+        numDays: numDays
+    };
+
+    // console.log(updatedData);
+    return updatedData;
+}
+
+
+
+
 
 
 

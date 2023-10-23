@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="csrf-token" content="{{ csrf_token }}">
 	<title>medE</title>
 	<link rel="icon" type="image/x-icon" href="{% static 'Favicon.png' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'user-profile.css' %}">
@@ -597,6 +598,9 @@
 	<a href="#top" class="back-top-btn" aria-label="back to top" data-back-top-btn>
 		<ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
 	</a>
+	
+
+	
 	
 	<script type="text/javascript" src="{% static 'cart.js' %}"></script>
 	<script type="text/javascript" src="{% static 'list.js' %}"></script>
