@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import Product
 from products.models import Orders
 from authentication.models import UserProfile
+from products.models import Profile_MedList
 import ast
 # Create your views here.
 def home(request):
@@ -29,7 +30,20 @@ def profile(request):
 
 
         temp[i.id]=[d,i.total,i.timestamp,i.status]
-    return render(request, 'user-profile.html', {'temp': temp})
+
+    # Medlist  From here
+
+    
+    print('User Phone Number:', phonenumber)  # Check the user phone number in Django console
+
+    # Assuming 'phone_number' is the field name in your Profile_MedList model
+    saved_data = Profile_MedList.objects.filter(phone_number=phonenumber).values()
+
+    # Convert the QuerySet to a list of dictionaries
+    data_list = list(saved_data)
+    print(data_list)
+
+    return render(request, 'user-profile.html', {'temp': temp,'medList': data_list})
 
 
 

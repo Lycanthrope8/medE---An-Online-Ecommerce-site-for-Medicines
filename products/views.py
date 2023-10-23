@@ -184,3 +184,20 @@ def save_med_list(request):
     except Exception as e:
         # Return an error response if there is any exception
         return JsonResponse({'success': False, 'error': str(e)})
+
+# def get_saved_data(request):
+#     try:
+#         user_phone_number = request.GET.get('user')
+#         print('User Phone Number:', user_phone_number)  # Check the user phone number in Django console
+
+#         # Assuming 'phone_number' is the field name in your Profile_MedList model
+#         saved_data = Profile_MedList.objects.filter(phone_number=user_phone_number).values()
+
+#         # Convert the QuerySet to a list of dictionaries
+#         data_list = list(saved_data)
+
+#         # Return the data as JSON response
+#         return JsonResponse(data_list, safe=False)
+#     except Exception as e:
+#         # Return an error response if there is any exception
+#         return JsonResponse({'error': str(e)}, status=500)
