@@ -602,47 +602,9 @@
 
 	
 	
-	<script type="text/javascript" src="{% static 'cart.js' %}"></script>
-	<script type="text/javascript" src="{% static 'list.js' %}"></script>
-    <script type="text/javascript" src="{% static 'user-profile.js' %}"></script>
+	
 	<script>
 
-		// Select all elements with class "num"
-let dayNumSpans = document.querySelectorAll('.num');
-let dayDecreaseBtns = document.querySelectorAll('.day-decrease-btn');
-let dayIncreaseBtns = document.querySelectorAll('.day-increase-btn');
-
-let format = (num) => (num > 9 ? num : "0" + num);
-
-// Loop through each num input and attach event listeners
-dayNumSpans.forEach((DayNumSpan, index) => {
-    let decreaseBtn = dayDecreaseBtns[index];
-    let increaseBtn = dayIncreaseBtns[index];
-
-    // Decrease button click event
-    decreaseBtn.onclick = () => {
-        let num = parseInt(DayNumSpan.value);
-        if (num > 0) {
-            DayNumSpan.value = format(num - 1);
-        }
-    };
-
-    // Increase button click event
-    increaseBtn.onclick = () => {
-        let num = parseInt(DayNumSpan.value);
-        DayNumSpan.value = format(num + 1);
-    };
-
-    // Keyup event for input validation
-    DayNumSpan.addEventListener('keyup', () => {
-        let num = parseInt(DayNumSpan.value);
-        if (isNaN(num) || num < 0) {
-            DayNumSpan.value = "00";
-        } else {
-            DayNumSpan.value = format(num);
-        }
-    });
-});
 
 // Inside your JavaScript code where you handle the table population
 document.querySelectorAll('tr').forEach((row) => {
@@ -679,6 +641,9 @@ document.querySelectorAll('tr').forEach((row) => {
 
 
  
-    </script>
+</script>
+<script type="text/javascript" src="{% static 'cart.js' %}"></script>
+<script type="text/javascript" src="{% static 'list.js' %}"></script>
+<script type="text/javascript" src="{% static 'user-profile.js' %}"></script>
 </body>
 </html> 

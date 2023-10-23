@@ -48,32 +48,63 @@ function AddToList(user, p_id) {
 }
 
 
+
+// Event listener for input fields and checkboxes
 document.querySelectorAll('input[type="checkbox"], input[type="text"]').forEach((input) => {
     input.addEventListener('change', () => {
-        // Get the updated data from the table
-        let updatedData = gatherUpdatedDataFromTable(input.closest('tr'));
-        console.log(updatedData);
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-        fetch('/save_med_list/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrfToken, // Include CSRF token for CSRF protection
-            },
-            body: JSON.stringify(updatedData)
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Handle the response from the server if needed
-            console.log(data);
-        })
-        .catch(error => {
-            // Handle errors if the request fails
-            console.error('Error:', error);
-        });
+        updateDataAndSendRequest(input.closest('tr'));
     });
 });
+
+// Event listener for day-decrease-btn buttons
+document.querySelectorAll('.day-decrease-btn').forEach((button) => {
+    button.addEventListener('click', () => {
+        let row = button.closest('tr');
+        let numInput = row.querySelector('.num');
+        let currentValue = parseInt(numInput.value);
+        if (currentValue > 1) {
+            numInput.value = currentValue - 1;
+            updateDataAndSendRequest(row);
+        }
+    });
+});
+
+// Event listener for day-increase-btn buttons
+document.querySelectorAll('.day-increase-btn').forEach((button) => {
+    button.addEventListener('click', () => {
+        let row = button.closest('tr');
+        let numInput = row.querySelector('.num');
+        let currentValue = parseInt(numInput.value);
+        numInput.value = currentValue + 1;
+        updateDataAndSendRequest(row);
+    });
+});
+
+function updateDataAndSendRequest(row) {
+    // Get the updated data from the specific row
+    let updatedData = gatherUpdatedDataFromTable(row);
+    // console.log(updatedData);
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    fetch('/save_med_list/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken, // Include CSRF token for CSRF protection
+        },
+        body: JSON.stringify(updatedData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle the response from the server if needed
+        console.log(data);
+    })
+    .catch(error => {
+        // Handle errors if the request fails
+        console.error('Error:', error);
+    });
+}
+
 
 function gatherUpdatedDataFromTable(row) {
     let medicineId = row.dataset.productName;
