@@ -606,39 +606,48 @@
 	<script>
 
 
-// Inside your JavaScript code where you handle the table population
-document.querySelectorAll('tr').forEach((row) => {
+async function fetchData(productName) {
+    try {
+        let response = await fetch(`/get_product_info/${productName}/`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        let productData = await response.json();
+        return productData;
+    } catch (error) {
+        console.error('Error:', error);
+        // Handle errors, show a placeholder, or handle them as per your application's requirements
+        return null;
+    }
+}
+
+document.querySelectorAll('tr').forEach(async (row) => {
     let productName = row.dataset.productName;
-    // Make an AJAX request to get product details
-    fetch(`/get_product_info/${productName}/`)
-        .then(response => response.json())
-        .then(productData => {
-            // Get the product name cell in this row
-            let productNameCell = row.querySelector('.product-name');
-            let productImageCell = row.querySelector('.product-image');
+    
+    if (productName) {
+        let productData = await fetchData(productName);
+        let productNameCell = row.querySelector('.product-name');
+        let productImageCell = row.querySelector('.product-image');
 
-			// console.log(productData.p_image)
-            if (productNameCell) {
-                // Update the content of the product name cell with the fetched product name
-				// Update the src attribute of the product image
-                let imgElement = document.createElement('img');
-                // imgElement.setAttribute('src', `../../media/${productData["p_image"]}`);
-                imgElement.setAttribute('alt', 'Product Image');
-                productImageCell.innerHTML = '';
-                productImageCell.appendChild(imgElement);
-				
-                productNameCell.textContent = productData.p_name;
-            }
+        if (productNameCell && productData && productData.p_name) {
+            let imgElement = document.createElement('img');
+            // imgElement.setAttribute('src', `../../media/${productData.p_image}`);
+            imgElement.setAttribute('alt', 'Product Image');
+            productImageCell.innerHTML = '';
+            productImageCell.appendChild(imgElement);
 
-            // Use productData to populate other cells in the row if needed
-            // Example: row.querySelector('.product-price').textContent = productData.p_price;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+            productNameCell.textContent = productData.p_name;
+        } else {
+            productNameCell.textContent = 'N/A';
+            productImageCell.textContent = 'Image Not Available';
+        }
+    } else {
+        let productNameCell = row.querySelector('.product-name');
+        productNameCell.textContent = 'N/A';
+        let productImageCell = row.querySelector('.product-image');
+        productImageCell.textContent = 'Image Not Available';
+    }
 });
-
-
 
  
 </script>
