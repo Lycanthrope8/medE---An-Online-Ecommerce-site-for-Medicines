@@ -34,14 +34,14 @@ def profile(request):
     # Medlist  From here
 
     
-    print('User Phone Number:', phonenumber)  # Check the user phone number in Django console
+    # print('User Phone Number:', phonenumber)  # Check the user phone number in Django console
 
     # Assuming 'phone_number' is the field name in your Profile_MedList model
     saved_data = Profile_MedList.objects.filter(phone_number=phonenumber).values()
 
     # Convert the QuerySet to a list of dictionaries
     data_list = list(saved_data)
-    print(data_list)
+    # print(data_list)
 
     return render(request, 'user-profile.html', {'temp': temp,'medList': data_list})
 

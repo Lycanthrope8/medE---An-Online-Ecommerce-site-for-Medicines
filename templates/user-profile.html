@@ -464,6 +464,7 @@
 			<div class="list">
 				<table>
 					<thead>
+						<th>Image</th>
 						<th>Products</th>
 						<th>Times</th>
 						<th>Days</th>
@@ -472,6 +473,7 @@
 						{% for item in medList %}
 							{% for medicine_id, details in item.med_list.items %}
 							<tr data-product-name="{{ medicine_id }}">
+								<td class="product-image"></td>
 								<td class="product-name"></td>
 									<td class="mylist-times">
 										<div>
@@ -647,8 +649,18 @@ document.querySelectorAll('tr').forEach((row) => {
         .then(productData => {
             // Get the product name cell in this row
             let productNameCell = row.querySelector('.product-name');
+            let productImageCell = row.querySelector('.product-image');
+
+			// console.log(productData.p_image)
             if (productNameCell) {
                 // Update the content of the product name cell with the fetched product name
+				// Update the src attribute of the product image
+                let imgElement = document.createElement('img');
+                // imgElement.setAttribute('src', `../../media/${productData["p_image"]}`);
+                imgElement.setAttribute('alt', 'Product Image');
+                productImageCell.innerHTML = '';
+                productImageCell.appendChild(imgElement);
+				
                 productNameCell.textContent = productData.p_name;
             }
 
