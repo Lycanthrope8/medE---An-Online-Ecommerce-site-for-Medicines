@@ -373,10 +373,15 @@
                         <button><ion-icon name="create-outline"></ion-icon></button>
                     </div>
                     <div class="input-box col-sm-6">
-                        <label for="">Birth Date</label>				
-                        <input class="birthdate" type="date" name="dob" placeholder="Birth Date" value="{{ user.dob }}">
-                        <button><ion-icon name="create-outline"></ion-icon></button>
-                    </div>
+						<label for="">Birth Date</label>				
+						<!-- Manually format user.dob using template tags -->
+						{% with formatted_dob=user.dob|date:'Y-m-d' %}
+						<input class="birthdate" type="date" name="dob" placeholder="Birth Date" value="{{ formatted_dob }}">
+						{% endwith %}
+						<button><ion-icon name="create-outline"></ion-icon></button>
+					</div>
+					
+					
                     <div class="gender input-box">
                         <label for="">Gender</label>
                         <div class="label1">                
