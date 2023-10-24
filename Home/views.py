@@ -62,7 +62,7 @@ def quick_order(request):
         products_data = main_product.objects.filter(p_id=int(key)).values('p_name', 'medPerStrip', 'p_price','p_discount')
         medPerStrip = products_data[counter]['medPerStrip']
         price=(products_data[counter]['p_price'] - (products_data[counter]['p_price']*(products_data[counter]['p_discount']/100)))/medPerStrip
-        quantity=(products_data[counter]['medPerStrip']*morning_day_len*dayy)/10
+        quantity=(products_data[counter]['medPerStrip']*morning_day_len*dayy)/medPerStrip
         t.append((products_data[counter]['p_name'], str(int(quantity)), '{:.2f}'.format(float(price * quantity))))         
         total+=round(price*quantity,2)
 

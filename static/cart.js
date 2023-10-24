@@ -219,9 +219,11 @@ document.getElementById('checkout-button').addEventListener('click', function() 
     .then(function(response) {
       if (response.status === 200) {
         console.log('Checkout was successful');
+        localStorage.removeItem('cart');
         window.location.href = '/order_confirm/';
       }
-    })
+     })
+
 });
 
 // Function to get the CSRF token from the cookie

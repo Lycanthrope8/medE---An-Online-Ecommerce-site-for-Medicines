@@ -285,7 +285,9 @@
                     <a href=""><h3>{{ product_details.p_company }}</h3></a>
                     <div class="price-box">
                         <p class="price">৳{{ product_details.discounted_price|floatformat:"2"}}</p>
+                        {% if product_details.p_discount > 0 %}
                         <del>৳{{ product_details.p_price|floatformat:"2" }}</del>
+						{% endif %}
                     </div>
 
                     <div class="quantity">

@@ -10,8 +10,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password, check_password
 from .models import UserProfile  # Import your UserProfile model
 from django.contrib.auth.decorators import login_required
-
-
+from products.models import Orders
+import ast
+from products.models import Profile_MedList
 
 def mylogin(request):
     if request.method == 'POST':
@@ -129,9 +130,36 @@ def update_profile(request):
         user_profile.save()
         # print("After save:", user_profile.first_name)  # Check user profile data after saving
 
+        User = UserProfile()
+        phonenumber = request.user.phone_number
+        orders = Orders.objects.filter(phonenumber=phonenumber) 
+        temp={}
+        for i in orders:
+            d=[]
+            data=ast.literal_eval(i.ordered_products)
+            for item in data:
+                name, number, _ = item
+                d.append(str(name+"X"+number))
+
+
+            temp[i.id]=[d,i.total,i.timestamp,i.status]
+
+        # Medlist  From here
+
+        
+        # print('User Phone Number:', phonenumber)  # Check the user phone number in Django console
+
+        # Assuming 'phone_number' is the field name in your Profile_MedList model
+        saved_data = Profile_MedList.objects.filter(phone_number=phonenumber).values()
+
+        # Convert the QuerySet to a list of dictionaries
+        data_list = list(saved_data)
+        # print(data_list)
+        
+
 
         # Redirect to a success page or any other desired behavior after successful form submission
-        return render(request, 'user-profile.html')  # Redirect to a success template
+        return render(request, 'user-profile.html', {'temp': temp,'medList': data_list})  # Redirect to a success template
 
     # Handle GET request or display the form
     return render(request, 'user-profile.html')

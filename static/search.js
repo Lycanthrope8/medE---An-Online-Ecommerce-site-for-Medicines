@@ -14,6 +14,7 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (data) {
                 var resultsDiv = $('#search-results');
+                // console.log(data);
                 resultsDiv.empty(); // Clear previous search results
 
                 if (data.length > 0) {
@@ -34,6 +35,7 @@ $(document).ready(function () {
     $('#search-input').on('input', function () {
         var query = $(this).val();
         fetchSearchResults(query);
+        
     });
 
     // Clear search results when clicking somewhere else on the page
