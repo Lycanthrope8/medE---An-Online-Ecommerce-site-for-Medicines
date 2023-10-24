@@ -5,7 +5,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="{% static 'order_confirm.css' %}"
+      href="{% static 'confirm.css' %}"
     />
   </head>
   <body>
@@ -25,11 +25,11 @@
       
     </header>
     <main>
-      <div class="container">
-        <p>order confiremd<p>
- 
-        
-      </div>
+        <div class="confirm-order container">
+          <img src="{% static 'images/check.gif' %}" alt="" width="80">
+          <h1>Your order has been confirmed!</h1>
+        </div>
+        <a href="{%url 'home'%}">Back to Home</a>
     </main>
 
     <script

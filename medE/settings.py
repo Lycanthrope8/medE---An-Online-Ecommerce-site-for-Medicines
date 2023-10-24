@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'livereload',
     'django.contrib.staticfiles',
     'Home',
     'products',
@@ -59,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'livereload.middleware.LiveReloadScript',
     
 ]
 
@@ -101,7 +103,7 @@ DATABASES = {
 # settings.py
 
 LOGOUT_REDIRECT_URL='home'
-
+ALLOWED_HOSTS = ["127.0.0.1", "192.168.0.106", "localhost"]
 
 
 # Password validation

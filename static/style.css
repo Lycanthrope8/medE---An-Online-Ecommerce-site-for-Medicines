@@ -253,10 +253,8 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .header-user-actions .shopping-cart .cartbox .cart-trash {
-	font-size: 2rem;
-	position: absolute;
-	top: 50%;
-	right: 2rem;
+	float: right;
+	font-size: 1.8rem;
 	cursor: pointer;
 	color: black;
 	transform: translateY(-50%);
@@ -267,22 +265,29 @@ body::-webkit-scrollbar-thumb:hover {
 	color: var(--red);
 }
 
-.header-user-actions .shopping-cart .cartbox .cart-content h3 {
+.header-user-actions .shopping-cart .cartbox h3 {
 	color: black;
 	font-size: 1.5rem;
 	padding-bottom: 1rem;
 }
 
-.header-user-actions .shopping-cart .cartbox .cart-content span {
+.header-user-actions .shopping-cart .cartbox span {
 	color: var(--red);
-	font-size: var(--fs-5);
+	font-size: var(--fs-4);
+	text-align: center;
+	margin: auto 6px;
 }
 
-.header-user-actions .shopping-cart .cartbox .cart-content .quantity {
-	padding-left: 1rem;
+.header-user-actions .shopping-cart .cartbox .quantity {
+	width: 80px;
+	height: 30px;
 	font-family: 'poppins', sans-serif;
 	font-weight: 500;
-	font-size: var(--fs-7);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 12px;
+    box-shadow:  3px 3px 5px 0px rgba(0,0,0,0.2);
 }
 
 .header-user-actions .shopping-cart .total {
@@ -416,6 +421,35 @@ body::-webkit-scrollbar-thumb:hover {
 .search-btn:hover {
 	color: var(--red);
 }
+
+.quantity input {
+	width: 100%;
+	border: none;
+	outline: none;
+	background-color: transparent;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+.quantity button:nth-child(1) {
+	height: 100%;
+	width: 100%;
+    border-bottom-left-radius: 12px;
+    border-top-left-radius: 12px;
+}
+.quantity button:nth-child(3) {
+	height: 100%;
+	width: 100%;
+    border-bottom-right-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.quantity button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
 
 /* .mobile-bottom-navigation {
 	background: white;
@@ -848,16 +882,31 @@ body::-webkit-scrollbar-thumb:hover {
 
 .img-area .days {
 	display: grid;
-	gap: 2px;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	gap: 15px;
+	grid-template-columns: 0.5fr 4fr 0.5fr 4fr 0.5fr 4fr;
 	padding: 10px 0;
 	width: 100%;
+	place-content: center;
+	line-height: 30px;
 }
 .img-area .days input[type="checkbox"] {
+	position: relative;
     display: grid;
-	place-content: center;
-	border: 0px;
-	width: 40px;
+	appearance: none;
+	background-color: rgb(223, 223, 223);
+	border-radius: 100%;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	line-height: 25px;
+}
+.img-area .days input[type="checkbox"]:checked:after {
+	position: absolute;
+	content: '\25CF';
+	font-size: 40px;
+	color: var(--red);
+	left: 50%;
+	transform: translate(-50%, 0);
 }
 .img-area .prescription-upload-btn {
 	display: flex;
@@ -1251,14 +1300,13 @@ body::-webkit-scrollbar-thumb:hover {
 	
 	.header-user-actions .shopping-cart .cartbox .cart-trash {
 		font-size: 1.8rem;
-		right: 1rem;
 	}
-	.header-user-actions .shopping-cart .cartbox .cart-content h3 {
+	.header-user-actions .shopping-cart .cartbox h3 {
 		font-size: 1rem;
 		padding-bottom: 0.1rem;
 	}
 	
-	.header-user-actions .shopping-cart .cartbox .cart-content span {
+	.header-user-actions .shopping-cart .cartbox span {
 		font-size: var(--fs-7);
 	}
 	
@@ -1372,6 +1420,7 @@ body::-webkit-scrollbar-thumb:hover {
 		height: 350px;
 		width: 100px;
 	}
+
 	.footer-top .container {
 		grid-template-columns: 1fr 1fr;
 	}
@@ -1462,9 +1511,6 @@ body::-webkit-scrollbar-thumb:hover {
 		--fs-1: 2.625rem;
 		--fs-2: 1.125rem;
 	}
-	.container {
-		max-width: 980px;
-	}
 	.header-main {
 		display: flex;
 	}
@@ -1522,21 +1568,17 @@ body::-webkit-scrollbar-thumb:hover {
 	
 	.header-user-actions .shopping-cart .cartbox .cart-trash {
 		font-size: 2rem;
-		right: 2rem;
 	}
 	
-	.header-user-actions .shopping-cart .cartbox .cart-content h3 {
+	.header-user-actions .shopping-cart .cartbox h3 {
 		font-size: 1.5rem;
 		padding-bottom: 1rem;
 	}
 	
-	.header-user-actions .shopping-cart .cartbox .cart-content span {
+	.header-user-actions .shopping-cart .cartbox span {
 		font-size: var(--fs-5);
 	}
-	
-	.header-user-actions .shopping-cart .cartbox .cart-content .quantity {
-		padding-left: 0.5rem;
-	}
+
 	
 	.header-user-actions .shopping-cart .total {
 		font-size: 25px;
@@ -1742,11 +1784,5 @@ body::-webkit-scrollbar-thumb:hover {
 	.footer-top .container {
 		grid-template-columns: 1fr 0.5fr 0.5fr ;
 	}
-	.quantity-button {
-		display: inline;
-		position: absolute;
-		margin-left: 5px; /* Adjust the margin as needed */
-		cursor: pointer; /* Add a pointer cursor to make them look clickable */
-	  }
 	  
 }

@@ -36,7 +36,7 @@ async function AddtoCart(id, quantity = 1, doSomething = null, button = null) {
       // Update the total price for this item in the cart
       const totalPriceElement = document.getElementById(`totalPrice-${id}`);
       if (totalPriceElement) {
-        totalPriceElement.textContent = `${(cart[id] * (productData.discounted_price) / productData.medPerStrip).toFixed(2)} Taka`;
+        totalPriceElement.textContent = `৳`+`${(cart[id] * (productData.discounted_price) / productData.medPerStrip).toFixed(2)}`;
       }
     } else {
       console.log("Response Error");
@@ -131,26 +131,28 @@ document.getElementById("cart-btn").addEventListener("click", async function() {
                   // Display the product name
                   resultsDiv.append(`
                   <div class="cartbox" id="cartbox-${p_id}">
-                            <button class="cart-trash" onclick="removeFromCart(${productData["p_id"]})">
-                                <ion-icon name="trash"></ion-icon>
-                            </button>
-                            <img src="../../media/${productData["p_image"]}" alt="">
-                            <div class="cart-content-${p_id}">
-                                <h3 id="productName-${p_id}">${productData["p_name"]}</h3>
-                                <div style="display: grid; grid-template-columns: 0.5fr 1fr; gap: 1px;">
-                                <span class="cart-content-price" id="productPrice-${p_id}">${productPrice}</span>
-                                    <span class="quantity"> 
-                                        Quantity:
-                                        <button class="quantity-button decrement" style="display: inline; white-space: nowrap;"
-                                            onclick="AddtoCart(${productData["p_id"]},${cart[productData["p_id"]]}, 'decrement', this)">-</button>
-                                        <span class="quantity-value" id="quantity-${p_id}">${cart[productData["p_id"]]}</span>  
-                                        <button class="quantity-button increment" style="display: inline; white-space: nowrap;"
-                                            onclick="AddtoCart(${productData["p_id"]},${cart[productData["p_id"]]}, 'increment', this)">+</button>
-                                    </span>
-                                </div>
-                            </div>
-                          <h6 id="totalPrice-${p_id}">${(cart[productData["p_id"]] * (productData['discounted_price'])/productData['medPerStrip']).toFixed(2)} Taka</h3>
-                        </div>`
+                            
+                  <img src="../../media/${productData["p_image"]}" alt="">
+                  <div class="cart-content-${p_id}">
+                      <h3 id="productName-${p_id}">${productData["p_name"]}</h3>
+                      <div style="display: grid; grid-template-columns: 0.5fr 1fr; gap: 20px;">
+                      <span class="quantity">
+                          <button class="quantity-button decrement" style="display: inline; white-space: nowrap;"
+                              onclick="AddtoCart(${productData["p_id"]},${cart[productData["p_id"]]}, 'decrement', this)">-</button>
+                          <span class="quantity-value" id="quantity-${p_id}">${cart[productData["p_id"]]}</span>  
+                          <button class="quantity-button increment" style="display: inline; white-space: nowrap;"
+                              onclick="AddtoCart(${productData["p_id"]},${cart[productData["p_id"]]}, 'increment', this)">+</button>
+                      </span>
+                      <span id="totalPrice-${p_id}">৳${(cart[productData["p_id"]] * (productData['discounted_price'])/productData['medPerStrip']).toFixed(2)}</h3>
+                      </div>
+                  </div>
+                  <button class="cart-trash" onclick="removeFromCart(${productData["p_id"]})">
+                      <ion-icon name="trash"></ion-icon>
+                  </button>
+              </div>`
+
+              // The line below to go right before where the div closes. Commented out for convenience 
+              
                   );
                 } else {
                   resultsDiv.append('<p>No product name found.</p>');

@@ -91,6 +91,8 @@ selectImage.addEventListener('click', function () {
 backDrop.addEventListener('click', function () {
     backDrop.classList.remove('active');
     imgArea.classList.remove('active');
+    document.querySelector(".popup-image").style.display = "none";
+    document.querySelector(".popup-image").style.opacity = "0";
 })
 
 inputFile.addEventListener('change', function () {
@@ -148,7 +150,21 @@ document.getElementById('account').addEventListener('click', function(){
     list.classList.remove('active');
 });
 
+document.getElementById('account-mob').addEventListener('click', function(){
+    regForm.classList.add('active');
+    prescriptions.classList.remove('active');
+    history.classList.remove('active');
+    list.classList.remove('active');
+});
+
 document.getElementById('prescription').addEventListener('click', function(){
+    prescriptions.classList.add('active');
+    regForm.classList.remove('active');
+    history.classList.remove('active');
+    list.classList.remove('active');
+});
+
+document.getElementById('prescription-mob').addEventListener('click', function(){
     prescriptions.classList.add('active');
     regForm.classList.remove('active');
     history.classList.remove('active');
@@ -161,14 +177,35 @@ document.getElementById('history').addEventListener('click', function(){
     prescriptions.classList.remove('active');
     list.classList.remove('active');
 });
+document.getElementById('history-mob').addEventListener('click', function(){
+    history.classList.add('active');
+    regForm.classList.remove('active');
+    prescriptions.classList.remove('active');
+    list.classList.remove('active');
+});
 document.getElementById('list').addEventListener('click', function(){
     list.classList.add('active');
     history.classList.remove('active');
     regForm.classList.remove('active');
     prescriptions.classList.remove('active');
 });
+document.getElementById('list-mob').addEventListener('click', function(){
+    list.classList.add('active');
+    history.classList.remove('active');
+    regForm.classList.remove('active');
+    prescriptions.classList.remove('active');
+});
 
-var prescBox = document.getElementsByClassName('.presc-box');
+const prescBox = document.getElementsByClassName('.presc-box');
+
+document.querySelectorAll(".prescriptions img").forEach(image =>{
+    image.onclick = () =>{
+        document.querySelector(".popup-image").style.display = "block";
+        document.querySelector(".popup-image").style.opacity = "1";
+        document.querySelector(".popup-image img").src = image.getAttribute("src");
+        backDrop.classList.add('active');
+    }
+});
 
 
 

@@ -234,10 +234,8 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .header-user-actions .shopping-cart .cartbox .cart-trash {
-	font-size: 2rem;
-	position: absolute;
-	top: 50%;
-	right: 2rem;
+	float: right;
+	font-size: 1.8rem;
 	cursor: pointer;
 	color: black;
 	transform: translateY(-50%);
@@ -248,21 +246,29 @@ body::-webkit-scrollbar-thumb:hover {
 	color: var(--red);
 }
 
-.header-user-actions .shopping-cart .cartbox .cart-content h3 {
+.header-user-actions .shopping-cart .cartbox h3 {
 	color: black;
 	font-size: 1.5rem;
 	padding-bottom: 1rem;
 }
 
-.header-user-actions .shopping-cart .cartbox .cart-content span {
+.header-user-actions .shopping-cart .cartbox span {
 	color: var(--red);
-	font-size: var(--fs-5);
+	font-size: var(--fs-4);
+	text-align: center;
+	margin: auto 6px;
 }
 
-.header-user-actions .shopping-cart .cartbox .cart-content .quantity {
-	padding-left: 1rem;
+.header-user-actions .shopping-cart .cartbox .quantity {
+	width: 80px;
+	height: 30px;
 	font-family: 'poppins', sans-serif;
 	font-weight: 500;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 12px;
+    box-shadow:  3px 3px 5px 0px rgba(0,0,0,0.2);
 }
 
 .header-user-actions .shopping-cart .total {
@@ -393,6 +399,34 @@ body::-webkit-scrollbar-thumb:hover {
 
 .search-btn:hover {
 	color: var(--red);
+}
+
+.quantity input {
+	width: 100%;
+	border: none;
+	outline: none;
+	background-color: transparent;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+.quantity button:nth-child(1) {
+	height: 100%;
+	width: 100%;
+    border-bottom-left-radius: 12px;
+    border-top-left-radius: 12px;
+}
+.quantity button:nth-child(3) {
+	height: 100%;
+	width: 100%;
+    border-bottom-right-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.quantity button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 /* .mobile-bottom-navigation {
@@ -659,20 +693,21 @@ body::-webkit-scrollbar-thumb:hover {
 main {
 	position: relative;
 	display: flex;
-	height: 800px;
+	height: auto;
 	width: 100%;
 }
 main .container {
-	max-width: 60vw;
-	margin: 0;
-	position: absolute;
-	left: 50%;
-	transform: translate(-50%, 0);
+	width: 100%;
+	margin: 10px auto 10px calc(100% - 85vw);
+	/* position: absolute; */
+	/* left: 50%; */
+	/* transform: translate(-50%, 0); */
 }
 
 main .sidebar {
+	position: absolute;
     width: 250px;
-	height: 60%;
+	height: max-content;
     border-radius: 10px;
     box-shadow: 0 8px 8px hsla(0, 0%, 0%, 0.2);
 }
@@ -712,14 +747,18 @@ main .sidebar li:hover{
     background-color: rgb(255, 97, 97);
 }
 
+main .sidebar li:last-child:hover {
+    border-bottom-right-radius: 10px;
+}
+
 .sidebar-sections:hover h3{
 	color: white;
 }
 
-main .container .registration-form {
+main .registration-form {
 	display: none;
 }
-main .container .registration-form.active {
+main .registration-form.active {
 	display: flex;
 	transition: 3s ease;
 }
@@ -737,7 +776,7 @@ main .container .registration-form.active {
 	text-transform: none;
 }
 
-.registration-form .input-box:not(:nth-child(6)) input,
+/* .registration-form .input-box:not(:nth-child(6)) input,
 .registration-form .input-box:not(:nth-child(7)) input {
 	width: 93%;
 }
@@ -745,7 +784,7 @@ main .container .registration-form.active {
 .registration-form .input-box:nth-child(6) input,
 .registration-form .input-box:nth-child(7) input {
 	width: 96%;
-}
+} */
 
 .registration-form .input-box button {
 	padding-left: 0px;
@@ -854,7 +893,7 @@ main .container .registration-form.active {
 
 .prescriptions.active .presc-box img {
 	border-radius: 10px;
-	width: 320px;
+	width: 300px;
 	margin-bottom: 20px;
 }
 
@@ -869,6 +908,18 @@ main .container .registration-form.active {
 
 .prescriptions.active .presc-box h3 {
 	font-size: var(--fs-3);
+}
+
+.popup-image img {
+	position: absolute;
+	top: 35%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border: 5px solid white;
+	border-radius: 5px;
+	width: 750px;
+	object-fit: cover;
+	z-index: 5;
 }
 
 /* ------------------------ */
@@ -992,6 +1043,7 @@ main .container .registration-form.active {
 	font-weight: 700;
 	padding: 1rem 2rem;
 }
+
 .list table tr:nth-child(even) {
 	background-color: rgba(222, 0, 0, 0.05);
 }
@@ -1010,6 +1062,11 @@ main .container .registration-form.active {
 	text-align: center;
 }
 
+.product-image img {
+	width: 100px;
+	margin: 0 auto;
+}
+
 .mylist-times input[type="checkbox"] {
 	position: relative;
     display: grid;
@@ -1019,31 +1076,28 @@ main .container .registration-form.active {
 	width: 20px;
 	height: 20px;
 	cursor: pointer;
-	line-height: 16px;
+	line-height: 20px;
 }
 .mylist-times input[type="checkbox"]:checked:after {
-	position: absolute;
-	content: '\25CF';
-	font-size: 30px;
+	/* position: absolute; */
+	content: '\2B24';
+	font-size: 16px;
 	color: var(--red);
-	left: 50%;
-	transform: translate(-50%, 0);
+	margin: 0 auto;
+	/* left: 50%; */
+	/* transform: translate(-50%, 0); */
 }
 
 .mylist-times div {
-	/* width: 100%; */
+	width: 60%;
 	display: flex;
 	justify-content: space-between;
-}
-
-.quantity-container {
-	height: 100%;
-	display: flex;
-	justify-content: center;
 	align-items: center;
+	margin: 0 auto;
 }
 
-.quantity {
+td .quantity {
+	margin: 0 auto;
 	width: 200px;
 	height: 60px;
 	display: flex;
@@ -1083,7 +1137,7 @@ main .container .registration-form.active {
 
 
 
-.quantity button.num {
+td .quantity button.num {
     font-size: 1.2rem;
     border-right: 2px solid rgba(0, 0, 0, 0.2);
     border-left: 2px solid rgba(0, 0, 0, 0.2);
@@ -1102,6 +1156,11 @@ main .container .registration-form.active {
 	border-radius: 10px;
 	z-index: 2;
 	transition: 0.2s ease;
+	text-align: center;
+}
+
+.quick-order:hover {
+	color: white;
 }
 
 /* ------------------------ */
@@ -1273,14 +1332,13 @@ main .container .registration-form.active {
 	
 	.header-user-actions .shopping-cart .cartbox .cart-trash {
 		font-size: 1.8rem;
-		right: 1rem;
 	}
-	.header-user-actions .shopping-cart .cartbox .cart-content h3 {
+	.header-user-actions .shopping-cart .cartbox h3 {
 		font-size: 1rem;
 		padding-bottom: 0.1rem;
 	}
 	
-	.header-user-actions .shopping-cart .cartbox .cart-content span {
+	.header-user-actions .shopping-cart .cartbox span {
 		font-size: var(--fs-7);
 	}
 	
@@ -1296,27 +1354,56 @@ main .container .registration-form.active {
 	.header-user-actions .user-login {
 		top: 150%;
 		right: -400%;
-		width: 20rem;
+		width: 10rem;
+		padding: 0px;
+	}
+	.header-user-actions .user-login .form-btn {
+		font-size: 1rem;
+		text-align: right;
+		padding-right: 1rem;
 	}
 	
 	.header-user-actions .user-login.active {
 		right: -5%;
 	}
 	main .container {
-		margin-top: 20px;
-		width: 100%;
+		margin: 0 auto;
 	}
 	main .sidebar {
-		width: 80px;
-		height: 40%;
+		display: none;
+		width: 60px;
 	}
 	
 	main .sidebar li h3{
 		display: none;
 	}
-	main .container .registration-form .input-box button {
+	main .sidebar li img{
+		width: 20px;
+	}
+	main .registration-form .input-box button {
 		left: 0px;
 	}
+
+	.prescriptions.active {
+		grid-template-columns: 1fr;
+	}
+
+	.list table {
+		width: 100vw;
+	}
+	.list table th{
+		font-size: var(--fs-11);
+	}
+	.list table tbody img {
+		display: none;
+	}
+	.list table tbody .quantity {
+		width: 60px;
+		height: 20px;
+	}
+	/* .mylist-times input[type="checkbox"] {
+		line-height: 17px;
+	} */
 	.prescriptions {
 		grid-template-columns: 1fr;
 	}
@@ -1352,17 +1439,22 @@ main .container .registration-form.active {
 	.banner-btn {
 		padding: 7px 20px;
 	}
-	main .container {
-		margin-top: 20px;
-		width: 100%;
-	}
-	main .sidebar {
+	/* main .sidebar {
 		width: 80px;
 		height: 40%;
 	}
 	
 	main .sidebar li h3{
 		display: none;
+	}
+	main .sidebar li img{
+		width: 30px;
+	} */
+	.list table {
+		width: 100vw;
+	}
+	.list table {
+		width: 100vw;
 	}
 	.product-grid {
 		grid-template-columns: 1fr 1fr;
@@ -1395,6 +1487,35 @@ main .container .registration-form.active {
 	.category-item {
 		min-width: calc(50% - 15px);
 	}
+	.header-user-actions .user-login .form-btn {
+		text-align: center;
+		padding-right: 0px;
+	}
+	.header-user-actions .user-login .form-btn:nth-child(2),
+	.header-user-actions .user-login .form-btn:nth-child(3),
+	.header-user-actions .user-login .form-btn:nth-child(4) {
+		display: none;
+	}
+	main .container {
+		margin: 10px auto 10px calc(100% - 86vw);
+	}
+
+	main .sidebar {
+		display: block;
+		width: 70px;
+	}
+	
+	main .sidebar li h3{
+		display: none;
+	}
+	main .sidebar li img{
+		width: 30px;
+	}
+
+	.list table tbody img {
+		display: block;
+	}
+
 	.prescriptions {
 		grid-template-columns: 1fr 1fr;
 	}
@@ -1412,7 +1533,7 @@ main .container .registration-form.active {
 	}
 	.container {
 		max-width: 750px;
-		margin: auto;
+		margin: 10px auto;
 	}
 
 	.header-user-actions .shopping-cart {
@@ -1453,20 +1574,23 @@ main .container .registration-form.active {
 	}
 
 	main .container {
-		margin-top: 20px;
-		width: 100%;
+		margin: 10px auto 10px calc(100% - 82vw);
 	}
 	main .sidebar {
 		width: 150px;
-		height: 40%;
 	}
 	
 	main .sidebar li h3{
 		display: block;
-		font-size: 10px;
+		font-size: 9px;
+		text-align: right;
 	}
 
-	.registration-form .input-box:not(:nth-child(6)) input,
+	.prescriptions.active {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	/* .registration-form .input-box:not(:nth-child(6)) input,
 	.registration-form .input-box:not(:nth-child(7)) input {
 		width: 80%;
 	}
@@ -1474,7 +1598,7 @@ main .container .registration-form.active {
 	.registration-form .input-box:nth-child(6) input,
 	.registration-form .input-box:nth-child(7) input {
 		width: 90%;
-	}	
+	}	 */
 
 	.footer-bottom .container {
 		display: flex;
@@ -1487,9 +1611,6 @@ main .container .registration-form.active {
 	:root {
 		--fs-1: 2.625rem;
 		--fs-2: 1.125rem;
-	}
-	.container {
-		max-width: 980px;
 	}
 	.header-main {
 		display: flex;
@@ -1548,21 +1669,17 @@ main .container .registration-form.active {
 	
 	.header-user-actions .shopping-cart .cartbox .cart-trash {
 		font-size: 2rem;
-		right: 2rem;
 	}
 	
-	.header-user-actions .shopping-cart .cartbox .cart-content h3 {
+	.header-user-actions .shopping-cart .cartbox h3 {
 		font-size: 1.5rem;
 		padding-bottom: 1rem;
 	}
 	
-	.header-user-actions .shopping-cart .cartbox .cart-content span {
+	.header-user-actions .shopping-cart .cartbox span {
 		font-size: var(--fs-5);
 	}
-	
-	.header-user-actions .shopping-cart .cartbox .cart-content .quantity {
-		padding-left: 0.5rem;
-	}
+
 	
 	.header-user-actions .shopping-cart .total {
 		font-size: 25px;
@@ -1749,17 +1866,38 @@ main .container .registration-form.active {
 		grid-template-columns: 1fr 1fr 1fr 1fr;
 	}
 
+	main .container {
+		margin: 10px auto 10px calc(100% - 80vw);
+	}
+
 	main .sidebar {
 		width: 20vw;
 		max-width: 250px;
-		height: 60%;
 	}
 	main .sidebar li h3{
 		font-size: 18px;
 	}
 
+	.prescriptions.active {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+
+	.prescriptions.active .presc-box img {
+		width: 200px;
+	}
+
+	.list table {
+		width: 100%;
+	}
+	.list table th{
+		font-size: var(--fs-6);
+	}
+	.list table tbody .quantity {
+		width: 200px;
+		height: 60px;
+	}
 	
-	.registration-form .input-box:not(:nth-child(6)) input,
+	/* .registration-form .input-box:not(:nth-child(6)) input,
 	.registration-form .input-box:not(:nth-child(7)) input {
 		max-width: 1080px;
 	}
@@ -1767,7 +1905,7 @@ main .container .registration-form.active {
 	.registration-form .input-box:nth-child(6) input,
 	.registration-form .input-box:nth-child(7) input {
 		max-width: 1080px;
-	}
+	} */
 
 	/* CATEGORY */
 
@@ -1785,5 +1923,20 @@ main .container .registration-form.active {
 
 	.footer-top .container {
 		grid-template-columns: 1fr 0.5fr 0.5fr ;
+	}
+}
+
+@media (min-width: 1280px) {
+
+	main .container {
+		margin: 10px auto 10px calc(100% - 83vw);
+	}
+
+	.prescriptions.active {
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+	}
+
+	.prescriptions.active .presc-box img {
+		width: 300px;
 	}
 }

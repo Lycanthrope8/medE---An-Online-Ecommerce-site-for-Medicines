@@ -88,7 +88,10 @@
 
 						<div style="text-align:center;" class="user-login">
 							{% if user.is_authenticated %}
-							<a href="{% url 'profile' %}" class="form-btn">Profile</a>
+							<a href="#" class="form-btn" id="account-mob">Profile</a>
+							<a href="#" class="form-btn" id="prescription-mob">Prescriptions</a>
+							<a href="#" class="form-btn" id="history-mob">Purchase History</a>
+							<a href="#" class="form-btn" id="list-mob">My List</a>
 							<a href="{% url 'mylogout' %}" class="form-btn">Logout</a>
 						    {% else %}
 							<a href="{% url 'mylogin' %}" class="form-btn">Login</a>
@@ -326,189 +329,180 @@
 		</div>
 	</div>
 	<main>
-			<div class="sidebar" id="sidebar">
-				<li class="sidebar-sections" id="account">
-					<a href="#">
-						<ion-icon name="person-circle-outline"></ion-icon>
-						<h3 href="#">Account</h3>
-					</a>
-				</li>
-				<li class="sidebar-sections" id="prescription">
-					<a href="#">
-						<img src="{%static 'prescription.png'%}" alt="" width="30">
-						<h3 href="#">Prescriptions</h3>
-					</a>
-				</li>
-				<li class="sidebar-sections" id="history">
-					<a href="#">
-						<ion-icon name="clipboard-outline"></ion-icon>
-						<h3 href="#">Purchase History</h3>
-					</a>
-				</li>
-				<li class="sidebar-sections" id="list">
-					<a href="#">
-						<ion-icon name="list-outline"></ion-icon>
-						<h3 href="#">My List</h3>
-					</a>
-				</li>
-			</div>
-			<!-- <h1>{{ user }}</h1> -->
-		<div class="container">
-			<div class="container">
-				<form action="{% url 'update_profile' %}" method="post" class="registration-form row active">
-                    {% csrf_token %}
-                    <div class="input-box col-sm-6">
-                        <label for="">First Name</label>
-                        <input class="firstname" type="text" name="first_name" placeholder="First Name" value="{{ user.first_name }}">
-                        <button><ion-icon name="create-outline"></ion-icon></button>
-                    </div>
-                    <div class="input-box col-sm-6">
-                        <label for="">Last Name</label>
-                        <input class="lastname" type="text" name="last_name" placeholder="Last Name" value="{{ user.last_name }}">
-                        <button><ion-icon name="create-outline"></ion-icon></button>
-                    </div>
-                    <div class="input-box col-sm-6">
-                        <label for="">Phone</label>
-                        <input class="phone" type="phone" name="phone_number" placeholder="Phone Number" value="{{ user.phone_number }}">
-                        <button><ion-icon name="create-outline"></ion-icon></button>
-                    </div>
-                    <div class="input-box col-sm-6">
-						<label for="">Birth Date</label>				
-						<!-- Manually format user.dob using template tags -->
-						{% with formatted_dob=user.dob|date:'Y-m-d' %}
-						<input class="birthdate" type="date" name="dob" placeholder="Birth Date" value="{{ formatted_dob }}">
-						{% endwith %}
-						<button><ion-icon name="create-outline"></ion-icon></button>
-					</div>
-					
-					
-                    <div class="gender input-box">
-                        <label for="">Gender</label>
-                        <div class="label1">                
-                            <input type="radio" class="gendermale" name="gender" value="M" {% if user.gender == 'M' %} checked {% endif %}>
-                            <label for="">Male</label>
-                        </div>
-                        <div class="label2">
-                            <input type="radio" class="genderfemale" name="gender" value="F" {% if user.gender == 'F' %} checked {% endif %}>
-                            <label for="">Female</label>
-                        </div>
-                    </div>
-                    <div class="input-box">
-                        <label for="">Email</label>				
-                        <input class="email" type="email" name="email" placeholder="Email" value="{{ user.email }}">
-                        <button><ion-icon name="create-outline"></ion-icon></button>
-                    </div>
-                    <div class="input-box">
-                        <label for="">Address</label>				
-                        <input class="address" type="text" name="address" placeholder="Address" value="{{ user.address }}">
-                        <button><ion-icon name="create-outline"></ion-icon></button>
-                    </div>
-                    <button type="submit">Update Profile</button>
-                </form>
-			</div>
-			<div class="prescriptions" id="prescriptions">
-			<div class="presc-box">
-				<img src="assets/images/prescription.jpg" alt="prescription-image">
-				<h3>Uploaded: 23.07.23</h3>
-			</div>
-			<div class="presc-box">
-				<img src="assets/images/prescription.jpg" alt="prescription-image">
-				<h3>Uploaded: 23.07.23</h3>
-			</div>
-			<div class="presc-box">
-				<img src="assets/images/prescription.jpg" alt="prescription-image">
-				<h3>Uploaded: 23.07.23</h3>
-			</div>
-			<div class="presc-box">
-				<img src="assets/images/prescription.jpg" alt="prescription-image">
-				<h3>Uploaded: 23.07.23</h3>
-			</div>
-			<div class="presc-box">
-				<img src="assets/images/prescription.jpg" alt="prescription-image">
-				<h3>Uploaded: 23.07.23</h3>
-			</div>
+		<div class="sidebar" id="sidebar">
+			<li class="sidebar-sections" id="account">
+				<a href="#">
+					<ion-icon name="person-circle-outline"></ion-icon>
+					<h3 href="#">Account</h3>
+				</a>
+			</li>
+			<li class="sidebar-sections" id="prescription">
+				<a href="#">
+					<img src="{%static 'prescription.png'%}" alt="" width="30">
+					<h3 href="#">Prescriptions</h3>
+				</a>
+			</li>
+			<li class="sidebar-sections" id="history">
+				<a href="#">
+					<ion-icon name="clipboard-outline"></ion-icon>
+					<h3 href="#">Purchase History</h3>
+				</a>
+			</li>
+			<li class="sidebar-sections" id="list">
+				<a href="#">
+					<ion-icon name="list-outline"></ion-icon>
+					<h3 href="#">My List</h3>
+				</a>
+			</li>
 		</div>
+		<!-- <h1>{{ user }}</h1> -->
+		<!-- <div class="container"> -->
+		<form action="{% url 'update_profile' %}" method="post" class="registration-form container row active">
+			{% csrf_token %}
+			<div class="input-box col-sm-6">
+				<label for="">First Name</label>
+				<input class="firstname" type="text" name="first_name" placeholder="First Name" value="{{ user.first_name }}">
+				<!-- <button><ion-icon name="create-outline"></ion-icon></button> -->
+			</div>
+			<div class="input-box col-sm-6">
+				<label for="">Last Name</label>
+				<input class="lastname" type="text" name="last_name" placeholder="Last Name" value="{{ user.last_name }}">
+				<!-- <button><ion-icon name="create-outline"></ion-icon></button> -->
+			</div>
+			<div class="input-box col-sm-6">
+				<label for="">Phone</label>
+				<input class="phone" type="phone" name="phone_number" placeholder="Phone Number" value="{{ user.phone_number }}">
+				<!-- <button><ion-icon name="create-outline"></ion-icon></button> -->
+			</div>
+			<div class="input-box col-sm-6">
+				<label for="">Birth Date</label>				
+				<!-- Manually format user.dob using template tags -->
+				{% with formatted_dob=user.dob|date:'Y-m-d' %}
+				<input class="birthdate" type="date" name="dob" placeholder="Birth Date" value="{{ formatted_dob }}">
+				{% endwith %}
+				<!-- <button><ion-icon name="create-outline"></ion-icon></button> -->
+			</div>
+			
+			
+			<div class="gender input-box">
+				<label for="">Gender</label>
+				<div class="label1">                
+					<input type="radio" class="gendermale" name="gender" value="M" {% if user.gender == 'M' %} checked {% endif %}>
+					<label for="">Male</label>
+				</div>
+				<div class="label2">
+					<input type="radio" class="genderfemale" name="gender" value="F" {% if user.gender == 'F' %} checked {% endif %}>
+					<label for="">Female</label>
+				</div>
+			</div>
+			<div class="input-box">
+				<label for="">Email</label>				
+				<input class="email" type="email" name="email" placeholder="Email" value="{{ user.email }}">
+				<!-- <button><ion-icon name="create-outline"></ion-icon></button> -->
+			</div>
+			<div class="input-box">
+				<label for="">Address</label>				
+				<input class="address" type="text" name="address" placeholder="Address" value="{{ user.address }}">
+				<!-- <button><ion-icon name="create-outline"></ion-icon></button> -->
+			</div>
+			<button type="submit">Update Profile</button>
+		</form>
+		<div class="prescriptions container" id="prescriptions">
+			<div class="presc-box">
+				<img src="{% static 'images/prescription.jpg' %}" alt="prescription-image">
+				<h3>Uploaded: 23.07.23</h3>
+			</div>
+			<div class="presc-box">
+				<img src="{% static 'images/prescription2.jpg' %}" alt="prescription-image">
+				<h3>Uploaded: 23.07.23</h3>
+			</div>
+			<div class="presc-box">
+				<img src="assets/images/prescription.jpg" alt="prescription-image">
+				<h3>Uploaded: 23.07.23</h3>
+			</div>
+			<div class="presc-box">
+				<img src="assets/images/prescription.jpg" alt="prescription-image">
+				<h3>Uploaded: 23.07.23</h3>
+			</div>
+			<div class="presc-box">
+				<img src="assets/images/prescription.jpg" alt="prescription-image">
+				<h3>Uploaded: 23.07.23</h3>
+			</div>
+			<div class="popup-image" style="opacity: 0;"><img src="" alt=""></div>
 		</div>
-		<div class="container">
-			<div class="purchase-history">
-				<table>
-					<thead>
-						<th>Invoice No.</th>
-						<th>Orders</th>
-						<th>Amount</th>
-						<th>Date</th>
-						<th>Status</th>
-						<th></th>
-					</thead>
-					<tbody>
-						{% for key, value in temp.items %}
-						<tr>
-							<td>{{ key }}</td>
-							<td>
-								<ul>
-									{% for item in value.0 %}
-										<li>{{ item }}</li>
-									{% endfor %}
-								</ul>
-							</td>
-							<td>{{ value.1 }}</td>
-							<td>{{ value.2|date:"d F Y" }}</td>
-							{% if value.3 == "pending" %}
-    						<td ><p style="background-color: yellow;">{{ value.3 }}</p></td>
-							{%else%}
-							<td ><p style="background-color: green;">{{ value.3 }}</p></td>
-							{% endif %}
-						</tr>
+		<div class="purchase-history container">
+			<table>
+				<thead>
+					<th>Invoice No.</th>
+					<th>Orders</th>
+					<th>Amount</th>
+					<th>Date</th>
+					<th>Status</th>
+				</thead>
+				<tbody>
+					{% for key, value in temp.items %}
+					<tr>
+						<td>{{ key }}</td>
+						<td>
+							<ul>
+								{% for item in value.0 %}
+									<li>{{ item }}</li>
+								{% endfor %}
+							</ul>
+						</td>
+						<td>{{ value.1 }}</td>
+						<td>{{ value.2|date:"d F Y" }}</td>
+						{% if value.3 == "pending" %}
+						<td ><p style="background-color: yellow;border-radius: 10px;padding: 5px 0;margin: 0;">{{ value.3 }}</p></td>
+						{%else%}
+						<td ><p style="background-color: green;border-radius: 10px;padding: 5px 0;margin: 0;">{{ value.3 }}</p></td>
+						{% endif %}
+					</tr>
+					{% endfor %}
+				</tbody>
+				
+			</table>
+		</div>
+		<div class="list container">
+			<table>
+				<thead>
+					<th colspan="2" style="padding: 0 2px;">Products</th>
+					<th>Times</th>
+					<th>Days</th>
+				</thead>
+				<tbody id="medListBody">
+					{% for item in medList %}
+						{% for medicine_id, details in item.med_list.items %}
+						<tr data-product-name="{{ medicine_id }}">
+							<td class="product-image"></td>
+							<td class="product-name"></td>
+								<td class="mylist-times">
+									<div>
+										<input type="checkbox" name="MorningD" value="Morning" {% if 'Morning' in details.0 %}checked{% endif %}>
+										<label for="Morning">Morning</label>
+									</div>
+									<div>
+										<input type="checkbox" name="DayD" value="Day" {% if 'Day' in details.0 %}checked{% endif %}>
+										<label for="Day">Day</label>
+									</div>
+									<div>
+										<input type="checkbox" name="NightD" value="Night" {% if 'Night' in details.0 %}checked{% endif %}>
+										<label for="Night">Night</label>
+									</div>
+								</td>
+								<td>
+									<div class="quantity">
+										<button class="day-decrease-btn">-</button>
+										<input type="text" id="Daynum{{ medicine_id }}" class="num" value="{{ details.1 }}">
+										<button class="day-increase-btn">+</button>
+									</div>
+								</td>
+							</tr>
 						{% endfor %}
-					</tbody>
-					
-				</table>
-			</div>
-		</div>
-
-		<div class="container">
-			<div class="list">
-				<table>
-					<thead>
-						<th>Image</th>
-						<th>Products</th>
-						<th>Times</th>
-						<th>Days</th>
-					</thead>
-					<tbody id="medListBody">
-						{% for item in medList %}
-							{% for medicine_id, details in item.med_list.items %}
-							<tr data-product-name="{{ medicine_id }}">
-								<td class="product-image"></td>
-								<td class="product-name"></td>
-									<td class="mylist-times">
-										<div>
-											<input type="checkbox" name="MorningD" value="Morning" {% if 'Morning' in details.0 %}checked{% endif %}>
-											<label for="Morning">Morning</label>
-										</div>
-										<div>
-											<input type="checkbox" name="DayD" value="Day" {% if 'Day' in details.0 %}checked{% endif %}>
-											<label for="Day">Day</label>
-										</div>
-										<div>
-											<input type="checkbox" name="NightD" value="Night" {% if 'Night' in details.0 %}checked{% endif %}>
-											<label for="Night">Night</label>
-										</div>
-									</td>
-									<td class="quantity-container">
-										<div class="quantity">
-											<button class="day-decrease-btn">-</button>
-											<input type="text" id="Daynum{{ medicine_id }}" class="num" value="{{ details.1 }}">
-											<button class="day-increase-btn">+</button>
-										</div>
-									</td>
-								</tr>
-							{% endfor %}
-						{% endfor %}
-					</tbody>
-				</table>
-				<a href="{% url 'quickorder' %}" class="quick-order" id="">Quick Order</a>
-			</div>
+					{% endfor %}
+				</tbody>
+			</table>
+			<a href="{% url 'quickorder' %}" class="quick-order" id="">Quick Order</a>
 		</div>
 								
 	</main>
@@ -636,7 +630,7 @@ document.querySelectorAll('tr').forEach(async (row) => {
 
         if (productNameCell && productData && productData.p_name) {
             let imgElement = document.createElement('img');
-            // imgElement.setAttribute('src', `../../media/${productData.p_image}`);
+            imgElement.setAttribute('src', `../../media/${productData.p_image}`);
             imgElement.setAttribute('alt', 'Product Image');
             productImageCell.innerHTML = '';
             productImageCell.appendChild(imgElement);
