@@ -50,12 +50,26 @@ class main_product(models.Model):
         return self.p_name
 
     def save(self, *args, **kwargs):
+        # Check if the main_product instance is being updated
+        if self.pk:
+            # Check if the associated Product instance exists
+            try:
+                product_instance = Product.objects.get(p_id=self.p_id)
+                # Update the existing Product instance
+                product_instance.p_name = self.p_name
+                product_instance.p_category = self.p_category
+                product_instance.p_price = self.p_price
+                product_instance.p_discount = self.p_discount
+                product_instance.p_image = self.p_image
+                product_instance.save()
+            except Product.DoesNotExist:
+                pass  # Handle the case where the Product does not exist
+
         super(main_product, self).save(*args, **kwargs)
-        if self.p_image and not self.p_image._committed:
-            super(main_product, self).save(*args, **kwargs)
+
         # Check if the feature is 'yes' and create a corresponding Product entry
         if self.feature == 'yes':
-            Product.objects.create(
+            Product.objects.get_or_create(
                 p_name=self.p_name,
                 p_category=self.p_category,
                 p_price=self.p_price,
