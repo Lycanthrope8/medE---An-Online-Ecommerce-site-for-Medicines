@@ -2,7 +2,8 @@ function AddToList(user, p_id) {
     const morningCheckbox = document.querySelector('input[name="MorningD"]');
     const dayCheckbox = document.querySelector('input[name="DayD"]');
     const nightCheckbox = document.querySelector('input[name="NightD"]');
-    const numDays = parseInt(document.getElementById('Daynum').innerText) || 0;
+    const numDays = parseInt(document.getElementById('DayNumSpan').value) || 0;
+
 
     // Check if the checkboxes are checked or not
     const isMorningChecked = morningCheckbox.checked;
@@ -142,6 +143,48 @@ function gatherUpdatedDataFromTable(row) {
 }
 
 
+document.querySelectorAll('.remove-button').forEach(button => {
+    button.addEventListener('click', function() {
+        const productId = this.getAttribute('data-product-id');
+        // Call a function to handle the removal logic, passing the productId
+        handleRemoveProduct(productId);
+    });
+});
+
+
+
+function handleRemoveProduct(productId) {
+    // Make a DELETE request to the backend API to remove the product
+    console.log("Removing Product ID: ",productId)
+    fetch(`/remove_productList/${productId}/`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCSRFToken(), // Include CSRF token for CSRF protection
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Successfully removed the product, update the DOM to remove the corresponding table row
+            const rowToRemove = document.querySelector(`tr[data-product-name="${productId}"]`);
+            if (rowToRemove) {
+                rowToRemove.remove();
+            }
+            console.log('Product removed successfully:', productId);
+        } else {
+            console.error('Failed to remove product:', data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+// Function to get the CSRF token from the meta tag
+function getCSRFToken() {
+    return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+}
 
 
 

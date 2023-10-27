@@ -43,8 +43,8 @@ urlpatterns = [
     path('checkout/', secondactivity.checkout_view, name='checkout'),
     path('confirm/', secondactivity.order_complete, name='confirm'),
     path('save_med_list/', secondactivity.save_med_list, name='save_med_list'),
+    path('remove_productList/<int:product_id>/', secondactivity.remove_productList, name='remove_productList'),
     path('quickorder/',firstactivity.quick_order, name='quickorder'),
-    # path('get_saved_data/', secondactivity.get_saved_data, name='get_saved_data'),
 
     
 ]

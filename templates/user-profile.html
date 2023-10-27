@@ -497,6 +497,9 @@
 										<button class="day-increase-btn">+</button>
 									</div>
 								</td>
+								<td>
+									<button class="remove-button" data-product-id="{{ medicine_id }}">Remove</button>
+								</td>
 							</tr>
 						{% endfor %}
 					{% endfor %}
@@ -635,18 +638,26 @@ document.querySelectorAll('tr').forEach(async (row) => {
             productImageCell.innerHTML = '';
             productImageCell.appendChild(imgElement);
 
-            productNameCell.textContent = productData.p_name;
+            // Create an anchor element for the product name
+            let productLink = document.createElement('a');
+            productLink.setAttribute('href', `/product/${productData.p_name}/`); // Set the correct product page URL
+            productLink.textContent = productData.p_name;
+            
+            // Append the anchor element to the productNameCell
+            productNameCell.innerHTML = '';
+            productNameCell.appendChild(productLink);
         } else {
-            productNameCell.textContent = 'N/A';
+            // productNameCell.textContent = 'N/A';
             productImageCell.textContent = 'Image Not Available';
         }
     } else {
         let productNameCell = row.querySelector('.product-name');
-        productNameCell.textContent = 'N/A';
+        // productNameCell.textContent = 'N/A';
         let productImageCell = row.querySelector('.product-image');
         productImageCell.textContent = 'Image Not Available';
     }
 });
+
 
  
 </script>
