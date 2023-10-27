@@ -185,7 +185,7 @@ def remove_productList(request, product_id):
         user_phone_number = request.user.phone_number  # Implement a function to get the user's phone number
         user = Profile_MedList.objects.get(phone_number=user_phone_number)
         med_list = user.med_list
-        print('Current med_list:', med_list)  # Add this line to debug
+        # print('Current med_list:', med_list)  # Add this line to debug
 
         # Check if the productId exists in med_list before attempting to delete
         if str(product_id) in med_list:
