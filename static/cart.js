@@ -129,12 +129,13 @@ document.getElementById("cart-btn").addEventListener("click", async function() {
               
               if (Object.keys(productData).length > 0 && "p_name" in productData) {
                   // Display the product name
+                  // <a href="{%url 'prod' p_name=product.p_name %}"></a>
                   resultsDiv.append(`
                   <div class="cartbox" id="cartbox-${p_id}">
                             
                   <img src="../../media/${productData["p_image"]}" alt="">
                   <div class="cart-content-${p_id}">
-                      <h3 id="productName-${p_id}">${productData["p_name"]}</h3>
+                  <h3><a href="/product/${productData["p_name"]}/">${productData["p_name"]}</a></h3>
                       <div style="display: grid; grid-template-columns: 0.5fr 1fr; gap: 20px;">
                       <span class="quantity">
                           <button class="quantity-button decrement" style="display: inline; white-space: nowrap;"

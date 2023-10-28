@@ -75,9 +75,55 @@ def verify_otp(request):
     # Handle GET requests (if any) here
     return render(request, 'authentication/login.html')
 
+from django.contrib.auth.hashers import make_password
+from django.contrib import messages
+from .models import UserProfile  # Import your user profile model
+
+def verify_forgot_password_otp(request):
+    if request.method == 'POST':
+        user_otp = request.POST.get('otp')
+        stored_otp = request.session.get('otp')
+        phone_number = request.session.get('phone_number')
+
+        if user_otp == stored_otp:
+            # OTP is correct, change user's password
+            new_password = request.POST.get('password')
+
+            # Hash the new password
+            print(new_password)
+            hashed_password = make_password(new_password)
+            print(hashed_password)
+            try:
+                # Retrieve the user profile with the given phone number
+                user_profile = UserProfile.objects.get(phone_number=phone_number)
+                # Update the user's password
+                user_profile.password = hashed_password
+                user_profile.save()
+
+                # Clear the OTP data from the session
+                del request.session['otp']
+                del request.session['phone_number']
+
+                messages.success(request, 'Password changed successfully!')
+                return redirect('mylogin')  # Redirect to the login page after changing the password
+            except UserProfile.DoesNotExist:
+                # Handle the case where the user profile does not exist
+                messages.error(request, 'User not found. Please try again.')
+                return redirect('forgotpassword')  # Redirect back to the forgot password page if user not found
+        else:
+            messages.error(request, 'Invalid OTP. Please try again.')
+            return redirect('forgotpassword')  # Redirect back to the forgot password page if OTP is invalid
+
+    # Handle GET requests (if any) here
+    return render(request, 'authentication/forgot_password.html')
+
 
 def myregister(request):
     return render(request, 'register.html')
+
+
+def forgotPassword(request):
+    return render(request, 'forgot_password.html')
 
 def send_otp(request):
     if request.method == 'POST':

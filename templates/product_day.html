@@ -299,7 +299,7 @@
 					<div class="buttons row">
 						<button class="addtocart col-sm-5" onclick="AddtoCart('{{product_details.p_id}}',parseInt(document.getElementById('num').innerText),'replace')">Add to Cart</button>
 						<button id="addtolist" class="addtolist col-sm-5">Add To List</button>
-						<div class="addtolistddown">
+						<div class="addtolistddown col-sm-5">
 							<div>
 								<input type="checkbox" name="MorningD" value="Morning">
 								<label for="Morning">Morning</label>
@@ -314,7 +314,7 @@
 							</div>
 							<div class="quantity">
 								<button class="day-decrease-btn">-</button>
-								<input type="text" id="Daynum" class="num" value="01">
+								<input type="text" id="DayNumSpan" class="day-num" value="01">
 								<button class="day-increase-btn">+</button>
 							</div>
 							<button id="addtolist" class="addtolist col-sm-12" onclick="AddToList('{{ user }}', '{{ product_details.p_id }}')">Add To List</button>
@@ -465,26 +465,25 @@
         quantityNum.textContent = currentQuantity.toString().padStart(2, '0');
     });
 
-	const DayNumSpan = document.getElementById('Daynum');
-    const daydecreaseBtn = document.querySelector('.day-decrease-btn');
-    const dayincreaseBtn = document.querySelector('.day-increase-btn');
+	const DayNumSpan = document.getElementById('DayNumSpan');
+	const dayDecreaseBtn = document.querySelector('.day-decrease-btn');
+	const dayIncreaseBtn = document.querySelector('.day-increase-btn');
 
-    // Decrease button click event
-    daydecreaseBtn.addEventListener('click', function() {
-        let num = parseInt(DayNumSpan.innerText);
-        if (num > 1) {
-            num--;
-            DayNumSpan.innerText = num < 10 ? '0' + num : num;
-        }
-    });
+	// Decrease button click event
+	dayDecreaseBtn.addEventListener('click', function() {
+		let num = parseInt(DayNumSpan.value);
+		if (num > 1) {
+			num--;
+			DayNumSpan.value = num < 10 ? '0' + num : num;
+		}
+	});
 
-    // Increase button click event
-    dayincreaseBtn.addEventListener('click', function() {
-        let num = parseInt(DayNumSpan.innerText);
-        num++;
-        DayNumSpan.innerText = num < 10 ? '0' + num : num;
-    });
-
+	// Increase button click event
+	dayIncreaseBtn.addEventListener('click', function() {
+		let num = parseInt(DayNumSpan.value);
+		num++;
+		DayNumSpan.value = num < 10 ? '0' + num : num;
+	});
 
  
     </script>

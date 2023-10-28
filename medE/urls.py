@@ -33,7 +33,9 @@ urlpatterns = [
     path('get_product_info/<int:p_id>/', secondactivity.get_product_info, name='get_product_info'),
     path('send_otp/', authenticationViews.send_otp, name='send_otp'),
     path('verify_otp/', authenticationViews.verify_otp, name='verify_otp'),
+    path('verify_forgot_password_otp/', authenticationViews.verify_forgot_password_otp, name='verify_forgot_password_otp'),
     path('login/', authenticationViews.mylogin, name='mylogin'),
+    path('forgot_password/', authenticationViews.forgotPassword, name='forgotpassword'),
     path('register/', authenticationViews.myregister, name='myregister'),
     path('logout/', authenticationViews.mylogout, name='mylogout'),
     path('profile/',firstactivity.profile, name='profile'),
@@ -43,8 +45,8 @@ urlpatterns = [
     path('checkout/', secondactivity.checkout_view, name='checkout'),
     path('confirm/', secondactivity.order_complete, name='confirm'),
     path('save_med_list/', secondactivity.save_med_list, name='save_med_list'),
+    path('remove_productList/<int:product_id>/', secondactivity.remove_productList, name='remove_productList'),
     path('quickorder/',firstactivity.quick_order, name='quickorder'),
-    # path('get_saved_data/', secondactivity.get_saved_data, name='get_saved_data'),
 
     
 ]

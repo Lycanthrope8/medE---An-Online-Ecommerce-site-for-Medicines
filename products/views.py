@@ -180,20 +180,22 @@ def save_med_list(request):
         # Return an error response if there is any exception
         return JsonResponse({'success': False, 'error': str(e)})
 
+def remove_productList(request, product_id):
+    try:
+        user_phone_number = request.user.phone_number  # Implement a function to get the user's phone number
+        user = Profile_MedList.objects.get(phone_number=user_phone_number)
+        med_list = user.med_list
+        # print('Current med_list:', med_list)  # Add this line to debug
 
-# def get_saved_data(request):
-#     try:
-#         user_phone_number = request.GET.get('user')
-#         print('User Phone Number:', user_phone_number)  # Check the user phone number in Django console
+        # Check if the productId exists in med_list before attempting to delete
+        if str(product_id) in med_list:
+            
+            del med_list[str(product_id)]
+            user.save()
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'error': 'Product ID not found in med_list'})
 
-#         # Assuming 'phone_number' is the field name in your Profile_MedList model
-#         saved_data = Profile_MedList.objects.filter(phone_number=user_phone_number).values()
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)})
 
-#         # Convert the QuerySet to a list of dictionaries
-#         data_list = list(saved_data)
-
-#         # Return the data as JSON response
-#         return JsonResponse(data_list, safe=False)
-#     except Exception as e:
-#         # Return an error response if there is any exception
-#         return JsonResponse({'error': str(e)}, status=500)
