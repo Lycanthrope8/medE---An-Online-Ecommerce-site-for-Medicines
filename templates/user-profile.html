@@ -24,7 +24,12 @@
 					<img src="{% static 'Logo.jpg' %}" alt=" medX logo" height="50px"width="80px">
 				</a>
 				<div class="header-search-container">
-					<input type="search" name="search" class="search-field" placeholder="Type to search products..."></input>
+
+					<input type="search" name="search" id="search-input" class="search-field" placeholder="Type to search products...">
+					<div id="search-results">
+
+					
+					</div>
 					<button class="search-btn">
 						<ion-icon name="search"></ion-icon>
 					</button>
@@ -46,12 +51,10 @@
 					<button id="select-image" class="action-btn">
 						<img src="{%static 'prescription.png'%}" alt="prescription-upload-icon" width="30">
 					</button>
-					<button id="user-login-btn" class="action-btn" >
+					<button id="user-login-btn" class="action-btn">
 						<ion-icon name="person-outline"></ion-icon>
 					</button>
-
-
-					<button id="cart-btn" class="action-btn" >
+					<button id="cart-btn" class="action-btn">
 						<ion-icon name="bag-outline"></ion-icon>
 						<span class="btn-badge">3</span>
 					</button>

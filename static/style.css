@@ -1334,7 +1334,8 @@ body::-webkit-scrollbar-thumb:hover {
 	.slider-container {
 		height: 200px;
 	}
-	.navigation-manual {
+	.navigation-manual,
+	.navigation-auto {
 		width: 270px;
 		margin-top: 203px;
 	}
@@ -1476,7 +1477,8 @@ body::-webkit-scrollbar-thumb:hover {
 	.slider-container {
 		height: 350px;
 	}
-	.navigation-manual {
+	.navigation-manual,
+	.navigation-auto {
 		margin-top: 320px;
 	}
 	.category-item-container {
@@ -1763,7 +1765,8 @@ body::-webkit-scrollbar-thumb:hover {
 	.slider-container {
 		height: 500px;
 	}
-	.navigation-manual {
+	.navigation-manual,
+	.navigation-auto {
 		margin-top: 470px;
 	}
 
