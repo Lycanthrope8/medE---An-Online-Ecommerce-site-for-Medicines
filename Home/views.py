@@ -5,6 +5,7 @@ from products.models import Orders
 from authentication.models import UserProfile
 from products.models import Profile_MedList
 import ast
+from django.http import JsonResponse
 from products.models import main_product 
 # Create your views here.
 def home(request):
@@ -75,5 +76,11 @@ def quick_order(request):
     
 
     
-
-
+def upload_prescription(request):
+    if request.method == 'POST':
+        prescription_image = request.FILES.get('prescription_image')
+        selected_days = request.POST.getlist('selected_days')
+        print(prescription_image)
+        print(selected_days[0])
+        return render(request, 'index.html')
+    
