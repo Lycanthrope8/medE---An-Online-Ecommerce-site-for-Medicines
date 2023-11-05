@@ -310,25 +310,16 @@
 	<div class="backdrop"></div>
 	<div class="img-area" id="img-area">
 		<div class="elem-container active" data-img="">
-				<input type="file" id="file-upload" accept="image/*" hidden>
-				<!-- <div class="times">
-					<input type="checkbox" name="Morning" value="Morning">
-					<label for="Morning">Morning</label>
-					<input type="checkbox" name="Afternoon" value="Afternoon">
-					<label for="Afternoon">Afternoon</label>
-					<input type="checkbox" name="Night" value="Night">
-					<label for="Night">Night</label>
-				</div> -->
-				<div class="days">
-					<input type="checkbox" name="7Days" value="7Days">
-					<label for="7Days">7 Days</label>
-					<input type="checkbox" name="15Days" value="15Days">
-					<label for="15Days">15 Days</label>
-					<input type="checkbox" name="1Month" value="1Month">
-					<label for="1Month">1 Month</label>
-				</div>
-				<button class="prescription-upload-btn" type="submit">Upload</button>
+			<input type="file" id="file-upload" accept="image/*" hidden>
+			<div class="days">
+				<input type="checkbox" name="7Days" value="7">
+				<label for="7Days">7 Days</label>
+				<input type="checkbox" name="15Days" value="15">
+				<label for="15Days">15 Days</label>
+				<input type="checkbox" name="1Month" value="30">
+				<label for="1Month">1 Month</label>
 			</div>
+			<button class="prescription-upload-btn" type="button" onclick="handleUpload()">Upload</button>
 		</div>
 	</div>
 	<main>
@@ -413,22 +404,6 @@
 		<div class="prescriptions container" id="prescriptions">
 			<div class="presc-box">
 				<img src="{% static 'images/prescription.jpg' %}" alt="prescription-image">
-				<h3>Uploaded: 23.07.23</h3>
-			</div>
-			<div class="presc-box">
-				<img src="{% static 'images/prescription2.jpg' %}" alt="prescription-image">
-				<h3>Uploaded: 23.07.23</h3>
-			</div>
-			<div class="presc-box">
-				<img src="assets/images/prescription.jpg" alt="prescription-image">
-				<h3>Uploaded: 23.07.23</h3>
-			</div>
-			<div class="presc-box">
-				<img src="assets/images/prescription.jpg" alt="prescription-image">
-				<h3>Uploaded: 23.07.23</h3>
-			</div>
-			<div class="presc-box">
-				<img src="assets/images/prescription.jpg" alt="prescription-image">
 				<h3>Uploaded: 23.07.23</h3>
 			</div>
 			<div class="popup-image" style="opacity: 0;"><img src="" alt=""></div>
@@ -666,6 +641,7 @@ document.querySelectorAll('tr').forEach(async (row) => {
 </script>
 <script type="text/javascript" src="{% static 'cart.js' %}"></script>
 <script type="text/javascript" src="{% static 'list.js' %}"></script>
+<script type="text/javascript" src="{% static 'prescription.js' %}"></script>
 <script type="text/javascript" src="{% static 'user-profile.js' %}"></script>
 </body>
 </html> 

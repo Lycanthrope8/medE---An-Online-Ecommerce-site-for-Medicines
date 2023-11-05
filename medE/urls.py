@@ -47,6 +47,7 @@ urlpatterns = [
     path('save_med_list/', secondactivity.save_med_list, name='save_med_list'),
     path('remove_productList/<int:product_id>/', secondactivity.remove_productList, name='remove_productList'),
     path('quickorder/',firstactivity.quick_order, name='quickorder'),
+    path('upload_prescription/',firstactivity.upload_prescription, name='upload_prescription'),
 
     
 ]

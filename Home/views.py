@@ -5,7 +5,10 @@ from products.models import Orders
 from authentication.models import UserProfile
 from products.models import Profile_MedList
 import ast
+from django.http import JsonResponse
 from products.models import main_product 
+from django.core.files.storage import FileSystemStorage
+import os
 # Create your views here.
 def home(request):
     products = Product.objects.all()
@@ -75,5 +78,41 @@ def quick_order(request):
     
 
     
+def upload_prescription(request):
+    if request.method == 'POST':
+        prescription_image = request.FILES.get('prescription_image')
+        selected_days = request.POST.getlist('selected_days')
+        phone_number = request.user.phone_number  # Replace this with the actual method to get the user's phone number.
 
+        # Create the user's prescription folder if it doesn't exist.
+        user_prescription_folder = os.path.join('media', 'prescription', str(phone_number))
+        if not os.path.exists(user_prescription_folder):
+            os.makedirs(user_prescription_folder)
 
+        # Save the prescription image to the user's folder.
+        fs = FileSystemStorage(location=user_prescription_folder)
+        saved_image = fs.save(prescription_image.name, prescription_image)
+
+        # Update the prescriptions column in the database
+        try:
+            user_medlist = Profile_MedList.objects.get(phone_number=phone_number)
+            prescriptions = user_medlist.prescriptions
+
+            if prescriptions:
+                prescriptions = eval(prescriptions)
+                prescriptions.append((saved_image, selected_days[0]))
+            else:
+                prescriptions = [(saved_image, selected_days[0])]
+
+            user_medlist.prescriptions = repr(prescriptions)
+            user_medlist.save()
+
+            return JsonResponse({'success': True})
+        except Profile_MedList.DoesNotExist:
+            # Create a new user with the provided phone number
+            new_user_medlist = Profile_MedList(phone_number=phone_number, prescriptions=repr([(saved_image, selected_days[0])]))
+            new_user_medlist.save()
+
+    # Handle other HTTP methods if needed
+
+    
