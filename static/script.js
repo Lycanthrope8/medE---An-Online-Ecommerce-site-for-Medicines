@@ -1,76 +1,78 @@
-'use strict';
+"use strict";
 
 var counter = 1;
 
-setInterval(function() {
-    document.getElementById('radio' + counter).checked = true;
+setInterval(function () {
+    document.getElementById("radio" + counter).checked = true;
     counter++;
-    if(counter > 5){
+    if (counter > 5) {
         counter = 1;
     }
 }, 3000);
 
-const main = document.querySelector('main');
-const userLogin = document.querySelector('.user-login');
-const shoppingcart = document.querySelector('.shopping-cart');
+const main = document.querySelector("main");
+const userLogin = document.querySelector(".user-login");
+const shoppingcart = document.querySelector(".shopping-cart");
 
-main.addEventListener('click', function(){
-    userLogin.classList.remove('active');
-    shoppingcart.classList.remove('active');
-})
+main.addEventListener("click", function () {
+    userLogin.classList.remove("active");
+    shoppingcart.classList.remove("active");
+});
 
-const mobileMenuOpenBtn = document.querySelectorAll('[data-mobile-menu-open-btn]');
-const mobileMenu = document.querySelectorAll('[data-mobile-menu]');
-const mobileMenuCloseBtn = document.querySelectorAll('[data-mobile-menu-close-btn]');
+const mobileMenuOpenBtn = document.querySelectorAll(
+    "[data-mobile-menu-open-btn]"
+);
+const mobileMenu = document.querySelectorAll("[data-mobile-menu]");
+const mobileMenuCloseBtn = document.querySelectorAll(
+    "[data-mobile-menu-close-btn]"
+);
 
-for (let i=0; i < mobileMenuOpenBtn.length; i++) {
+for (let i = 0; i < mobileMenuOpenBtn.length; i++) {
     const mobileMenuCloseFunc = function () {
-        mobileMenu[i].classList.remove('active');
-    }
-    mobileMenuOpenBtn[i].addEventListener('click', function () {
-        mobileMenu[i].classList.add('active');
+        mobileMenu[i].classList.remove("active");
+    };
+    mobileMenuOpenBtn[i].addEventListener("click", function () {
+        mobileMenu[i].classList.add("active");
     });
 
-    mobileMenuCloseBtn[i].addEventListener('click', mobileMenuCloseFunc);
+    mobileMenuCloseBtn[i].addEventListener("click", mobileMenuCloseFunc);
 }
-
 
 // ACCORDION MENU
 
-const accordionBtn = document.querySelectorAll('[data-accordion-btn]');
-const accordion = document.querySelectorAll('[data-accordion]');
+const accordionBtn = document.querySelectorAll("[data-accordion-btn]");
+const accordion = document.querySelectorAll("[data-accordion]");
 
 for (let i = 0; i < accordionBtn.length; i++) {
-
-    accordionBtn[i].addEventListener('click', function () {
-
-        const clickedBtn = this.nextElementSibling.classList.contains('active');
+    accordionBtn[i].addEventListener("click", function () {
+        const clickedBtn = this.nextElementSibling.classList.contains("active");
 
         for (let i = 0; i < accordion.length; i++) {
             if (clickedBtn) break;
 
-            if (accordion[i].classList.contains('active')) {
-                
-                accordion[i].classList.remove('active');
-                accordionBtn[i].classList.remove('active');
+            if (accordion[i].classList.contains("active")) {
+                accordion[i].classList.remove("active");
+                accordionBtn[i].classList.remove("active");
             }
         }
-        this.nextElementSibling.classList.toggle('active');
-        this.classList.toggle('active');
+        this.nextElementSibling.classList.toggle("active");
+        this.classList.toggle("active");
     });
 }
 
 // BACK TO TOP BUTTON
 
 const mybutton = document.querySelector("[data-back-top-btn]");
-window.onscroll = function() {scrollFunction()};
+window.onscroll = function () {
+    scrollFunction();
+};
 
 function scrollFunction() {
-  if (window.scrollY > 100) {
-    mybutton.classList.add('active');
-  } else {
-    mybutton.classList.remove('active');
-  }
+    if (window.scrollY > 100) {
+        mybutton.classList.add("active");
+    } else {
+        mybutton.classList.remove("active");
+    }
 }
 
 // AUTO BANNER CAROUSEL
@@ -87,70 +89,68 @@ function scrollFunction() {
 //     }
 //     console.log(img);
 //     img.innerHTML = "<img src="+slides[Start-1]+">";
-   
+
 // }
 // setInterval(slider,2000);
 
-let shoppingCart = document.querySelector('.shopping-cart');
-let addToList = document.querySelector('.addtolistddown');
+const selectImage = document.querySelector("#select-image");
+const selectImage2 = document.querySelector("#select-image2");
+const inputFile = document.querySelector("#file-upload");
+const imgArea = document.getElementById("img-area");
+const backDrop = document.querySelector(".backdrop");
+const elemContainer = document.querySelector(".elem-container");
 
-
-
-document.querySelector('#cart-btn').onclick = () =>{
-    shoppingCart.classList.toggle('active');
-    loginForm.classList.remove('active');
-}
-
-let loginForm = document.querySelector('.user-login');
-
-document.querySelector('#user-login-btn').onclick = () =>{
-    loginForm.classList.toggle('active');
-    shoppingCart.classList.remove('active');
-    
-}
-document.querySelector('#addtolist').onclick = () =>{
-    addToList.classList.toggle('active');
-}
-
-const selectImage = document.querySelector('#select-image');
-const inputFile = document.querySelector('#file-upload');
-const imgArea = document.getElementById('img-area');
-const backDrop = document.querySelector('.backdrop');
-const elemContainer = document.querySelector('.elem-container');
-
-selectImage.addEventListener('click', function () {
+selectImage.addEventListener("click", function () {
     inputFile.click();
-    imgArea.classList.add('active');
-    backDrop.classList.add('active');
-})
-backDrop.addEventListener('click', function () {
-    backDrop.classList.remove('active');
-    imgArea.classList.remove('active');
-})
+    imgArea.classList.add("active");
+    backDrop.classList.add("active");
+});
+selectImage2.addEventListener("click", function () {
+    imgArea.classList.add("active");
+    backDrop.classList.add("active");
+});
 
-inputFile.addEventListener('change', function () {
-    const image = this.files[0]
+backDrop.addEventListener("click", function () {
+    backDrop.classList.remove("active");
+    imgArea.classList.remove("active");
+});
+
+inputFile.addEventListener("change", function () {
+    const image = this.files[0];
     console.log(image);
     const reader = new FileReader();
-    reader.onload = ()=> {
+    reader.onload = () => {
         const imgUrl = reader.result;
-        const img = document.createElement('img');
+        const img = document.createElement("img");
         img.src = imgUrl;
         elemContainer.appendChild(img);
-        elemContainer.classList.add('active');
+        elemContainer.classList.add("active");
         elemContainer.dataset.img = image.name;
-    }
-    reader.readAsDataURL(image) ;
-})
+    };
+    reader.readAsDataURL(image);
+});
 
-document.querySelector('#select-image2').addEventListener('click', function () {
-    imgArea.classList.add('active');
-    backDrop.classList.add('active');
-})
+let shoppingCart = document.querySelector(".shopping-cart");
+let addToList = document.querySelector(".addtolistddown");
 
-document.querySelector('.label1').addEventListener('click', function(){
-    document.querySelector('.gendermale').checked = true;
-})
-document.querySelector('.label2').addEventListener('click', function(){
-    document.querySelector('.genderfemale').checked = true;
-})
+document.querySelector("#cart-btn").onclick = () => {
+    shoppingCart.classList.toggle("active");
+    loginForm.classList.remove("active");
+};
+
+let loginForm = document.querySelector(".user-login");
+
+document.querySelector("#user-login-btn").onclick = () => {
+    loginForm.classList.toggle("active");
+    shoppingCart.classList.remove("active");
+};
+document.querySelector("#addtolist").onclick = () => {
+    addToList.classList.toggle("active");
+};
+
+document.querySelector(".label1").addEventListener("click", function () {
+    document.querySelector(".gendermale").checked = true;
+});
+document.querySelector(".label2").addEventListener("click", function () {
+    document.querySelector(".genderfemale").checked = true;
+});

@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>medE</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 	<link rel="icon" type="image/x-icon" href="{% static 'Favicon.png' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
+
 <body>
 	<header>
 		<div class="header-main" data-header>
 			<div class="container">
 				<a class="header-logo" href="{%url 'home'%}">
-					<img src="{% static 'Logo.jpg' %}" alt=" medX logo"height="50px"width="80px">
+					<img src="{% static 'Logo.jpg' %}" alt=" medX logo" height="50px" width="80px">
 				</a>
 				<div class="header-search-container">
-					
-					<input type="search" name="search" id="search-input" class="search-field" placeholder="Type to search products...">
+
+					<input type="search" name="search" id="search-input" class="search-field"
+						placeholder="Type to search products...">
 					<div id="search-results">
 
-					
+
 					</div>
 					<button class="search-btn">
 						<ion-icon name="search"></ion-icon>
@@ -39,25 +43,25 @@
 						</button>
 						<div id="search-results2">
 
-					
+
 						</div>
 					</div>
 					<button id="select-image" class="action-btn">
 						<img src="{%static 'prescription.png'%}" alt="prescription-upload-icon" width="30">
 					</button>
-					<button id="user-login-btn" class="action-btn" >
+					<button id="user-login-btn" class="action-btn">
 						<ion-icon name="person-outline"></ion-icon>
 					</button>
 
 
-					<button id="cart-btn" class="action-btn" >
+					<button id="cart-btn" class="action-btn">
 						<ion-icon name="bag-outline"></ion-icon>
 						<span class="btn-badge">3</span>
 					</button>
-						<div class="shopping-cart" >
-								<!-- HTML template for a product cartbox -->
-								<div id= "cart-container">
-									<!-- <div class="cartbox" id="cartbox-${p_id}">
+					<div class="shopping-cart">
+						<!-- HTML template for a product cartbox -->
+						<div id="cart-container">
+							<!-- <div class="cartbox" id="cartbox-${p_id}">
 									  <button class="cart-trash">
 										<ion-icon name="trash"></ion-icon>
 									  </button>
@@ -71,24 +75,24 @@
 										</div>
 									  </div>
 									</div> -->
-								  </div>
-								  
-								  <div class="total"></div>
-								  {% if user.is_authenticated %}
-								<a  class="cart-checkout-btn" id="checkout-button">Checkout</a>
-						    {% else %}
-							<a href="{% url 'mylogin' %}" class="cart-checkout-btn" id="">Checkout</a>
-						    {% endif %}
 						</div>
 
-						<div style="text-align:center;" class="user-login">
-							{% if user.is_authenticated %}
-							<a href="{% url 'profile' %}" class="form-btn">Profile</a>
-							<a href="{% url 'mylogout' %}" class="form-btn">Logout</a>
-						    {% else %}
-							<a href="{% url 'mylogin' %}" class="form-btn">Login</a>
-						    {% endif %}
-						</div>
+						<div class="total"></div>
+						{% if user.is_authenticated %}
+						<a class="cart-checkout-btn" id="checkout-button">Checkout</a>
+						{% else %}
+						<a href="{% url 'mylogin' %}" class="cart-checkout-btn" id="">Checkout</a>
+						{% endif %}
+					</div>
+
+					<div style="text-align:center;" class="user-login">
+						{% if user.is_authenticated %}
+						<a href="{% url 'profile' %}" class="form-btn">Profile</a>
+						<a href="{% url 'mylogout' %}" class="form-btn">Logout</a>
+						{% else %}
+						<a href="{% url 'mylogin' %}" class="form-btn">Login</a>
+						{% endif %}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -103,45 +107,74 @@
 						<div class="dropdown-panel">
 							<ul class="dropdown-panel-list">
 								<li class="menu-title">
-								
+
 								</li>
-								<li class="panel-list-item"><a href="{%url 'category' p_category='Cold & Allergies'%}">Cold & Allergies</a></li>
-								<li class="panel-list-item"><a href="{%url 'category' p_category='Heart Problems'%}">Heart Problems</a></li>
-								<li class="panel-list-item"><a href="{%url 'category' p_category='Diabetes'%}">Diabetes</a></li>
-								<li class="panel-list-item"><a href="{%url 'category' p_category='Respiratory Problems'%}">Respiratory Problems</a></li>
+								<li class="panel-list-item"><a
+										href="{%url 'category' p_category='Cold & Allergies'%}">Cold & Allergies</a>
+								</li>
+								<li class="panel-list-item"><a
+										href="{%url 'category' p_category='Heart Problems'%}">Heart Problems</a></li>
+								<li class="panel-list-item"><a
+										href="{%url 'category' p_category='Diabetes'%}">Diabetes</a></li>
+								<li class="panel-list-item"><a
+										href="{%url 'category' p_category='Respiratory Problems'%}">Respiratory
+										Problems</a></li>
 							</ul>
 							<ul class="dropdown-panel-list">
 								<li class="menu-title">
-									
+
 								</li>
-								<li class="panel-list-item"><a href="{%url 'category' p_category='Neurological Problems'%}">Neurological Problems</a></li>
-								<li class="panel-list-item"><a href="{%url 'category' p_category='Arthritis or other types of pain'%}">Arthritis or other types of pain</a></li>
-								<li class="panel-list-item"><a href="{%url 'category' p_category='Sexual Wellness'%}">Sexual Wellness</a></li>
-								<li class="panel-list-item"><a href="{%url 'category' p_category='Herbal & Ayurvedic'%}">Herbal & Ayurvedic</a></li>
+								<li class="panel-list-item"><a
+										href="{%url 'category' p_category='Neurological Problems'%}">Neurological
+										Problems</a></li>
+								<li class="panel-list-item"><a
+										href="{%url 'category' p_category='Arthritis or other types of pain'%}">Arthritis
+										or other types of pain</a></li>
+								<li class="panel-list-item"><a
+										href="{%url 'category' p_category='Sexual Wellness'%}">Sexual Wellness</a></li>
+								<li class="panel-list-item"><a
+										href="{%url 'category' p_category='Herbal & Ayurvedic'%}">Herbal & Ayurvedic</a>
+								</li>
 							</ul>
 							<ul class="dropdown-panel-list">
 								<li class="menu-title">
-									
+
 								</li>
-								<li class="panel-list-item"><a href="{%url 'category' p_category='Infant & Mothers care'%}">Infant & Mothers care</a></li>
-								<li class="panel-list-item"><a href="{%url 'category' p_category='Supplements & Nutrition'%}">Supplements & Nutrition</a></li>
-								<li class="panel-list-item"><a href="{%url 'category' p_category='More will be added late'%}">More will be added late</a></li>
-								<li class="panel-list-item"><a href="{%url 'category' p_category='Cold & Allergies'%}">More will be added late</a></li>
+								<li class="panel-list-item"><a
+										href="{%url 'category' p_category='Infant & Mothers care'%}">Infant & Mothers
+										care</a></li>
+								<li class="panel-list-item"><a
+										href="{%url 'category' p_category='Supplements & Nutrition'%}">Supplements &
+										Nutrition</a></li>
+								<li class="panel-list-item"><a
+										href="{%url 'category' p_category='More will be added late'%}">More will be
+										added late</a></li>
+								<li class="panel-list-item"><a
+										href="{%url 'category' p_category='Cold & Allergies'%}">More will be added
+										late</a></li>
 							</ul>
 							<ul class="dropdown-panel-list">
 								<li class="menu-title">
-									
+
 								</li>
-								<li class="panel-list-item"><a href="{%url 'category' p_category='Cold & Allergies'%}">More will be added late</a></li>
-								<li class="panel-list-item"><a href="{%url 'category' p_category='Cold & Allergies'%}">More will be added late</a></li>
-								<li class="panel-list-item"><a href="{%url 'category' p_category='Cold & Allergies'%}">More will be added late</a></li>
-								<li class="panel-list-item"><a href="{%url 'category' p_category='Cold & Allergies'%}">More will be added late</a></li>
+								<li class="panel-list-item"><a
+										href="{%url 'category' p_category='Cold & Allergies'%}">More will be added
+										late</a></li>
+								<li class="panel-list-item"><a
+										href="{%url 'category' p_category='Cold & Allergies'%}">More will be added
+										late</a></li>
+								<li class="panel-list-item"><a
+										href="{%url 'category' p_category='Cold & Allergies'%}">More will be added
+										late</a></li>
+								<li class="panel-list-item"><a
+										href="{%url 'category' p_category='Cold & Allergies'%}">More will be added
+										late</a></li>
 							</ul>
 						</div>
 					</li>
 					<li class="menu-category">
-						<a href="{%url 'category' p_category='MENS'%}"class="menu-title">Men's</a>
-			
+						<a href="{%url 'category' p_category='MENS'%}" class="menu-title">Men's</a>
+
 
 					</li>
 					<li class="menu-category">
@@ -150,16 +183,18 @@
 					</li>
 					<li class="menu-category">
 						<a href="{%url 'category' p_category='BABY CARE'%}" class="menu-title">Baby Care</a>
-			
-	
-					</li>
-					<li class="menu-category">
-						<a href="{%url 'category' p_category='Personal Hygiene'%}" class="menu-title">Personal Hygiene</a>
-			
+
 
 					</li>
 					<li class="menu-category">
-						<a href="{%url 'category' p_category='Medical Equipments' %}"class="menu-title">Medical Equipments</a>
+						<a href="{%url 'category' p_category='Personal Hygiene'%}" class="menu-title">Personal
+							Hygiene</a>
+
+
+					</li>
+					<li class="menu-category">
+						<a href="{%url 'category' p_category='Medical Equipments' %}" class="menu-title">Medical
+							Equipments</a>
 
 					</li>
 				</ul>
@@ -181,7 +216,7 @@
 		<nav class="mobile-navigation-menu has-scrollbar" data-mobile-menu>
 			<div class="menu-top">
 				<h2 class="menu-title">Menu</h2>
-				
+
 				<button class="menu-close-btn" data-mobile-menu-close-btn>
 					<ion-icon name="close-outline"></ion-icon>
 				</button>
@@ -207,55 +242,68 @@
 							<a href="{%url 'category' p_category='WOMEN'%}" class="submenu-title">Women's</a>
 						</li>
 						<li class="submenu-category">
-							<a href="{%url 'category' p_category='BABY CARE'%}"  class="submenu-title">Baby Care</a>
+							<a href="{%url 'category' p_category='BABY CARE'%}" class="submenu-title">Baby Care</a>
 						</li>
 						<li class="submenu-category">
-							<a href="{%url 'category' p_category='Personal Hygiene'%}" class="submenu-title">Personal Hygiene</a>
+							<a href="{%url 'category' p_category='Personal Hygiene'%}" class="submenu-title">Personal
+								Hygiene</a>
 						</li>
 
 						<li class="submenu-category">
-							<a href="{%url 'category' p_category='Medical Equipments' %}"class="submenu-title">Medical Equipments</a>
+							<a href="{%url 'category' p_category='Medical Equipments' %}" class="submenu-title">Medical
+								Equipments</a>
 						</li>
 						<li class="submenu-category">
-							<a href="{%url 'category' p_category='Cold & Allergies'%}"class="submenu-title">Cold & Allergies</a>
+							<a href="{%url 'category' p_category='Cold & Allergies'%}" class="submenu-title">Cold &
+								Allergies</a>
 						</li>
 						<li class="submenu-category">
-							<a href="{%url 'category' p_category='Heart Problems'%}"class="submenu-title">Heart Problems</a>
+							<a href="{%url 'category' p_category='Heart Problems'%}" class="submenu-title">Heart
+								Problems</a>
 						</li>
 						<li class="submenu-category">
-							<a href="{%url 'category' p_category='Diabetes'%}"class="submenu-title">Diabetes</a>
+							<a href="{%url 'category' p_category='Diabetes'%}" class="submenu-title">Diabetes</a>
 						</li>
 						<li class="submenu-category">
-							<a href="{%url 'category' p_category='Respiratory Problems'%}"class="submenu-title">Respiratory Problems</a>
+							<a href="{%url 'category' p_category='Respiratory Problems'%}"
+								class="submenu-title">Respiratory Problems</a>
 						</li>
 						<li class="submenu-category">
-							<a href="{%url 'category' p_category='Neurological Problems'%}"class="submenu-title">Neurological Problems</a>
+							<a href="{%url 'category' p_category='Neurological Problems'%}"
+								class="submenu-title">Neurological Problems</a>
 						</li>
 						<li class="submenu-category">
-							<a href="{%url 'category' p_category='Arthritis or other types of pain'%}"class="submenu-title">Arthritis or other types of pain</a>
+							<a href="{%url 'category' p_category='Arthritis or other types of pain'%}"
+								class="submenu-title">Arthritis or other types of pain</a>
 						</li>
 						<li class="submenu-category">
-							<a href="{%url 'category' p_category='Sexual Wellness'%}"class="submenu-title">Sexual Wellness</a>
+							<a href="{%url 'category' p_category='Sexual Wellness'%}" class="submenu-title">Sexual
+								Wellness</a>
 						</li>
 						<li class="submenu-category">
-							<a href="{%url 'category' p_category='Herbal & Ayurvedic'%}"class="submenu-title">Herbal & Ayurvedic</a>
+							<a href="{%url 'category' p_category='Herbal & Ayurvedic'%}" class="submenu-title">Herbal &
+								Ayurvedic</a>
 						</li>
 						<li class="submenu-category">
-							<a href="{%url 'category' p_category='Infant & Mothers care'%}"class="submenu-title">Infant & Mothers care</a>
+							<a href="{%url 'category' p_category='Infant & Mothers care'%}" class="submenu-title">Infant
+								& Mothers care</a>
 						</li>
 						<li class="submenu-category">
-							<a href="{%url 'category' p_category='Supplements & Nutrition'%}"class="submenu-title">Supplements & Nutrition</a>
+							<a href="{%url 'category' p_category='Supplements & Nutrition'%}"
+								class="submenu-title">Supplements & Nutrition</a>
 						</li>
 						<li class="submenu-category">
-						<a href="{%url 'category' p_category='More will be added late'%}"class="submenu-title">More will be added late</a>
+							<a href="{%url 'category' p_category='More will be added late'%}" class="submenu-title">More
+								will be added late</a>
 						</li>
 						<li class="submenu-category">
-							<a href="{%url 'category' p_category='More will be added late'%}"class="submenu-title">More will be added late</a>
+							<a href="{%url 'category' p_category='More will be added late'%}" class="submenu-title">More
+								will be added late</a>
 						</li>
 					</ul>
 				</li>
 			</ul>
-		</nav> 
+		</nav>
 	</header>
 	<main>
 		<!-- --------------
@@ -266,7 +314,7 @@
 				<div class="slider-container">
 					<!-- ------------------------- -->
 
-						<!-- <div class="slide first"><img src="assets/images/banner-1.jpg" alt="banner1"></div>
+					<!-- <div class="slide first"><img src="assets/images/banner-1.jpg" alt="banner1"></div>
 						<div class="slide"><img src="assets/images/banner-2.jpg" alt="banner2"></div>
 						<div class="slide"><img src="assets/images/banner-3.jpg" alt="banner3"></div> -->
 
@@ -337,7 +385,7 @@
 							<a href="#" class="banner-btn">Consult now</a>
 						</div>
 					</div>
-					
+
 					<div class="navigation-auto">
 						<div class="auto-btn1"></div>
 						<div class="auto-btn2"></div>
@@ -369,25 +417,16 @@
 		<div class="backdrop"></div>
 		<div class="img-area" id="img-area">
 			<div class="elem-container active" data-img="">
-					<input type="file" id="file-upload" accept="image/*" hidden>
-					<div class="times">
-						<input type="checkbox" name="Morning" value="Morning">
-						<label for="Morning">Morning</label>
-						<input type="checkbox" name="Afternoon" value="Afternoon">
-						<label for="Afternoon">Afternoon</label>
-						<input type="checkbox" name="Night" value="Night">
-						<label for="Night">Night</label>
-					</div>
-					<div class="days">
-						<input type="checkbox" name="7Days" value="7Days">
-						<label for="7Days">7 Days</label>
-						<input type="checkbox" name="15Days" value="15Days">
-						<label for="15Days">15 Days</label>
-						<input type="checkbox" name="1Month" value="1Month">
-						<label for="1Month">1 Month</label>
-					</div>
-					<button class="prescription-upload-btn" type="submit">Upload</button>
+				<input type="file" id="file-upload" accept="image/*" hidden>
+				<div class="days">
+					<input type="checkbox" name="7Days" value="7">
+					<label for="7Days">7 Days</label>
+					<input type="checkbox" name="15Days" value="15">
+					<label for="15Days">15 Days</label>
+					<input type="checkbox" name="1Month" value="30">
+					<label for="1Month">1 Month</label>
 				</div>
+				<button class="prescription-upload-btn" type="button" onclick="handleUpload()">Upload</button>
 			</div>
 		</div>
 		<!-- --------------
@@ -404,10 +443,10 @@
 							<div class="category-content-flex">
 								<h3 class="category-item-title">MEN'S CARE</h3>
 							</div>
-							<a href="{%url 'category' p_category='MENS'%}"class="menu-title">Show A</a>
+							<a href="{%url 'category' p_category='MENS'%}" class="menu-title">Show A</a>
 						</div>
 					</div>
-					
+
 					<div class="category-item">
 						<div class="category-img-box">
 							<img src="{% static 'cat-icons/woman.png' %}" alt="woman-logo" width="30">
@@ -415,7 +454,7 @@
 						<div class="category-content-box">
 							<div class="category-content-flex">
 								<h3 class="category-item-title">Women's Choice</h3>
-							
+
 							</div>
 							<a href="{%url 'category' p_category='WOMEN'%}" class="menu-title">Show All</a>
 						</div>
@@ -427,7 +466,7 @@
 						<div class="category-content-box">
 							<div class="category-content-flex">
 								<h3 class="category-item-title">Sexual Wellness</h3>
-								
+
 							</div>
 							<a href="{%url 'category' p_category='Sexual Wellness'%}">Show All</a>
 						</div>
@@ -439,7 +478,7 @@
 						<div class="category-content-box">
 							<div class="category-content-flex">
 								<h3 class="category-item-title">Baby Care</h3>
-							
+
 							</div>
 							<a href="{%url 'category' p_category='BABY CARE'%}" class="menu-title">Show All</a>
 						</div>
@@ -461,75 +500,79 @@
 		<div class="backdrop"></div>
 		<div class="img-area" id="img-area">
 			<div class="elem-container active" data-img="">
-					<input type="file" id="file-upload" accept="image/*" hidden>
-					<div class="times">
-						<input type="checkbox" name="Morning" value="Morning">
-						<label for="Morning">Morning</label>
-						<input type="checkbox" name="Afternoon" value="Afternoon">
-						<label for="Afternoon">Afternoon</label>
-						<input type="checkbox" name="Night" value="Night">
-						<label for="Night">Night</label>
-					</div>
-					<div class="days">
-						<input type="checkbox" name="7Days" value="7Days">
-						<label for="7Days">7 Days</label>
-						<input type="checkbox" name="15Days" value="15Days">
-						<label for="15Days">15 Days</label>
-						<input type="checkbox" name="1Month" value="1Month">
-						<label for="1Month">1 Month</label>
-					</div>
-					<button class="prescription-upload-btn" type="submit">Upload</button>
+				<input type="file" id="file-upload" accept="image/*" hidden>
+				<div class="times">
+					<input type="checkbox" name="Morning" value="Morning">
+					<label for="Morning">Morning</label>
+					<input type="checkbox" name="Afternoon" value="Afternoon">
+					<label for="Afternoon">Afternoon</label>
+					<input type="checkbox" name="Night" value="Night">
+					<label for="Night">Night</label>
 				</div>
+				<div class="days">
+					<input type="checkbox" name="7Days" value="7Days">
+					<label for="7Days">7 Days</label>
+					<input type="checkbox" name="15Days" value="15Days">
+					<label for="15Days">15 Days</label>
+					<input type="checkbox" name="1Month" value="1Month">
+					<label for="1Month">1 Month</label>
+				</div>
+				<button class="prescription-upload-btn" type="submit">Upload</button>
 			</div>
+		</div>
 		</div>
 		<!-- --------------
 			PRODUCTS
 		-------------- -->
-	
+
 		<div class="container">
 			<div class="product-main">
 				<h2 class="title">Featured Products</h2>
 				<div class="product-grid">
-					
+
 					{% for product in products %}
 					<div class="showcase">
 						<div class="showcase-banner">
 							<a href="{%url 'prod' p_name=product.p_name %}">
-								<img  class="product-img default" src="media/{{ product.p_image }}" alt="{{ product.p_name }}" width="300">
-								<img  class="product-img hover" src="media/{{ product.p_image }}" alt="{{ product.p_name }}" width="300">
+								<img class="product-img default" src="media/{{ product.p_image }}"
+									alt="{{ product.p_name }}" width="300">
+								<img class="product-img hover" src="media/{{ product.p_image }}"
+									alt="{{ product.p_name }}" width="300">
 							</a>
 							{% if product.p_discount > 0 %}
-   						 <p class="showcase-badge">{{ product.p_discount|floatformat:"2" }}%</p>
+							<p class="showcase-badge">{{ product.p_discount|floatformat:"2" }}%</p>
 							{% endif %}
 
 
-							<div  class="showcase-actions" >
-								<button id = "{{ product.p_id }}" class="btn-action" onclick="ClearCart()">
+							<div class="showcase-actions">
+								<button id="{{ product.p_id }}" class="btn-action" onclick="ClearCart()">
 									<ion-icon name="heart-outline"></ion-icon>
 								</button>
-								<button id = "{{ product.p_id }} " class="btn-action" onclick="AddtoCart('{{product.p_id}}')"> <!--Cart button-->
-								
-								</button> 
+								<button id="{{ product.p_id }} " class="btn-action"
+									onclick="AddtoCart('{{product.p_id}}')"> <!--Cart button-->
+
+								</button>
 							</div>
 						</div>
-			
+
 						<div class="showcase-content">
-							<a href="{%url 'prod' p_name=product.p_name %}" class="showcase-category">{{ product.p_name }}</a>
+							<a href="{%url 'prod' p_name=product.p_name %}" class="showcase-category">{{ product.p_name
+								}}</a>
 
 							<a href="{%url 'prod' p_name=product.p_name %}">
 								<h3 class="showcase-title">{{ product.p_category }}</h3>
 							</a>
-							
+
 							<div class="price-box">
-						
-                             <p class="price">৳{{ product.discounted_price|floatformat:"2"}}</p>
-							 {% if product.p_discount > 0 %}
- 
+
+								<p class="price">৳{{ product.discounted_price|floatformat:"2"}}</p>
+								{% if product.p_discount > 0 %}
+
 								<del>{{ product.p_price|floatformat:"2" }}</del>
 								{% endif %}
 							</div>
 						</div>
-					
+
 					</div>
 					{%endfor%}
 				</div>
@@ -541,9 +584,11 @@
 		<div class="footer-top section">
 			<div class="container">
 				<div class="footer-brand">
-					<a href="#" class="logo"><img style="border-radius: 10px;" src="{% static 'Favicon.png' %}" width="80" alt="logo"></a>
+					<a href="#" class="logo"><img style="border-radius: 10px;" src="{% static 'Favicon.png' %}"
+							width="80" alt="logo"></a>
 					<p class="footer-text">
-						If you have any queries please contact us at <a href="mailto:support@gmail.com" class="link">support@gmail.com</a>
+						If you have any queries please contact us at <a href="mailto:support@gmail.com"
+							class="link">support@gmail.com</a>
 					</p>
 					<ul class="contact-list">
 						<li class="contact-item">
@@ -580,7 +625,7 @@
 						</li>
 					</ul>
 				</div>
-				
+
 				<ul class="footer-list">
 					<li>
 						<p class="footer-list-title">Corporate</p>
@@ -619,7 +664,8 @@
 				<p class="copyright">
 					&copy; 2023 Made by <a href="#">Team NJ<sup>2</sup>.</a>
 				</p>
-				<img src="{% static 'payment/payment.png' %}" width="380" height="90" loading="lazy" alt="payment method" class="img">
+				<img src="{% static 'payment/payment.png' %}" width="380" height="90" loading="lazy"
+					alt="payment method" class="img">
 			</div>
 		</div>
 	</footer>
@@ -627,7 +673,9 @@
 	<a href="#top" class="back-top-btn" aria-label="back to top" data-back-top-btn>
 		<ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
 	</a>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
 	<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 	<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 	<script src="{% static 'script.js' %}"></script>
@@ -635,4 +683,5 @@
 	<script src="{% static 'search.js' %}"></script>
 	<script type="text/javascript" src="{% static 'cart.js' %}"></script>
 </body>
+
 </html>
