@@ -954,7 +954,7 @@ main .container {
 	padding: 10px 0;
 }
 .product-details .addtocart:hover,
-.product-details .buynow:hover {
+.product-details .addtolist:hover {
 	filter: brightness(90%);
 }
 

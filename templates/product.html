@@ -444,67 +444,65 @@
 	<a href="#top" class="back-top-btn" aria-label="back to top" data-back-top-btn>
 		<ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
 	</a>
-    <script type="text/javascript" src="{% static 'script.js' %}"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="{% static 'script.js' %}"></script>
 	<script src="{% static 'search.js' %}"></script>
 	<script>
+		// Get the buttons and the quantity element
+		const decreaseBtn = document.querySelector('.decrease-btn');
+			const increaseBtn = document.querySelector('.increase-btn');
+			const quantityNum = document.querySelector('.num');
 
-	
-// Get the buttons and the quantity element
-const decreaseBtn = document.querySelector('.decrease-btn');
-    const increaseBtn = document.querySelector('.increase-btn');
-    const quantityNum = document.querySelector('.num');
+			// Add event listener for the decrease button
+			decreaseBtn.addEventListener('click', function() {
+				let currentQuantity = parseInt(quantityNum.textContent);
+				if (currentQuantity > 1) {
+					currentQuantity--;
+					quantityNum.textContent = currentQuantity.toString().padStart(2, '0');
+				}
+			});
 
-    // Add event listener for the decrease button
-    decreaseBtn.addEventListener('click', function() {
-        let currentQuantity = parseInt(quantityNum.textContent);
-        if (currentQuantity > 1) {
-            currentQuantity--;
-            quantityNum.textContent = currentQuantity.toString().padStart(2, '0');
-        }
-    });
-
-    // Add event listener for the increase button
-    increaseBtn.addEventListener('click', function() {
-        let currentQuantity = parseInt(quantityNum.textContent);
-        currentQuantity++;
-        quantityNum.textContent = currentQuantity.toString().padStart(2, '0');
-    });
+			// Add event listener for the increase button
+			increaseBtn.addEventListener('click', function() {
+				let currentQuantity = parseInt(quantityNum.textContent);
+				currentQuantity++;
+				quantityNum.textContent = currentQuantity.toString().padStart(2, '0');
+			});
 
 
-        const plus = document.querySelector(".plus"),
-        minus = document.querySelector(".minus"),
-        num = document.querySelector(".num");
+				const plus = document.querySelector(".plus"),
+				minus = document.querySelector(".minus"),
+				num = document.querySelector(".num");
 
-    let a = 1;
-	
-	// Get the modal
-var modal = document.getElementById('myModal');
+			let a = 1;
+			
+			// Get the modal
+		var modal = document.getElementById('myModal');
 
-// Get the button that opens the modal
-var btn = document.getElementById('addToCartBtn');
+		// Get the button that opens the modal
+		var btn = document.getElementById('addToCartBtn');
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName('close')[0];
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName('close')[0];
 
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-    modal.style.display = 'block';
-}
+		// When the user clicks the button, open the modal 
+		btn.onclick = function() {
+			modal.style.display = 'block';
+		}
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = 'none';
-}
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+			modal.style.display = 'none';
+		}
 
-// When the user clicks Confirm, close the modal
-var confirmBtn = document.getElementById('confirmBtn');
-confirmBtn.onclick = function() {
-    var selectedTime = document.getElementById('time').value;
-    var duration = document.getElementById('duration').value;
-    // Do something with selectedTime and duration, for example, send them to the server
-    modal.style.display = 'none';
-}
+		// When the user clicks Confirm, close the modal
+		var confirmBtn = document.getElementById('confirmBtn');
+		confirmBtn.onclick = function() {
+			var selectedTime = document.getElementById('time').value;
+			var duration = document.getElementById('duration').value;
+			// Do something with selectedTime and duration, for example, send them to the server
+			modal.style.display = 'none';
+		}
 
 
 
