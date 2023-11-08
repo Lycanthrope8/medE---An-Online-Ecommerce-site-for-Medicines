@@ -36,7 +36,7 @@ async function AddtoCart(id, quantity = 1, doSomething = null, button = null) {
       // Update the total price for this item in the cart
       const totalPriceElement = document.getElementById(`totalPrice-${id}`);
       if (totalPriceElement) {
-        totalPriceElement.textContent = `৳`+`${(cart[id] * (productData.discounted_price) / productData.medPerStrip).toFixed(2)}`;
+        totalPriceElement.textContent = `৳` + `${(cart[id] * (productData.discounted_price) / productData.medPerStrip).toFixed(2)}`;
       }
     } else {
       console.log("Response Error");
@@ -76,7 +76,7 @@ async function removeFromCart(productId) {
     delete cart[productId];
     // Update the cart in localStorage
     localStorage.setItem('cart', JSON.stringify(cart));
-    
+
     // Call totalBill to update and display the new total
     await totalBill();
 
@@ -96,15 +96,15 @@ async function removeFromCart(productId) {
 
 
 function ClearCart() {
-    console.log('clearing cart');
-    localStorage.removeItem('cart');
-    cart = {}
-    console.log(cart)
-  }
+  console.log('clearing cart');
+  localStorage.removeItem('cart');
+  cart = {}
+  console.log(cart)
+}
 
-  var totalValue = 0.0; // Initialize total value to 0.0
+var totalValue = 0.0; // Initialize total value to 0.0
 
-document.getElementById("cart-btn").addEventListener("click", async function() {
+document.getElementById("cart-btn").addEventListener("click", async function () {
   totalValue = await totalBill();
   var cart = JSON.parse(localStorage.getItem('cart'));
   var resultsDiv = $('#cart-container');
@@ -113,29 +113,29 @@ document.getElementById("cart-btn").addEventListener("click", async function() {
   resultsDiv.empty();
 
   // Get the sorted array of product IDs
-  var sortedProductIds = Object.keys(cart).sort(function(a, b) {
-      return a - b;
+  var sortedProductIds = Object.keys(cart).sort(function (a, b) {
+    return a - b;
   });
 
   // Loop through the sorted product IDs and create fetch requests
   for (const p_id of sortedProductIds) {
-      try {
-          // Fetch the product information for the current p_id
-          const response = await fetch(`/get_product_info/${p_id}/`);
-          if (response.ok) {
-              const productData = await response.json();
-              console.log("Product Data:", productData);
-              var productPrice = parseFloat(productData.discounted_price).toFixed(2);
-              
-              if (Object.keys(productData).length > 0 && "p_name" in productData) {
-                  // Display the product name
-                  // <a href="{%url 'prod' p_name=product.p_name %}"></a>
-                  resultsDiv.append(`
+    try {
+      // Fetch the product information for the current p_id
+      const response = await fetch(`/get_product_info/${p_id}/`);
+      if (response.ok) {
+        const productData = await response.json();
+        console.log("Product Data:", productData);
+        var productPrice = parseFloat(productData.discounted_price).toFixed(2);
+
+        if (Object.keys(productData).length > 0 && "p_name" in productData) {
+          // Display the product name
+          // <a href="{%url 'prod' p_name=product.p_name %}"></a>
+          resultsDiv.append(`
                   <div class="cartbox" id="cartbox-${p_id}">
                             
                   <img src="../../media/${productData["p_image"]}" alt="">
                   <div class="cart-content-${p_id}">
-                  <h3><a href="/product/${productData["p_name"]}/">${productData["p_name"]}</a></h3>
+                  <h3><a style="color:black;" href="/product/${productData["p_name"]}/">${productData["p_name"]}</a></h3>
                       <div style="display: grid; grid-template-columns: 0.5fr 1fr; gap: 20px;">
                       <span class="quantity">
                           <button class="quantity-button decrement" style="display: inline; white-space: nowrap;"
@@ -144,7 +144,7 @@ document.getElementById("cart-btn").addEventListener("click", async function() {
                           <button class="quantity-button increment" style="display: inline; white-space: nowrap;"
                               onclick="AddtoCart(${productData["p_id"]},${cart[productData["p_id"]]}, 'increment', this)">+</button>
                       </span>
-                      <span id="totalPrice-${p_id}">৳${(cart[productData["p_id"]] * (productData['discounted_price'])/productData['medPerStrip']).toFixed(2)}</h3>
+                      <span id="totalPrice-${p_id}">৳${(cart[productData["p_id"]] * (productData['discounted_price']) / productData['medPerStrip']).toFixed(2)}</h3>
                       </div>
                   </div>
                   <button class="cart-trash" onclick="removeFromCart(${productData["p_id"]})">
@@ -152,36 +152,36 @@ document.getElementById("cart-btn").addEventListener("click", async function() {
                   </button>
               </div>`
 
-              // The line below to go right before where the div closes. Commented out for convenience 
-              
-                  );
-                } else {
-                  resultsDiv.append('<p>No product name found.</p>');
-                }
-              } else {
-                resultsDiv.append('<p>No results found.</p>');
-              }
-      } catch (error) {
-          console.error('Error:', error);
+            // The line below to go right before where the div closes. Commented out for convenience 
+
+          );
+        } else {
+          resultsDiv.append('<p>No product name found.</p>');
+        }
+      } else {
+        resultsDiv.append('<p>No results found.</p>');
       }
+    } catch (error) {
+      console.error('Error:', error);
     }
+  }
 });
 
-async function totalBill(){
+async function totalBill() {
   var cart = JSON.parse(localStorage.getItem('cart')) || {};
   // Get the sorted array of product IDs
-  var sortedProductIds = Object.keys(cart).sort(function(a, b) {
+  var sortedProductIds = Object.keys(cart).sort(function (a, b) {
     return a - b;
   });
 
   total = 0.0;
   try {
-    for(const p_id of sortedProductIds){
+    for (const p_id of sortedProductIds) {
       const response = await fetch(`/get_product_info/${p_id}/`);
       if (response.ok) {
         const productData = await response.json();
-        total+= parseFloat((cart[productData["p_id"]] * (productData['discounted_price'] / productData['medPerStrip'])).toFixed(2));
-      }else{
+        total += parseFloat((cart[productData["p_id"]] * (productData['discounted_price'] / productData['medPerStrip'])).toFixed(2));
+      } else {
         console.log("Response Error")
       }
     }
@@ -190,7 +190,7 @@ async function totalBill(){
     if (totalElement) {
       totalElement.textContent = `Total:` + total;
     }
-    
+
 
   } catch (error) { // Define the error variable here
     console.error('Error:', error);
@@ -198,7 +198,7 @@ async function totalBill(){
 }
 
 
-document.getElementById('checkout-button').addEventListener('click', function() {
+document.getElementById('checkout-button').addEventListener('click', function () {
   var cart = JSON.parse(localStorage.getItem('cart')) || {};
 
   // Get the CSRF token
@@ -217,13 +217,13 @@ document.getElementById('checkout-button').addEventListener('click', function() 
 
   // Send the cart data to the server using fetch
   fetch(url, requestOptions)
-    .then(function(response) {
+    .then(function (response) {
       if (response.status === 200) {
         console.log('Checkout was successful');
         localStorage.removeItem('cart');
         window.location.href = '/order_confirm/';
       }
-     })
+    })
 
 });
 

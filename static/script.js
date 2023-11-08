@@ -1,5 +1,14 @@
 "use strict";
 
+const selectImage = document.querySelector("#select-image");
+const selectImage2 = document.querySelector("#select-image2");
+const inputFile = document.querySelector("#file-upload");
+const imgArea = document.getElementById("img-area");
+const backDrop = document.querySelector(".backdrop");
+const elemContainer = document.querySelector(".elem-container");
+
+const mybutton = document.querySelector("[data-back-top-btn]");
+
 var counter = 1;
 
 setInterval(function () {
@@ -11,12 +20,12 @@ setInterval(function () {
 }, 3000);
 
 const main = document.querySelector("main");
-const userLogin = document.querySelector(".user-login");
-const shoppingcart = document.querySelector(".shopping-cart");
+// const userLogin = document.querySelector(".user-login");
+const shoppingCart = document.querySelector(".shopping-cart");
 
 main.addEventListener("click", function () {
     userLogin.classList.remove("active");
-    shoppingcart.classList.remove("active");
+    shoppingCart.classList.remove("active");
 });
 
 const mobileMenuOpenBtn = document.querySelectorAll(
@@ -60,45 +69,21 @@ for (let i = 0; i < accordionBtn.length; i++) {
     });
 }
 
-// BACK TO TOP BUTTON
-
-const mybutton = document.querySelector("[data-back-top-btn]");
-window.onscroll = function () {
-    scrollFunction();
+document.querySelector("#cart-btn").onclick = () => {
+    shoppingCart.classList.toggle("active");
+    userLogin.classList.remove("active");
 };
 
-function scrollFunction() {
-    if (window.scrollY > 100) {
-        mybutton.classList.add("active");
-    } else {
-        mybutton.classList.remove("active");
-    }
-}
+const userLogin = document.querySelector(".user-login");
 
-// AUTO BANNER CAROUSEL
+document.querySelector("#user-login-btn").onclick = () => {
+    userLogin.classList.toggle("active");
+    shoppingCart.classList.remove("active");
+};
 
-// var img = document.getElementById('slider-item');
-// var slides = ['assets/images/banner-2.jpg','assets/images/banner-3.jpg','assets/images/banner-1.jpg'];
-// var Start=0;
-// function slider(){
-//     if(Start<slides.length){
-//         Start=Start+1;
-//     }
-//     else{
-//         Start=1;
-//     }
-//     console.log(img);
-//     img.innerHTML = "<img src="+slides[Start-1]+">";
-
-// }
-// setInterval(slider,2000);
-
-const selectImage = document.querySelector("#select-image");
-const selectImage2 = document.querySelector("#select-image2");
-const inputFile = document.querySelector("#file-upload");
-const imgArea = document.getElementById("img-area");
-const backDrop = document.querySelector(".backdrop");
-const elemContainer = document.querySelector(".elem-container");
+///////////////////////
+// PRESCRIPTION UPLOAD
+//////////////////////
 
 selectImage.addEventListener("click", function () {
     inputFile.click();
@@ -130,27 +115,28 @@ inputFile.addEventListener("change", function () {
     reader.readAsDataURL(image);
 });
 
-let shoppingCart = document.querySelector(".shopping-cart");
-let addToList = document.querySelector(".addtolistddown");
-
-document.querySelector("#cart-btn").onclick = () => {
-    shoppingCart.classList.toggle("active");
-    loginForm.classList.remove("active");
-};
-
-let loginForm = document.querySelector(".user-login");
-
-document.querySelector("#user-login-btn").onclick = () => {
-    loginForm.classList.toggle("active");
-    shoppingCart.classList.remove("active");
-};
-document.querySelector("#addtolist").onclick = () => {
-    addToList.classList.toggle("active");
-};
-
 document.querySelector(".label1").addEventListener("click", function () {
     document.querySelector(".gendermale").checked = true;
 });
 document.querySelector(".label2").addEventListener("click", function () {
     document.querySelector(".genderfemale").checked = true;
 });
+
+
+//////////////////////
+// BACK TO TOP BUTTON
+//////////////////////
+
+
+
+window.onscroll = function () {
+    scrollFunction();
+};
+
+function scrollFunction() {
+    if (window.scrollY > 100) {
+        mybutton.classList.add("active");
+    } else {
+        mybutton.classList.remove("active");
+    }
+}

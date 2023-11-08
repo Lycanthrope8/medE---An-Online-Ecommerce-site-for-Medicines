@@ -334,7 +334,7 @@
 								<input type="text" id="DayNumSpan" class="day-num" value="01">
 								<button class="day-increase-btn">+</button>
 							</div>
-							<button id="addtolist" class="addtolist addtolist2 col-sm-12" onclick="AddToList('{{ user }}', '{{ product_details.p_id }}')">Add To List</button>
+							<button id="addtolist2" class="addtolist addtolist2 col-sm-12" onclick="AddToList('{{ user }}', '{{ product_details.p_id }}')">Add To List</button>
 						</div>
 						
 						<div id="message"></div>
@@ -457,57 +457,60 @@
 	<a href="#top" class="back-top-btn" aria-label="back to top" data-back-top-btn>
 		<ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
 	</a>
-    <script type="text/javascript" src="{% static 'script.js' %}"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="{% static 'script.js' %}"></script>
 	<script src="{% static 'search.js' %}"></script>
-	<script>
-        // Get the buttons and the quantity element
-    const decreaseBtn = document.querySelector('.decrease-btn');
-    const increaseBtn = document.querySelector('.increase-btn');
-    const quantityNum = document.querySelector('.num');
-
-    // Add event listener for the decrease button
-    decreaseBtn.addEventListener('click', function() {
-        let currentQuantity = parseInt(quantityNum.textContent);
-        if (currentQuantity > 1) {
-            currentQuantity--;
-            quantityNum.textContent = currentQuantity.toString().padStart(2, '0');
-        }
-    });
-
-    // Add event listener for the increase button
-    increaseBtn.addEventListener('click', function() {
-        let currentQuantity = parseInt(quantityNum.textContent);
-        currentQuantity++;
-        quantityNum.textContent = currentQuantity.toString().padStart(2, '0');
-    });
-
-	const DayNumSpan = document.getElementById('DayNumSpan');
-	const dayDecreaseBtn = document.querySelector('.day-decrease-btn');
-	const dayIncreaseBtn = document.querySelector('.day-increase-btn');
-
-	// Decrease button click event
-	dayDecreaseBtn.addEventListener('click', function() {
-		let num = parseInt(DayNumSpan.value);
-		if (num > 1) {
-			num--;
-			DayNumSpan.value = num < 10 ? '0' + num : num;
-		}
-	});
-
-	// Increase button click event
-	dayIncreaseBtn.addEventListener('click', function() {
-		let num = parseInt(DayNumSpan.value);
-		num++;
-		DayNumSpan.value = num < 10 ? '0' + num : num;
-	});
-
- 
-    </script>
-
 	<script src="{% static 'cart.js' %}"></script>
 	<script src="{% static 'list.js' %}"></script>
 	<script src="{% static 'toast.js' %}"></script>
+	<script>
+        // Get the buttons and the quantity element
+		const decreaseBtn = document.querySelector('.decrease-btn');
+		const increaseBtn = document.querySelector('.increase-btn');
+		const quantityNum = document.querySelector('.num');
+
+		// Add event listener for the decrease button
+		decreaseBtn.addEventListener('click', function() {
+			let currentQuantity = parseInt(quantityNum.textContent);
+			if (currentQuantity > 1) {
+				currentQuantity--;
+				quantityNum.textContent = currentQuantity.toString().padStart(2, '0');
+			}
+		});
+
+		// Add event listener for the increase button
+		increaseBtn.addEventListener('click', function() {
+			let currentQuantity = parseInt(quantityNum.textContent);
+			currentQuantity++;
+			quantityNum.textContent = currentQuantity.toString().padStart(2, '0');
+		});
+
+		const DayNumSpan = document.getElementById('DayNumSpan');
+		const dayDecreaseBtn = document.querySelector('.day-decrease-btn');
+		const dayIncreaseBtn = document.querySelector('.day-increase-btn');
+
+		// Decrease button click event
+		dayDecreaseBtn.addEventListener('click', function() {
+			let num = parseInt(DayNumSpan.value);
+			if (num > 1) {
+				num--;
+				DayNumSpan.value = num < 10 ? '0' + num : num;
+			}
+		});
+
+		// Increase button click event
+		dayIncreaseBtn.addEventListener('click', function() {
+			let num = parseInt(DayNumSpan.value);
+			num++;
+			DayNumSpan.value = num < 10 ? '0' + num : num;
+		});
+
+		const addToList = document.querySelector(".addtolistddown");
+
+		document.getElementById("addtolist").onclick = () => {
+			addToList.classList.toggle("active");
+		};
+    </script>
 
 </body>
 </html> 
