@@ -21,7 +21,10 @@
         <img src="{% static 'favicon.png' %}" alt=" medX logo">
         <form style="padding: 0;" method="post" action="{% url 'send_otp' %}">
             {% csrf_token %}
-            <input id="phone_number" type="text" name="phone_number" placeholder="Phone Number" required/>
+            <div class="num-input-container">
+              <label for="phone_number">+880</label>
+              <input id="phone_number" type="text" name="phone_number" placeholder="Phone Number" pattern="[0]\d{10}" title="Enter a valid phone number" required/>
+            </div>
             <button type="submit">Send OTP</button>
         </form>
 

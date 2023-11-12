@@ -16,11 +16,13 @@
   <body>
     <div class="container" id="container">
         <div class="form-container sign-in">
-            <form method="post" action="{% url 'mylogin' %}">
+            <form name="form" method="post" action="{% url 'mylogin' %}">
                 {% csrf_token %}
                 <img src="{% static 'favicon.png' %}" alt=" medX logo">
-                <input
-                type="tel" name="phone_number" placeholder="Phone Number" required/>
+                <div class="num-input-container">
+                  <label for="phone_number">+880</label>
+                  <input class="phone-number" type="tel" name="phone_number" placeholder="Phone Number" pattern="[0]\d{10}" title="Enter a valid phone number" required/>
+                </div>
                 <input type="password" name="password" placeholder="Password" required/>
                 <button type="submit">Login</button>
                 <button><a href="{% url 'forgotpassword' %}">Forgot Password?</a></button>
@@ -43,4 +45,15 @@
         </div>
     </div>
   </body>
+  <script>
+
+    // function validation(){
+    //   var number = document.forms["form"]["phone_number"];
+
+    //   if(Nan(number.value) || number.value.length!=11 || first_num<6) {
+    //     alert("invalid")
+    //   }
+    // }
+
+  </script>
 </html>
