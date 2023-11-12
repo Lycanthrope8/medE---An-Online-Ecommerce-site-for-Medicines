@@ -77,7 +77,6 @@ def quick_order(request):
 
     
 
-    
 def upload_prescription(request):
     if request.method == 'POST':
         prescription_image = request.FILES.get('prescription_image')
@@ -92,6 +91,7 @@ def upload_prescription(request):
         # Save the prescription image to the user's folder.
         fs = FileSystemStorage(location=user_prescription_folder)
         saved_image = fs.save(prescription_image.name, prescription_image)
+        image= "prescription/"+phone_number+"/"+saved_image
 
         # Update the prescriptions column in the database
         try:
@@ -99,20 +99,17 @@ def upload_prescription(request):
             prescriptions = user_medlist.prescriptions
 
             if prescriptions:
-                prescriptions = eval(prescriptions)
-                prescriptions.append((saved_image, selected_days[0]))
+                prescriptions.append((image, selected_days[0]))
             else:
-                prescriptions = [(saved_image, selected_days[0])]
+                prescriptions = [(image, selected_days[0])]
 
-            user_medlist.prescriptions = repr(prescriptions)
+            user_medlist.prescriptions = (prescriptions)
             user_medlist.save()
 
             return JsonResponse({'success': True})
         except Profile_MedList.DoesNotExist:
             # Create a new user with the provided phone number
-            new_user_medlist = Profile_MedList(phone_number=phone_number, prescriptions=repr([(saved_image, selected_days[0])]))
+            new_user_medlist = Profile_MedList(phone_number=phone_number, prescriptions=([(image, selected_days[0])]))
             new_user_medlist.save()
 
     # Handle other HTTP methods if needed
-
-    
