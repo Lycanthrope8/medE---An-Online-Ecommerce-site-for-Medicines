@@ -235,13 +235,16 @@ def update_profile(request):
         saved_data = Profile_MedList.objects.filter(phone_number=phonenumber).values()
 
         # Convert the QuerySet to a list of dictionaries
+        
         data_list = list(saved_data)
+
         # print(data_list)
         
 
 
         # Redirect to a success page or any other desired behavior after successful form submission
         return render(request, 'user-profile.html', {'temp': temp,'medList': data_list})  # Redirect to a success template
+    
 
     # Handle GET request or display the form
     return render(request, 'user-profile.html')

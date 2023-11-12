@@ -25,6 +25,7 @@
               <label for="phone_number">+880</label>
               <input id="phone_number" type="text" name="phone_number" placeholder="{% if phone_number %}{{ phone_number|slice:'4:' }}{% else %} Phone Number {%endif%}" pattern="[0]\d{10}" title="Enter a valid phone number"  required/>
             </div>
+
             <button type="submit">Send OTP</button>
             {%if message%}
             <div>{{message}}</div>
@@ -41,6 +42,7 @@
           <div class="input-field" id="otp-container">
             <input type="number" name="otp1" id="otp1" class="otp-input" maxlength="1" />
             <input type="number" name="otp2" id="otp2" class="otp-input" maxlength="1" disabled />
+
             <input type="number" name="otp3" id="otp3" class="otp-input" maxlength="1" disabled />
             <input type="number" name="otp4" id="otp4" class="otp-input" maxlength="1" disabled />
           </div>  
@@ -59,6 +61,7 @@
       
       <div class="toggle-container toggle-right">
         <div class="toggle bg-right">
+
           <div class="toggle-panel">
             
             <h1>Hello there!</h1>
@@ -82,6 +85,7 @@
         }
       });
     
+
       input.addEventListener("keydown", (event) => {
         if (event.key === "Backspace") {
           if (index > 0 && input.value === "") {
@@ -91,5 +95,6 @@
       });
     });
     </script>
+    
     
     </html>
