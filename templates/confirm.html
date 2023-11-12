@@ -2,11 +2,7 @@
 {% load static %}
 <html>
   <head>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'confirm.css' %}"
-    />
+    <link rel="stylesheet" type="text/css" href="{% static 'confirm.css' %}" />
   </head>
   <body>
     <header>
@@ -22,14 +18,13 @@
           </a>
         </div>
       </div>
-      
     </header>
     <main>
-        <div class="confirm-order container">
-          <img src="{% static 'images/check.gif' %}" alt="" width="80">
-          <h1>Your order has been confirmed!</h1>
-        </div>
-        <a href="{%url 'home'%}">Back to Home</a>
+      <div class="confirm-order container">
+        <img src="{% static 'images/check.gif' %}" alt="" width="80" />
+        <h1>Your order has been confirmed!</h1>
+      </div>
+      <a href="{%url 'home'%}">Back to Home</a>
     </main>
 
     <script

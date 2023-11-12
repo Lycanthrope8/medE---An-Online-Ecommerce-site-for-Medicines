@@ -9,16 +9,16 @@ async function AddtoCart(id, quantity = 1, doSomething = null, button = null) {
 
       if (cart[id] === undefined) {
         console.log("Added to cart:", id);
-        // Multiply the quantity by 'medPerStrip' from the API response
-        cart[id] = parseInt(quantity * productData.medPerStrip);
+        
+        cart[id] = parseInt(quantity);
       } else if (cart[id] !== undefined && doSomething === null) {
-        cart[id] += quantity * productData.medPerStrip;
+        cart[id] += quantity;
       } else if (doSomething === "increment") {
         cart[id] += 1;
       } else if (doSomething === "decrement" && cart[id] > 1) {
         cart[id] -= 1;
       } else if (doSomething === "replace") {
-        cart[id] = parseInt(quantity * productData.medPerStrip);
+        cart[id] = parseInt(quantity);
       }
 
       // console.log(cart);
@@ -36,7 +36,7 @@ async function AddtoCart(id, quantity = 1, doSomething = null, button = null) {
       // Update the total price for this item in the cart
       const totalPriceElement = document.getElementById(`totalPrice-${id}`);
       if (totalPriceElement) {
-        totalPriceElement.textContent = `৳` + `${(cart[id] * (productData.discounted_price) / productData.medPerStrip).toFixed(2)}`;
+        totalPriceElement.textContent = `৳` + `${(cart[id] * productData.discounted_price).toFixed(2)}`;
       }
     } else {
       console.log("Response Error");
@@ -144,7 +144,7 @@ document.getElementById("cart-btn").addEventListener("click", async function () 
                           <button class="quantity-button increment" style="display: inline; white-space: nowrap;"
                               onclick="AddtoCart(${productData["p_id"]},${cart[productData["p_id"]]}, 'increment', this)">+</button>
                       </span>
-                      <span id="totalPrice-${p_id}">৳${(cart[productData["p_id"]] * (productData['discounted_price']) / productData['medPerStrip']).toFixed(2)}</h3>
+                      <span id="totalPrice-${p_id}">৳${(cart[productData["p_id"]] * productData['discounted_price']).toFixed(2)}</h3>
                       </div>
                   </div>
                   <button class="cart-trash" onclick="removeFromCart(${productData["p_id"]})">
@@ -180,7 +180,7 @@ async function totalBill() {
       const response = await fetch(`/get_product_info/${p_id}/`);
       if (response.ok) {
         const productData = await response.json();
-        total += parseFloat((cart[productData["p_id"]] * (productData['discounted_price'] / productData['medPerStrip'])).toFixed(2));
+        total += parseFloat((cart[productData["p_id"]] * productData['discounted_price'] ).toFixed(2));
       } else {
         console.log("Response Error")
       }

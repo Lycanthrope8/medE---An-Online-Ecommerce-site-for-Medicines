@@ -804,7 +804,7 @@ main .sidebar li:hover {
   background-color: rgb(255, 97, 97);
 }
 
-main .sidebar li:last-child:hover {
+main .sidebar li:last-child {
   border-bottom-right-radius: 10px;
 }
 
@@ -820,6 +820,9 @@ main .registration-form.active {
   display: flex;
   transition: 3s ease;
 }
+main .registration-form.active ~ .sidebar li:nth-child(1) {
+  background-color: rgb(255, 97, 97);
+}
 
 .registration-form input {
   margin: 1.5rem 0;
@@ -832,6 +835,12 @@ main .registration-form.active {
   font-size: 0.8rem;
   color: black;
   text-transform: none;
+}
+.registration-form h1 {
+  text-align: center;
+  margin: 15px auto;
+  font-weight: 500;
+  color: #303030;
 }
 
 /* .registration-form .input-box:not(:nth-child(6)) input,
@@ -863,16 +872,11 @@ main .registration-form.active {
   gap: 10px;
   grid-template-columns: 2fr 1fr 1fr;
   padding: 20px 10px;
+  align-items: center;
 }
 
 .registration-form .gender label {
   padding: 10px 0;
-}
-
-.registration-form .gender .label1,
-.registration-form .gender .label2 {
-  display: grid;
-  grid-template-columns: 0.5fr 1fr;
 }
 
 .registration-form .gender .label1 {
@@ -890,7 +894,7 @@ main .registration-form.active {
 }
 
 .registration-form .gender input {
-  margin-left: auto;
+  margin: 1rem auto;
 }
 
 .registration-form .gender label:not(:nth-child(1)) {
@@ -977,12 +981,13 @@ main .registration-form.active {
 
 .popup-image img {
   position: absolute;
-  top: 35%;
+  top: 65%;
   left: 50%;
   transform: translate(-50%, -50%);
   border: 5px solid white;
   border-radius: 5px;
-  width: 750px;
+  width: 100%;
+  max-width: 700px;
   object-fit: cover;
   z-index: 5;
 }
@@ -1449,7 +1454,7 @@ td .quantity button.num {
   }
 
   main .container {
-    margin: 0 auto;
+    margin: 0 auto 10px auto;
   }
 
   main .sidebar {
@@ -2066,7 +2071,7 @@ td .quantity button.num {
 
 @media (min-width: 1280px) {
   main .container {
-    margin: 10px auto 10px calc(100% - 83vw);
+    margin: 10px auto 10px calc(100% - 81vw);
   }
 
   .prescriptions.active {

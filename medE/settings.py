@@ -60,7 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'livereload.middleware.LiveReloadScript',
+    # 'livereload.middleware.LiveReloadScript',
     
 ]
 
@@ -103,7 +103,7 @@ DATABASES = {
 # settings.py
 
 LOGOUT_REDIRECT_URL='home'
-ALLOWED_HOSTS = ["127.0.0.1", "192.168.0.106", "192.168.0.108", "192.168.0.104", "localhost"]
+ALLOWED_HOSTS = ["127.0.0.1", "192.168.0.106", "192.168.0.108", "192.168.0.104", "192.168.0.110", "localhost"]
 
 
 # Password validation
