@@ -804,7 +804,7 @@ main .sidebar li:hover {
   background-color: rgb(255, 97, 97);
 }
 
-main .sidebar li:last-child:hover {
+main .sidebar li:last-child {
   border-bottom-right-radius: 10px;
 }
 
@@ -819,6 +819,9 @@ main .registration-form {
 main .registration-form.active {
   display: flex;
   transition: 3s ease;
+}
+main .registration-form.active ~ .sidebar li:nth-child(1) {
+  background-color: rgb(255, 97, 97);
 }
 
 .registration-form input {

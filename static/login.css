@@ -133,17 +133,41 @@ body {
   height: 40px;
 } */
 
-.container input {
-    background-color: #eee;
+.num-input-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.num-input-container input {
+  background-color: #eee;
     border: none;
     margin: 8px 0;
     padding: 10px 15px;
-    font-size: 13px;
+    font-size: 1rem;
+    font-weight: 500;
     border-radius: 10px;
     width: 100%;
     outline: none;
 }
+.container label {
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: rgb(232, 240, 254);
+  padding: 10px 15px;
+  border-radius: 10px;
+}
 
+.container input {
+    background-color: rgb(232, 240, 254);
+    border: none;
+    margin: 8px 0;
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 10px;
+    width: 100%;
+    outline: none;
+}
 /* ////////////// */
 /* FORMS */
 /* ////////////// */
@@ -243,7 +267,7 @@ img {
   text-align: center;
   font-size: 1.125rem;
   font-weight: 500;
-  border: 1px solid#ddd;
+  box-shadow: inset 8px 10px 5px 0px rgba(194, 194, 194, 0.1);
 }
 
 .input-field input::-webkit-inner-spin-button,
