@@ -16,7 +16,7 @@ from products.models import Profile_MedList
 
 def mylogin(request):
     if request.method == 'POST':
-        phone_number = request.POST.get('phone_number')
+        phone_number = '+880'+request.POST.get('phone_number')
         password = request.POST.get('password')
 
         # Retrieve user profile based on phone number
@@ -26,11 +26,8 @@ def mylogin(request):
 
         if user_profile is not None and check_password(password, user_profile.password):
             # Password matches, log the user in
-            
-            
             user = authenticate(request, username=phone_number, password=password)
             print(user)
-
 
             if user is not None:
                 login(request, user)
@@ -43,12 +40,23 @@ def mylogin(request):
     return render(request, 'login.html')
 
 
-def verify_otp(request):
-    if request.method == 'POST':
-        user_otp = request.POST.get('otp')
-        stored_otp = request.session.get('otp')
-        phone_number = request.session.get('phone_number')
+from django.contrib.auth.hashers import make_password
+from django.contrib import messages
+from .models import UserProfile  # Import your user profile model
 
+def verify_otp(request):
+    print("Getting here")
+    if request.method == 'POST':
+        otp1 = request.POST.get('otp1')
+        otp2 = request.POST.get('otp2')
+        otp3 = request.POST.get('otp3')
+        otp4 = request.POST.get('otp4')
+        user_otp = otp1 + otp2 + otp3 + otp4
+        stored_otp = request.session.get('otp')
+
+        phone_number = request.session.get('phone_number')
+        
+        # print(user_otp, stored_otp , phone_number)
         if user_otp == stored_otp:
             # OTP is correct, create a user profile
             password = request.POST.get('password')
@@ -75,9 +83,6 @@ def verify_otp(request):
     # Handle GET requests (if any) here
     return render(request, 'authentication/login.html')
 
-from django.contrib.auth.hashers import make_password
-from django.contrib import messages
-from .models import UserProfile  # Import your user profile model
 
 def verify_forgot_password_otp(request):
     if request.method == 'POST':
@@ -125,24 +130,55 @@ def myregister(request):
 def forgotPassword(request):
     return render(request, 'forgot_password.html')
 
+# def send_otp(request):
+#     if request.method == 'POST':
+#         phone_number = '+880'+request.POST.get('phone_number')
+#         otp = str(random.randint(1000, 9999))  # Generate a random 4-digit OTP
+
+#         # Send the OTP via Twilio
+#         client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+#         message = client.messages.create(
+#             body=f'Your OTP is: {otp}',
+#             from_=settings.TWILIO_PHONE_NUMBER,
+#             to=phone_number
+#         )
+
+#         # Store the OTP in session for verification
+#         request.session['otp'] = otp
+#         request.session['phone_number'] = phone_number
+#         print(otp)
+#         return HttpResponse("OTP sent successfully")
+
+
+from twilio.base.exceptions import TwilioRestException
+from django.http import HttpResponse, JsonResponse
+from django.conf import settings
+
 def send_otp(request):
     if request.method == 'POST':
-        phone_number = request.POST.get('phone_number')
+        phone_number = '+880' + request.POST.get('phone_number')
         otp = str(random.randint(1000, 9999))  # Generate a random 4-digit OTP
 
-        # Send the OTP via Twilio
-        client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
-        message = client.messages.create(
-            body=f'Your OTP is: {otp}',
-            from_=settings.TWILIO_PHONE_NUMBER,
-            to=phone_number
-        )
+        try:
+            # Send the OTP via Twilio
+            client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+            message = client.messages.create(
+                body=f'Your OTP is: {otp}',
+                from_=settings.TWILIO_PHONE_NUMBER,
+                to=phone_number
+            )
 
-        # Store the OTP in session for verification
-        request.session['otp'] = otp
-        request.session['phone_number'] = phone_number
-        print(otp)
-        return HttpResponse("OTP sent successfully")
+            # Store the OTP in session for verification
+            request.session['otp'] = otp
+            request.session['phone_number'] = phone_number
+            print(f"OTP sent successfully to {phone_number}, otp: {otp}")
+            return render(request, 'register.html', {'phone_number':phone_number,'message': "OTP Sent Successfully"})
+            # return JsonResponse({'status': 'success', 'message': 'OTP sent successfully'})
+        except TwilioRestException as e:
+            # Log the error or handle it appropriately
+            print(f"Twilio Error: {e}")
+            return JsonResponse({'status': 'error', 'message': 'Failed to send OTP. Please try again.'})
+    return HttpResponse("Invalid request method")
 
 
 def mylogout(request):
