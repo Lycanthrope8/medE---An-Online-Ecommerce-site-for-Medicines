@@ -402,19 +402,22 @@
 			</div>
 			<button type="submit">Update Profile</button>
 		</form>
+
 		{% for item in medList %}
-		{% for p in item.prescriptions %}
-		<div class="prescriptions container" id="prescriptions">
-			<p>{{p.0}}</p>
-			<div class="presc-box">
-				
-				<img src="" alt="{{p.0}}" >
-				<h3>Uploaded: 23.07.23</h3>
-			</div>
-			<div class="popup-image" style="opacity: 0;"><img src="" alt=""></div>
-		</div>
-		{%endfor%}
-		{%endfor%}
+        {% for p in item.prescriptions %}
+        <div class="prescriptions container" id="prescriptions">
+            <p>{{p.0}}</p>
+            <div class="presc-box">
+
+                <img src="" alt="{{p.0}}" >
+                <h3>Uploaded: 23.07.23</h3>
+            </div>
+            <div class="popup-image" style="opacity: 0;"><img src="" alt=""></div>
+        </div>
+        {%endfor%}
+        {%endfor%}
+
+
 		<div class="purchase-history container">
 			<table>
 				<thead>

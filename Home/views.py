@@ -77,7 +77,6 @@ def quick_order(request):
 
     
 
-    
 def upload_prescription(request):
     if request.method == 'POST':
         prescription_image = request.FILES.get('prescription_image')
@@ -114,5 +113,3 @@ def upload_prescription(request):
             new_user_medlist.save()
 
     # Handle other HTTP methods if needed
-
-    
