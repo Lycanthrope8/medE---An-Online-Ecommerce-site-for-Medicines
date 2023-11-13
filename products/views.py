@@ -11,13 +11,13 @@ from django.utils import timezone
 # Create your views here.
 def prod(request, p_name):
     product_details = {
-        'name': p_name
+        'name': p_name,
     }
 
     try:
         product = main_product.objects.get(p_name=product_details['name'])
         product.discounted_price = product.p_price - (product.p_price*(product.p_discount/100))	#FOR DISCOUNT
-         
+        
     except main_product.DoesNotExist:
         product = None
         
@@ -82,6 +82,7 @@ def get_product_info(request, p_id):
             'p_id': p_id,
             'p_name': product.p_name,
             'p_category': product.p_category,
+            'otc_status': product.otc_status,
             'p_price': str(product.p_price),
             'p_discount': str(product.p_discount),
             'discounted_price':product.p_price - (product.p_price * (product.p_discount / 100)),
@@ -107,8 +108,8 @@ def checkout_view(request):
             total=0
             for key, value in data.items():
                 product = main_product.objects.get(p_id=key)
-                total+=value*((product.p_price - (product.p_price * (product.p_discount / 100)))/product.medPerStrip)
-                output[product.p_name]=str(value)+";"+ str(value*(product.p_price - (product.p_price * (product.p_discount / 100)))/product.medPerStrip)
+                total+=value*((product.p_price - (product.p_price * (product.p_discount / 100))))
+                output[product.p_name]=str(value)+";"+ str(value*(product.p_price - (product.p_price * (product.p_discount / 100))))
             print(output)
             if(total>0):
                 total+=60

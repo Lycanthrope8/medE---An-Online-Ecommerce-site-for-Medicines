@@ -292,6 +292,12 @@
 						{% endif %}
                     </div>
 
+					<div class="otc-status">
+						{% if product_details.otc_status == 'no' %}
+							<p class="prescription-message">You need to provide a prescription for this medicine</p>
+						{% endif %}
+					</div>
+
 
 
 					<!-- Product Page Decrease Increase Quantity -->
