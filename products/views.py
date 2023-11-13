@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.db import connection
-from .models import main_product, Profile_MedList
+from .models import main_product, Profile_MedList, presciption_order
 from django.core.exceptions import ObjectDoesNotExist
 from authentication.models import UserProfile
 import json
@@ -107,8 +107,8 @@ def checkout_view(request):
             total=0
             for key, value in data.items():
                 product = main_product.objects.get(p_id=key)
-                total+=value*((product.p_price - (product.p_price * (product.p_discount / 100)))/product.medPerStrip)
-                output[product.p_name]=str(value)+";"+ str(value*(product.p_price - (product.p_price * (product.p_discount / 100)))/product.medPerStrip)
+                total+=value*((product.p_price - (product.p_price * (product.p_discount / 100))))
+                output[product.p_name]=str(value)+";"+ str(value*(product.p_price - (product.p_price * (product.p_discount / 100))))
             print(output)
             if(total>0):
                 total+=60
@@ -199,3 +199,29 @@ def remove_productList(request, product_id):
     except Exception as e:
         return JsonResponse({'success': False, 'error': str(e)})
 
+def pres_confirm(request):
+    phonenumber = request.user.phone_number
+    saved_data = Profile_MedList.objects.filter(phone_number=phonenumber).values()
+
+    # Convert the QuerySet to a list of dictionaries
+    data_list = list(saved_data)
+    return render(request,'pres_confirm.html',{'medList': data_list})
+
+
+def presciptions_order(request):
+    if request.method == 'POST':
+        # Get the necessary data from the form and logged in user
+        phone_number = request.user.phone_number  # Replace with your actual user profile field
+        prescription_img = request.POST.get('prescription_img')  # Make sure this is the correct form field name
+        days = request.POST.get('days2')
+        delivery_address = request.POST.get('address', 'null')
+        # Create a new prescription order
+        prescription_order_obj = presciption_order.objects.create(
+            phonenumber=phone_number,
+            prescription_img=prescription_img,
+            days=days,
+            del_adress=delivery_address,
+            timestamp=timezone.now(), # You can set the default status here
+        )
+        prescription_order_obj.save()
+    return render(request,'confirm.html')

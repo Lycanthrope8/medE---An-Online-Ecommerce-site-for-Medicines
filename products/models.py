@@ -114,6 +114,7 @@ class Orders(models.Model):
     ]
     phonenumber = models.CharField(max_length=15)
     ordered_products = models.TextField(default="null")
+    prescription = models.JSONField(default="null")
     total = models.TextField(default="null")
     del_adress = models.TextField(default="null")
     timestamp = models.DateTimeField(default=timezone.now)
@@ -127,3 +128,21 @@ class Profile_MedList(models.Model):
 
     def __str__(self):
         return self.phone_number
+    
+
+class presciption_order(models.Model):
+    Approved = 'Approved'
+    Rejected = 'Rejected'
+    Pending = 'Pending'
+    prescription_status = [
+        (Approved, 'Approved'),
+        (Rejected, 'Rejected'),
+        (Pending, 'Pending'),
+    ]
+
+    phonenumber = models.CharField(max_length=15)
+    prescription_img = models.TextField(default="null")
+    days = models.TextField(default="null")
+    del_adress = models.TextField(default="null")
+    timestamp = models.DateTimeField(default=timezone.now)
+    status=models.CharField(max_length=20, choices=prescription_status, default='Pending', blank=True)
