@@ -403,21 +403,20 @@
 			<button type="submit">Update Profile</button>
 		</form>
 
-
+		
         <div class="prescriptions container" id="prescriptions">
 			{% for item in medList %}
         {% for p in item.prescriptions %}
-            <p>{{p.0}}</p>
             <div class="presc-box">
 
-                <img src="{{p.0}}" alt="{{p.0}}" >
+                <img src="../../media/{{p.0}}" alt="{{p.0}}" >
                 <h3>Uploaded: 23.07.23</h3>
             </div>
-            <div class="popup-image" style="opacity: 0;"><img src="" alt=""></div>
+            <div class="popup-image" style="opacity: 0;"><img src="../../media/{{p.0}}" alt=""></div>
 			{%endfor%}
 			{%endfor%}
-	
         </div>
+	
 
 		<div class="purchase-history container">
 			<table>
