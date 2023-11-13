@@ -21,10 +21,12 @@ class main_product(models.Model):
 
     )
     feature_CHOICES = (('yes', 'yes'), ('no', 'no'))
+    OTC_CHOICES = (('yes', 'Yes'),('no', 'No'))
 
     p_id = models.AutoField(primary_key=True)
     p_name = models.CharField(max_length=255)
     p_type = models.CharField(max_length=255)
+    otc_status = models.CharField(max_length=3, choices=OTC_CHOICES, default='yes')
     p_image=models.ImageField(upload_to='media/',default='static\cat-icons\syringe.png')  # 'images/' is the upload directory
     p_generics = models.CharField(max_length=255)
     p_company = models.CharField(max_length=255)
