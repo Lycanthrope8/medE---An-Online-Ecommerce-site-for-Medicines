@@ -129,10 +129,21 @@ def searchresult(request):
             search_results = json.loads(search_results_json)
 
             # Process the search results as needed
-            print(search_results)
 
+            p_id_list = [item['p_id'] for item in search_results]
+            p_details=[]
+            for id in p_id_list:
+                products = main_product.objects.filter(p_id=id)
+                for product in products:
+                    product.discounted_price = product.p_price - (product.p_price * (product.p_discount / 100))
+                p_details.append(products)
+
+            context = {
+                'product_details': p_details,
+                }
+            print(context)
             # Return a response if necessary
-            return JsonResponse({'status': 'success'})
+            return render(request,'search-results.html',context)
     
     # Return an error response if the request doesn't contain the expected data
     return JsonResponse({'status': 'error', 'message': 'Invalid request'})

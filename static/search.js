@@ -120,18 +120,19 @@ function searchresults() {
         dataType: 'json',
         success: function (data) {
             console.log(data);
-
+    
             // Make a new AJAX request to pass the data to the searchresult view
             $.ajax({
                 url: '/searchresult/', // Update this URL to match your searchresult view URL
                 method: 'POST', // or 'GET' depending on your requirements
                 data: { 'search_results': JSON.stringify(data) },
                 success: function (response) {
-                    // Handle the response from the searchresult view
+                    // Handle the response as needed
                     console.log(response);
                 }
             });
         }
     });
+    
 }
 

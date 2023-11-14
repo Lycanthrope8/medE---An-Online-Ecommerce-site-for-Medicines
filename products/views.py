@@ -67,6 +67,7 @@ def live_search(request):
             {
                 'p_name': product.p_name,
                 'p_type': product.p_type,
+                'p_id':product.p_id,
             }
             for product in results
         ]
