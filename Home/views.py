@@ -136,13 +136,14 @@ def searchresult(request):
                 products = main_product.objects.filter(p_id=id)
                 for product in products:
                     product.discounted_price = product.p_price - (product.p_price * (product.p_discount / 100))
+                    print(product.p_image)
                 p_details.append(products)
 
             context = {
                 'product_details': p_details,
             }
             
-
+            
             # Render the HTML template with the context
             html_content = render(request, 'search-results.html', context).content.decode('utf-8')
 
