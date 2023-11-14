@@ -802,7 +802,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 .backdrop.active {
   display: block;
-  position: absolute;
+  position: fixed;
   top: 0;
   height: 100%;
   width: 100%;
@@ -815,7 +815,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 .img-area.active {
   display: flex;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -1395,7 +1395,7 @@ body::-webkit-scrollbar-thumb:hover {
     --fs-8: 0.875rem;
   }
   .img-area .elem-container {
-    height: 480px;
+    height: 500px;
     width: 400px;
   }
   .img-area .elem-container {
@@ -1794,13 +1794,13 @@ body::-webkit-scrollbar-thumb:hover {
   .img-area .elem-container {
     padding: 500px 20px 25px 25px;
     height: 650px;
-    width: 650px;
+    width: 550px;
   }
 
   .img-area .elem-container img {
     top: 50%;
-    height: 100%;
-    width: 100%;
+    height: 450px;
+    width: 500px;
   }
 
   /* CATEGORY */

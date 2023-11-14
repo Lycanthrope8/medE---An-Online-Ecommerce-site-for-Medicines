@@ -115,13 +115,6 @@ inputFile.addEventListener("change", function () {
     reader.readAsDataURL(image);
 });
 
-document.querySelector(".label1").addEventListener("click", function () {
-    document.querySelector(".gendermale").checked = true;
-});
-document.querySelector(".label2").addEventListener("click", function () {
-    document.querySelector(".genderfemale").checked = true;
-});
-
 
 //////////////////////
 // BACK TO TOP BUTTON
@@ -139,4 +132,11 @@ function scrollFunction() {
     } else {
         mybutton.classList.remove("active");
     }
-}
+};
+
+
+$(".days :nth-child(odd)").change(function(){
+    $(".days :nth-child(odd)").prop('checked',false);
+    $(this).prop('checked',true);
+    console.log($(this).val());
+});

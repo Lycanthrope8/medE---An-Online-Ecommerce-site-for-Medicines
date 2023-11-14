@@ -2,11 +2,70 @@
 {% load static %}
 <html>
   <head>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'order_confirm.css' %}"
-    />
+    <title>medE</title>
+	  <link rel="icon" type="image/x-icon" href="{% static 'Favicon.png' %}">
+    <style>
+      .header-main .container {
+        border-bottom: 1px solid hsl(0, 0%, 93%);
+        /* flex-wrap: wrap; */
+        padding: 5px 0;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .header-logo {
+        display: block;
+      }
+      .header-logo img{
+        margin: 0 auto;
+      }
+      .purchase-history {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .presc-image {
+        height: 600px;
+        width: 550px;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+      }
+      label {
+        padding: 5px 10px;
+        font: 600 20px "poppins", sans-serif;
+      }
+      #addressInput {
+        outline: none;
+        border: none;
+        border-radius: 15px;
+        font: 400 18px "poppins", sans-serif;
+        padding: 0px 10px;
+        background-color: rgb(232, 240, 254);
+        width: calc(100% - 20px);
+      }
+      .confirm-order {
+        border: none;
+        outline: none;
+        cursor: pointer;
+        font: 600 20px "poppins", sans-serif;
+        color: white;
+        margin-top: 10px;
+        background-color: #de0000;
+        border-radius: 15px;
+        width: 100%;
+        padding: 10px 20px;
+        transition: 0.2s ease;
+      }
+      .confirm-order:hover {
+        letter-spacing: 1px;
+      }
+    </style>
+
   </head>
   <body>
     <header>
@@ -31,7 +90,7 @@
                     {% for p in item.prescriptions %}
 
                         {% if forloop.last %}
-                        <img src="../../media/{{p.0}}" alt="{{p.0}}" >
+                        <img class="presc-image" src="../../media/{{p.0}}" alt="{{p.0}}" >
                             <form method="post" action="{% url 'presciptions_order' %}">
                                 {% csrf_token %}
                                 <input type="hidden" name="prescription_img" value="{{ p.0 }}">

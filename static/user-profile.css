@@ -980,17 +980,30 @@ main .registration-form.active ~ .sidebar li:nth-child(1) {
   font-size: var(--fs-3);
 }
 
-.popup-image img {
-  position: absolute;
-  top: 65%;
+.popup-image {
+  display: none;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 700px;
+  z-index: 5;
+}
+.popup-image.active {
+  display: flex;
+}
+
+.popup-image.active img {
+  /* position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%); */
   border: 5px solid white;
   border-radius: 5px;
   width: 100%;
   max-width: 700px;
   object-fit: cover;
-  z-index: 5;
 }
 
 /* ------------------------ */
@@ -1502,6 +1515,22 @@ td .quantity button.num {
   .prescriptions {
     grid-template-columns: 1fr;
   }
+  .img-area .elem-container {
+    padding: 300px 20px 25px 25px;
+    height: 500px;
+    width: 90vw;
+  }
+  .img-area .elem-container img {
+    top: 42%;
+    height: 280px;
+    width: 280px;
+  }
+  .img-area .days input[type="checkbox"] {
+    width: 30px;
+  }
+  .days label {
+    font-size: 3.5vw;
+  }
 }
 
 @media (min-width: 480px) {
@@ -1563,6 +1592,21 @@ td .quantity button.num {
   .product-grid {
     grid-template-columns: 1fr 1fr;
     gap: 30px;
+  }
+  .img-area .elem-container {
+    height: 480px;
+    width: 400px;
+  }
+  .img-area .elem-container {
+    padding: 300px 20px 25px 25px;
+  }
+  .img-area .elem-container img {
+    top: 42%;
+    height: 280px;
+    width: 280px;
+  }
+  .days label {
+    font-size: var(--fs-6);
   }
 
   .copyright {
@@ -1631,6 +1675,16 @@ td .quantity button.num {
 
   .prescriptions {
     grid-template-columns: 1fr 1fr;
+  }
+  .img-area .elem-container {
+    height: 500px;
+    width: 400px;
+  }
+
+  .img-area .elem-container img {
+    top: 45%;
+    height: 300px;
+    width: 300px;
   }
 
   .footer-top .container {
@@ -1708,7 +1762,14 @@ td .quantity button.num {
   .prescriptions.active {
     grid-template-columns: 1fr 1fr;
   }
-
+  .img-area .elem-container img {
+    top: 45%;
+    height: 300px;
+    width: 350px;
+  }
+  .img-area .times input[type="checkbox"] {
+    width: 30px;
+  }
   /* .registration-form .input-box:not(:nth-child(6)) input,
 	.registration-form .input-box:not(:nth-child(7)) input {
 		width: 80%;
@@ -2063,6 +2124,20 @@ td .quantity button.num {
 
   .product-grid {
     grid-template-columns: repeat(4, 1fr);
+  }
+  .img-area .elem-container.active:hover::before {
+    opacity: 1;
+  }
+  .img-area .elem-container {
+    padding: 500px 20px 25px 25px;
+    height: 650px;
+    width: 550px;
+  }
+
+  .img-area .elem-container img {
+    top: 50%;
+    height: 450px;
+    width: 500px;
   }
 
   .footer-top .container {

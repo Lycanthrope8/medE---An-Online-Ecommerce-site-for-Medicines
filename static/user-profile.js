@@ -91,8 +91,7 @@ selectImage.addEventListener('click', function () {
 backDrop.addEventListener('click', function () {
     backDrop.classList.remove('active');
     imgArea.classList.remove('active');
-    document.querySelector(".popup-image").style.display = "none";
-    document.querySelector(".popup-image").style.opacity = "0";
+    document.querySelector(".popup-image").classList.remove('active');
 })
 
 inputFile.addEventListener('change', function () {
@@ -200,13 +199,14 @@ const prescBox = document.getElementsByClassName('.presc-box');
 
 document.querySelectorAll(".prescriptions img").forEach(image =>{
     image.onclick = () =>{
-        document.querySelector(".popup-image").style.display = "block";
-        document.querySelector(".popup-image").style.opacity = "1";
         document.querySelector(".popup-image img").src = image.getAttribute("src");
+        document.querySelector(".popup-image").classList.add('active');
         backDrop.classList.add('active');
     }
 });
 
-
-
-
+$(".days :nth-child(odd)").change(function(){
+    $(".days :nth-child(odd)").prop('checked',false);
+    $(this).prop('checked',true);
+    console.log($(this).val());
+});
