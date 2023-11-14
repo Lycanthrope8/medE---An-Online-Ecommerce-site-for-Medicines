@@ -5,8 +5,11 @@ from .models import main_product, Profile_MedList, presciption_order
 from django.core.exceptions import ObjectDoesNotExist
 from authentication.models import UserProfile
 import json
+import os
+from django.conf import settings
 from .models import Orders
 from django.utils import timezone
+from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
 def prod(request, p_name):
@@ -146,15 +149,42 @@ def order_confirm(request):
     context = {'product_data_list': product_data_list, 'prescription_required': prescription_required, 'total': total,'user_address': user_address}
     print(context)
     return render(request, 'order_confirm.html', context)
+
+
 def order_complete(request):
-    ordered_products = request.GET.get('order_data', None)
-    total = request.GET.get('total', None)
-    del_adress = request.GET.get('address', None)
-    User = UserProfile()
-    phonenumber = request.user.phone_number
-    order = Orders(phonenumber=phonenumber, ordered_products=ordered_products,total=total,del_adress=del_adress, timestamp=timezone.now() )
-    order.save()
+    if request.method == 'POST':
+        phonenumber = request.POST.get('phonenumber')
+        ordered_products = request.POST.get('ordered_products')
+        prescription_file = request.FILES.get('prescription')
+        total = request.POST.get('total')
+        del_address = request.POST.get('address')
+
+        if prescription_file:
+            # Create the user's prescription folder if it doesn't exist.
+            user_prescription_folder = os.path.join('media', 'otc_prescription', str(phonenumber))
+            if not os.path.exists(user_prescription_folder):
+                os.makedirs(user_prescription_folder)
+            # Save the prescription image to the user's folder.
+
+            fs = FileSystemStorage(location=user_prescription_folder)
+            saved_image = fs.save(prescription_file.name, prescription_file)
+            image= ["otc_prescription/"+phonenumber+"/"+saved_image]
+        else:
+            image=[]
+
+        # Create a new Orders instance and save it to the database
+        # print(phonenumber,ordered_products,prescription_file,total,del_address)
+        order = Orders(
+            phonenumber=phonenumber,
+            ordered_products=ordered_products,
+            prescriptions=image,
+            total=total,
+            del_adress=del_address,
+            status='pending'  # Set the initial status to 'confirm'
+        )
+        order.save()
     return render(request,'confirm.html')
+
 
 from django.http import JsonResponse
 

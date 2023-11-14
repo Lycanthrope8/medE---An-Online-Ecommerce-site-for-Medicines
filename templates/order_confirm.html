@@ -25,6 +25,9 @@
                         <th>Product</th>
                         <th>Quantity</th>
                         <th>Price</th>
+
+                        <p>{{product_data_list}}</p>
+                        <p>{{user}}</p>
                     </thead>
                     <tbody>
                         {% for product_name, quantity, price in product_data_list %}
@@ -49,16 +52,25 @@
                     </tbody>
                 </table>
 
-                {% if prescription_required == True %}
-                <label for="prescription">Upload Your prescription here</label>
-                <input type="file" id="file-upload" name="prescription" accept="image/*" required>
-                {% endif %}
-
-                <label for="address">Address:</label>
-                <input style="height: 60px;" type="text" id="addressInput" name="address" value='{{user_address}}'>
-
-                <a href="{% url 'confirm'%}?order_data={{product_data_list}}&total={{ total }}&address="
-                    id="confirmLink"><button class="confirm-order" type="submit">Confirm Order</button></a>
+                <form method="post" action="{% url 'confirm' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <!-- Your existing HTML code for displaying products -->
+                    <input type="hidden" name="phonenumber" value="{{ user }}">
+                    <input type="hidden" name="ordered_products" value="{{ product_data_list }}">
+                    <input type="hidden" name="total" value="{{ total }}">
+                    
+                    {% if prescription_required %}
+                        <label for="prescription">Upload Your prescription here</label>
+                        <input type="file" id="file-upload" name="prescription" accept="image/*" required>
+                    {% endif %}
+                    
+                    <label for="address">Address:</label>
+                    <input style="height: 60px;" type="text" id="addressInput" name="address" value='{{user_address}}'>
+                    
+                    <button class="confirm-order" type="submit">Confirm Order</button>
+                </form>
+                
+                
             </div>
         </div>
     </main>
