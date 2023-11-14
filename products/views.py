@@ -11,13 +11,13 @@ from django.utils import timezone
 # Create your views here.
 def prod(request, p_name):
     product_details = {
-        'name': p_name
+        'name': p_name,
     }
 
     try:
         product = main_product.objects.get(p_name=product_details['name'])
         product.discounted_price = product.p_price - (product.p_price*(product.p_discount/100))	#FOR DISCOUNT
-         
+        
     except main_product.DoesNotExist:
         product = None
         
@@ -82,6 +82,7 @@ def get_product_info(request, p_id):
             'p_id': p_id,
             'p_name': product.p_name,
             'p_category': product.p_category,
+            'otc_status': product.otc_status,
             'p_price': str(product.p_price),
             'p_discount': str(product.p_discount),
             'discounted_price':product.p_price - (product.p_price * (product.p_discount / 100)),
@@ -97,7 +98,6 @@ def get_product_info(request, p_id):
 
 
 
-
 def checkout_view(request):
     if request.method == 'POST':
         try:
@@ -105,13 +105,20 @@ def checkout_view(request):
             # Process the cart_data as needed (e.g., complete the checkout)
             output={}
             total=0
+            prescription_required = False
             for key, value in data.items():
                 product = main_product.objects.get(p_id=key)
-                total+=value*((product.p_price - (product.p_price * (product.p_discount / 100))))
-                output[product.p_name]=str(value)+";"+ str(value*(product.p_price - (product.p_price * (product.p_discount / 100))))
+                if product.otc_status == "no":
+                    prescription_required = True
+                total += value * (product.p_price - (product.p_price * (product.p_discount / 100)))
+                output[product.p_name] = f"{str(value)};{str(value * (product.p_price - (product.p_price * (product.p_discount / 100))))}"
+
             print(output)
+            print(prescription_required)
             if(total>0):
                 total+=60
+
+            request.session['prescription_required'] = prescription_required
             request.session['checkout_output'] = output
             request.session['checkout_total'] = str(total)
 
@@ -127,19 +134,18 @@ def checkout_view(request):
 
     # For other HTTP methods (e.g., GET), return a method not allowed response
     return JsonResponse({'error': 'Method Not Allowed'}, status=405)
-
-
 def order_confirm(request):
     output = request.session.get('checkout_output')
     total = request.session.get('checkout_total')
+    prescription_required = request.session.get('prescription_required')
+    print(prescription_required)
     User = UserProfile()
     # Split the product data and create a list of tuples (product_name, quantity, price)
     product_data_list = [(product_name, *product_data.split(';')) for product_name, product_data in output.items()]
     user_address = request.user.address
-    context = {'product_data_list': product_data_list, 'total': total,'user_address': user_address}
+    context = {'product_data_list': product_data_list, 'prescription_required': prescription_required, 'total': total,'user_address': user_address}
     print(context)
     return render(request, 'order_confirm.html', context)
-
 def order_complete(request):
     ordered_products = request.GET.get('order_data', None)
     total = request.GET.get('total', None)

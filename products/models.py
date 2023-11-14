@@ -17,8 +17,6 @@ class main_product(models.Model):
         ('Herbal & Ayurvedic','Herbal & Ayurvedic'),
         ('Infant & Mothers care','Infant & Mothers care'),
         ('Supplements & Nutrition','Supplements & Nutrition')
-        
-
     )
     feature_CHOICES = (('yes', 'yes'), ('no', 'no'))
     OTC_CHOICES = (('yes', 'Yes'),('no', 'No'))
