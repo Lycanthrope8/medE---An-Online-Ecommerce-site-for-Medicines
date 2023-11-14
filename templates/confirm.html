@@ -24,7 +24,7 @@
         <img src="{% static 'images/check.gif' %}" alt="" width="80" />
         <h1>Your order has been confirmed!</h1>
       </div>
-      <a href="{%url 'home'%}">Back to Home</a>
+      <button><a href="{%url 'home'%}"> Back to Home</a></button>
     </main>
 
     <script
@@ -41,5 +41,10 @@
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
     <script type="text/javascript" src="{% static 'script.js' %}"></script>
+    
+    <script>
+      // Remove 'cart' item from localStorage when the page loads
+      localStorage.removeItem('cart');
+    </script>
   </body>
 </html>
