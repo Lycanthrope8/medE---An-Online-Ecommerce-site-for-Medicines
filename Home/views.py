@@ -15,7 +15,7 @@ def home(request):
     for product in products:
 
         product.discounted_price = product.p_price - (product.p_price*(product.p_discount/100))	#FOR DISCOUNT
-
+    print(products)
     return render(request,'index.html',{'products': products})
 
 
@@ -118,7 +118,7 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
-@csrf_exempt  # Use this decorator if CSRF protection is enabled
+@csrf_exempt
 def searchresult(request):
     if request.method == 'POST':
         # Get the search results data from the request
@@ -131,7 +131,7 @@ def searchresult(request):
             # Process the search results as needed
 
             p_id_list = [item['p_id'] for item in search_results]
-            p_details=[]
+            p_details = []
             for id in p_id_list:
                 products = main_product.objects.filter(p_id=id)
                 for product in products:
@@ -140,13 +140,14 @@ def searchresult(request):
 
             context = {
                 'product_details': p_details,
-                }
-            print(context)
-            # Return a response if necessary
-            return render(request,'search-results.html',context)
+            }
+            
+
+            # Render the HTML template with the context
+            html_content = render(request, 'search-results.html', context).content.decode('utf-8')
+
+            # Return the HTML content as the response
+            return HttpResponse(html_content)
     
     # Return an error response if the request doesn't contain the expected data
-    return JsonResponse({'status': 'error', 'message': 'Invalid request'})
-
- 
-        
+    return HttpResponse('Invalid request', status=400)

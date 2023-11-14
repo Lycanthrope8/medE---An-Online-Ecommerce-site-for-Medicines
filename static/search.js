@@ -115,7 +115,7 @@ function searchresults() {
 
     // Make an AJAX request to your Django live_search view
     $.ajax({
-        url: '/live_search/', // Update this URL to match your live_search view URL
+        url: '/live_search/',
         data: { 'q': searchInput },
         dataType: 'json',
         success: function (data) {
@@ -123,12 +123,51 @@ function searchresults() {
     
             // Make a new AJAX request to pass the data to the searchresult view
             $.ajax({
-                url: '/searchresult/', // Update this URL to match your searchresult view URL
-                method: 'POST', // or 'GET' depending on your requirements
+                url: '/searchresult/',
+                method: 'POST',
                 data: { 'search_results': JSON.stringify(data) },
                 success: function (response) {
                     // Handle the response as needed
                     console.log(response);
+    
+                    // Replace the entire current page with the received HTML
+                    document.documentElement.innerHTML = response;
+                }
+            });
+        }
+    });
+    
+};
+
+function searchresults2() {
+    var searchInput = document.getElementById('search-input2').value;
+    var resultsDiv = $('#search-results2');
+
+    // Check if the search input is empty
+    if (!searchInput) {
+        resultsDiv.empty();
+        return;
+    }
+
+    // Make an AJAX request to your Django live_search view
+    $.ajax({
+        url: '/live_search/',
+        data: { 'q': searchInput },
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+    
+            // Make a new AJAX request to pass the data to the searchresult view
+            $.ajax({
+                url: '/searchresult/',
+                method: 'POST',
+                data: { 'search_results': JSON.stringify(data) },
+                success: function (response) {
+                    // Handle the response as needed
+                    console.log(response);
+    
+                    // Replace the entire current page with the received HTML
+                    document.documentElement.innerHTML = response;
                 }
             });
         }

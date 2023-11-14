@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>medE</title>
 	<link rel="icon" type="image/x-icon" href="{% static 'Favicon.png' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'product.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -250,7 +250,59 @@
 		</nav> 
 	</header>
 <main>
+	<div class="container">
+		<div class="product-main">
+			<h2 class="title">Search Results</h2>
+			<div class="product-grid">
+    {% for key in product_details %}
+    {% for product in key %}
+	<div class="showcase">
+		<div class="showcase-banner">
+			<a href="{%url 'prod' p_name=product.p_name %}">
+				<img class="product-img default" src="media/{{ product.p_image }}"
+					alt="{{ product.p_name }}" width="300">
+				<img class="product-img hover" src="media/{{ product.p_image }}"
+					alt="{{ product.p_name }}" width="300">
+			</a>
+			{% if product.p_discount > 0 %}
+			<p class="showcase-badge">{{ product.p_discount|floatformat:"2" }}%</p>
+			{% endif %}
 
+				 <!--Cart button and Favorites button-->
+			<!-- <div class="showcase-actions">
+				<button id="{{ product.p_id }}" class="btn-action" onclick="ClearCart()">
+					<ion-icon name="heart-outline"></ion-icon>
+				</button>
+				<button id="{{ product.p_id }} " class="btn-action"
+					onclick="AddtoCart('{{product.p_id}}')">
+
+				</button>
+			</div> -->
+		</div>
+
+		<div class="showcase-content">
+			<a href="{%url 'prod' p_name=product.p_name %}" class="showcase-category">{{ product.p_name }}</a>
+
+			<a href="{%url 'prod' p_name=product.p_name %}">
+				<h3 class="showcase-title">{{ product.p_category }}</h3>
+			</a>
+
+			<div class="price-box">
+
+				<p class="price">৳{{ product.discounted_price|floatformat:"2"}}</p>
+				{% if product.p_discount > 0 %}
+
+				<del>{{ product.p_price|floatformat:"2" }}</del>
+				{% endif %}
+			</div>
+		</div>
+
+	</div>
+
+    
+{% endfor %}
+{% endfor %}
+</div>
 		
 </main>
 
