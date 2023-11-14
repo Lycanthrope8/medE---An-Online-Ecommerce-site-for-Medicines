@@ -110,8 +110,9 @@ def checkout_view(request):
                 product = main_product.objects.get(p_id=key)
                 if product.otc_status == "no":
                     prescription_required = True
-                total+=value((product.p_price - (product.p_price (product.p_discount / 100))))
-                output[product.p_name]=str(value)+";"+ str(value(product.p_price - (product.p_price (product.p_discount / 100))))
+                total += value * (product.p_price - (product.p_price * (product.p_discount / 100)))
+                output[product.p_name] = f"{str(value)};{str(value * (product.p_price - (product.p_price * (product.p_discount / 100))))}"
+
             print(output)
             print(prescription_required)
             if(total>0):
