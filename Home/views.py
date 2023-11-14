@@ -111,5 +111,5 @@ def upload_prescription(request):
             # Create a new user with the provided phone number
             new_user_medlist = Profile_MedList(phone_number=phone_number, prescriptions=([(image, selected_days[0])]))
             new_user_medlist.save()
-
+            return JsonResponse({'success': True})
     # Handle other HTTP methods if needed

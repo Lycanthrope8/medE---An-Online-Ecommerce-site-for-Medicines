@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.db import connection
-from .models import main_product, Profile_MedList
+from .models import main_product, Profile_MedList, presciption_order
 from django.core.exceptions import ObjectDoesNotExist
 from authentication.models import UserProfile
 import json
@@ -98,7 +98,6 @@ def get_product_info(request, p_id):
 
 
 
-
 def checkout_view(request):
     if request.method == 'POST':
         try:
@@ -106,13 +105,19 @@ def checkout_view(request):
             # Process the cart_data as needed (e.g., complete the checkout)
             output={}
             total=0
+            prescription_required = False
             for key, value in data.items():
                 product = main_product.objects.get(p_id=key)
-                total+=value*((product.p_price - (product.p_price * (product.p_discount / 100))))
-                output[product.p_name]=str(value)+";"+ str(value*(product.p_price - (product.p_price * (product.p_discount / 100))))
+                if product.otc_status == "no":
+                    prescription_required = True
+                total+=value((product.p_price - (product.p_price (product.p_discount / 100))))
+                output[product.p_name]=str(value)+";"+ str(value(product.p_price - (product.p_price (product.p_discount / 100))))
             print(output)
+            print(prescription_required)
             if(total>0):
                 total+=60
+
+            request.session['prescription_required'] = prescription_required
             request.session['checkout_output'] = output
             request.session['checkout_total'] = str(total)
 
@@ -128,19 +133,18 @@ def checkout_view(request):
 
     # For other HTTP methods (e.g., GET), return a method not allowed response
     return JsonResponse({'error': 'Method Not Allowed'}, status=405)
-
-
 def order_confirm(request):
     output = request.session.get('checkout_output')
     total = request.session.get('checkout_total')
+    prescription_required = request.session.get('prescription_required')
+    print(prescription_required)
     User = UserProfile()
     # Split the product data and create a list of tuples (product_name, quantity, price)
     product_data_list = [(product_name, *product_data.split(';')) for product_name, product_data in output.items()]
     user_address = request.user.address
-    context = {'product_data_list': product_data_list, 'total': total,'user_address': user_address}
+    context = {'product_data_list': product_data_list, 'prescription_required': prescription_required, 'total': total,'user_address': user_address}
     print(context)
     return render(request, 'order_confirm.html', context)
-
 def order_complete(request):
     ordered_products = request.GET.get('order_data', None)
     total = request.GET.get('total', None)
@@ -200,3 +204,29 @@ def remove_productList(request, product_id):
     except Exception as e:
         return JsonResponse({'success': False, 'error': str(e)})
 
+def pres_confirm(request):
+    phonenumber = request.user.phone_number
+    saved_data = Profile_MedList.objects.filter(phone_number=phonenumber).values()
+
+    # Convert the QuerySet to a list of dictionaries
+    data_list = list(saved_data)
+    return render(request,'pres_confirm.html',{'medList': data_list})
+
+
+def presciptions_order(request):
+    if request.method == 'POST':
+        # Get the necessary data from the form and logged in user
+        phone_number = request.user.phone_number  # Replace with your actual user profile field
+        prescription_img = request.POST.get('prescription_img')  # Make sure this is the correct form field name
+        days = request.POST.get('days2')
+        delivery_address = request.POST.get('address', 'null')
+        # Create a new prescription order
+        prescription_order_obj = presciption_order.objects.create(
+            phonenumber=phone_number,
+            prescription_img=prescription_img,
+            days=days,
+            del_adress=delivery_address,
+            timestamp=timezone.now(), # You can set the default status here
+        )
+        prescription_order_obj.save()
+    return render(request,'confirm.html')

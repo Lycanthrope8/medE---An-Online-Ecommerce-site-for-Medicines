@@ -23,7 +23,7 @@ function handleUpload() {
             "X-CSRFToken": csrfToken // Set the CSRF token as a request header
         },
         success: function(response) {
-            // Handle the response from the Django view
+            window.location.href = '/prescription_confirm/';
         },
         error: function(error) {
             // Handle any errors
