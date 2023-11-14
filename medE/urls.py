@@ -50,7 +50,7 @@ urlpatterns = [
     path('upload_prescription/',firstactivity.upload_prescription, name='upload_prescription'),
     path('prescription_confirm/', secondactivity.pres_confirm, name='prescription_confirm'),
     path('prescriptions_order/', secondactivity.presciptions_order, name='presciptions_order'),
-    path('search-results/', firstactivity.searchresult, name='search_results'),
+    path('searchresult/', firstactivity.searchresult, name='search_results'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -114,9 +114,28 @@ def upload_prescription(request):
             return JsonResponse({'success': True})
     # Handle other HTTP methods if needed
 
-def searchresult(request):
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
-    return render(request, 'search-results.html')
+@csrf_exempt  # Use this decorator if CSRF protection is enabled
+def searchresult(request):
+    if request.method == 'POST':
+        # Get the search results data from the request
+        search_results_json = request.POST.get('search_results', None)
+
+        if search_results_json:
+            # Parse the JSON data
+            search_results = json.loads(search_results_json)
+
+            # Process the search results as needed
+            print(search_results)
+
+            # Return a response if necessary
+            return JsonResponse({'status': 'success'})
+    
+    # Return an error response if the request doesn't contain the expected data
+    return JsonResponse({'status': 'error', 'message': 'Invalid request'})
 
  
         

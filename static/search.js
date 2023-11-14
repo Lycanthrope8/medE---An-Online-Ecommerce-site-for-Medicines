@@ -103,9 +103,35 @@ $(document).ready(function () {
     });
 });
 
-function searchresults(){
+function searchresults() {
+    var searchInput = document.getElementById('search-input').value;
+    var resultsDiv = $('#search-results');
 
-    console.log(data)
+    // Check if the search input is empty
+    if (!searchInput) {
+        resultsDiv.empty();
+        return;
+    }
 
+    // Make an AJAX request to your Django live_search view
+    $.ajax({
+        url: '/live_search/', // Update this URL to match your live_search view URL
+        data: { 'q': searchInput },
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
 
+            // Make a new AJAX request to pass the data to the searchresult view
+            $.ajax({
+                url: '/searchresult/', // Update this URL to match your searchresult view URL
+                method: 'POST', // or 'GET' depending on your requirements
+                data: { 'search_results': JSON.stringify(data) },
+                success: function (response) {
+                    // Handle the response from the searchresult view
+                    console.log(response);
+                }
+            });
+        }
+    });
 }
+
