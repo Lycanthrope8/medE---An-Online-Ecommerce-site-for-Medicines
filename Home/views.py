@@ -15,7 +15,7 @@ def home(request):
     for product in products:
 
         product.discounted_price = product.p_price - (product.p_price*(product.p_discount/100))	#FOR DISCOUNT
-
+    print(products)
     return render(request,'index.html',{'products': products})
 
 
@@ -113,3 +113,42 @@ def upload_prescription(request):
             new_user_medlist.save()
             return JsonResponse({'success': True})
     # Handle other HTTP methods if needed
+
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def searchresult(request):
+    if request.method == 'POST':
+        # Get the search results data from the request
+        search_results_json = request.POST.get('search_results', None)
+
+        if search_results_json:
+            # Parse the JSON data
+            search_results = json.loads(search_results_json)
+
+            # Process the search results as needed
+
+            p_id_list = [item['p_id'] for item in search_results]
+            p_details = []
+            for id in p_id_list:
+                products = main_product.objects.filter(p_id=id)
+                for product in products:
+                    product.discounted_price = product.p_price - (product.p_price * (product.p_discount / 100))
+                    print(product.p_image)
+                p_details.append(products)
+
+            context = {
+                'product_details': p_details,
+            }
+            
+            
+            # Render the HTML template with the context
+            html_content = render(request, 'search-results.html', context).content.decode('utf-8')
+
+            # Return the HTML content as the response
+            return HttpResponse(html_content)
+    
+    # Return an error response if the request doesn't contain the expected data
+    return HttpResponse('Invalid request', status=400)

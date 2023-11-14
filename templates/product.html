@@ -21,34 +21,31 @@
 					<img src="{% static 'Logo.jpg' %}" alt=" medX logo" height="50px"width="80px">
 				</a>
 				<div class="header-search-container">
-					
-					<input type="search" name="search" id="search-input" class="search-field" placeholder="Type to search products...">
+
+					<input type="search" name="search" id="search-input" class="search-field"
+						placeholder="Type to search products...">
 					<div id="search-results">
 
-					
+
 					</div>
-					<button class="search-btn">
+					<button class="search-btn" onclick="searchresults()">
 						<ion-icon name="search"></ion-icon>
 					</button>
 				</div>
-				
-				
-
 				<button class="action-btn menu-action" data-mobile-menu-open-btn>
 					<ion-icon name="menu"></ion-icon>
 				</button>
 				<div class="header-user-actions">
 					<div class="search-box">
 						<input class="search-txt" id="search-input2" type="text" placeholder="Type to search...">
-						<button class="mobile-srch-btn action-btn">
+						<button class="mobile-srch-btn action-btn" onclick="searchresults2()">
 							<ion-icon name="search-outline"></ion-icon>
 						</button>
 						<div id="search-results2">
 
-					
+
 						</div>
 					</div>
-
 
 					<button id="select-image" class="action-btn">
 						<img src="{%static 'prescription.png'%}" alt="prescription-upload-icon" width="30">

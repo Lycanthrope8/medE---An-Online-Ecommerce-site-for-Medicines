@@ -4,30 +4,16 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="csrf-token" content="{{ csrf_token }}">
 	<title>medE</title>
 	<link rel="icon" type="image/x-icon" href="{% static 'Favicon.png' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'product_day.css' %}">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 	<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
-	<!-- <div class="toast-notification" id="toast-container">
-		<div class="toast-content">
-			<i class="fas fa-solid fa-check"></i>
-			<ion-icon class="check" name="checkmark-outline"></ion-icon>
-
-			<div class="message">
-				<span class="text text-1">Success!</span>
-				<span class="text text-2">Your change has been saved!</span>
-			</div>
-		</div>
-		<ion-icon class="close" name="close-outline"></ion-icon>
-		<div class="progress"></div>
-	</div> -->
     <header>
 		<div class="header-main" data-header>
 			<div class="container">
@@ -60,6 +46,7 @@
 
 						</div>
 					</div>
+
 					<button id="select-image" class="action-btn">
 						<img src="{%static 'prescription.png'%}" alt="prescription-upload-icon" width="30">
 					</button>
@@ -70,6 +57,7 @@
 						<ion-icon name="bag-outline"></ion-icon>
 						<span class="btn-badge">3</span>
 					</button>
+					
 					<div class="shopping-cart" >
 						<!-- HTML template for a product cartbox -->
 						<div id= "cart-container">
@@ -92,14 +80,7 @@
 						  </div>
 						  
 						<div class="total"></div>
-							{% if user.is_authenticated %}
-								<script>
-									var userPhoneNumber = "{{ user }}";
-								</script>
-							<a  class="cart-checkout-btn" id="checkout-button">Checkout</a>
-						{% else %}
-						<a href="{% url 'mylogin' %}" class="cart-checkout-btn" id="">Checkout</a>
-						{% endif %}
+					<a href="#" class="cart-checkout-btn">Checkout</a>
 					</div>
 
 					<div style="text-align:center;" class="user-login">
@@ -265,259 +246,159 @@
 			</ul>
 		</nav> 
 	</header>
-	<main>
-		<div class="backdrop"></div>
-		<div class="img-area" id="img-area">
-			<div class="elem-container active" data-img="">
-					<input type="file" id="file-upload" accept="image/*" hidden>
-					<div class="times">
-						<input type="checkbox" name="Morning" value="Morning">
-						<label for="Morning">Morning</label>
-						<input type="checkbox" name="Afternoon" value="Afternoon">
-						<label for="Afternoon">Afternoon</label>
-						<input type="checkbox" name="Night" value="Night">
-						<label for="Night">Night</label>
-					</div>
-					<div class="days">
-						<input type="checkbox" name="7Days" value="7Days">
-						<label for="7Days">7 Days</label>
-						<input type="checkbox" name="15Days" value="15Days">
-						<label for="15Days">15 Days</label>
-						<input type="checkbox" name="1Month" value="1Month">
-						<label for="1Month">1 Month</label>
-					</div>
-					<button class="prescription-upload-btn" type="submit">Upload</button>
-				</div>
+<main>
+	<div class="container">
+		<div class="product-main">
+			<h2 class="title">Search Results</h2>
+			<div class="product-grid">
+    {% for key in product_details %}
+    {% for product in key %}
+	<div class="showcase">
+		<div class="showcase-banner">
+			<a href="{%url 'prod' p_name=product.p_name %}">
+				<img class="product-img default" src="media/{{ product.p_image }}"
+					alt="{{ product.p_name }}" width="300">
+				<img class="product-img hover" src="media/{{ product.p_image }}"
+					alt="{{ product.p_name }}" width="300">
+			</a>
+			{% if product.p_discount > 0 %}
+			<p class="showcase-badge">{{ product.p_discount|floatformat:"2" }}%</p>
+			{% endif %}
+
+				 <!--Cart button and Favorites button-->
+			<!-- <div class="showcase-actions">
+				<button id="{{ product.p_id }}" class="btn-action" onclick="ClearCart()">
+					<ion-icon name="heart-outline"></ion-icon>
+				</button>
+				<button id="{{ product.p_id }} " class="btn-action"
+					onclick="AddtoCart('{{product.p_id}}')">
+
+				</button>
+			</div> -->
+		</div>
+
+		<div class="showcase-content">
+			<a href="{%url 'prod' p_name=product.p_name %}" class="showcase-category">{{ product.p_name }}</a>
+
+			<a href="{%url 'prod' p_name=product.p_name %}">
+				<h3 class="showcase-title">{{ product.p_category }}</h3>
+			</a>
+
+			<div class="price-box">
+
+				<p class="price">৳{{ product.discounted_price|floatformat:"2"}}</p>
+				{% if product.p_discount > 0 %}
+
+				<del>{{ product.p_price|floatformat:"2" }}</del>
+				{% endif %}
 			</div>
 		</div>
-		<div class="container">
-			<div class="product-details row">
-                <div class="col-sm-6">
-                    <img class="product-img default" src="{{ product_details.p_image.url }}" alt="{{ product_details.p_name }}" width="600">
-                </div>
-                <div class="col-sm-6">
-                    <p>Home / {{ product_details.p_name }}</p>
-                    <h1>{{ product_details.p_name }}</h1>
-                    <h2>{{ product_details.p_type }}</h2>
-                    <h3>Generics: {{ product_details.p_generics }}</h3>
-                    <a href=""><h3>{{ product_details.p_company }}</h3></a>
-                    <div class="price-box">
-                        <p class="price">৳{{ product_details.discounted_price|floatformat:"2"}}</p>
-                        {% if product_details.p_discount > 0 %}
-                        <del>৳{{ product_details.p_price|floatformat:"2" }}</del>
-						{% endif %}
-                    </div>
 
-					<div class="otc-status">
-						{% if product_details.otc_status == 'no' %}
-							<p class="prescription-message">You need to provide a prescription for this medicine</p>
-						{% endif %}
-					</div>
+	</div>
 
-                    <div class="quantity">
-						<button class="decrease-btn">-</button>
-						<span type="number" id="num" class="num">01</span>
-						<button class="increase-btn">+</button>
-					</div>
+    
+{% endfor %}
+{% endfor %}
+</div>
+		
+</main>
 
-					<div class="buttons row">
-						<button class="addtocart col-sm-5" onclick="AddtoCart('{{product_details.p_id}}',parseInt(document.getElementById('num').innerText),'replace')">Add to Cart</button>
-						<button id="addtolist" class="addtolist col-sm-5">Add To List</button>
-						<div class="addtolistddown col-sm-5">
-							<div>
-								<input type="checkbox" name="MorningD" value="Morning">
-								<label for="Morning">Morning</label>
-							</div>
-							<div>
-								<input type="checkbox" name="DayD" value="Day">
-								<label for="Day">Day</label>
-							</div>
-							<div>
-								<input type="checkbox" name="NightD" value="Night">
-								<label for="Night">Night</label>
-							</div>
-							<div class="quantity">
-								<button class="day-decrease-btn">-</button>
-								<input type="text" id="DayNumSpan" class="day-num" value="01">
-								<button class="day-increase-btn">+</button>
-							</div>
-							<button id="addtolist2" class="addtolist addtolist2 col-sm-12" onclick="AddToList('{{ user }}', '{{ product_details.p_id }}')">Add To List</button>
-						</div>
-						
-						<div id="message"></div>
-					</div>
-                </div>
-                
+<footer class="footer">
+    <div class="footer-top section">
+        <div class="container">
+            <div class="footer-brand">
+                <a href="#" class="logo"><img style="border-radius: 10px;" src="{% static 'favicon.png' %}"
+                        width="80" alt="logo"></a>
+                <p class="footer-text">
+                    If you have any queries please contact us at <a href="mailto:support@gmail.com"
+                        class="link">support@gmail.com</a>
+                </p>
+                <ul class="contact-list">
+                    <li class="contact-item">
+                        <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
+                        <address class="address">
+                            Online Store, Narayanganj
+                        </address>
+                    </li>
+                    <li class="contact-item">
+                        <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
+                        <a href="tel:(+880)XXXXXXXXXX" class="contact-link">(+880)XXXXXXXXXX</a>
+                    </li>
+                </ul>
+                <ul class="social-list">
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-facebook"></ion-icon>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-instagram"></ion-icon>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-twitter"></ion-icon>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-linkedin"></ion-icon>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <section class="product-medications">
-                <h2>Indications</h2>
-                <p>{{ product_details.p_Indications }}</p>
-                <h2>Pharmacology</h2>
-                <p>{{ product_details.p_Pharmacology }}</p>
-                <h2>Dosage & Administration</h2>
-               <p>{{ product_details.p_Dosage }}</p>
-                    <h2>Interaction</h2>
-                    <p>{{ product_details.p_Interaction }}</p>
-                    <h2>Contradictions</h2>
-                    <p>{{ product_details.p_Contradictions }}</p>
-                    <h2>Side Effects</h2>
-                    <p>{{ product_details.p_Side_Effects }}</p>
-                    <h2>Pregnancy and Lactation</h2>
-                    <p>{{ product_details.p_Pregnancy }}</p>
-                    <h2>Precautions and Warnings</h2>
-                    <p>{{ product_details.p_Precautions}}</p>
-                    <h2>Therapeutic Class</h2>
-                    <p>{{ product_details.p_Therapeutic}}</p>
-                    <h2>Storage Conditions</h2>
-                    <p>{{ product_details.p_Storage}}</p>
-            </section>
-		</div>
-	</main>
 
-	<footer class="footer">
-		<div class="footer-top section">
-			<div class="container">
-				<div class="footer-brand">
-					<a href="#" class="logo"><img style="border-radius: 10px;" src="{% static 'Favicon.png' %}" width="80" alt="logo"></a>
-					<p class="footer-text">
-						If you have any queries please contact us at <a href="mailto:support@gmail.com" class="link">support@gmail.com</a>
-					</p>
-					<ul class="contact-list">
-						<li class="contact-item">
-							<ion-icon name="location-outline" aria-hidden="true"></ion-icon>
-							<address class="address">
-								Online Store, Narayanganj
-							</address>
-						</li>
-						<li class="contact-item">
-							<ion-icon name="call-outline" aria-hidden="true"></ion-icon>
-							<a href="tel:(+880)XXXXXXXXXX" class="contact-link">(+880)XXXXXXXXXX</a>
-						</li>
-					</ul>
-					<ul class="social-list">
-						<li>
-							<a href="#" class="social-link">
-								<ion-icon name="logo-facebook"></ion-icon>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="social-link">
-								<ion-icon name="logo-instagram"></ion-icon>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="social-link">
-								<ion-icon name="logo-twitter"></ion-icon>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="social-link">
-								<ion-icon name="logo-linkedin"></ion-icon>
-							</a>
-						</li>
-					</ul>
-				</div>
-				
-				<ul class="footer-list">
-					<li>
-						<p class="footer-list-title">Corporate</p>
-					</li>
-					<li>
-						<p class="footer-link">About Us</p>
-					</li>
-					<li>
-						<p class="footer-link">Contact Us</p>
-					</li>
-					<li>
-						<p class="footer-link">FAQs</p>
-					</li>
-				</ul>
-				<ul class="footer-list">
-					<li>
-						<p class="footer-list-title">Information</p>
-					</li>
-					<li>
-						<p class="footer-link">Privacy Policy</p>
-					</li>
-					<li>
-						<p class="footer-link">Refund Policy</p>
-					</li>
-					<li>
-						<p class="footer-link">Shipping Policy</p>
-					</li>
-					<li>
-						<p class="footer-link">Terms of Service</p>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<div class="footer-bottom">
-			<div class="container">
-				<p class="copyright">
-					&copy; 2023 Made by <a href="#">Team NJ<sup>2</sup>.</a>
-				</p>
-				<img src="{% static 'payment/payment.png' %}" width="380" height="90" loading="lazy" alt="payment method" class="img">
-			</div>
-		</div>
-	</footer>
+            <ul class="footer-list">
+                <li>
+                    <p class="footer-list-title">Corporate</p>
+                </li>
+                <li>
+                    <p class="footer-link">About Us</p>
+                </li>
+                <li>
+                    <p class="footer-link">Contact Us</p>
+                </li>
+                <li>
+                    <p class="footer-link">FAQs</p>
+                </li>
+            </ul>
+            <ul class="footer-list">
+                <li>
+                    <p class="footer-list-title">Information</p>
+                </li>
+                <li>
+                    <p class="footer-link">Privacy Policy</p>
+                </li>
+                <li>
+                    <p class="footer-link">Refund Policy</p>
+                </li>
+                <li>
+                    <p class="footer-link">Shipping Policy</p>
+                </li>
+                <li>
+                    <p class="footer-link">Terms of Service</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <p class="copyright">
+                &copy; 2023 Made by <a href="#">Team NJ<sup>2</sup>.</a>
+            </p>
+            <img src="{% static 'payment/payment.png' %}" width="380" height="90" loading="lazy"
+                alt="payment method" class="img">
+        </div>
+    </div>
+</footer>
 
-	<a href="#top" class="back-top-btn" aria-label="back to top" data-back-top-btn>
-		<ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
-	</a>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="{% static 'script.js' %}"></script>
-	<script src="{% static 'search.js' %}"></script>
-	<script src="{% static 'cart.js' %}"></script>
-	<script src="{% static 'list.js' %}"></script>
-	<script src="{% static 'toast.js' %}"></script>
-	<script>
-        // Get the buttons and the quantity element
-		const decreaseBtn = document.querySelector('.decrease-btn');
-		const increaseBtn = document.querySelector('.increase-btn');
-		const quantityNum = document.querySelector('.num');
-
-		// Add event listener for the decrease button
-		decreaseBtn.addEventListener('click', function() {
-			let currentQuantity = parseInt(quantityNum.textContent);
-			if (currentQuantity > 1) {
-				currentQuantity--;
-				quantityNum.textContent = currentQuantity.toString().padStart(2, '0');
-			}
-		});
-
-		// Add event listener for the increase button
-		increaseBtn.addEventListener('click', function() {
-			let currentQuantity = parseInt(quantityNum.textContent);
-			currentQuantity++;
-			quantityNum.textContent = currentQuantity.toString().padStart(2, '0');
-		});
-
-		const DayNumSpan = document.getElementById('DayNumSpan');
-		const dayDecreaseBtn = document.querySelector('.day-decrease-btn');
-		const dayIncreaseBtn = document.querySelector('.day-increase-btn');
-
-		// Decrease button click event
-		dayDecreaseBtn.addEventListener('click', function() {
-			let num = parseInt(DayNumSpan.value);
-			if (num > 1) {
-				num--;
-				DayNumSpan.value = num < 10 ? '0' + num : num;
-			}
-		});
-
-		// Increase button click event
-		dayIncreaseBtn.addEventListener('click', function() {
-			let num = parseInt(DayNumSpan.value);
-			num++;
-			DayNumSpan.value = num < 10 ? '0' + num : num;
-		});
-
-		const addToList = document.querySelector(".addtolistddown");
-
-		document.getElementById("addtolist").onclick = () => {
-			addToList.classList.toggle("active");
-		};
-    </script>
-
+<a href="#top" class="back-top-btn" aria-label="back to top" data-back-top-btn>
+    <ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
+</a>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'script.js' %}"></script>
+<script src="{% static 'search.js' %}"></script>
+<script type="text/javascript" src="{% static 'cart.js' %}"></script>
 </body>
-</html> 
+</html>

@@ -31,7 +31,7 @@
 
 
 					</div>
-					<button class="search-btn">
+					<button class="search-btn" onclick="searchresults()">
 						<ion-icon name="search"></ion-icon>
 					</button>
 				</div>
@@ -41,7 +41,7 @@
 				<div class="header-user-actions">
 					<div class="search-box">
 						<input class="search-txt" id="search-input2" type="text" placeholder="Type to search...">
-						<button class="mobile-srch-btn action-btn">
+						<button class="mobile-srch-btn action-btn" onclick="searchresults2()">
 							<ion-icon name="search-outline"></ion-icon>
 						</button>
 						<div id="search-results2">
@@ -90,8 +90,9 @@
 
 					<div style="text-align:center;" class="user-login">
 						{% if user.is_authenticated %}
-						<a href="{% url 'profile' %}" class="form-btn">Profile</a>
-						<a href="{% url 'mylogout' %}" class="form-btn">Logout</a>
+						
+						<a href="{% url 'profile' %}" class="form-btn">Profile<i class="fa-regular fa-user"></i></a>
+						<a href="{% url 'mylogout' %}" class="form-btn">Logout<i class="fa-solid fa-arrow-right-from-bracket"></i></a>
 						{% else %}
 						<a href="{% url 'mylogin' %}" class="form-btn">Login</a>
 						{% endif %}

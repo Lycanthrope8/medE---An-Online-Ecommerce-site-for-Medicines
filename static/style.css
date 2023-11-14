@@ -23,9 +23,7 @@
   --black: #000000;
 }
 /*** RESETTING CSS ***/
-*,
-*::before,
-*::after {
+* {
   font-family: "poppins", sans-serif;
   margin: 0;
   padding: 0;
