@@ -375,6 +375,9 @@ body::-webkit-scrollbar-thumb:hover {
   padding: 8px 0;
   border-radius: 5px;
   transition: 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 .header-user-actions .user-login .form-btn:hover {
   background: var(--red);
