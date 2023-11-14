@@ -1,5 +1,6 @@
 $(document).ready(function () {
     // Function to fetch and display search results
+    
     function fetchSearchResults(query) {
         // Check if the query is empty
         if (!query) {
@@ -28,6 +29,9 @@ $(document).ready(function () {
                 } else {
                     resultsDiv.append('<p>No results found.</p>');
                 }
+                console.log(data)
+
+
             }
         });
     }
@@ -98,3 +102,10 @@ $(document).ready(function () {
         }
     });
 });
+
+function searchresults(){
+
+    console.log(data)
+
+
+}

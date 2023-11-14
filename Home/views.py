@@ -113,3 +113,10 @@ def upload_prescription(request):
             new_user_medlist.save()
             return JsonResponse({'success': True})
     # Handle other HTTP methods if needed
+
+def searchresult(request):
+
+    return render(request, 'search-results.html')
+
+ 
+        
