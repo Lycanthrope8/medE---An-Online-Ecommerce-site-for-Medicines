@@ -124,7 +124,7 @@ document.getElementById("cart-btn").addEventListener("click", async function () 
       const response = await fetch(`/get_product_info/${p_id}/`);
       if (response.ok) {
         const productData = await response.json();
-        console.log("Product Data:", productData);
+        // console.log("Product Data:", productData);
         var productPrice = parseFloat(productData.discounted_price).toFixed(2);
 
         if (Object.keys(productData).length > 0 && "p_name" in productData) {
@@ -216,6 +216,7 @@ document.getElementById('checkout-button').addEventListener('click', function ()
   };
 
   // Send the cart data to the server using fetch
+  var url = '/checkout/';
   fetch(url, requestOptions)
     .then(function (response) {
       if (response.status === 200) {

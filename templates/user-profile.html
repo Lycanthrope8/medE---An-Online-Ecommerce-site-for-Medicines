@@ -60,11 +60,10 @@
 						<ion-icon name="bag-outline"></ion-icon>
 						<span class="btn-badge">3</span>
 					</button>
-						<div class="shopping-cart" >
-
-								<!-- HTML late for a product cartbox -->
-								<div id= "cart-container">
-									<!-- <div class="cartbox" id="cartbox-${p_id}">
+					<div class="shopping-cart">
+						<!-- HTML template for a product cartbox -->
+						<div id="cart-container">
+							<!-- <div class="cartbox" id="cartbox-${p_id}">
 									  <button class="cart-trash">
 										<ion-icon name="trash"></ion-icon>
 									  </button>
@@ -78,18 +77,16 @@
 										</div>
 									  </div>
 									</div> -->
-								  </div>
-								  
-								  <div class="total"></div>
-								  {% if user.is_authenticated %}
-								  	<script>
-										var userPhoneNumber = "{{ user }}";
-									</script>
-								<a  class="cart-checkout-btn" id="checkout-button">Checkout</a>
-						    {% else %}
-							<a href="{% url 'mylogin' %}" class="cart-checkout-btn" id="">Checkout</a>
-						    {% endif %}
 						</div>
+
+						<div class="total"></div>
+						{% if user.is_authenticated %}
+						<a class="cart-checkout-btn" id="checkout-button">Checkout</a>
+						{% else %}
+						<a href="{% url 'mylogin' %}" class="cart-checkout-btn" id="">Checkout</a>
+						{% endif %}
+					</div>
+
 
 						<div style="text-align:center;" class="user-login">
 							{% if user.is_authenticated %}
