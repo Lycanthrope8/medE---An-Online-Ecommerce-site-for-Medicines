@@ -33,7 +33,7 @@ def profile(request):
             d.append(str(name+"X"+number))
 
 
-        temp[i.id]=[d,i.total,i.timestamp,i.status]
+        temp[i.id]=[d,i.total,i.timestamp,i.Delivery_status]
 
     # Medlist  From here
 

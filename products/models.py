@@ -105,18 +105,33 @@ pre_save.connect(delete_product_if_feature_changed, sender=main_product)
 
 class Orders(models.Model):
     pending = 'pending'
-    confirm = 'confirm'
-    stat = [
+    confirmed = 'confirmed'
+    Shipping = 'Shipping'
+    Completed = 'Completed'
+    Failed = 'Failed'
+    delivery_stat = [
         (pending, 'pending'),
-        (confirm, 'confirm'),
+        (confirmed, 'confirmed'),
+        (Shipping , 'Shipping'),
+        (Completed , 'Completed'),
+        (Failed , 'Failed'),
+    ]
+    Approved = 'Approved'
+    Rejected = 'Rejected'
+    Pending = 'Pending'
+    prescription_status = [
+        (Approved, 'Approved'),
+        (Rejected, 'Rejected'),
+        (Pending, 'Pending'),
     ]
     phonenumber = models.CharField(max_length=15)
     ordered_products = models.TextField(default="null")
-    prescriptions = models.JSONField(default="null")
+    prescriptions = models.JSONField(default="null",blank=True)
     total = models.TextField(default="null")
     del_adress = models.TextField(default="null")
     timestamp = models.DateTimeField(default=timezone.now)
-    status=models.CharField(max_length=20, choices=stat, default='pending', blank=True)
+    status=models.CharField(max_length=20, choices=prescription_status, default='pending', blank=True)
+    Delivery_status=models.CharField(max_length=20, choices=delivery_stat, default='Pending', blank=True)
 
 
 class Profile_MedList(models.Model):
@@ -138,9 +153,23 @@ class presciption_order(models.Model):
         (Pending, 'Pending'),
     ]
 
+    pending = 'pending'
+    confirmed = 'confirmed'
+    Shipping = 'Shipping'
+    Completed = 'Completed'
+    Failed = 'Failed'
+    delivery_stat = [
+        (pending, 'pending'),
+        (confirmed, 'confirmed'),
+        (Shipping , 'Shipping'),
+        (Completed , 'Completed'),
+        (Failed , 'Failed'),
+    ]
+
     phonenumber = models.CharField(max_length=15)
     prescription_img = models.TextField(default="null")
     days = models.TextField(default="null")
     del_adress = models.TextField(default="null")
     timestamp = models.DateTimeField(default=timezone.now)
     status=models.CharField(max_length=20, choices=prescription_status, default='Pending', blank=True)
+    Delivery_status=models.CharField(max_length=20, choices=delivery_stat, default='Pending', blank=True)
