@@ -1053,6 +1053,10 @@ main .registration-form.active ~ .sidebar li:nth-child(1) {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
+.purchase-history table ul {
+  margin-bottom: 0;
+}
+
 .purchase-history table th {
   color: rgba(222, 0, 0, 0.7);
   text-transform: uppercase;
@@ -1064,6 +1068,13 @@ main .registration-form.active ~ .sidebar li:nth-child(1) {
 
 .purchase-history table tr:nth-child(even) {
   background-color: rgba(222, 0, 0, 0.05);
+}
+
+.purchase-history table tr td:nth-child(5) p{
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-bottom: 0;
 }
 
 .purchase-history table tbody {
@@ -1115,7 +1126,7 @@ main .registration-form.active ~ .sidebar li:nth-child(1) {
 
 .purchase-history table td {
   font-weight: 500;
-  padding: 1rem 2rem;
+  padding: 2rem 2rem;
   text-align: center;
 }
 
@@ -1550,6 +1561,23 @@ td .quantity button.num {
   .days label {
     font-size: 3.5vw;
   }
+
+  .purchase-history table thead tr {
+    display: none;
+  }
+  .purchase-history table tbody tr {
+    display: block;
+  }
+  .purchase-history table td {
+    text-align: right;
+    display: block;
+  }
+  .purchase-history table td::before {
+    content: attr(data-title) ": ";
+    float: left;
+    padding: 5px 10px;
+  }
+  
 }
 
 @media (min-width: 480px) {
@@ -2157,6 +2185,20 @@ td .quantity button.num {
     top: 50%;
     height: 450px;
     width: 500px;
+  }
+
+  .purchase-history table thead tr {
+    display: table-row;
+  }
+  .purchase-history table tbody tr {
+    display: inline-flex;
+  }
+  .purchase-history table td {
+    text-align: center;
+    display: flex;
+  }
+  .purchase-history table td::before {
+    content: "";
   }
 
   .footer-top .container {
