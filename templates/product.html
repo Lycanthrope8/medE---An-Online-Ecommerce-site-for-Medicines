@@ -309,7 +309,7 @@
 
 
 					<div class="buttons row">
-						<button class="addtocart col-sm-5" onclick="AddtoCart('{{product_details.p_id}}',parseInt(document.getElementById('num').innerText),'replace')">Add to Cart</button>
+						<button class="addtocart col-sm-6" onclick="AddtoCart('{{product_details.p_id}}',parseInt(document.getElementById('num').innerText),'replace')">Add to Cart</button>
 						<!-- <button class="buynow col-sm-5" id="addToCartBtn">Add To List</button> -->
 
 							<div class="popup" id="myModal">
@@ -439,7 +439,7 @@
 				<p class="copyright">
 					&copy; 2023 Made by <a href="#">Team NJ<sup>2</sup>.</a>
 				</p>
-				<img src="{% static 'payment/payment.png' %}" width="380" height="90" loading="lazy" alt="payment method" class="img">
+				{% comment %} <img src="{% static 'payment/payment.png' %}" width="380" height="90" loading="lazy" alt="payment method" class="img"> {% endcomment %}
 			</div>
 		</div>
 	</footer>

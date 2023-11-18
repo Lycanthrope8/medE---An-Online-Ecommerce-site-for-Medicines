@@ -1,5 +1,6 @@
 "use strict";
 
+
 const selectImage = document.querySelector("#select-image");
 const selectImage2 = document.querySelector("#select-image2");
 const inputFile = document.querySelector("#file-upload");
@@ -8,6 +9,35 @@ const backDrop = document.querySelector(".backdrop");
 const elemContainer = document.querySelector(".elem-container");
 
 const mybutton = document.querySelector("[data-back-top-btn]");
+
+//////////////////////
+// BACK TO TOP BUTTON
+//////////////////////
+
+
+
+window.onscroll = function () {
+    scrollFunction();
+};
+
+function scrollFunction() {
+    if (window.scrollY > 100) {
+        mybutton.classList.add("active");
+    } else {
+        mybutton.classList.remove("active");
+    }
+};
+
+
+$(".days :nth-child(odd)").change(function(){
+    $(".days :nth-child(odd)").prop('checked',false);
+    $(this).prop('checked',true);
+    console.log($(this).val());
+});
+
+/////////////////////////////
+// FRONT PAGE BANNER CAROUSEL
+/////////////////////////////
 
 var counter = 1;
 
@@ -113,30 +143,4 @@ inputFile.addEventListener("change", function () {
         elemContainer.dataset.img = image.name;
     };
     reader.readAsDataURL(image);
-});
-
-
-//////////////////////
-// BACK TO TOP BUTTON
-//////////////////////
-
-
-
-window.onscroll = function () {
-    scrollFunction();
-};
-
-function scrollFunction() {
-    if (window.scrollY > 100) {
-        mybutton.classList.add("active");
-    } else {
-        mybutton.classList.remove("active");
-    }
-};
-
-
-$(".days :nth-child(odd)").change(function(){
-    $(".days :nth-child(odd)").prop('checked',false);
-    $(this).prop('checked',true);
-    console.log($(this).val());
 });

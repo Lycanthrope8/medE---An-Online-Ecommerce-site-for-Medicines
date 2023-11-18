@@ -429,20 +429,20 @@
 				<tbody>
 					{% for key, value in temp.items %}
 					<tr>
-						<td>{{ key }}</td>
-						<td>
+						<td data-title="Invoice No">{{ key }}</td>
+						<td data-title="Orders">
 							<ul>
 								{% for item in value.0 %}
 									<li>{{ item }}</li>
 								{% endfor %}
 							</ul>
 						</td>
-						<td>{{ value.1 }}</td>
-						<td>{{ value.2|date:"d F Y" }}</td>
+						<td data-title="Amount">{{ value.1 }}</td>
+						<td data-title="Date">{{ value.2|date:"d F Y" }}</td>
 						{% if value.3 == "pending" %}
-						<td ><p style="background-color: yellow;border-radius: 10px;padding: 5px 0;margin: 0;">{{ value.3 }}</p></td>
+						<td data-title="Status" ><p style="background-color: #f1c40f;">{{ value.3 }}</p></td>
 						{%else%}
-						<td ><p style="background-color: green;border-radius: 10px;padding: 5px 0;margin: 0;">{{ value.3 }}</p></td>
+						<td data-title="Status" ><p style="background-color: #30cb83;">{{ value.3 }}</p></td>
 						{% endif %}
 					</tr>
 					{% endfor %}
@@ -579,7 +579,7 @@
 				<p class="copyright">
 					&copy; 2023 Made by <a href="#">Team NJ<sup>2</sup>.</a>
 				</p>
-				<img src="assets/payment/payment.png" width="380" height="90" loading="lazy" alt="payment method" class="img">
+				<!-- <img src="assets/payment/payment.png" width="380" height="90" loading="lazy" alt="payment method" class="img"> -->
 			</div>
 		</div>
 	</footer>
