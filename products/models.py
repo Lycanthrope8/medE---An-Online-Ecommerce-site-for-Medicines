@@ -104,25 +104,25 @@ pre_save.connect(delete_product_if_feature_changed, sender=main_product)
 
 
 class Orders(models.Model):
-    pending = 'pending'
-    confirmed = 'confirmed'
+    Pending = 'Pending'
+    Confirmed = 'Confirmed'
     Shipping = 'Shipping'
     Completed = 'Completed'
     Failed = 'Failed'
     delivery_stat = [
-        (pending, 'pending'),
-        (confirmed, 'confirmed'),
+        (Pending, 'Pending'),
+        (Confirmed, 'Confirmed'),
         (Shipping , 'Shipping'),
         (Completed , 'Completed'),
         (Failed , 'Failed'),
     ]
     Approved = 'Approved'
     Rejected = 'Rejected'
-    Pending = 'Pending'
+    pending = 'pending'
     prescription_status = [
         (Approved, 'Approved'),
         (Rejected, 'Rejected'),
-        (Pending, 'Pending'),
+        (pending, 'pending'),
     ]
     phonenumber = models.CharField(max_length=15)
     ordered_products = models.TextField(default="null")
@@ -153,14 +153,14 @@ class presciption_order(models.Model):
         (Pending, 'Pending'),
     ]
 
-    pending = 'pending'
-    confirmed = 'confirmed'
+    Pending = 'Pending'
+    Confirmed = 'Confirmed'
     Shipping = 'Shipping'
     Completed = 'Completed'
     Failed = 'Failed'
     delivery_stat = [
-        (pending, 'pending'),
-        (confirmed, 'confirmed'),
+        (Pending, 'Pending'),
+        (Confirmed, 'Confirmed'),
         (Shipping , 'Shipping'),
         (Completed , 'Completed'),
         (Failed , 'Failed'),

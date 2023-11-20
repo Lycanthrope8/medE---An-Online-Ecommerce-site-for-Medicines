@@ -4,6 +4,7 @@ from .models import Product
 from products.models import Orders
 from authentication.models import UserProfile
 from products.models import Profile_MedList
+from products.models import presciption_order
 import ast
 from django.http import JsonResponse
 from products.models import main_product 
@@ -24,6 +25,7 @@ def profile(request):
     User = UserProfile()
     phonenumber = request.user.phone_number
     orders = Orders.objects.filter(phonenumber=phonenumber) 
+    p_order=presciption_order.objects.filter(phonenumber=phonenumber) 
     temp={}
     for i in orders:
         d=[]
@@ -46,8 +48,8 @@ def profile(request):
     # Convert the QuerySet to a list of dictionaries
     data_list = list(saved_data)
     # print(data_list)
-
-    return render(request, 'user-profile.html', {'temp': temp,'medList': data_list})
+    print(p_order)
+    return render(request, 'user-profile.html', {'temp': temp,'medList': data_list, 'p_order':p_order})
 
 
 def quick_order(request):
