@@ -80,7 +80,14 @@
 						  </div>
 						  
 						<div class="total"></div>
-					<a href="#" class="cart-checkout-btn">Checkout</a>
+						{% if user.is_authenticated %}
+						<script>
+							var userPhoneNumber = "{{ user }}";
+						</script>
+					<a  class="cart-checkout-btn" id="checkout-button">Checkout</a>
+				{% else %}
+				<a href="{% url 'mylogin' %}" class="cart-checkout-btn" id="">Checkout</a>
+				{% endif %}
 					</div>
 
 					<div style="text-align:center;" class="user-login">
