@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 from products.models import Orders
 import ast
 from products.models import Profile_MedList
+from products.models import presciption_order
 
 def mylogin(request):
     if request.method == 'POST':
@@ -237,11 +238,11 @@ def update_profile(request):
         # Convert the QuerySet to a list of dictionaries
         data_list = list(saved_data)
         # print(data_list)
-        
+        p_order=presciption_order.objects.filter(phonenumber=phonenumber) 
 
 
         # Redirect to a success page or any other desired behavior after successful form submission
-        return render(request, 'user-profile.html', {'temp': temp,'medList': data_list})  # Redirect to a success template
+        return render(request, 'user-profile.html', {'temp': temp,'medList': data_list, 'p_order':p_order})  # Redirect to a success template
 
     # Handle GET request or display the form
     return render(request, 'user-profile.html')
