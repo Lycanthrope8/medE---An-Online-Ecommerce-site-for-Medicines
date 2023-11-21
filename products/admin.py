@@ -9,7 +9,7 @@ from django.utils.html import format_html
 admin.site.register(main_product)
 
 class OrdersAdmin(admin.ModelAdmin):
-    list_display = ('phonenumber', 'status', 'timestamp','Delivery_status',)  # Add any other fields you want to display
+    list_display = ('id','phonenumber', 'status', 'timestamp','Delivery_status',)  # Add any other fields you want to display
     list_filter = ('status','Delivery_status',)  # Filter by the 'status' field
     search_fields = ('phonenumber',)
     def photos_display(self, obj):
@@ -31,7 +31,7 @@ class OrdersAdmin(admin.ModelAdmin):
 admin.site.register(Orders, OrdersAdmin)
 
 class PrescriptionOrderAdmin(admin.ModelAdmin):
-    list_display = ('phonenumber', 'status', 'timestamp','Delivery_status',)
+    list_display = ('id','phonenumber', 'status', 'timestamp','Delivery_status',)
     list_filter = ('status','Delivery_status',)
     search_fields = ('phonenumber',)
 
