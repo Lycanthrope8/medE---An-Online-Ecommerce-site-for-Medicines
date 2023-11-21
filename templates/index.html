@@ -49,9 +49,16 @@
 
 						</div>
 					</div>
+					{% if user.is_authenticated %}
 					<button id="select-image" class="action-btn">
 						<img src="{%static 'prescription.png'%}" alt="prescription-upload-icon" width="30">
 					</button>
+						{% else %}
+						<a href="{% url 'mylogin' %}"><button >
+							<img src="{%static 'prescription.png'%}" alt="prescription-upload-icon" width="30">
+						</button></a>
+						{% endif %}
+					
 					<button id="user-login-btn" class="action-btn">
 						<ion-icon name="person-outline"></ion-icon>
 					</button>
@@ -415,7 +422,12 @@
 		<div class="prescription" id="select-image2">
 			<div class="container">
 				<input type="file" id="file-upload" accept="image/*">
+				{% if user.is_authenticated %}
 				<label id="select-image" for="file-upload">Upload Prescription</label>
+						{% else %}
+						<a href="{% url 'mylogin' %}"><label id="select-image" >Upload Prescription</label></a>
+						{% endif %}
+				
 			</div>
 		</div>
 		<div class="backdrop"></div>

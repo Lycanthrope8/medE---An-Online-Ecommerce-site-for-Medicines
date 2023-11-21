@@ -47,9 +47,15 @@
 						</div>
 					</div>
 
+					{% if user.is_authenticated %}
 					<button id="select-image" class="action-btn">
 						<img src="{%static 'prescription.png'%}" alt="prescription-upload-icon" width="30">
 					</button>
+						{% else %}
+						<a href="{% url 'mylogin' %}"><button >
+							<img src="{%static 'prescription.png'%}" alt="prescription-upload-icon" width="30">
+						</button></a>
+						{% endif %}
 					<button id="user-login-btn" class="action-btn">
 						<ion-icon name="person-outline"></ion-icon>
 					</button>
