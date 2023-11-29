@@ -491,7 +491,8 @@ body::-webkit-scrollbar-thumb:hover {
 
 main .container {
     display: flex;
-    /* margin: 20px 60px 20px 60px; */
+    margin: 20px auto;
+	padding: 0;
     flex-direction: column;
 }
 
@@ -513,7 +514,7 @@ main .container {
 .purchase-history table th {
 	color: rgba(222, 0, 0, 0.7);
 	text-transform: uppercase;
-	letter-spacing: 0.1rem;
+	letter-spacing: 0.3rem;
 	font-size: var(--fs-6);
 	font-weight: 700;
 	padding: 1rem 2rem;
