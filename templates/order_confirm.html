@@ -114,6 +114,11 @@
         </div>
     </main>
     <script>
+        var prescription = document.getElementById("file-upload");
+        prescription.addEventListener('change', function(){
+            document.querySelector(".details :nth-child(6)").innerHTML = `<i class="fa-solid fa-check"></i>Prescription uploaded! Click to upload again`;
+        });
+        
         const bkashopt = document.getElementById(bkashOpt);
         const codopt = document.getElementById(codOpt);
         document.getElementById("payment-options").addEventListener('change', function (event){
@@ -127,17 +132,17 @@
         document.addEventListener('DOMContentLoaded', function () {
             // Get references to the input field and the link
             const addressInput = document.getElementById('addressInput');
-            const confirmLink = document.getElementById('confirmLink');
+            // const confirmLink = document.getElementById('confirmLink');
             const fileInput = document.getElementById('file-upload');
 
             // Add a click event listener to the button
-            confirmLink.addEventListener('click', function (event) {
-                // Get the current value from the input field
-                const userAddress = addressInput.value;
+            // confirmLink.addEventListener('click', function (event) {
+            //     // Get the current value from the input field
+            //     const userAddress = addressInput.value;
 
-                // Update the href attribute of the link with the user's address
-                confirmLink.href += encodeURIComponent(userAddress);
-            });
+            //     // Update the href attribute of the link with the user's address
+            //     confirmLink.href += encodeURIComponent(userAddress);
+            // });
         });
         
     </script>
@@ -145,11 +150,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-    <script type="module"
-        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule
-        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script type="text/javascript" src="{% static 'script.js' %}"></script>
+    <!-- <script type="text/javascript" src="{% static 'script.js' %}"></script> -->
 </body>
 
 </html>

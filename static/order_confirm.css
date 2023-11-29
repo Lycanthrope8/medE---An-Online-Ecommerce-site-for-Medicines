@@ -589,6 +589,7 @@ form .details label:nth-of-type(1) {
 	justify-content: center;
 	align-items: center;
 	background-color: var(--red);
+	text-align: center;
 	padding: 60px 30px;
 	margin-bottom: 10px;
 	color: white;
