@@ -618,6 +618,7 @@ form .details label:nth-of-type(2) {
 	border: none;
 	border-radius: 10px;
 	background-color: rgb(232, 240 ,254);
+	box-shadow: inset 2px 2px 5px 4px hsla(0, 0%, 0%, 0.01);
 }
 
 form .payment {
@@ -640,8 +641,9 @@ form .payment select {
 	box-shadow: 0 8px 16px hsla(0, 0%, 0%, 0.15);
 	appearance: none;
 	background: var(--red) url(caret-down-solid.svg) no-repeat;
-	background-position: 95% 50%;
+	background-position: 95% 40%;
 	background-size: 20px;
+	cursor: pointer;
 }
 .bkash-info-taker {
 	visibility: none;
