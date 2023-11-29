@@ -3,7 +3,13 @@
 <html>
 
 <head>
+    <title>medE</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.png' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'order_confirm.css' %}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -49,30 +55,75 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            <div class="">
 
-                <form method="post" action="{% url 'confirm' %}" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <!-- Your existing HTML code for displaying products -->
-                    <input type="hidden" name="phonenumber" value="{{ user }}">
-                    <input type="hidden" name="ordered_products" value="{{ product_data_list }}">
-                    <input type="hidden" name="total" value="{{ total }}">
+                <form class="row" method="post" action="{% url 'confirm' %}" enctype="multipart/form-data">
+                    <div class="details col-sm-6">
+                        {% csrf_token %}
+                        <!-- Your existing HTML code for displaying products -->
+                        <input type="hidden" name="phonenumber" value="{{ user }}">
+                        <input type="hidden" name="ordered_products" value="{{ product_data_list }}">
+                        <input type="hidden" name="total" value="{{ total }}">
+                        
+                        {% if prescription_required %}
+                            <input type="file" id="file-upload" name="prescription" accept="image/*" required>
+                            <label for="file-upload"><i class="fa-regular fa-image"></i>Upload Your prescription here</label>
+                        {% endif %}
+                        
+                        <label for="address">Address:</label>
+                        <textarea rows="6" cols="75" type="text" id="addressInput" name="address" value='{{user_address}}' size="10">
+                    </div>
+                    <div class="payment col-sm-6">
                     
-                    {% if prescription_required %}
-                        <label for="prescription">Upload Your prescription here</label>
-                        <input type="file" id="file-upload" name="prescription" accept="image/*" required>
-                    {% endif %}
-                    
-                    <label for="address">Address:</label>
-                    <input style="height: 60px;" type="text" id="addressInput" name="address" value='{{user_address}}'>
-                    
+                        <!-- <p>
+                            01. Open the bKash app or go to your bKash Mobile Menu by dialling *247#<br>
+                            02. Choose “Send Money”<br>
+                            03. Enter the bKash Account Number given down below “Account Number.”<br>
+                            04. Enter the exact bill amount.<br>
+                            05. Now, enter your bKash Mobile Menu PIN to confirm the transaction.<br>
+                            06. After sending money, you'’'ll receive a bKash Transaction ID (TRX ID). Note the Transaction ID.<br>
+                            09. Now, enter your bKash number and Transaction ID (TRX ID) on the form down below. (Note: If you are paying from an Agent, don’t forget to get his bKash number and Transaction ID (TRX ID). If he doesn’t want to provide the Transaction ID (TRX ID), you can type ‘AGENT’ on the Transaction ID form.)<br>
+                            ** Our bKash number changes from time to time. Don’t call this number. You won’t get any reply. If you need to talk, kindly knock us on Facebook or join the discord. If possible, don’t forget to take a payment screenshot from the bKash app; it may require for any future inquiries **<br>
+                            <b>You need to send us ৳ 255.00</b>
+                        </p> -->
+                        <select name="payment-options" id="payment-options">
+                            <option id="codOpt" value="cod">COD (Cash on Delivery)</option>
+                            <option id="bkashOpt" value="bKash">bKash</option>
+                        </select>
+                        
+                        
+
+
+                        <div class="bkash-info-taker">
+                            <h5>Account type: <b>Personal</b></h5>
+                            <h5>Account Number: <b>01XXXXXXXXX</b></h5>
+                            <label for="">Your bKash Account Number</label>
+                            <input type="phone" placeholder="01XXXXXXXXX">
+                            <label for="">Transaction ID</label>
+                            <input type="text" placeholder="AKS4BPLFKY">
+                        </div>
+                    </div>
+
                     <button class="confirm-order" type="submit">Confirm Order</button>
                 </form>
+                    
                 
                 
             </div>
         </div>
     </main>
     <script>
+        const bkashopt = document.getElementById(bkashOpt);
+        const codopt = document.getElementById(codOpt);
+        document.getElementById("payment-options").addEventListener('change', function (event){
+            if (event.target.value == 'bKash') {
+                document.querySelector('.bkash-info-taker').classList.add('active');
+            }
+            else if (event.target.value == 'cod') {
+                document.querySelector('.bkash-info-taker').classList.remove('active');
+            }
+        });
         document.addEventListener('DOMContentLoaded', function () {
             // Get references to the input field and the link
             const addressInput = document.getElementById('addressInput');
@@ -88,6 +139,7 @@
                 confirmLink.href += encodeURIComponent(userAddress);
             });
         });
+        
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
