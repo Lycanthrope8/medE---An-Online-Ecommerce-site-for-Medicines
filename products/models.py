@@ -132,6 +132,8 @@ class Orders(models.Model):
     timestamp = models.DateTimeField(default=timezone.now)
     status=models.CharField(max_length=20, choices=prescription_status, default='pending', blank=True)
     Delivery_status=models.CharField(max_length=20, choices=delivery_stat, default='Pending', blank=True)
+    paymentMobile = models.CharField(max_length=15, blank=True, null=True)
+    TxID = models.CharField(max_length=50, blank=True, null=True)
 
 
 class Profile_MedList(models.Model):
@@ -173,3 +175,5 @@ class presciption_order(models.Model):
     timestamp = models.DateTimeField(default=timezone.now)
     status=models.CharField(max_length=20, choices=prescription_status, default='Pending', blank=True)
     Delivery_status=models.CharField(max_length=20, choices=delivery_stat, default='Pending', blank=True)
+    paymentMobile = models.CharField(max_length=15, blank=True, null=True)
+    TxID = models.CharField(max_length=50, blank=True, null=True)

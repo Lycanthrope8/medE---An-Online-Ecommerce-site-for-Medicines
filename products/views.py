@@ -152,6 +152,8 @@ def order_confirm(request):
     return render(request, 'order_confirm.html', context)
 
 
+
+
 def order_complete(request):
     if request.method == 'POST':
         phonenumber = request.POST.get('phonenumber')
@@ -159,6 +161,8 @@ def order_complete(request):
         prescription_file = request.FILES.get('prescription')
         total = request.POST.get('total')
         del_address = request.POST.get('address')
+        payment_mobile = request.POST.get('paymentMobile')
+        tx_id = request.POST.get('TxID')
 
         if prescription_file:
             # Create the user's prescription folder if it doesn't exist.
@@ -166,25 +170,26 @@ def order_complete(request):
             if not os.path.exists(user_prescription_folder):
                 os.makedirs(user_prescription_folder)
             # Save the prescription image to the user's folder.
-
             fs = FileSystemStorage(location=user_prescription_folder)
             saved_image = fs.save(prescription_file.name, prescription_file)
-            image= ["otc_prescription/"+phonenumber+"/"+saved_image]
+            image = ["otc_prescription/"+phonenumber+"/"+saved_image]
         else:
-            image=[]
+            image = []
 
         # Create a new Orders instance and save it to the database
-        # print(phonenumber,ordered_products,prescription_file,total,del_address)
         order = Orders(
             phonenumber=phonenumber,
             ordered_products=ordered_products,
             prescriptions=image,
             total=total,
             del_adress=del_address,
-            status='pending'  # Set the initial status to 'confirm'
+            status='pending',  # Set the initial status to 'pending'
+            paymentMobile=payment_mobile,
+            TxID=tx_id
         )
         order.save()
-    return render(request,'confirm.html')
+
+    return render(request, 'confirm.html')
 
 
 from django.http import JsonResponse
