@@ -7,7 +7,7 @@ const Toast = {
     },
 
     show(message, type, seconds) {
-        console.log(localStorage.getItem('cart'));
+        // console.log(localStorage.getItem('cart'));
         let toast = document.createElement("div");
         let check = document.createElement("ion-icon");
         let mssge = document.createElement("div");

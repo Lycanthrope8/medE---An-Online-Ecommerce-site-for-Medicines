@@ -1,3 +1,15 @@
+function updateCartBadge() {
+  var cart = JSON.parse(localStorage.getItem('cart')) || {};
+  var cartLength = Object.keys(cart).length;
+  // console.log(cartLength);
+  // Update the content of the span with the cart length
+  var cartBadgeSpan = document.querySelector('.btn-badge');
+  if (cartBadgeSpan) {
+    cartBadgeSpan.textContent = cartLength;
+  }
+}
+
+
 async function AddtoCart(id, quantity = 1, doSomething = null, button = null) {
   var cart = JSON.parse(localStorage.getItem('cart')) || {};
 
@@ -44,6 +56,7 @@ async function AddtoCart(id, quantity = 1, doSomething = null, button = null) {
   } catch (error) {
     console.error('Error:', error);
   }
+  updateCartBadge();
 }
 
 
@@ -89,6 +102,7 @@ async function removeFromCart(productId) {
   } else {
     console.log('Product not found in the cart.');
   }
+  updateCartBadge();
 }
 
 
@@ -100,6 +114,7 @@ function ClearCart() {
   localStorage.removeItem('cart');
   cart = {}
   console.log(cart)
+  updateCartBadge();
 }
 
 var totalValue = 0.0; // Initialize total value to 0.0
@@ -195,6 +210,8 @@ async function totalBill() {
   } catch (error) { // Define the error variable here
     console.error('Error:', error);
   }
+  updateCartBadge();
+
 }
 
 
