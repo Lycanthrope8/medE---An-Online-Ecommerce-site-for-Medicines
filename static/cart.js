@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', function () {
+  updateCartBadge();
+});
+
 function updateCartBadge() {
   var cart = JSON.parse(localStorage.getItem('cart')) || {};
   var cartLength = Object.keys(cart).length;
