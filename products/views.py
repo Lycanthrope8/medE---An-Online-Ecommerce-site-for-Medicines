@@ -257,6 +257,8 @@ def presciptions_order(request):
         prescription_img = request.POST.get('prescription_img')  # Make sure this is the correct form field name
         days = request.POST.get('days2')
         delivery_address = request.POST.get('address', 'null')
+        payment_mobile = request.POST.get('paymentMobile')
+        tx_id = request.POST.get('TxID')
         # Create a new prescription order
         prescription_order_obj = presciption_order.objects.create(
             phonenumber=phone_number,
@@ -264,6 +266,8 @@ def presciptions_order(request):
             days=days,
             del_adress=delivery_address,
             timestamp=timezone.now(), # You can set the default status here
+            paymentMobile=payment_mobile,
+            TxID=tx_id
         )
         prescription_order_obj.save()
     return render(request,'confirm.html')
